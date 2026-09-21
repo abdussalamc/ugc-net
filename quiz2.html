@@ -17,21 +17,21 @@
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
     <!-- Start Quiz Modal Overlay -->
-<div id="start-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl p-6 md:p-8 max-w-md w-full text-center shadow-2xl border border-slate-100 space-y-5">
-        <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto">
-            <i class="fa-solid fa-play text-2xl ml-1"></i>
+    <div id="start-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-6 md:p-8 max-w-md w-full text-center shadow-2xl border border-slate-100 space-y-5">
+            <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto">
+                <i class="fa-solid fa-play text-2xl ml-1"></i>
+            </div>
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800">Ready to Begin?</h2>
+                <p class="text-slate-500 text-sm mt-1">UGC NET Mock Test 2</p>
+            </div>
+            <button onclick="document.getElementById('start-modal').remove(); startTimer(); loadQuestion(0);" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-amber-500/25 transition duration-150 flex items-center justify-center space-x-2 text-base">
+                <i class="fa-solid fa-rocket"></i>
+                <span>Start Quiz 2</span>
+            </button>
         </div>
-        <div>
-            <h2 class="text-2xl font-bold text-slate-800">Ready to Begin?</h2>
-            <p class="text-slate-500 text-sm mt-1">UGC NET Mock Test 2</p>
-        </div>
-<button onclick="document.getElementById('start-modal').remove(); startTimer(); renderQuestion();" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-amber-500/25 transition duration-150 flex items-center justify-center space-x-2 text-base">
-            <i class="fa-solid fa-rocket"></i>
-            <span>Start Quiz 2</span>
-        </button>
     </div>
-</div>
 
     <header class="bg-indigo-900 text-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-2">
@@ -725,11 +725,10 @@
         // Init App
         window.onload = function() {
             renderPalette();
-            loadQuestion(0);
-            startTimer();
         };
 
         function startTimer() {
+            if (timerInterval) return;
             timerInterval = setInterval(() => {
                 if (timerSeconds <= 0) {
                     clearInterval(timerInterval);
@@ -963,26 +962,6 @@
             document.getElementById("resultModal").classList.remove("hidden");
         }
 
-        let timeLeft = 3600;
-let timerInterval = null;
-
-function startTimer() {
-    if (timerInterval) return;
-    timerInterval = setInterval(() => {
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            alert("Time is up! Submitting your test automatically.");
-            submitTest();
-            return;
-        }
-        timeLeft--;
-        let minutes = Math.floor(timeLeft / 60);
-        let seconds = timeLeft % 60;
-        let formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
-        let formattedSeconds = seconds < 10 ? "0" + seconds : seconds;
-        document.getElementById("timerDisplay").innerText = `${formattedMinutes}:${formattedSeconds}`;
-    }, 1000);
-}
         function reviewMode() {
             document.getElementById("resultModal").classList.add("hidden");
             loadQuestion(0);
