@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGC NET Full Length Mock Test - 150 Unique Questions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-indigo-950 text-white shadow-md sticky top-0 z-30">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-graduation-cap text-2xl text-amber-400"></i>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">UGC NET Mock Test (150 Unique Questions)</h1>
+                    <p class="text-xs text-indigo-200">Paper 1 (1-50) + Paper 2 Commerce (51-150) | 300 Marks | 180 Mins</p>
+                </div>
+            </div>
+
+            <!-- Timer & Submit -->
+            <div class="flex items-center space-x-4">
+                <div id="timer-box" class="bg-slate-900 px-4 py-1.5 rounded-lg border border-indigo-700 flex items-center space-x-2">
+                    <i class="fa-regular fa-clock text-amber-400"></i>
+                    <span id="timer" class="font-mono text-xl font-bold text-amber-400">03:00:00</span>
+                </div>
+                <button id="submit-btn" onclick="confirmSubmit()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-4 py-2 rounded-lg transition shadow-sm text-sm">
+                    Submit Test
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        
+        <!-- Question & Review Area (3 cols) -->
+        <section class="lg:col-span-3 flex flex-col space-y-4">
+
+            <!-- Post-Submit Summary Bar -->
+            <div id="score-summary" class="hidden bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h2 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2 flex items-center">
+                    <i class="fa-solid fa-chart-pie text-indigo-600 mr-2"></i> Performance Analysis
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div class="p-3 bg-indigo-50 rounded-lg">
+                        <div class="text-2xl font-bold text-indigo-700" id="total-score">0 / 300</div>
+                        <div class="text-xs text-indigo-900 font-medium">Total Score</div>
+                    </div>
+                    <div class="p-3 bg-emerald-50 rounded-lg">
+                        <div class="text-2xl font-bold text-emerald-600" id="correct-count">0</div>
+                        <div class="text-xs text-emerald-900 font-medium">Correct</div>
+                    </div>
+                    <div class="p-3 bg-rose-50 rounded-lg">
+                        <div class="text-2xl font-bold text-rose-600" id="incorrect-count">0</div>
+                        <div class="text-xs text-rose-900 font-medium">Incorrect</div>
+                    </div>
+                    <div class="p-3 bg-amber-50 rounded-lg">
+                        <div class="text-2xl font-bold text-amber-600" id="unattempted-count">150</div>
+                        <div class="text-xs text-amber-900 font-medium">Unattempted</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question Box -->
+            <div id="question-card" class="bg-white rounded-xl shadow-sm border border-slate-200 flex-1 flex flex-col p-6">
+                <!-- Question Top Header -->
+                <div class="flex justify-between items-start border-b pb-4 mb-4">
+                    <div>
+                        <span id="unit-badge" class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 font-semibold text-xs rounded-full mb-2">
+                            Paper 1 - Teaching Aptitude
+                        </span>
+                        <h2 class="text-lg font-bold text-slate-800" id="q-number">Question 1 of 150</h2>
+                    </div>
+                    <button onclick="toggleBookmark()" id="bookmark-btn" class="text-slate-400 hover:text-amber-500 transition text-lg p-1">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </button>
+                </div>
+
+                <!-- Question Text -->
+                <div id="q-text" class="text-slate-800 text-base font-medium mb-6 leading-relaxed">
+                    Loading question...
+                </div>
+
+                <!-- Radio Options -->
+                <div id="options-container" class="space-y-3 mb-6"></div>
+
+                <!-- Detailed Explanation -->
+                <div id="explanation-box" class="hidden mt-4 p-4 rounded-lg bg-indigo-50 border border-indigo-200">
+                    <h3 class="font-bold text-indigo-900 text-sm mb-1 flex items-center">
+                        <i class="fa-solid fa-circle-info text-indigo-600 mr-2"></i> Detailed Explanation:
+                    </h3>
+                    <p id="explanation-text" class="text-slate-700 text-sm leading-relaxed"></p>
+                </div>
+
+                <!-- Controls -->
+                <div class="mt-auto pt-4 border-t flex justify-between items-center">
+                    <button onclick="clearResponse()" class="text-xs font-semibold text-slate-500 hover:text-rose-600 transition flex items-center">
+                        <i class="fa-solid fa-rotate-left mr-1"></i> Clear Response
+                    </button>
+                    <div class="space-x-2">
+                        <button id="prev-btn" onclick="navigate(-1)" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-sm rounded-lg font-medium transition">
+                            <i class="fa-solid fa-chevron-left mr-1"></i> Previous
+                        </button>
+                        <button id="next-btn" onclick="navigate(1)" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm rounded-lg font-medium transition">
+                            Next <i class="fa-solid fa-chevron-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation Palette Sidebar -->
+        <aside class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col h-full">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="font-bold text-slate-800 text-sm flex items-center">
+                    <i class="fa-solid fa-grip mr-2 text-indigo-600"></i> Palette
+                </h3>
+                <select id="paper-filter" onchange="filterPaper(this.value)" class="text-xs border rounded p-1 text-slate-700 font-medium">
+                    <option value="all">All (150)</option>
+                    <option value="p1">Paper 1 (1-50)</option>
+                    <option value="p2">Paper 2 Commerce (51-150)</option>
+                </select>
+            </div>
+
+            <!-- Legend -->
+            <div class="grid grid-cols-2 gap-2 text-xs text-slate-600 mb-4 pb-3 border-b">
+                <div class="flex items-center space-x-1.5"><span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span> <span>Answered</span></div>
+                <div class="flex items-center space-x-1.5"><span class="w-3 h-3 rounded-full bg-slate-200 inline-block"></span> <span>Not Answered</span></div>
+                <div class="flex items-center space-x-1.5"><span class="w-3 h-3 rounded-full bg-amber-400 inline-block"></span> <span>Bookmarked</span></div>
+                <div class="flex items-center space-x-1.5"><span class="w-3 h-3 rounded-full bg-indigo-600 inline-block"></span> <span>Current</span></div>
+            </div>
+
+            <!-- Grid Buttons -->
+            <div id="palette-grid" class="grid grid-cols-5 gap-2 overflow-y-auto max-h-[500px] custom-scrollbar p-1"></div>
+        </aside>
+    </main>
+
+    <script>
+        // Database of 150 Fully Unique Questions
+        const questions = [
+            // PAPER 1 (Questions 1 to 50)
+            { u: "Paper 1: Teaching Aptitude", q: "Which level of teaching relies heavily on original critical thinking and problem solving?", o: ["Memory Level", "Understanding Level", "Reflective Level", "Autonomous Level"], c: 2, e: "Reflective level teaching (Hunt's model) focuses on problem-solving, critical reflection, and original thought." },
+            { u: "Paper 1: Teaching Aptitude", q: "In Choice Based Credit System (CBCS), core courses are mandatory whereas elective courses offer flexibility. True or False?", o: ["True", "False", "Partially True", "Irrelevant"], c: 0, e: "CBCS mandates core courses for foundational knowledge while providing elective options for specialization." },
+            { u: "Paper 1: Teaching Aptitude", q: "Continuous and Comprehensive Evaluation (CCE) primarily aims at evaluating:", o: ["Cognitive skills only", "Scholastic and co-scholastic developments", "Marks obtained in final board exams", "Attendance records"], c: 1, e: "CCE evaluates both scholastic and co-scholastic domains of a student continuously." },
+            { u: "Paper 1: Teaching Aptitude", q: "SWAYAM Prabha consists of how many DTH channels devoted to broadcasting high-quality educational programs?", o: ["32 Channels", "40 Channels", "80 Channels", "12 Channels"], c: 1, e: "SWAYAM Prabha is a group of 40 DTH channels broadcasting educational programs 24/7." },
+            { u: "Paper 1: Teaching Aptitude", q: "Formative assessment differs from summative assessment because it is conducted:", o: ["At the end of the semester", "During the instruction process to monitor learning", "For annual ranking", "By external examiners only"], c: 1, e: "Formative evaluation provides ongoing feedback during instruction to improve learning outcomes." },
+
+            { u: "Paper 1: Research Aptitude", q: "Rejecting a true Null Hypothesis (H0) leads to:", o: ["Type II Error", "Type I Error", "Sampling Error", "Standard Error"], c: 1, e: "Type I Error (alpha error) occurs when a true null hypothesis is incorrectly rejected." },
+            { u: "Paper 1: Research Aptitude", q: "Which sampling technique selects participants based on specific non-probability criteria chosen by the researcher?", o: ["Simple Random Sampling", "Purposive Sampling", "Stratified Sampling", "Cluster Sampling"], c: 1, e: "Purposive/judgmental sampling selects subjects specifically suited for the study's purpose." },
+            { u: "Paper 1: Research Aptitude", q: "Action research is best applied to solve:", o: ["Long-term theoretical dilemmas", "Immediate local operational problems", "Global macroeconomic trends", "Historical archives"], c: 1, e: "Action research targets immediate practical problems in local operational contexts." },
+            { u: "Paper 1: Research Aptitude", q: "An empirical research study relies primarily on:", o: ["Systematic observation and experimental data", "Speculative philosophy", "Unverified opinion polls", "Authoritarian claims"], c: 0, e: "Empirical research bases its conclusions on observable and testable real-world evidence." },
+            { u: "Paper 1: Research Aptitude", q: "In APA reference style, how is the author's name formatted?", o: ["First Name, Last Name", "Last Name, First Initial.", "Full Name capitalized", "Title followed by surname"], c: 1, e: "APA formatting requires Surname followed by First Initial (e.g., Smith, J.)." },
+
+            { u: "Paper 1: Reading Comprehension", q: "Inferential reading requires the reader to:", o: ["Memorize exact dates in text", "Read between the lines to draw logical conclusions", "Scan for bold headings only", "Ignore implied contexts"], c: 1, e: "Inferential comprehension deduces underlying meaning from context clues." },
+            { u: "Paper 1: Reading Comprehension", q: "The central argument of a academic thesis is typically presented in the:", o: ["Conclusion", "Introduction / Thesis Statement", "Footnotes", "Bibliography"], c: 1, e: "The thesis statement in the introduction presents the central claim of an academic paper." },
+            { u: "Paper 1: Reading Comprehension", q: "Skimming a research paper allows the reader to:", o: ["Perform detailed statistical audits", "Grasp the general idea and main points quickly", "Memorize author biographies", "Find spelling mistakes"], c: 1, e: "Skimming is a fast reading technique used to preview overall main ideas." },
+            { u: "Paper 1: Reading Comprehension", q: "An objective tone in scholarly writing implies that the author is:", o: ["Emotionally charged", "Biased towards one view", "Unbiased, factual, and evidence-based", "Sarcastic and humorous"], c: 2, e: "Objective tone presents facts without personal prejudice or emotional bias." },
+            { u: "Paper 1: Reading Comprehension", q: "Antonyms identified in comprehension passages help evaluate a candidate's:", o: ["Vocabulary and context analysis", "Mathematical speed", "Grammar rule memorization", "Punctuation efficiency"], c: 0, e: "Identifying antonyms tests context-driven vocabulary range." },
+
+            { u: "Paper 1: Communication", q: "Semantic barriers in communication arise due to:", o: ["Distance between speaker and listener", "Technical jargon and language misinterpretations", "Poor telephone connectivity", "Lack of room lighting"], c: 1, e: "Semantic noise arises from word ambiguities, complex jargon, or misdecoded symbols." },
+            { u: "Paper 1: Communication", q: "Kinesics refers to the study of:", o: ["Use of time in communication", "Body language, gestures, and expressions", "Physical touching behavior", "Voice pitch and tone"], c: 1, e: "Kinesics analyzes non-verbal communication conveyed through body movement." },
+            { u: "Paper 1: Communication", q: "In Shannon and Weaver's model, noise is defined as:", o: ["Feedback mechanism", "Distortion or interference in message transmission", "Encoding of ideas", "Decoder's response"], c: 1, e: "Noise is any signal interference that alters the message between source and receiver." },
+            { u: "Paper 1: Communication", q: "Mass communication is characterized by having a:", o: ["Small intimate audience", "Large, heterogeneous, and anonymous audience", "One-on-one structured dialogue", "Immediate physical feedback loop"], c: 1, e: "Mass communication addresses large, diverse, geographically dispersed audiences." },
+            { u: "Paper 1: Communication", q: "Horizontal communication occurs between:", o: ["Superior and subordinate", "Employees at the same organizational level", "Company and external customers", "Directors and shareholders"], c: 1, e: "Horizontal/lateral communication takes place among peers at equivalent organizational levels." },
+
+            { u: "Paper 1: Mathematical Reasoning", q: "Find the next term in the series: 3, 7, 15, 31, 63, ?", o: ["127", "125", "120", "128"], c: 0, e: "Pattern: $(x \\times 2) + 1$. Thus, $(63 \\times 2) + 1 = 127$." },
+            { u: "Paper 1: Mathematical Reasoning", q: "A sum of ₹10,000 becomes ₹12,000 in 2 years at Simple Interest. What is the annual interest rate?", o: ["8%", "10%", "12%", "15%"], c: 1, e: "Interest = ₹2,000. $SI = (P \\times R \\times T)/100 \\Rightarrow 2000 = (10000 \\times R \\times 2)/100 \\Rightarrow R = 10\\%$." },
+            { u: "Paper 1: Mathematical Reasoning", q: "If A:B = 2:3 and B:C = 4:5, what is A:B:C?", o: ["8:12:15", "6:9:12", "8:10:15", "2:4:5"], c: 0, e: "Multiply A:B by 4 $\\rightarrow$ 8:12; B:C by 3 $\\rightarrow$ 12:15. Combined ratio = 8:12:15." },
+            { u: "Paper 1: Mathematical Reasoning", q: "Average age of 4 members is 25 years. If a 5th member aged 35 joins, what is the new average?", o: ["26 years", "27 years", "28 years", "30 years"], c: 1, e: "Total age = $(4 \\times 25) + 35 = 135$. New average = $135 / 5 = 27$ years." },
+            { u: "Paper 1: Mathematical Reasoning", q: "A train running at 72 km/h crosses a pole in 10 seconds. Length of the train is:", o: ["150m", "200m", "250m", "300m"], c: 1, e: "$72 \\text{ km/h} = 72 \\times (5/18) = 20 \\text{ m/s}$. Distance = $20 \\text{ m/s} \\times 10 \\text{ s} = 200$ meters." },
+
+            { u: "Paper 1: Logical Reasoning", q: "In Classical Square of Opposition, if 'All S are P' is TRUE, then 'No S are P' is:", o: ["True", "False", "Undetermined", "Partially True"], c: 1, e: "A and E propositions are Contraries. Both cannot be true at the same time." },
+            { u: "Paper 1: Logical Reasoning", q: "Which Pramana in Indian Logic refers to knowledge derived through comparison or similarity?", o: ["Pratyaksha", "Anumana", "Upamana", "Sabda"], c: 2, e: "Upamana represents knowledge gained through analogy and comparison." },
+            { u: "Paper 1: Logical Reasoning", q: "Identify the fallacy: 'You cannot trust his argument on economic policy because he didn't go to college.'", o: ["Ad Hominem", "Begging the Question", "Straw Man", "Slippery Slope"], c: 0, e: "Ad Hominem attacks the person's character rather than addressing their logical argument." },
+            { u: "Paper 1: Logical Reasoning", q: "In Nyaya syllogism, the middle term that serves as the reason is known as:", o: ["Paksha", "Sadhya", "Hetu", "Vyakti"], c: 2, e: "Hetu is the middle term or reason that links the minor term (Paksha) to major term (Sadhya)." },
+            { u: "Paper 1: Logical Reasoning", q: "Obversion of 'All swans are white' results in:", o: ["No swans are non-white", "Some swans are white", "All non-swans are white", "No white things are swans"], c: 0, e: "Obversion changes quality and replaces predicate with its complement." },
+
+            { u: "Paper 1: Data Interpretation", q: "If production increases from 500 units to 650 units, what is the percentage growth?", o: ["20%", "25%", "30%", "35%"], c: 2, e: "Growth = $[(650 - 500)/500] \\times 100 = (150/500) \\times 100 = 30\\%$." },
+            { u: "Paper 1: Data Interpretation", q: "In a pie chart, a sector allocated 108° represents what percentage of the total dataset?", o: ["25%", "30%", "35%", "40%"], c: 1, e: "Percentage = $(108 / 360) \\times 100 = 0.30 \\times 100 = 30\\%$." },
+            { u: "Paper 1: Data Interpretation", q: "The ratio of male to female students in a college is 5:3. If total students are 800, female students count is:", o: ["300", "500", "250", "350"], c: 0, e: "Female students = $(3 / 8) \\times 800 = 300$." },
+            { u: "Paper 1: Data Interpretation", q: "Which bar chart variation displays multiple data series stacked on top of one another?", o: ["Grouped Bar Chart", "Stacked Bar Chart", "Histogram", "Line Graph"], c: 1, e: "Stacked bar charts show proportional breakdown within cumulative total bars." },
+            { u: "Paper 1: Data Interpretation", q: "Median of data values [12, 18, 7, 22, 15] is:", o: ["12", "15", "18", "14.8"], c: 1, e: "Sorted array: [7, 12, 15, 18, 22]. The middle (3rd) term is 15." },
+
+            { u: "Paper 1: ICT", q: "What is the full form of RAM?", o: ["Read Access Memory", "Random Access Memory", "Rapid Allocation Module", "Run Auto Memory"], c: 1, e: "RAM stands for Random Access Memory." },
+            { u: "Paper 1: ICT", q: "Which protocol secures web traffic through encryption?", o: ["HTTP", "HTTPS", "FTP", "SMTP"], c: 1, e: "HTTPS encrypts data transferred between web browser and website." },
+            { u: "Paper 1: ICT", q: "Convert decimal 19 into binary representation:", o: ["10011", "10101", "11001", "11100"], c: 0, e: "$19 = 16 + 2 + 1 = 2^4 + 2^1 + 2^0 \\rightarrow 10011_2$." },
+            { u: "Paper 1: ICT", q: "SaaS in cloud computing stands for:", o: ["System as a Service", "Software as a Service", "Storage as a Service", "Software as a System"], c: 1, e: "SaaS stands for Software as a Service." },
+            { u: "Paper 1: ICT", q: "Unsolicited promotional bulk emails sent over the internet are called:", o: ["Phishing", "Spam", "Malware", "Spyware"], c: 1, e: "Unsolicited bulk email messages are categorized as spam." },
+
+            { u: "Paper 1: People & Environment", q: "How many Sustainable Development Goals (SDGs) were framed by UN for 2030?", o: ["8", "12", "17", "20"], c: 2, e: "The 2030 Agenda includes 17 SDGs with 169 targets." },
+            { u: "Paper 1: People & Environment", q: "The Earth's protective ozone layer is located in the:", o: ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"], c: 1, e: "Stratospheric ozone protects Earth from harmful solar UV radiation." },
+            { u: "Paper 1: People & Environment", q: "Kyoto Protocol primarily targets global reduction of:", o: ["Ozone depleting chemicals", "Greenhouse gas emissions", "Plastic waste", "Heavy metal runoff"], c: 1, e: "Kyoto Protocol mandates international reductions in greenhouse gas emissions." },
+            { u: "Paper 1: People & Environment", q: "Minamata disease is caused by industrial contamination of water with:", o: ["Lead", "Cadmium", "Mercury", "Arsenic"], c: 2, e: "Minamata disease is caused by methylmercury poisoning." },
+            { u: "Paper 1: People & Environment", q: "Which energy source is classified as secondary renewable energy?", o: ["Solar radiation", "Wind current", "Green Hydrogen", "Geothermal heat"], c: 2, e: "Green Hydrogen is produced by electrolysis using primary renewable electricity." },
+
+            { u: "Paper 1: Higher Education System", q: "NEP 2020 replaces the 10+2 structure with which school framework?", o: ["5+3+3+4", "3+5+3+4", "5+4+3+3", "4+3+3+5"], c: 0, e: "NEP 2020 introduces the 5+3+3+4 structure covering ages 3 to 18." },
+            { u: "Paper 1: Higher Education System", q: "Which statutory agency accredits Higher Educational Institutions (HEIs) in India?", o: ["AICTE", "NAAC", "NCTE", "NCERT"], c: 1, e: "NAAC evaluates and accredits higher education institutions in India." },
+            { u: "Paper 1: Higher Education System", q: "Ancient Takshashila University was historically renowned for specialization in:", o: ["Medicine (Ayurveda)", "Astronomy only", "Naval Architecture", "Metallurgy"], c: 0, e: "Takshashila was renowned worldwide for Medicine and Political Thought." },
+            { u: "Paper 1: Higher Education System", q: "RUSA (Rashtriya Uchchatar Shiksha Abhiyan) is aimed at strategic funding of:", o: ["Primary schools", "State higher education institutions", "Private technical coaching", "Foreign branch campuses"], c: 1, e: "RUSA provides strategic funding to state higher education institutions." },
+            { u: "Paper 1: Higher Education System", q: "Academic Bank of Credits (ABC) allows students flexible options for:", o: ["Multiple entry and exit in higher education", "Waiving tuition fees", "Direct PhD admission without master degree", "Exemption from term exams"], c: 0, e: "ABC digitally stores credits to facilitate student mobility and multiple entry/exit." },
+
+            // PAPER 2 COMMERCE (Questions 51 to 150)
+            { u: "Paper 2: Accounting & Auditing", q: "According to AS-3, dividend paid by a manufacturing company is categorized under:", o: ["Operating Activity", "Investing Activity", "Financing Activity", "Extraordinary Activity"], c: 2, e: "Dividend payment represents cost of capital financing, so it is a Financing Activity." },
+            { u: "Paper 2: Accounting & Auditing", q: "Goodwill recorded in the books of accounts must always be:", o: ["Self-generated Goodwill", "Purchased Goodwill", "Revalued Goodwill", "Inherited Goodwill"], c: 1, e: "As per AS-26, only purchased goodwill for consideration is recognized in account books." },
+            { u: "Paper 2: Accounting & Auditing", q: "Which accounting concept mandates that financial statements should not anticipate future profits but provide for all possible losses?", o: ["Matching Concept", "Prudence / Conservatism Concept", "Materiality Concept", "Consistency Concept"], c: 1, e: "Prudence concept requires anticipating no profits while recognizing all probable liabilities." },
+            { u: "Paper 2: Accounting & Auditing", q: "Break-Even Point (in units) is calculated as:", o: ["Fixed Cost / Contribution per unit", "Fixed Cost / PV Ratio", "Total Cost / Selling Price", "Variable Cost / Margin of Safety"], c: 0, e: "$BEP \\text{ (units)} = \\text{Fixed Cost} / \\text{Contribution per unit}$." },
+            { u: "Paper 2: Accounting & Auditing", q: "Standard Costing uses variance analysis. Material Usage Variance is computed as:", o: ["(Standard Quantity - Actual Quantity) x Standard Price", "(Standard Price - Actual Price) x Actual Quantity", "(Standard Quantity - Actual Quantity) x Actual Price", "Total Standard Cost / Total Actual Cost"], c: 0, e: "$MUV = (SQ - AQ) \\times SP$." },
+            { u: "Paper 2: Accounting & Auditing", q: "Auditing of financial statements of a public listed company is primarily mandatory under:", o: ["Income Tax Act 1961", "Companies Act 2013", "SEBI Act 1992", "Partnership Act 1932"], c: 1, e: "Companies Act 2013 mandates statutory audit for corporate financial statements." },
+            { u: "Paper 2: Accounting & Auditing", q: "When shares are forfeited, the Share Forfeiture Account is credited with:", o: ["Nominal value of shares", "Called-up amount on shares", "Amount already paid up by the defaulting shareholder", "Unpaid call amount"], c: 2, e: "Share forfeiture account credits the exact amount already paid by defaulting shareholder." },
+            { u: "Paper 2: Accounting & Auditing", q: "Which financial ratio measures a firm's ability to settle immediate short-term obligations without relying on inventory sales?", o: ["Current Ratio", "Quick / Acid-Test Ratio", "Debt Equity Ratio", "Solvency Ratio"], c: 1, e: "Quick Ratio excludes inventory and prepaid expenses to test immediate liquidity." },
+            { u: "Paper 2: Accounting & Auditing", q: "Zero-Based Budgeting (ZBB) requires managers to justify budget proposals from:", o: ["Previous year base level", "Scratch / Zero base every period", "Standard industry average", "Inflation adjusted figures"], c: 1, e: "ZBB requires justifying all expenses from a zero base every budget period." },
+            { u: "Paper 2: Accounting & Auditing", q: "Realization Account is prepared at the time of:", o: ["Admission of a partner", "Retirement of a partner", "Dissolution of a partnership firm", "Issue of debentures"], c: 2, e: "Realization account computes net profit/loss on asset realization when dissolving a firm." },
+
+            { u: "Paper 2: Business Finance", q: "Which capital structure theory posits that firm value is independent of financial leverage in the absence of taxes?", o: ["Net Income Approach", "Traditional Approach", "Modigliani-Miller (MM) Hypothesis I", "Net Operating Income Approach"], c: 2, e: "MM Proposition I proves capital structure irrelevance in perfect markets without taxes." },
+            { u: "Paper 2: Business Finance", q: "Cost of equity capital ($K_e$) under Dividend Growth Model is expressed as:", o: ["$(D_1 / P_0) + g$", "$D_1 / P_0$", "$EPS / P_0$", "$(D_0 \\times g) / P_0$"], c: 0, e: "Dividend Growth Model equation: $K_e = (D_1 / P_0) + g$." },
+            { u: "Paper 2: Business Finance", q: "Operating Leverage measures the responsiveness of Operating Profit (EBIT) to changes in:", o: ["Sales Volume", "EPS", "Interest Expense", "Tax Rate"], c: 0, e: "Operating leverage measures sensitivity of EBIT relative to percentage changes in sales." },
+            { u: "Paper 2: Business Finance", q: "If Net Present Value (NPV) of a project is equal to zero, its Internal Rate of Return (IRR) is:", o: ["Greater than Cost of Capital", "Equal to Cost of Capital", "Less than Cost of Capital", "Zero"], c: 1, e: "IRR is the exact discount rate where NPV equals zero (Cost of Capital = IRR)." },
+            { u: "Paper 2: Business Finance", q: "Walter's Model suggests that a growth firm ($r > k$) should follow a dividend payout ratio of:", o: ["100%", "50%", "0%", "75%"], c: 2, e: "When return ($r$) exceeds cost of capital ($k$), Walter model advises 0% payout (100% retention)." },
+            { u: "Paper 2: Business Finance", q: "The risk that cannot be eliminated through portfolio diversification is called:", o: ["Unsystematic Risk", "Systematic / Market Risk", "Credit Risk", "Operational Risk"], c: 1, e: "Systematic risk affects the overall market and cannot be diversified away." },
+            { u: "Paper 2: Business Finance", q: "Which instrument allows Indian corporate issuers to raise foreign equity funds listed on international exchanges?", o: ["Commercial Paper", "Global Depository Receipts (GDRs)", "Treasury Bills", "Certificate of Deposit"], c: 1, e: "GDRs facilitate equity capital raising across international capital markets." },
+            { u: "Paper 2: Business Finance", q: "Capital Rationing arises when a firm faces:", o: ["Excess investment capital", "Constraints on available capital budget for profitable projects", "Negative Interest rates", "Zero NPV opportunities"], c: 1, e: "Capital rationing occurs when available funds are insufficient to fund all positive NPV projects." },
+            { u: "Paper 2: Business Finance", q: "Operating Cycle of a working capital framework measures time taken to convert:", o: ["Cash into Raw Materials and back into Cash", "Fixed Assets into Cash", "Equity into Debt", "Net Profit into Dividends"], c: 0, e: "Operating cycle measures total time elapsed from purchasing inventory to receiving cash sales." },
+            { u: "Paper 2: Business Finance", q: "CAPM formula calculates required return on asset as:", o: ["$R_f + \\beta (R_m - R_f)$", "$R_f - \\beta (R_m)$", "$R_m + \\beta (R_f)$", "$\\beta \\times (R_m - R_f)$"], c: 0, e: "CAPM equation: $E(R_i) = R_f + \\beta_i (R_m - R_f)$." },
+
+            { u: "Paper 2: Business Economics", q: "When Elasticity of Demand ($E_d$) is equal to 1, Marginal Revenue ($MR$) is:", o: ["Positive", "Negative", "Zero", "Infinite"], c: 2, e: "Formula $MR = AR (1 - 1/E_d)$. When $E_d = 1$, $MR = AR(1 - 1) = 0$." },
+            { u: "Paper 2: Business Economics", q: "Indifference curves are convex to the origin due to:", o: ["Diminishing Marginal Rate of Substitution (MRS)", "Increasing Marginal Utility", "Constant Opportunity Cost", "Rising Income Effect"], c: 0, e: "Convexity of indifference curves results from diminishing marginal rate of substitution." },
+            { u: "Paper 2: Business Economics", q: "Kinked Demand Curve model in Oligopoly explains:", o: ["Price Flexibility", "Price Rigidity / Sticky Prices", "Collusive Duopoly", "Monopoly power"], c: 1, e: "Paul Sweezy's kinked demand model explains sticky prices in oligopoly markets." },
+            { u: "Paper 2: Business Economics", q: "Under Perfect Competition, a firm achieves long-run equilibrium where:", o: ["$P = MR = LMC = LAC$", "$P > LMC$", "$MR = LFC$", "$P = AFC$"], c: 0, e: "In long-run perfect competition, price equals marginal revenue, long-run marginal cost, and minimum average cost." },
+            { u: "Paper 2: Business Economics", q: "Giffen goods are special inferior goods where:", o: ["Income effect is negative and stronger than substitution effect", "Substitution effect outweighs income effect", "Demand curves slope downward normally", "Price elasticity is infinite"], c: 0, e: "For Giffen goods, negative income effect overwhelms substitution effect, creating upward sloping demand." },
+            { u: "Paper 2: Business Economics", q: "The law of variable proportions operates in the:", o: ["Short Run", "Long Run", "Very Long Run", "Secular Period"], c: 0, e: "Law of variable proportions applies when at least one input factor remains fixed (Short Run)." },
+            { u: "Paper 2: Business Economics", q: "Price Discrimination is possible and profitable under Monopoly when markets have:", o: ["Identical price elasticities", "Different price elasticities of demand", "Perfect substitute goods", "Zero entry barriers"], c: 1, e: "Monopolists discriminate prices across markets with differing demand elasticities." },
+            { u: "Paper 2: Business Economics", q: "Production function $Q = A \\cdot L^a \\cdot K^b$ represents Constant Returns to Scale if:", o: ["$a + b > 1$", "$a + b = 1$", "$a + b < 1$", "$a = b = 0$"], c: 1, e: "In Cobb-Douglas production function, $a + b = 1$ indicates constant returns to scale." },
+            { u: "Paper 2: Business Economics", q: "Consumer Surplus is defined as the area between:", o: ["Demand curve and Price line", "Supply curve and Price line", "Total Cost and Total Revenue", "AFC and AVC"], c: 0, e: "Consumer surplus is the region bounded above by demand curve and below by market price." },
+            { u: "Paper 2: Business Economics", q: "Isoquants represent various combinations of two input factors that produce:", o: ["Equal total cost", "Equal level of physical output", "Equal marginal utility", "Maximum revenue"], c: 1, e: "Isoquants map alternative factor combinations yielding an identical level of output." },
+
+            { u: "Paper 2: Organizational Behavior & HRM", q: "According to Herzberg's Two-Factor Theory, which factor prevents job dissatisfaction but does not motivate?", o: ["Achievement", "Hygiene Factors", "Recognition", "Growth Opportunities"], c: 1, e: "Hygiene factors (salary, working conditions) prevent dissatisfaction but do not yield motivation." },
+            { u: "Paper 2: Organizational Behavior & HRM", q: "In Vroom's Expectancy Theory, Motivation is the product of:", o: ["Expectancy x Instrumentality x Valence", "Effort x Ability x Context", "Hygiene x Motivator x Need", "Perception x Behavior"], c: 0, e: "Vroom's formula: $Motivation = Expectancy \\times Instrumentality \\times Valence$." },
+            { u: "Paper 2: Organizational Behavior & HRM", q: "360-Degree Performance Appraisal gathers feedback from:", o: ["Superiors only", "Superiors, peers, subordinates, and clients", "Self-appraisal only", "HR Department exclusively"], c: 1, e: "360-degree feedback collects appraisals from all surrounding stakeholder groups." },
+            { u: "Paper 2: Organizational Behavior & HRM", q: "The process of predicting an organization's future human resource requirements is called:", o: ["Job Evaluation", "Human Resource Planning (HRP)", "Job Enrichment", "Performance Management"], c: 1, e: "HRP forecasts future manpower needs and aligns workforce supply with demand." },
+            { u: "Paper 2: Organizational Behavior & HRM", q: "Job Evaluation is primarily conducted to determine:", o: ["Relative worth of jobs for fair wage structure", "Training needs of employees", "Individual performance ratings", "Recruitment channels"], c: 0, e: "Job evaluation determines relative worth of different jobs to set equitable pay scales." },
+            { u: "Paper 2: Organizational Behavior & HRM", q: "Which leadership style involves complete hands-off delegation, allowing group members full decision freedom?", o: ["Autocratic Leadership", "Democratic Leadership", "Laissez-Faire Leadership", "Transformational Leadership"], c: 2, e: "Laissez-faire leadership grants total autonomy to subordinates with minimal leader intervention." },
+            { u: "Paper 2: Organizational Behavior & HRM", q: "Matrix Organizational Structure combines functional departmentalization with:", o: ["Product / Project Structure", "Geographic division", "Customer division", "Network structure"], c: 0, e: "Matrix structures overlay project/product management onto functional hierarchies." },
+            { u: "Paper 2: Organizational Behavior & HRM", q: "Systematic horizontal expansion of job tasks at the same organizational level is called:", o: ["Job Enlargement", "Job Enrichment", "Job Rotation", "Job Specification"], c: 0, e: "Job enlargement adds a wider variety of tasks at the same level of responsibility." },
+            { u: "Paper 2: Organizational Behavior & HRM", q: "The process through which new employees internalize organizational values and norms is called:", o: ["Orientation", "Socialization", "Recruitment", "Collective Bargaining"], c: 1, e: "Organizational socialization adapts new hires to corporate culture and values." },
+            { u: "Paper 2: Organizational Behavior & HRM", q: "In grievance handling procedures, the final domestic resolution step before arbitration is typically handled by:", o: ["Line Supervisor", "Grievance Committee / Top Management", "Works Committee", "Labor Court"], c: 1, e: "Unresolved grievances escalate through supervisors up to top management/grievance committees." },
+
+            { u: "Paper 2: Banking & Financial Institutions", q: "Which minimum capital adequacy framework was established globally to manage banking risks?", o: ["SEBI Norms", "Basel Accords", "FEMA Regulations", "IRDAI Guidelines"], c: 1, e: "Basel Accords set international standards for bank capital adequacy and risk management." },
+            { u: "Paper 2: Banking & Financial Institutions", q: "Repo Rate is defined as the interest rate at which:", o: ["RBI lends short-term money to commercial banks against government securities", "Commercial banks deposit surplus funds with RBI", "Banks lend to top corporate borrowers", "RBI lends long-term to state governments"], c: 0, e: "Repo rate is RBI's short-term lending rate to commercial banks against collateral securities." },
+            { u: "Paper 2: Banking & Financial Institutions", q: "Which regulatory body governs capital markets and stock exchanges in India?", o: ["RBI", "SEBI", "IRDAI", "PFRDA"], c: 1, e: "SEBI regulates and oversees Indian securities and capital markets." },
+            { u: "Paper 2: Banking & Financial Institutions", q: "NPA (Non-Performing Asset) classification applies when interest or principal installment remains overdue for over:", o: ["30 Days", "60 Days", "90 Days", "180 Days"], c: 2, e: "Loans become NPAs when payments remain overdue for more than 90 days." },
+            { u: "Paper 2: Banking & Financial Institutions", q: "Which system facilitates real-time gross settlement of high-value interbank fund transfers instantly?", o: ["NEFT", "RTGS", "IMPS", "ACH"], c: 1, e: "RTGS processes high-value money transfers individually on a real-time basis." },
+            { u: "Paper 2: Banking & Financial Institutions", q: "Regional Rural Banks (RRBs) were established in India following recommendations of:", o: ["Narasimham Committee (1975)", "Hilton Young Commission", "Raghuram Rajan Committee", "Chakravarty Committee"], c: 0, e: "M. Narasimham Working Group (1975) recommended establishing RRBs." },
+            { u: "Paper 2: Banking & Financial Institutions", q: "Which development bank acts as the apex refinancing institution for rural and agricultural credit in India?", o: ["SIDBI", "NABARD", "EXIM Bank", "NHB"], c: 1, e: "NABARD is the apex refinancing authority for agriculture and rural development." },
+            { u: "Paper 2: Banking & Financial Institutions", q: "CAMELS rating framework evaluates banking institutions. What does 'M' stand for?", o: ["Market Capital", "Management Capability", "Monetary Reserve", "Margin Balance"], c: 1, e: "CAMELS stands for Capital adequacy, Asset quality, Management, Earnings, Liquidity, Sensitivity." },
+            { u: "Paper 2: Banking & Financial Institutions", q: "Under Insurance Ombudsman rules, maximum compensation award payable is capped at:", o: ["₹20 Lakhs", "₹30 Lakhs", "₹50 Lakhs", "₹1 Crore"], c: 1, e: "Insurance Ombudsman can award compensation up to ₹30 Lakhs." },
+            { u: "Paper 2: Banking & Financial Institutions", q: "Which financial market instrument issued by banks provides fixed yield for short-term deposit funds?", o: ["Certificate of Deposit (CD)", "Commercial Paper (CP)", "Treasury Bill", "Equity Warrant"], c: 0, e: "Certificates of Deposit are negotiable money market instruments issued by commercial banks." },
+
+            { u: "Paper 2: Marketing Management", q: "Initial high pricing of a innovative product followed by gradual price reductions over time is called:", o: ["Penetration Pricing", "Skimming Pricing", "Predatory Pricing", "Peak-Load Pricing"], c: 1, e: "Price skimming skims initial market segments willing to pay premium prices." },
+            { u: "Paper 2: Marketing Management", q: "4 Ps of Marketing Mix proposed by E. Jerome McCarthy consist of Product, Price, Place, and:", o: ["People", "Process", "Promotion", "Positioning"], c: 2, e: "Traditional 4 Ps are Product, Price, Place, and Promotion." },
+            { u: "Paper 2: Marketing Management", q: "Dividing a broad target market into subsets based on social class, lifestyle, or personality is called:", o: ["Demographic Segmentation", "Psychographic Segmentation", "Geographic Segmentation", "Behavioral Segmentation"], c: 1, e: "Psychographic segmentation groups buyers based on social class, lifestyle, and personality traits." },
+            { u: "Paper 2: Marketing Management", q: "At which stage of the Product Life Cycle (PLC) do profits peak while sales growth begins to stabilize?", o: ["Introduction", "Growth", "Maturity", "Decline"], c: 2, e: "In Maturity stage, sales reach maximum peak while profit margins stabilize before declining." },
+            { u: "Paper 2: Marketing Management", q: "Holistic Marketing Concept encompasses Integrated Marketing, Relationship Marketing, Performance Marketing, and:", o: ["Internal Marketing", "Direct Marketing", "Database Marketing", "Viral Marketing"], c: 0, e: "Holistic marketing combines Integrated, Relationship, Performance, and Internal marketing." },
+            { u: "Paper 2: Marketing Management", q: "Which promotional tool provides short-term incentives to encourage quick purchase of products?", o: ["Advertising", "Sales Promotion", "Public Relations", "Personal Selling"], c: 1, e: "Sales promotions offer short-term incentives (coupons, discounts) to stimulate immediate buying." },
+            { u: "Paper 2: Marketing Management", q: "Cognitive Dissonance in consumer behavior refers to:", o: ["Post-purchase anxiety or doubt regarding choice made", "Impulse buying behavior", "Brand loyalty development", "Search for product information"], c: 0, e: "Cognitive dissonance is post-purchase psychological discomfort over chosen alternatives." },
+            { u: "Paper 2: Marketing Management", q: "Direct marketing channels exclude which intermediary?", o: ["Retailers and Wholesalers", "Company Website", "Telemarketing agents", "Direct Mailers"], c: 0, e: "Direct marketing sells straight to consumers without intermediary wholesalers or retailers." },
+            { u: "Paper 2: Marketing Management", q: "Brand Equity refers to:", o: ["Total market capitalization of parent company", "Added value endowed on products by the brand name", "Cost incurred in registering trademark", "Advertising budget assigned to brand"], c: 1, e: "Brand equity is the commercial value derived from consumer perception of the brand name." },
+            { u: "Paper 2: Marketing Management", q: "Services marketing adds 3 extra Ps to the traditional mix: People, Process, and:", o: ["Physical Evidence", "Publicity", "Positioning", "Packaging"], c: 0, e: "Expanded service marketing mix includes People, Process, and Physical Evidence." },
+
+            { u: "Paper 2: Legal Aspects of Business", q: "Under Indian Contract Act 1872, an agreement without consideration is strictly:", o: ["Voidable", "Void", "Valid", "Illegal"], c: 1, e: "Section 25 specifies that agreements without consideration are void (subject to exceptions)." },
+            { u: "Paper 2: Legal Aspects of Business", q: "Minors entering into contracts in India are protected because their agreements are:", o: ["Voidable at minor's option", "Void ab initio (void from beginning)", "Valid with court approval", "Enforceable after age 18"], c: 1, e: "Mohori Bibee v. Dharmodas Ghoshed ruled minor agreements void ab initio." },
+            { u: "Paper 2: Legal Aspects of Business", q: "Under Sales of Goods Act 1930, 'Caveat Emptor' means:", o: ["Let the seller beware", "Let the buyer beware", "Goods must fit purpose", "Ownership passes immediately"], c: 1, e: "Caveat Emptor places responsibility on buyers to examine goods before purchasing." },
+            { u: "Paper 2: Legal Aspects of Business", q: "Negotiable Instruments Act 1881 covers Promissory Notes, Bills of Exchange, and:", o: ["Cheques", "Share Certificates", "Bonds", "Fixed Deposit Receipts"], c: 0, e: "The Act explicitly governs Promissory Notes, Bills of Exchange, and Cheques." },
+            { u: "Paper 2: Legal Aspects of Business", q: "Which agency handles consumer complaints involving claims exceeding ₹10 Crore under CPA 2019?", o: ["District Commission", "State Commission", "National Consumer Disputes Redressal Commission (NCDRC)", "Supreme Court"], c: 2, e: "Under Consumer Protection Act 2019, NCDRC handles claims exceeding ₹10 Crore." },
+            { u: "Paper 2: Legal Aspects of Business", q: "Right to Information (RTI) Act 2005 requires PIOs to supply requested information within:", o: ["15 Days", "30 Days", "45 Days", "60 Days"], c: 1, e: "Public Information Officers must respond within 30 days of receiving RTI applications." },
+            { u: "Paper 2: Legal Aspects of Business", q: "Intellectual property protection for technical inventions with industrial application is granted as:", o: ["Copyright", "Trademark", "Patent", "Trade Secret"], c: 2, e: "Patents grant exclusive technological rights over novel inventions for 20 years." },
+            { u: "Paper 2: Legal Aspects of Business", q: "Limited Liability Partnership (LLP) registration in India is governed by:", o: ["Companies Act 2013", "Partnership Act 1932", "LLP Act 2008", "FEMA 1999"], c: 2, e: "LLP structures are registered under Limited Liability Partnership Act 2008." },
+            { u: "Paper 2: Legal Aspects of Business", q: "Which type of breach occurs when a contracting party declares refusal to perform duties prior to due date?", o: ["Actual Breach", "Anticipatory Breach", "Minor Breach", "Constructive Breach"], c: 1, e: "Anticipatory breach happens when performance is repudiated prior to scheduled due date." },
+            { u: "Paper 2: Legal Aspects of Business", q: "GST (Goods and Services Tax) in India was introduced via which Constitutional Amendment Act?", o: ["101st Amendment Act", "44th Amendment Act", "122nd Amendment Act", "86th Amendment Act"], c: 0, e: "The 101st Constitutional Amendment Act (2016) paved way for GST implementation." },
+
+            { u: "Paper 2: Business Statistics & Research Methods", q: "Which parametric test evaluates significant difference between means of more than two independent sample groups?", o: ["Student t-test", "Z-test", "ANOVA (F-test)", "Chi-Square test"], c: 2, e: "Analysis of Variance (ANOVA) compares mean values across three or more groups." },
+            { u: "Paper 2: Business Statistics & Research Methods", q: "Spearman's Rank Correlation coefficient ranges between:", o: ["0 and +1", "-1 and +1", "-Infinity and +Infinity", "0 and 100"], c: 1, e: "Rank correlation coefficients always fall within the interval $[-1, +1]$." },
+            { u: "Paper 2: Business Statistics & Research Methods", q: "In a negatively skewed distribution, the relationship between Mean, Median, and Mode is:", o: ["$Mean > Median > Mode$", "$Mean < Median < Mode$", "$Mean = Median = Mode$", "$Mode < Mean < Median$"], c: 1, e: "In negative skewness, extreme low values pull the mean down ($Mean < Median < Mode$)." },
+            { u: "Paper 2: Business Statistics & Research Methods", q: "Chi-Square ($\chi^2$) test is non-parametric and used to evaluate:", o: ["Goodness of fit and independence of attributes", "Difference between two population means", "Linear regression slopes", "Geometric means"], c: 0, e: "Chi-Square test checks goodness-of-fit and independence between categorical attributes." },
+            { u: "Paper 2: Business Statistics & Research Methods", q: "Standard Deviation divided by Mean expressed as a percentage yields:", o: ["Variance", "Standard Error", "Coefficient of Variation (CV)", "Co-variance"], c: 2, e: "$CV = (\\text{Standard Deviation} / \\text{Mean}) \\times 100$." },
+            { u: "Paper 2: Business Statistics & Research Methods", q: "Probability of rejecting a Null Hypothesis when it is false is known as:", o: ["Level of Significance", "Power of a Test ($1 - \\beta$)", "Type I Error Rate", "Confidence Level"], c: 1, e: "Power of a test ($1 - \\beta$) measures ability to correctly reject false null hypotheses." },
+            { u: "Paper 2: Business Statistics & Research Methods", q: "Regression coefficients $b_{yx}$ and $b_{xy}$ share property where their geometric mean equals:", o: ["Variance", "Coefficient of Determination", "Correlation Coefficient ($r$)", "Standard Error"], c: 2, e: "Correlation coefficient equals geometric mean of regression coefficients: $r = \\sqrt{b_{yx} \\times b_{xy}}$." },
+            { u: "Paper 2: Business Statistics & Research Methods", q: "Index numbers measuring price movements over time calculated using Base Year quantities as weights are called:", o: ["Paasche Index", "Laspeyres Index", "Fisher's Ideal Index", "Marshall-Edgeworth Index"], c: 1, e: "Laspeyres index uses base year quantity weights ($q_0$) for price index calculations." },
+            { u: "Paper 2: Business Statistics & Research Methods", q: "Which random sampling method divides population into homogenous subgroups prior to random selection?", o: ["Simple Random Sampling", "Stratified Random Sampling", "Cluster Sampling", "Convenience Sampling"], c: 1, e: "Stratified sampling creates homogenous strata and samples randomly within each stratum." },
+            { u: "Paper 2: Business Statistics & Research Methods", q: "Normal Distribution curve is symmetric and bell-shaped with kurtosis value ($B_2$) equal to:", o: ["0", "3", "1", "1.96"], c: 1, e: "A mesokurtic standard normal distribution has kurtosis $B_2 = 3$." },
+
+            { u: "Paper 2: Business Environment & IB", q: "Balance of Payments (BoP) consists of Current Account, Capital Account, and:", o: ["Financial Reserve & Errors and Omissions", "Budget Deficit", "Trade Surplus", "Foreign Debt Account"], c: 0, e: "BoP balancing incorporates official reserve changes along with errors and omissions." },
+            { u: "Paper 2: Business Environment & IB", q: "WTO (World Trade Organization) was established in 1995 following conclusion of which round?", o: ["Tokyo Round", "Uruguay Round", "Doha Round", "Kennedy Round"], c: 1, e: "The Uruguay Round of GATT negotiations created the WTO on January 1, 1995." },
+            { u: "Paper 2: Business Environment & IB", q: "FDI entry strategy where a foreign enterprise establishes completely new facilities from scratch is called:", o: ["Brownfield Investment", "Greenfield Investment", "Joint Venture", "Franchising"], c: 1, e: "Greenfield FDI builds brand new operational infrastructure from scratch." },
+            { u: "Paper 2: Business Environment & IB", q: "According to David Ricardo, international trade is driven by differences in:", o: ["Absolute Advantage", "Comparative Advantage / Opportunity Cost", "Factor Endowments", "Product Life Cycles"], c: 1, e: "Ricardo's theory demonstrates trade gains based on comparative cost advantage." },
+            { u: "Paper 2: Business Environment & IB", q: "TRIPS agreement under WTO specifically governs:", o: ["Trade in Services", "Trade-Related Aspects of Intellectual Property Rights", "Agriculture subsidies", "Textile quotas"], c: 1, e: "TRIPS establishes global standards for intellectual property rights enforcement." },
+            { u: "Paper 2: Business Environment & IB", q: "Which regional economic group utilizes the 'Euro' as single currency across member nations?", o: ["NAFTA / USMCA", "European Union (Eurozone)", "ASEAN", "SAARC"], c: 1, e: "The Eurozone consists of EU member nations using the Euro." },
+            { u: "Paper 2: Business Environment & IB", q: "FEMA (Foreign Exchange Management Act) replaced FERA in India in the year:", o: ["1991", "1999", "2005", "2010"], c: 1, e: "FEMA was enacted in 1999 to facilitate cross-border trade and currency management." },
+            { u: "Paper 2: Business Environment & IB", q: "Heckscher-Ohlin Theory explains trade patterns based on international differences in:", o: ["Technological innovation", "Factor Endowments (Labor vs Capital abundance)", "Demand preferences", "Transport costs"], c: 1, e: "Heckscher-Ohlin model highlights comparative advantage derived from relative factor abundance." },
+            { u: "Paper 2: Business Environment & IB", q: "IMF (International Monetary Fund) was primarily established at Bretton Woods to assist countries with:", o: ["Long-term infrastructure grants", "Short-term Balance of Payments (BoP) crises", "Tariff reduction enforcement", "Private sector equity"], c: 1, e: "IMF provides financial assistance to member states facing short-term BoP distress." },
+            { u: "Paper 2: Business Environment & IB", q: "PESTLE framework for macro-environmental analysis stands for Political, Economic, Social, Technological, Legal, and:", o: ["Environmental", "Ethical", "Educational", "Entrepreneurial"], c: 0, e: "PESTLE includes Political, Economic, Social, Technological, Legal, and Environmental factors." },
+
+            { u: "Paper 2: Income Tax & Tax Planning", q: "What is the maximum deduction allowed under Section 80C of Income Tax Act 1961?", o: ["₹1,00,000", "₹1,50,000", "₹2,00,000", "₹2,50,000"], c: 1, e: "Section 80C caps aggregate tax deductions at ₹1,50,000 per assessment year." },
+            { u: "Paper 2: Business Economics", q: "Which revenue curve coincides with the demand curve faced by a firm under monopoly?", o: ["Total Revenue Curve", "Marginal Revenue Curve", "Average Revenue Curve", "Total Cost Curve"], c: 2, e: "For any seller, the Average Revenue (AR) curve is identical to the market demand curve." },
+            { u: "Paper 2: Income Tax & Tax Planning", q: "Residential status of an individual taxpayer in India under Section 6 depends on:", o: ["Citizenship status", "Number of days stayed in India during relevant previous years", "Place of birth", "Location of bank accounts"], c: 1, e: "Tax residence is determined solely by physical stay duration in India during relevant previous years." },
+            { u: "Paper 2: Income Tax & Tax Planning", q: "Under Income Tax Act, tax deduction for municipal taxes paid on let-out house property is allowed under head:", o: ["Income from Salaries", "Income from House Property", "Income from Business/Profession", "Capital Gains"], c: 1, e: "Municipal taxes paid by owner are deducted from Gross Annual Value under House Property." },
+            { u: "Paper 2: Income Tax & Tax Planning", q: "Long-Term Capital Gain (LTCG) on transfer of listed equity shares exceeding ₹1 Lakh is taxed under Section 112A at rate of:", o: ["10%", "15%", "20%", "30%"], c: 0, e: "LTCG on listed equity shares above ₹1 Lakh is taxed at 10% (without indexation)." },
+            { u: "Paper 2: Income Tax & Tax Planning", q: "Deduction under Section 80D is available in respect of payments made towards:", o: ["Life Insurance Premium", "Medical Insurance Premium", "Interest on Higher Education Loan", "Donation to charities"], c: 1, e: "Section 80D allows tax deductions for health and medical insurance premiums." },
+            { u: "Paper 2: Income Tax & Tax Planning", q: "Which Section governs advance tax liability when total tax payable in a financial year is ₹10,000 or more?", o: ["Section 208", "Section 192", "Section 80G", "Section 139"], c: 0, e: "Section 208 mandates advance tax payment if estimated tax liability reaches or exceeds ₹10,000." },
+            { u: "Paper 2: Income Tax & Tax Planning", q: "In tax terminology, illegal reduction of tax liability through fraud or misrepresentation is termed:", o: ["Tax Avoidance", "Tax Planning", "Tax Evasion", "Tax Management"], c: 2, e: "Tax evasion illegally evades tax obligations using fraudulent methods." },
+            { u: "Paper 2: Income Tax & Tax Planning", q: "Income of a minor child is generally clubbed with income of that parent whose total income is:", o: ["Lower", "Higher", "Zero", "Equal to basic exemption"], c: 1, e: "Under Section 64(1A), minor income is clubbed with the parent having higher total income." },
+            { u: "Paper 2: Income Tax & Tax Planning", q: "Standard Deduction allowable to salaried employees under Section 16(ia) in current tax regimes is:", o: ["₹40,000", "₹50,000", "₹75,000", "₹1,00,000"], c: 2, e: "Standard deduction for salaried individuals under modern tax revisions is ₹75,000." }
+        ];
+
+        // State variables
+        let currentIdx = 0;
+        let userAnswers = new Array(150).fill(null);
+        let bookmarked = new Array(150).fill(false);
+        let timeLeft = 180 * 60; // 180 Minutes
+        let timerInterval = null;
+        let isSubmitted = false;
+        let currentFilter = "all";
+
+        window.onload = () => {
+            renderPalette();
+            loadQuestion(0);
+            startTimer();
+        };
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmit();
+                } else {
+                    timeLeft--;
+                    updateTimerDisplay();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const hrs = Math.floor(timeLeft / 3600);
+            const mins = Math.floor((timeLeft % 3600) / 60);
+            const secs = timeLeft % 60;
+            document.getElementById("timer").innerText = 
+                `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        function filterPaper(val) {
+            currentFilter = val;
+            renderPalette();
+        }
+
+        function renderPalette() {
+            const grid = document.getElementById("palette-grid");
+            grid.innerHTML = "";
+
+            let start = 0;
+            let end = 150;
+            if (currentFilter === "p1") end = 50;
+            if (currentFilter === "p2") start = 50;
+
+            for (let i = start; i < end; i++) {
+                const btn = document.createElement("button");
+                btn.innerText = i + 1;
+                btn.className = `w-9 h-9 rounded-lg font-bold text-xs flex items-center justify-center transition ${getPaletteStyle(i)}`;
+                btn.onclick = () => loadQuestion(i);
+                grid.appendChild(btn);
+            }
+        }
+
+        function getPaletteStyle(idx) {
+            if (idx === currentIdx) {
+                return "bg-indigo-600 text-white ring-2 ring-indigo-400 ring-offset-1";
+            }
+            if (bookmarked[idx]) {
+                return "bg-amber-400 text-slate-900";
+            }
+            if (userAnswers[idx] !== null) {
+                return "bg-emerald-500 text-white";
+            }
+            return "bg-slate-100 text-slate-700 hover:bg-slate-200";
+        }
+
+        function loadQuestion(idx) {
+            currentIdx = idx;
+            const q = questions[idx];
+
+            document.getElementById("unit-badge").innerText = q.u;
+            document.getElementById("q-number").innerText = `Question ${idx + 1} of 150`;
+            document.getElementById("q-text").innerText = q.q;
+
+            // Bookmark icon
+            const bmBtn = document.getElementById("bookmark-btn");
+            bmBtn.innerHTML = bookmarked[idx] ? 
+                `<i class="fa-solid fa-bookmark text-amber-500"></i>` : 
+                `<i class="fa-regular fa-bookmark"></i>`;
+
+            // Render options
+            const container = document.getElementById("options-container");
+            container.innerHTML = "";
+
+            q.o.forEach((opt, optIdx) => {
+                const label = document.createElement("label");
+                label.className = `flex items-center p-3.5 rounded-lg border transition cursor-pointer ${getOptionStyle(idx, optIdx)}`;
+                
+                const radio = document.createElement("input");
+                radio.type = "radio";
+                radio.name = "option";
+                radio.value = optIdx;
+                radio.checked = userAnswers[idx] === optIdx;
+                radio.disabled = isSubmitted;
+                radio.className = "w-4 h-4 text-indigo-600 focus:ring-indigo-500";
+                radio.onchange = () => selectOption(optIdx);
+
+                const text = document.createElement("span");
+                text.className = "ml-3 text-sm text-slate-700 font-medium";
+                text.innerText = opt;
+
+                label.appendChild(radio);
+                label.appendChild(text);
+                container.appendChild(label);
+            });
+
+            // Navigation
+            document.getElementById("prev-btn").disabled = idx === 0;
+            document.getElementById("next-btn").disabled = idx === 149;
+
+            // Explanation handling
+            const expBox = document.getElementById("explanation-box");
+            if (isSubmitted) {
+                expBox.classList.remove("hidden");
+                document.getElementById("explanation-text").innerHTML = q.e;
+            } else {
+                expBox.classList.add("hidden");
+            }
+
+            renderPalette();
+        }
+
+        function getOptionStyle(qIdx, optIdx) {
+            if (!isSubmitted) {
+                return userAnswers[qIdx] === optIdx ? 
+                    "border-indigo-600 bg-indigo-50" : 
+                    "border-slate-200 hover:bg-slate-50";
+            }
+
+            const correctOpt = questions[qIdx].c;
+            const userOpt = userAnswers[qIdx];
+
+            if (optIdx === correctOpt) {
+                return "border-emerald-500 bg-emerald-50 text-emerald-900 font-semibold";
+            }
+            if (userOpt === optIdx && userOpt !== correctOpt) {
+                return "border-rose-500 bg-rose-50 text-rose-900";
+            }
+            return "border-slate-200 opacity-60";
+        }
+
+        function selectOption(optIdx) {
+            if (isSubmitted) return;
+            userAnswers[currentIdx] = optIdx;
+            renderPalette();
+            loadQuestion(currentIdx);
+        }
+
+        function clearResponse() {
+            if (isSubmitted) return;
+            userAnswers[currentIdx] = null;
+            renderPalette();
+            loadQuestion(currentIdx);
+        }
+
+        function toggleBookmark() {
+            bookmarked[currentIdx] = !bookmarked[currentIdx];
+            renderPalette();
+            loadQuestion(currentIdx);
+        }
+
+        function navigate(step) {
+            const nextIdx = currentIdx + step;
+            if (nextIdx >= 0 && nextIdx < 150) {
+                loadQuestion(nextIdx);
+            }
+        }
+
+        function confirmSubmit() {
+            if (isSubmitted) return;
+            const answeredCount = userAnswers.filter(a => a !== null).length;
+            if (confirm(`You have answered ${answeredCount} out of 150 questions. Submit full test?`)) {
+                submitTest();
+            }
+        }
+
+        function autoSubmit() {
+            alert("Time's up! Your full test is submitting automatically.");
+            submitTest();
+        }
+
+        function submitTest() {
+            isSubmitted = true;
+            clearInterval(timerInterval);
+
+            let correct = 0;
+            let incorrect = 0;
+            let unattempted = 0;
+
+            userAnswers.forEach((ans, idx) => {
+                if (ans === null) {
+                    unattempted++;
+                } else if (ans === questions[idx].c) {
+                    correct++;
+                } else {
+                    incorrect++;
+                }
+            });
+
+            const totalScore = correct * 2; // 2 marks each (150 * 2 = 300)
+
+            document.getElementById("score-summary").classList.remove("hidden");
+            document.getElementById("total-score").innerText = `${totalScore} / 300`;
+            document.getElementById("correct-count").innerText = correct;
+            document.getElementById("incorrect-count").innerText = incorrect;
+            document.getElementById("unattempted-count").innerText = unattempted;
+
+            document.getElementById("submit-btn").innerText = "Test Completed";
+            document.getElementById("submit-btn").disabled = true;
+            document.getElementById("submit-btn").className = "bg-slate-400 text-white font-bold px-4 py-2 rounded-lg text-sm cursor-not-allowed";
+
+            loadQuestion(currentIdx);
+        }
+    </script>
+</body>
+</html>
