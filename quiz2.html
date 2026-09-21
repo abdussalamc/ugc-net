@@ -962,6 +962,26 @@
             document.getElementById("resultModal").classList.remove("hidden");
         }
 
+        let timeLeft = 3600;
+let timerInterval = null;
+
+function startTimer() {
+    if (timerInterval) return;
+    timerInterval = setInterval(() => {
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            alert("Time is up! Submitting your test automatically.");
+            submitTest();
+            return;
+        }
+        timeLeft--;
+        let minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
+        let formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+        let formattedSeconds = seconds < 10 ? "0" + seconds : seconds;
+        document.getElementById("timerDisplay").innerText = `${formattedMinutes}:${formattedSeconds}`;
+    }, 1000);
+}
         function reviewMode() {
             document.getElementById("resultModal").classList.add("hidden");
             loadQuestion(0);
