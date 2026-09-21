@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGC NET Paper 1 Full Mock Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <header class="bg-indigo-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center space-x-3">
+                <div class="p-2 bg-indigo-700 rounded-lg">
+                    <i class="fa-solid font-bold fa-graduation-cap text-2xl text-yellow-400"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-wide">UGC NET Paper 1 Master Prep</h1>
+                    <p class="text-xs text-indigo-200">50 Questions | 100 Marks | 60 Minutes</p>
+                </div>
+            </div>
+
+            <!-- Timer & Action Bar -->
+            <div class="flex items-center space-x-4">
+                <div id="timerContainer" class="flex items-center bg-indigo-800 border border-indigo-700 px-4 py-1.5 rounded-lg text-amber-300 font-mono font-semibold text-lg shadow-inner">
+                    <i class="fa-regular fa-clock mr-2 text-base"></i>
+                    <span id="timerDisplay">60:00</span>
+                </div>
+                <button id="submitBtn" onclick="confirmSubmitTest()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-all shadow-md flex items-center">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Submit Test
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto w-full px-4 py-6 flex-1 grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+        <!-- Left / Central Content Area (Questions & Context) -->
+        <div class="lg:col-span-3 flex flex-col space-y-4">
+            
+            <!-- Module / Sub-header Badge -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-wrap justify-between items-center gap-2">
+                <div>
+                    <span id="moduleBadge" class="inline-block bg-indigo-100 text-indigo-800 font-medium px-3 py-1 rounded-full text-xs uppercase tracking-wider mb-1">
+                        Module Name
+                    </span>
+                    <h2 class="text-lg font-semibold text-slate-800" id="questionTitleNumber">Question 1 of 50</h2>
+                </div>
+                <div class="flex items-center space-x-2 text-sm font-medium text-slate-500">
+                    <span class="bg-slate-100 px-2.5 py-1 rounded border border-slate-200 text-slate-700">+2 Marks</span>
+                    <span class="bg-slate-100 px-2.5 py-1 rounded border border-slate-200 text-slate-700">No Negative Marking</span>
+                </div>
+            </div>
+
+            <!-- Dynamic Context Box for Reading Comprehension & Data Interpretation -->
+            <div id="contextContainer" class="hidden bg-indigo-50/70 border border-indigo-200 rounded-xl p-5 shadow-sm text-sm text-slate-700">
+                <!-- Data Table or Passage injected here -->
+            </div>
+
+            <!-- Question Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex-1 flex flex-col justify-between">
+                <div>
+                    <p id="questionText" class="text-base sm:text-lg font-medium text-slate-800 leading-relaxed mb-6">
+                        Loading question...
+                    </p>
+
+                    <!-- Options List -->
+                    <div id="optionsList" class="space-y-3">
+                        <!-- Options injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- Solution & Explanation Panel (Hidden during test, shown in review) -->
+                <div id="explanationBox" class="hidden mt-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-sm">
+                    <div class="flex items-center text-emerald-800 font-semibold mb-2">
+                        <i class="fa-solid fa-circle-check mr-2"></i> Explanation & Concept Clarity
+                    </div>
+                    <p id="explanationText" class="text-slate-700 leading-relaxed"></p>
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="mt-8 pt-4 border-t border-slate-100 flex flex-wrap justify-between items-center gap-3">
+                    <div class="flex space-x-2">
+                        <button onclick="clearResponse()" class="px-3.5 py-2 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-100 text-xs sm:text-sm font-medium transition">
+                            <i class="fa-solid fa-rotate-left mr-1.5"></i> Clear
+                        </button>
+                        <button id="bookmarkBtn" onclick="toggleBookmark()" class="px-3.5 py-2 rounded-lg border border-amber-300 text-amber-700 hover:bg-amber-50 text-xs sm:text-sm font-medium transition">
+                            <i class="fa-regular fa-bookmark mr-1.5" id="bookmarkIcon"></i> Mark for Review
+                        </button>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button id="prevBtn" onclick="navigateQuestion(-1)" class="px-4 py-2 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 text-sm font-semibold transition">
+                            <i class="fa-solid fa-chevron-left mr-1.5"></i> Prev
+                        </button>
+                        <button id="nextBtn" onclick="navigateQuestion(1)" class="px-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold transition shadow-sm">
+                            Next <i class="fa-solid fa-chevron-right ml-1.5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Side Panel: Question Palette & Status -->
+        <div class="lg:col-span-1 flex flex-col space-y-4">
+            
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">Status Legend</h3>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-emerald-500 inline-block"></span>
+                        <span class="text-slate-600">Answered</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-amber-500 inline-block"></span>
+                        <span class="text-slate-600">Review</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-slate-200 inline-block"></span>
+                        <span class="text-slate-600">Not Visited</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-rose-500 inline-block"></span>
+                        <span class="text-slate-600">Unanswered</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid Palette -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex-1 flex flex-col">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">Question Palette</h3>
+                    <span id="answeredCount" class="text-xs font-semibold bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-full">0/50 Answered</span>
+                </div>
+
+                <div id="paletteGrid" class="grid grid-cols-5 gap-2 max-h-80 overflow-y-auto custom-scrollbar p-1">
+                    <!-- 50 Buttons injected dynamically -->
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Result / Score Modal (Hidden by Default) -->
+    <div id="resultModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 sm:p-8 text-center animate-fade-in relative">
+            <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-800">Test Completed!</h2>
+            <p class="text-sm text-slate-500 mb-6">Here is your performance summary for UGC NET Paper 1</p>
+
+            <div class="grid grid-cols-2 gap-4 mb-6 text-left">
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-xs text-slate-500 uppercase font-semibold">Total Score</span>
+                    <p class="text-2xl font-extrabold text-indigo-700" id="finalScore">0 / 100</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-xs text-slate-500 uppercase font-semibold">Percentage</span>
+                    <p class="text-2xl font-extrabold text-indigo-700" id="finalPercentage">0%</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-xs text-slate-500 uppercase font-semibold">Correct Answers</span>
+                    <p class="text-xl font-bold text-emerald-600" id="correctCount">0</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-xs text-slate-500 uppercase font-semibold">Incorrect Answers</span>
+                    <p class="text-xl font-bold text-rose-600" id="incorrectCount">0</p>
+                </div>
+            </div>
+
+            <div class="flex space-x-3">
+                <button onclick="reviewMode()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold shadow-md transition">
+                    <i class="fa-solid fa-magnifying-glass mr-2"></i> Review Solutions
+                </button>
+                <button onclick="restartTest()" class="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold transition">
+                    <i class="fa-solid fa-arrow-rotate-right mr-2"></i> Re-take Test
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Structure for 50 Questions covering all 10 Modules
+        const questionsData = [
+            // ------------------ MODULE 1: TEACHING APTITUDE (1 - 5) ------------------
+            {
+                id: 1,
+                module: "1. Teaching Aptitude",
+                question: "Which level of teaching focuses on critical thinking, problem-solving, and deep insight generation rather than mere rote memory?",
+                options: ["Memory Level", "Understanding Level", "Reflective Level", "Autonomous Development Level"],
+                answer: 2,
+                explanation: "Reflective Level of Teaching (promoted by Hunt) is the highest level of teaching that emphasizes critical thinking, problem-solving, and synthesis of concepts."
+            },
+            {
+                id: 2,
+                module: "1. Teaching Aptitude",
+                question: "Which of the following is an example of a Formative Assessment?",
+                options: ["End-of-term University Final Exam", "Weekly Diagnostic Quiz with Immediate Feedback", "National Eligibility Standardized Test", "Annual Grading Evaluation"],
+                answer: 1,
+                explanation: "Formative evaluation is conducted during the instructional process to monitor student learning and provide ongoing feedback to improve teaching and learning."
+            },
+            {
+                id: 3,
+                module: "1. Teaching Aptitude",
+                question: "According to Bloom's Revised Taxonomy, which cognitive process represents the highest level of learning?",
+                options: ["Analyzing", "Evaluating", "Creating", "Applying"],
+                answer: 2,
+                explanation: "In Anderson & Krathwohl's revision of Bloom's Taxonomy, 'Creating' (putting elements together to form a coherent or functional whole) is the highest cognitive skill."
+            },
+            {
+                id: 4,
+                module: "1. Teaching Aptitude",
+                question: "Which learning platform is a flagship initiative of the Government of India designed to achieve access, equity, and quality in higher education via MOOCs?",
+                options: ["SWAYAM", "DIKSHA", "SWAYAM PRABHA", "NPTEL"],
+                answer: 0,
+                explanation: "SWAYAM (Study Webs of Active-Learning for Young Aspiring Minds) provides integrated MOOCs platform for courses from Class 9 to Post-Graduation."
+            },
+            {
+                id: 5,
+                module: "1. Teaching Aptitude",
+                question: "In the context of learner characteristics, 'Field Dependent' learners typically exhibit which behavior?",
+                options: ["Prefer working independently on abstract problems", "Rely strongly on external context and social interaction", "Focus heavily on isolated details", "Prefer self-directed solitary study"],
+                answer: 1,
+                explanation: "Field-dependent cognitive style learners perceive information holistically, tend to be socially oriented, and rely on external cues/contexts."
+            },
+
+            // ------------------ MODULE 2: RESEARCH APTITUDE (6 - 10) ------------------
+            {
+                id: 6,
+                module: "2. Research Aptitude",
+                question: "A research design where the investigator manipulates an independent variable to observe its effect on a dependent variable with random assignment is called:",
+                options: ["Ex-post Facto Research", "Experimental Research", "Descriptive Survey", "Historical Research"],
+                answer: 1,
+                explanation: "Experimental research is characterized by active manipulation of independent variables, control over extraneous variables, and random assignment."
+            },
+            {
+                id: 7,
+                module: "2. Research Aptitude",
+                question: "In hypothesis testing, a 'Type I Error' occurs when:",
+                options: ["A true null hypothesis is rejected", "A false null hypothesis is accepted", "A true alternative hypothesis is rejected", "A false alternative hypothesis is accepted"],
+                answer: 0,
+                explanation: "Type I error (α error) happens when the researcher incorrectly rejects a true null hypothesis."
+            },
+            {
+                id: 8,
+                module: "2. Research Aptitude",
+                question: "Which sampling technique ensures every member of the population has a known and equal non-zero probability of selection?",
+                options: ["Snowball Sampling", "Quota Sampling", "Simple Random Sampling", "Purposive Sampling"],
+                answer: 2,
+                explanation: "Simple Random Sampling is a probability sampling method where each element in the population has an equal chance of selection."
+            },
+            {
+                id: 9,
+                module: "2. Research Aptitude",
+                question: "What is the primary objective of Action Research?",
+                options: ["To formulate broad theoretical generalizations", "To solve an immediate local problem in a specific setting", "To explore historical trends", "To evaluate fundamental laws of science"],
+                answer: 1,
+                explanation: "Action research is an applied cyclical research process aimed at solving immediate, practical problems faced by practitioners in local settings."
+            },
+            {
+                id: 10,
+                module: "2. Research Aptitude",
+                question: "Which of the following is considered an act of Plagiarism in academic research?",
+                options: ["Paraphrasing an idea with proper citation", "Presenting someone else's work or ideas as one's own without attribution", "Publishing raw empirical data with methodology", "Collaborating on a joint research project with consent"],
+                answer: 1,
+                explanation: "Plagiarism is the unacknowledged use of another author's work, ideas, or language as one's original output."
+            },
+
+            // ------------------ MODULE 3: READING COMPREHENSION (11 - 15) ------------------
+            {
+                id: 11,
+                module: "3. Reading Comprehension",
+                hasContext: true,
+                contextType: "passage",
+                question: "According to the passage, what primary factor differentiates sustainable innovation from traditional technology expansion?",
+                options: ["Immediate short-term profitability", "Holistic integration of eco-efficiency, social equity, and economic viability", "Complete avoidance of industrial manufacturing", "Sole reliance on government subsidies"],
+                answer: 1,
+                explanation: "The passage emphasizes that sustainable innovation balances long-term environmental stewardship, social equity, and economic durability rather than focusing solely on short-term profits."
+            },
+            {
+                id: 12,
+                module: "3. Reading Comprehension",
+                hasContext: true,
+                contextType: "passage",
+                question: "What major challenge to global green technology adoption is highlighted in the text?",
+                options: ["Lack of public interest in renewable energy", "High initial capital expenditure and technology transfer barriers in developing nations", "Complete unavailability of solar power technology", "Overabundance of skilled green workforce"],
+                answer: 1,
+                explanation: "Paragraph 2 directly identifies high initial capital setup and restrictive technology transfer barriers as key impediments for developing economies."
+            },
+            {
+                id: 13,
+                module: "3. Reading Comprehension",
+                hasContext: true,
+                contextType: "passage",
+                question: "In the phrase 'mitigating anthropogenic climate disruption', what does the word 'anthropogenic' mean?",
+                options: ["Naturally occurring", "Human-caused or human-induced", "Atmospheric and space-derived", "Geological and volcanic"],
+                answer: 1,
+                explanation: "'Anthropogenic' means originating from or produced by human activity."
+            },
+            {
+                id: 14,
+                module: "3. Reading Comprehension",
+                hasContext: true,
+                contextType: "passage",
+                question: "What role do educational institutions play according to the author?",
+                options: ["To replace industrial production entirely", "To act as incubators for climate research and cultivate ecological consciousness", "To enforce environmental penalties on citizens", "To restrict technological research to theoretical domains"],
+                answer: 1,
+                explanation: "The passage states higher education acts as a critical incubator for green innovations, interdisciplinary research, and fostering civic consciousness."
+            },
+            {
+                id: 15,
+                module: "3. Reading Comprehension",
+                hasContext: true,
+                contextType: "passage",
+                question: "What is the overall tone and perspective of the passage?",
+                options: ["Cynical and dismissive", "Analytical, proactive, and constructive", "Purely historical and descriptive", "Aggressive and polemical"],
+                answer: 1,
+                explanation: "The passage objectively analyzes current challenges while constructively outlining pathways toward sustainable development."
+            },
+
+            // ------------------ MODULE 4: COMMUNICATION (16 - 20) ------------------
+            {
+                id: 16,
+                module: "4. Communication",
+                question: "Which barrier to communication occurs due to differences in linguistic meaning, jargon, or ambiguous words?",
+                options: ["Psychological Barrier", "Semantic Barrier", "Physical Barrier", "Organizational Barrier"],
+                answer: 1,
+                explanation: "Semantic barriers arise from misunderstandings related to words, symbols, technical jargon, or language interpretation."
+            },
+            {
+                id: 17,
+                module: "4. Communication",
+                question: "Communication with oneself, including inner monologue and reflection, is termed as:",
+                options: ["Interpersonal Communication", "Intrapersonal Communication", "Group Communication", "Mass Communication"],
+                answer: 1,
+                explanation: "Intrapersonal communication is internal reflection and thought processes within an individual mind."
+            },
+            {
+                id: 18,
+                module: "4. Communication",
+                question: "In the Shannon-Weaver linear model of communication, 'Noise' is defined as:",
+                options: ["The emotional state of the speaker", "Any disturbance that interferes with or distorts the message transmission", "The feedback sent back to the source", "The channel medium itself"],
+                answer: 1,
+                explanation: "Noise refers to any unwanted signal or interference that degrades the clarity of the transmitted message."
+            },
+            {
+                id: 19,
+                module: "4. Communication",
+                question: "Kinesics in non-verbal communication refers specifically to the study of:",
+                options: ["Voice pitch and tone", "Body language, facial expressions, and gestures", "Spatial distance between communicators", "Touch-based physical interaction"],
+                answer: 1,
+                explanation: "Kinesics is the study of body movement, gestures, postures, and facial expressions in non-verbal communication."
+            },
+            {
+                id: 20,
+                module: "4. Communication",
+                question: "Effective classroom communication should ideally be:",
+                options: ["Top-down and Authoritarian", "Transactional and Empathetic", "Passive and Unidirectional", "Strictly Monologue-driven"],
+                answer: 1,
+                explanation: "Classroom communication works best when interactive (transactional), empathetic, and student-centric."
+            },
+
+            // ------------------ MODULE 5: MATHEMATICAL REASONING & APTITUDE (21 - 25) ------------------
+            {
+                id: 21,
+                module: "5. Mathematical Reasoning",
+                question: "Find the next number in the series: 4, 9, 19, 39, 79, ?",
+                options: ["149", "159", "169", "139"],
+                answer: 1,
+                explanation: "Pattern: Each term is multiplied by 2 and then added 1. (4×2)+1=9; (9×2)+1=19; (19×2)+1=39; (39×2)+1=79; (79×2)+1 = 159."
+            },
+            {
+                id: 22,
+                module: "5. Mathematical Reasoning",
+                question: "A person buys an item for ₹1,200 and sells it for ₹1,500. What is the profit percentage?",
+                options: ["20%", "25%", "30%", "15%"],
+                answer: 1,
+                explanation: "Profit = ₹1500 - ₹1200 = ₹300. Profit % = (300 / 1200) × 100 = 25%."
+            },
+            {
+                id: 23,
+                module: "5. Mathematical Reasoning",
+                question: "If 'TEACHER' is coded as 'VGCEJFT' in a certain code, how is 'STUDENT' coded in that same pattern?",
+                options: ["UVWFGPV", "UVWGGPV", "UWVFGPU", "TVWEHQV"],
+                answer: 0,
+                explanation: "Pattern: Each letter is shifted forward by +2 positions. S(+2)=U, T(+2)=V, U(+2)=W, D(+2)=F, E(+2)=G, N(+2)=P, T(+2)=V -> UVWFGPV."
+            },
+            {
+                id: 24,
+                module: "5. Mathematical Reasoning",
+                question: "The average weight of 5 students is 50 kg. If a new student weighing 62 kg joins the group, what is the new average weight?",
+                options: ["52 kg", "54 kg", "51 kg", "53 kg"],
+                answer: 0,
+                explanation: "Total initial weight = 5 × 50 = 250 kg. New total weight = 250 + 62 = 312 kg. New average = 312 / 6 = 52 kg."
+            },
+            {
+                id: 25,
+                module: "5. Mathematical Reasoning",
+                question: "At what simple interest rate per annum will a principal amount double itself in 8 years?",
+                options: ["10%", "12.5%", "15%", "8.5%"],
+                answer: 1,
+                explanation: "To double, Interest = Principal (P). S.I. = (P × R × T) / 100 => P = (P × R × 8) / 100 => R = 100 / 8 = 12.5%."
+            },
+
+            // ------------------ MODULE 6: LOGICAL REASONING & INDIAN LOGIC (26 - 30) ------------------
+            {
+                id: 26,
+                module: "6. Logical Reasoning",
+                question: "In Classical Indian Logic (Nyaya), which Means of Valid Knowledge (Pramana) refers to knowledge derived through comparison or similarity?",
+                options: ["Pratyaksha (Perception)", "Anumana (Inference)", "Upamana (Comparison/Analogy)", "Sabda (Verbal Testimony)"],
+                answer: 2,
+                explanation: "Upamana is the knowledge gained through similarity/comparison (e.g., knowing a wild cow 'Gavaya' by comparing it to a domestic cow)."
+            },
+            {
+                id: 27,
+                module: "6. Logical Reasoning",
+                question: "Identify the fallacy in the statement: 'Every component of this computer is lightweight, therefore the entire computer must be lightweight.'",
+                options: ["Fallacy of Division", "Fallacy of Composition", "Ad Hominem", "Begging the Question"],
+                answer: 1,
+                explanation: "Fallacy of Composition wrongly infers that what is true of the parts must also be true of the whole."
+            },
+            {
+                id: 28,
+                module: "6. Logical Reasoning",
+                question: "According to the Nyaya syllogism, 'The hill has fire because it has smoke' represents which of the five steps (Avayavas)?",
+                options: ["Pratijna (Proposition)", "Hetu (Reason)", "Udaharana (Example)", "Upanaya (Application)"],
+                answer: 1,
+                explanation: "Hetu states the reason for establishing the proposition ('because it has smoke')."
+            },
+            {
+                id: 29,
+                module: "6. Logical Reasoning",
+                question: "In the Categorical Syllogism: 'All humans are mortal. All scholars are humans. Therefore, all scholars are mortal.' What is the 'Middle Term'?",
+                options: ["Scholars", "Mortal", "Humans", "Therefore"],
+                answer: 2,
+                explanation: "The Middle Term ('Humans') appears in both premises but is absent in the conclusion."
+            },
+            {
+                id: 30,
+                module: "6. Logical Reasoning",
+                question: "Which form of non-perception or non-apprehension is recognized in Advaita Vedanta as a distinct source of valid knowledge for non-existence?",
+                options: ["Arthapatti", "Anupalabdhi", "Sabda", "Anumana"],
+                answer: 1,
+                explanation: "Anupalabdhi (non-apprehension) is recognized by Advaita Vedanta and Bhatta Mimamsa as the Pramana for perceiving non-existence (Abhava)."
+            },
+
+            // ------------------ MODULE 7: DATA INTERPRETATION (31 - 35) ------------------
+            {
+                id: 31,
+                module: "7. Data Interpretation",
+                hasContext: true,
+                contextType: "table",
+                question: "What is the total revenue generated by University A across all three academic years (2021 to 2023)?",
+                options: ["₹110 Crores", "₹115 Crores", "₹120 Crores", "₹125 Crores"],
+                answer: 1,
+                explanation: "University A Revenue: 35 (2021) + 38 (2022) + 42 (2023) = ₹115 Crores."
+            },
+            {
+                id: 32,
+                module: "7. Data Interpretation",
+                hasContext: true,
+                contextType: "table",
+                question: "What is the average expenditure of University B over the three-year period (2021-2023)?",
+                options: ["₹25 Crores", "₹27 Crores", "₹28 Crores", "₹30 Crores"],
+                answer: 1,
+                explanation: "University B Expenditure: 22 (2021) + 26 (2022) + 33 (2023) = 81 Crores. Average = 81 / 3 = ₹27 Crores."
+            },
+            {
+                id: 33,
+                module: "7. Data Interpretation",
+                hasContext: true,
+                contextType: "table",
+                question: "Calculate the total profit (Revenue minus Expenditure) generated by University C in the year 2023.",
+                options: ["₹10 Crores", "₹12 Crores", "₹14 Crores", "₹16 Crores"],
+                answer: 2,
+                explanation: "In 2023 for University C: Revenue = ₹50 Cr, Expenditure = ₹36 Cr. Profit = 50 - 36 = ₹14 Crores."
+            },
+            {
+                id: 34,
+                module: "7. Data Interpretation",
+                hasContext: true,
+                contextType: "table",
+                question: "What is the percentage increase in Revenue for University C from 2021 to 2023?",
+                options: ["20%", "25%", "30%", "33.33%"],
+                answer: 1,
+                explanation: "University C Revenue 2021 = ₹40 Cr, 2023 = ₹50 Cr. Increase = 10 Cr. Percentage = (10 / 40) × 100 = 25%."
+            },
+            {
+                id: 35,
+                module: "7. Data Interpretation",
+                hasContext: true,
+                contextType: "table",
+                question: "In the year 2022, what is the ratio of Expenditure between University A and University B?",
+                options: ["3 : 2", "15 : 13", "5 : 4", "19 : 13"],
+                answer: 1,
+                explanation: "In 2022: University A Expenditure = 30, University B Expenditure = 26. Ratio = 30 : 26 = 15 : 13."
+            },
+
+            // ------------------ MODULE 8: INFORMATION & COMMUNICATION TECHNOLOGY (36 - 40) ------------------
+            {
+                id: 36,
+                module: "8. ICT",
+                question: "Which component of computer memory is volatile, fast, and directly accessible by the CPU for executing current programs?",
+                options: ["ROM", "RAM", "Hard Disk", "Optical Disc"],
+                answer: 1,
+                explanation: "RAM (Random Access Memory) is primary volatile memory used by the CPU to store data currently being processed."
+            },
+            {
+                id: 37,
+                module: "8. ICT",
+                question: "What is the main function of an IP Address on a computer network?",
+                options: ["Encrypt user passwords", "Uniquely identify a device connected to the network", "Store local user files", "Convert analog voice signals into digital"],
+                answer: 1,
+                explanation: "An IP (Internet Protocol) address provides a unique numerical identifier for network node routing."
+            },
+            {
+                id: 38,
+                module: "8. ICT",
+                question: "In cybersecurity, 'Phishing' refers to:",
+                options: ["Scanning hard drives for bad sectors", "Fraudulent attempts to obtain sensitive information by disguising as a trustworthy entity", "Overloading a web server with traffic", "Encrypting computer files for ransom"],
+                answer: 1,
+                explanation: "Phishing is a social engineering cyberattack designed to trick users into divulging credentials or financial data."
+            },
+            {
+                id: 39,
+                module: "8. ICT",
+                question: "What is the full form of the acronym URL in web technology?",
+                options: ["Universal Resource Link", "Uniform Resource Locator", "Unified Routing Location", "Universal Retrieval Locator"],
+                answer: 1,
+                explanation: "URL stands for Uniform Resource Locator, specifying the web address of a resource."
+            },
+            {
+                id: 40,
+                module: "8. ICT",
+                question: "Which cloud service model provides virtualized computing resources (servers, storage, networking) over the internet?",
+                options: ["SaaS (Software as a Service)", "PaaS (Platform as a Service)", "IaaS (Infrastructure as a Service)", "DaaS (Data as a Service)"],
+                answer: 2,
+                explanation: "IaaS offers essential compute, storage, and networking resources on demand on a pay-as-you-go basis."
+            },
+
+            // ------------------ MODULE 9: PEOPLE, DEVELOPMENT & ENVIRONMENT (41 - 45) ------------------
+            {
+                id: 41,
+                module: "9. People & Environment",
+                question: "How many Sustainable Development Goals (SDGs) were adopted by the United Nations under Agenda 2030?",
+                options: ["8 Goals", "12 Goals", "17 Goals", "21 Goals"],
+                answer: 2,
+                explanation: "The UN SDGs consist of 17 global goals with 169 targets adopted in 2015 to be achieved by 2030."
+            },
+            {
+                id: 42,
+                module: "9. People & Environment",
+                question: "Which international treaty/protocol specifically aims at protecting the Earth's ozone layer by phasing out ODS (Ozone Depleting Substances)?",
+                options: ["Kyoto Protocol", "Montreal Protocol", "Paris Agreement", "Nagoya Protocol"],
+                answer: 1,
+                explanation: "The 1987 Montreal Protocol targets the phase-out of substances like CFCs that deplete the stratospheric ozone layer."
+            },
+            {
+                id: 43,
+                module: "9. People & Environment",
+                question: "Secondary air pollutants are formed through chemical reactions in the atmosphere. Which of the following is a Secondary Pollutant?",
+                options: ["Carbon Monoxide (CO)", "Sulfur Dioxide (SO2)", "Ground-level Ozone (O3)", "Nitric Oxide (NO)"],
+                answer: 2,
+                explanation: "Ground-level Ozone (photochemical smog component) is formed when primary pollutants (NOx and VOCs) react in sunlight."
+            },
+            {
+                id: 44,
+                module: "9. People & Environment",
+                question: "What primary energy source powers Geothermal Energy plants?",
+                options: ["Solar Radiation", "Heat originating from the Earth's internal core", "Oceanic Tides", "Atmospheric pressure differentials"],
+                answer: 1,
+                explanation: "Geothermal energy harnesses thermal heat stored beneath the sub-surface crust of the Earth."
+            },
+            {
+                id: 45,
+                module: "9. People & Environment",
+                question: "Eutrophication in freshwater lakes is primarily caused by an excess runoff of which nutrients?",
+                options: ["Lead and Mercury", "Nitrates and Phosphates", "Sodium and Calcium", "Chlorine and Fluoride"],
+                answer: 1,
+                explanation: "Agricultural runoff rich in Nitrates and Phosphates triggers excessive algae growth (algal blooms), reducing dissolved oxygen."
+            },
+
+            // ------------------ MODULE 10: HIGHER EDUCATION SYSTEM (46 - 50) ------------------
+            {
+                id: 46,
+                module: "10. Higher Education",
+                question: "Which ancient Indian seat of learning was famous for Buddhist studies and was founded by Emperor Kumaragupta I in the 5th century CE?",
+                options: ["Takshashila", "Nalanda", "Vikramashila", "Valabhi"],
+                answer: 1,
+                explanation: "Nalanda Mahavihara in Bihar was a world-renowned center of learning founded during the Gupta Empire era."
+            },
+            {
+                id: 47,
+                module: "10. Higher Education",
+                question: "Under the National Education Policy (NEP) 2020, what target Gross Enrolment Ratio (GER) in higher education is set to be achieved by 2035?",
+                options: ["35%", "50%", "65%", "75%"],
+                answer: 1,
+                explanation: "NEP 2020 aims to increase the Gross Enrolment Ratio (GER) in higher education including vocational education to 50% by 2035."
+            },
+            {
+                id: 48,
+                module: "10. Higher Education",
+                question: "Which apex statutory body is responsible for the coordination, determination, and maintenance of standards of university education in India?",
+                options: ["NCERT", "AICTE", "UGC", "NITI Aayog"],
+                answer: 2,
+                explanation: "The University Grants Commission (UGC), established under the UGC Act 1956, regulates university education standards."
+            },
+            {
+                id: 49,
+                module: "10. Higher Education",
+                question: "National Assessment and Accreditation Council (NAAC) functions as an autonomous body under which organization?",
+                options: ["Ministry of Electronics and IT", "UGC (University Grants Commission)", "ICSSR", "AIU (Association of Indian Universities)"],
+                answer: 1,
+                explanation: "NAAC was established in 1994 as an autonomous institution under the University Grants Commission (UGC) headquartered in Bengaluru."
+            },
+            {
+                id: 50,
+                module: "10. Higher Education",
+                question: "The Choice Based Credit System (CBCS) recommended by UGC aims to provide:",
+                options: ["Strict rigid subject boundaries without electives", "Student-centric learning with flexibility to choose interdisciplinary electives", "Rote learning examination structures", "Non-transferable localized diploma certificates"],
+                answer: 1,
+                explanation: "CBCS introduces flexible student-centric choices across core, elective, and skill-based courses with standardized credit transfer across institutions."
+            }
+        ];
+
+        // Shared Context Data
+        const rcPassageHTML = `
+            <div class="space-y-2">
+                <h4 class="font-bold text-indigo-900 border-b border-indigo-200 pb-1">
+                    <i class="fa-solid fa-book-open mr-2"></i>Reading Comprehension Passage
+                </h4>
+                <p class="leading-relaxed italic">
+                    "Sustainable development requires a fundamental paradigm shift in how global societies produce, consume, and innovate. Rather than pursuing short-term technological expansion at the cost of ecological degradation, modern sustainable innovation integrates eco-efficiency, social equity, and long-term economic durability. While green technological developments such as solar photovoltaic conversion, wind turbine efficiency, and grid-scale battery storage have advanced exponentially, developing nations continue to encounter formidable structural hurdles. The primary impediments involve prohibitive initial capital expenditure, technical capacity bottlenecks, and stringent intellectual property frameworks that restrict seamless technology transfer across international borders.
+                    <br><br>
+                    To effectively mitigate anthropogenic climate disruption, international policy frameworks must prioritize equitable climate finance mechanisms. In this transformative ecosystem, higher education institutions serve a pivotal role. Universities act not merely as pedagogical centers, but as essential incubators for interdisciplinary climate research, green entrepreneurship, and ecological civic responsibility. By embedding sustainability across multidisciplinary curricula, universities equip future leaders to navigate complex climate challenges."
+                </p>
+            </div>
+        `;
+
+        const diTableHTML = `
+            <div class="space-y-3">
+                <h4 class="font-bold text-indigo-900 border-b border-indigo-200 pb-1">
+                    <i class="fa-solid fa-table mr-2"></i>Data Interpretation Table
+                </h4>
+                <p class="text-xs text-slate-600">The following table presents the Annual Revenue and Expenditure (in ₹ Crores) of three Universities (A, B, C) over three financial years (2021 to 2023).</p>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-xs text-left bg-white rounded-lg overflow-hidden border border-slate-200">
+                        <thead class="bg-indigo-900 text-white font-semibold">
+                            <tr>
+                                <th class="p-2 border">University</th>
+                                <th class="p-2 border" colspan="2">2021 (Rev / Exp)</th>
+                                <th class="p-2 border" colspan="2">2022 (Rev / Exp)</th>
+                                <th class="p-2 border" colspan="2">2023 (Rev / Exp)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-700">
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2 font-bold border bg-slate-100">University A</td>
+                                <td class="p-2 border font-medium text-emerald-700">₹35 Cr</td>
+                                <td class="p-2 border text-slate-600">₹25 Cr</td>
+                                <td class="p-2 border font-medium text-emerald-700">₹38 Cr</td>
+                                <td class="p-2 border text-slate-600">₹30 Cr</td>
+                                <td class="p-2 border font-medium text-emerald-700">₹42 Cr</td>
+                                <td class="p-2 border text-slate-600">₹32 Cr</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2 font-bold border bg-slate-100">University B</td>
+                                <td class="p-2 border font-medium text-emerald-700">₹28 Cr</td>
+                                <td class="p-2 border text-slate-600">₹22 Cr</td>
+                                <td class="p-2 border font-medium text-emerald-700">₹32 Cr</td>
+                                <td class="p-2 border text-slate-600">₹26 Cr</td>
+                                <td class="p-2 border font-medium text-emerald-700">₹40 Cr</td>
+                                <td class="p-2 border text-slate-600">₹33 Cr</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-2 font-bold border bg-slate-100">University C</td>
+                                <td class="p-2 border font-medium text-emerald-700">₹40 Cr</td>
+                                <td class="p-2 border text-slate-600">₹30 Cr</td>
+                                <td class="p-2 border font-medium text-emerald-700">₹45 Cr</td>
+                                <td class="p-2 border text-slate-600">₹34 Cr</td>
+                                <td class="p-2 border font-medium text-emerald-700">₹50 Cr</td>
+                                <td class="p-2 border text-slate-600">₹36 Cr</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `;
+
+        // State Tracking
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(50).fill(null);
+        let bookmarkedState = new Array(50).fill(false);
+        let isSubmitted = false;
+        let timerSeconds = 3600; // 60 Minutes
+        let timerInterval = null;
+
+        // Init App
+        window.onload = function() {
+            renderPalette();
+            loadQuestion(0);
+            startTimer();
+        };
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (timerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmitTest();
+                } else {
+                    timerSeconds--;
+                    updateTimerDisplay();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timerSeconds / 60);
+            const seconds = timerSeconds % 60;
+            document.getElementById("timerDisplay").innerText = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function renderPalette() {
+            const grid = document.getElementById("paletteGrid");
+            grid.innerHTML = "";
+
+            for (let i = 0; i < 50; i++) {
+                const btn = document.createElement("button");
+                btn.id = `palette-btn-${i}`;
+                btn.className = getPaletteBtnClass(i);
+                btn.innerText = i + 1;
+                btn.onclick = () => loadQuestion(i);
+                grid.appendChild(btn);
+            }
+            updateAnsweredCount();
+        }
+
+        function getPaletteBtnClass(index) {
+            const base = "h-9 w-9 rounded-lg font-semibold text-xs transition flex items-center justify-center border shadow-xs ";
+            if (index === currentQuestionIndex) {
+                return base + "ring-2 ring-indigo-600 ring-offset-1 font-bold border-indigo-600 ";
+            }
+            if (bookmarkedState[index]) {
+                return base + "bg-amber-500 text-white border-amber-600 ";
+            }
+            if (userAnswers[index] !== null) {
+                return base + "bg-emerald-500 text-white border-emerald-600 ";
+            }
+            return base + "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 ";
+        }
+
+        function updatePaletteBtn(index) {
+            const btn = document.getElementById(`palette-btn-${index}`);
+            if (btn) btn.className = getPaletteBtnClass(index);
+            updateAnsweredCount();
+        }
+
+        function updateAnsweredCount() {
+            const count = userAnswers.filter(a => a !== null).length;
+            document.getElementById("answeredCount").innerText = `${count}/50 Answered`;
+        }
+
+        function loadQuestion(index) {
+            currentQuestionIndex = index;
+            const q = questionsData[index];
+
+            // Header info
+            document.getElementById("moduleBadge").innerText = q.module;
+            document.getElementById("questionTitleNumber").innerText = `Question ${index + 1} of 50`;
+            document.getElementById("questionText").innerText = q.question;
+
+            // Context (Reading Comp / DI)
+            const contextContainer = document.getElementById("contextContainer");
+            if (q.hasContext) {
+                contextContainer.classList.remove("hidden");
+                contextContainer.innerHTML = (q.contextType === "passage") ? rcPassageHTML : diTableHTML;
+            } else {
+                contextContainer.classList.add("hidden");
+                contextContainer.innerHTML = "";
+            }
+
+            // Options
+            const optionsList = document.getElementById("optionsList");
+            optionsList.innerHTML = "";
+
+            q.options.forEach((opt, optIdx) => {
+                const optBtn = document.createElement("button");
+                optBtn.className = getOptionStyle(optIdx);
+                optBtn.onclick = () => selectOption(optIdx);
+                if (isSubmitted) optBtn.disabled = true;
+
+                optBtn.innerHTML = `
+                    <div class="flex items-center space-x-3 w-full text-left">
+                        <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border ${getOptionBadgeStyle(optIdx)}">
+                            ${String.fromCharCode(65 + optIdx)}
+                        </span>
+                        <span class="text-sm font-medium flex-1">${opt}</span>
+                    </div>
+                `;
+                optionsList.appendChild(optBtn);
+            });
+
+            // Bookmark button state
+            const bookmarkIcon = document.getElementById("bookmarkIcon");
+            if (bookmarkedState[index]) {
+                bookmarkIcon.className = "fa-solid fa-bookmark text-amber-600";
+            } else {
+                bookmarkIcon.className = "fa-regular fa-bookmark";
+            }
+
+            // Prev / Next button states
+            document.getElementById("prevBtn").disabled = (index === 0);
+            document.getElementById("prevBtn").style.opacity = (index === 0) ? "0.5" : "1";
+            
+            if (index === 49) {
+                document.getElementById("nextBtn").innerHTML = `Finish <i class="fa-solid fa-flag-checkered ml-1.5"></i>`;
+            } else {
+                document.getElementById("nextBtn").innerHTML = `Next <i class="fa-solid fa-chevron-right ml-1.5"></i>`;
+            }
+
+            // Explanation handling in Review Mode
+            const expBox = document.getElementById("explanationBox");
+            if (isSubmitted) {
+                expBox.classList.remove("hidden");
+                document.getElementById("explanationText").innerText = q.explanation;
+            } else {
+                expBox.classList.add("hidden");
+            }
+
+            // Refresh old/new active buttons in palette
+            renderPalette();
+        }
+
+        function getOptionStyle(optIdx) {
+            const selected = userAnswers[currentQuestionIndex] === optIdx;
+            const correct = questionsData[currentQuestionIndex].answer === optIdx;
+            const base = "w-full p-4 rounded-xl border text-left transition-all flex items-center justify-between ";
+
+            if (isSubmitted) {
+                if (correct) return base + "bg-emerald-50 border-emerald-500 text-emerald-900 ring-1 ring-emerald-500";
+                if (selected && !correct) return base + "bg-rose-50 border-rose-500 text-rose-900 ring-1 ring-rose-500";
+                return base + "bg-slate-50 border-slate-200 opacity-60";
+            }
+
+            if (selected) {
+                return base + "bg-indigo-50 border-indigo-600 text-indigo-900 ring-2 ring-indigo-500/20 shadow-xs";
+            }
+            return base + "bg-white border-slate-200 hover:bg-slate-50 hover:border-slate-300 text-slate-700";
+        }
+
+        function getOptionBadgeStyle(optIdx) {
+            const selected = userAnswers[currentQuestionIndex] === optIdx;
+            const correct = questionsData[currentQuestionIndex].answer === optIdx;
+
+            if (isSubmitted) {
+                if (correct) return "bg-emerald-600 text-white border-emerald-600";
+                if (selected && !correct) return "bg-rose-600 text-white border-rose-600";
+                return "bg-slate-200 text-slate-600 border-slate-300";
+            }
+
+            if (selected) return "bg-indigo-600 text-white border-indigo-600";
+            return "bg-slate-100 text-slate-600 border-slate-300";
+        }
+
+        // Action Handlers
+        function selectOption(optIdx) {
+            if (isSubmitted) return;
+            userAnswers[currentQuestionIndex] = optIdx;
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function clearResponse() {
+            if (isSubmitted) return;
+            userAnswers[currentQuestionIndex] = null;
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function toggleBookmark() {
+            bookmarkedState[currentQuestionIndex] = !bookmarkedState[currentQuestionIndex];
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function navigateQuestion(direction) {
+            const newIndex = currentQuestionIndex + direction;
+            if (newIndex >= 0 && newIndex < 50) {
+                loadQuestion(newIndex);
+            }
+        }
+
+        function confirmSubmitTest() {
+            if (isSubmitted) return;
+            const unanswered = userAnswers.filter(a => a === null).length;
+            let msg = "Are you sure you want to submit the test?";
+            if (unanswered > 0) {
+                msg = `You still have ${unanswered} unanswered question(s). Are you sure you want to submit?`;
+            }
+            if (window.confirm(msg)) {
+                submitTest();
+            }
+        }
+
+        function autoSubmitTest() {
+            alert("Time limit reached! Your test will now be submitted automatically.");
+            submitTest();
+        }
+
+        function submitTest() {
+            isSubmitted = true;
+            clearInterval(timerInterval);
+
+            // Hide timer button / disable submit
+            document.getElementById("submitBtn").classList.add("hidden");
+
+            // Compute Marks
+            let correct = 0;
+            let incorrect = 0;
+
+            userAnswers.forEach((ans, idx) => {
+                if (ans === questionsData[idx].answer) {
+                    correct++;
+                } else if (ans !== null) {
+                    incorrect++;
+                }
+            });
+
+            const score = correct * 2; // 2 marks per question
+            const percentage = ((score / 100) * 100).toFixed(1);
+
+            document.getElementById("finalScore").innerText = `${score} / 100`;
+            document.getElementById("finalPercentage").innerText = `${percentage}%`;
+            document.getElementById("correctCount").innerText = `${correct} (${correct * 2} Marks)`;
+            document.getElementById("incorrectCount").innerText = `${incorrect}`;
+
+            // Show Modal
+            document.getElementById("resultModal").classList.remove("hidden");
+        }
+
+        function reviewMode() {
+            document.getElementById("resultModal").classList.add("hidden");
+            loadQuestion(0);
+        }
+
+        function restartTest() {
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>
