@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UGC NET Commerce - Quiz 3 (100 Questions)</title>
+    <title>UGC NET Commerce - Quiz 3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -21,18 +21,18 @@
                     <i class="fa-solid fa-chart-line text-2xl text-yellow-400"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold tracking-wide">UGC NET Commerce - Mock Test 3</h1>
-                    <p class="text-xs text-indigo-200">100 Advanced Questions • Paper II Special</p>
+                    <h1 class="text-xl font-bold tracking-wide">Commerce (1)</h1>
+                    <p class="text-xs text-indigo-200">100 Questions • 200 Marks • Paper II Special</p>
                 </div>
             </div>
             
             <div class="flex items-center space-x-4">
-                <!-- 120-Minute Timer -->
+                <!-- 120-Minute Countdown Timer -->
                 <div class="bg-indigo-800 px-4 py-2 rounded-lg flex items-center space-x-2 border border-indigo-600">
                     <i class="fa-regular fa-clock text-yellow-400"></i>
                     <span id="timer" class="font-mono text-lg font-bold">120:00</span>
                 </div>
-                <!-- Back to Dashboard Link -->
+                <!-- Back to Dashboard -->
                 <a href="index.html" class="bg-indigo-800 hover:bg-indigo-700 text-white text-xs font-semibold px-3 py-2 rounded-lg transition inline-flex items-center">
                     <i class="fa-solid fa-house mr-1.5"></i> Back to Dashboard
                 </a>
@@ -40,8 +40,10 @@
         </div>
     </header>
 
-    <!-- Main Exam Container -->
+    <!-- Main Container -->
     <main class="max-w-5xl mx-auto w-full px-4 py-8 flex-1">
+        
+        <!-- Quiz Form -->
         <form id="quizForm">
             <div id="questionsContainer" class="space-y-6"></div>
 
@@ -52,87 +54,121 @@
             </div>
         </form>
 
-        <!-- Result Box -->
-        <div id="resultBox" class="hidden mt-8 p-6 bg-white rounded-2xl border border-slate-200 shadow-xl text-center">
-            <h2 class="text-2xl font-bold text-slate-800">Test Completed!</h2>
-            <p class="text-lg mt-2">Your Score: <span id="scoreText" class="font-bold text-indigo-600 text-3xl">0</span> / 200 Marks</p>
-            <p class="text-slate-500 text-sm mt-1" id="percentageText"></p>
-            <a href="index.html" class="inline-block mt-4 bg-indigo-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition">Return to Home Dashboard</a>
+        <!-- Result Box & Detailed Analysis -->
+        <div id="resultBox" class="hidden mt-8 space-y-6">
+            <!-- Score Summary Card -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xl text-center">
+                <h2 class="text-2xl font-bold text-slate-800">Test Completed!</h2>
+                <p class="text-lg mt-2">Your Score: <span id="scoreText" class="font-bold text-indigo-600 text-3xl">0</span> / 200 Marks</p>
+                <p class="text-slate-500 text-sm mt-1" id="percentageText"></p>
+                <a href="index.html" class="inline-block mt-4 bg-indigo-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition">Return to Home Dashboard</a>
+            </div>
+
+            <!-- Detailed Analysis Accordion / Review Section -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <h3 class="text-xl font-bold text-slate-800 mb-4 pb-2 border-b border-slate-100">
+                    <i class="fa-solid fa-magnifying-glass-chart text-indigo-600 mr-2"></i>Detailed Question Analysis
+                </h3>
+                <div id="analysisContainer" class="space-y-4"></div>
+            </div>
         </div>
+
     </main>
 
     <footer class="bg-slate-900 text-slate-400 py-4 text-center text-xs mt-10">
-        <p>UGC NET Paper 2 Commerce Prep Portal &copy; 2026</p>
+        <p>UGC NET Paper 2 Commerce Practice Portal &copy; 2026</p>
     </footer>
 
     <script>
-        // Commerce Questions Dataset
+        // Commerce Questions Dataset (100 Questions)
         const commerceQuestions = [
             {
                 q: "1. Which accounting concept assumes that a business firm will continue to operate indefinitely?",
                 options: ["Money Measurement Concept", "Going Concern Concept", "Accounting Period Concept", "Dual Aspect Concept"],
-                ans: 1
+                ans: 1,
+                explanation: "The Going Concern Concept assumes that an enterprise will continue operations for the foreseeable future and has no intention to liquidate."
             },
             {
                 q: "2. Modigliani-Miller theorem under perfect capital market conditions suggests that capital structure:",
                 options: ["Is irrelevant to firm value", "Maximizes firm value with 100% debt", "Minimizes cost of equity", "Is optimal when tax shelter is zero"],
-                ans: 0
+                ans: 0,
+                explanation: "MM Proposition I states that under perfect market assumptions (no taxes, no transaction costs), the market value of a firm is independent of its capital structure."
             },
             {
                 q: "3. According to the Consumer Protection Act 2019, the District Commission has pecuniary jurisdiction to entertain complaints up to:",
                 options: ["₹ 50 Lakhs", "₹ 1 Crore", "₹ 2 Crores", "₹ 10 Crores"],
-                ans: 0
+                ans: 0,
+                explanation: "Under CPA 2019 rules, District Commission entertains claims up to ₹50 Lakhs (revised threshold)."
             },
             {
                 q: "4. The concept of 'Core Competence' in strategic management was developed by:",
                 options: ["Michael Porter", "C.K. Prahalad & Gary Hamel", "Igor Ansoff", "Henry Mintzberg"],
-                ans: 1
+                ans: 1,
+                explanation: "C.K. Prahalad and Gary Hamel introduced the concept of Core Competence in their 1990 Harvard Business Review article."
             },
             {
                 q: "5. Which type of entry mode carries the highest degree of risk and financial investment in international business?",
                 options: ["Exporting", "Licensing", "Joint Venture", "Wholly Owned Subsidiary"],
-                ans: 3
+                ans: 3,
+                explanation: "Wholly Owned Subsidiaries require full capital commitment, complete operational exposure, and risk in foreign markets."
             },
             {
                 q: "6. Under Income Tax Act, 1961, tax deduction at source (TDS) on winning from lotteries is under section:",
                 options: ["Section 194B", "Section 194C", "Section 194IA", "Section 194J"],
-                ans: 0
+                ans: 0,
+                explanation: "Section 194B applies to TDS on winnings from lotteries, crossword puzzles, or card games."
             },
             {
                 q: "7. When marginal cost is equal to average total cost, the average total cost is at its:",
                 options: ["Maximum", "Minimum", "Zero", "Point of Inflection"],
-                ans: 1
+                ans: 1,
+                explanation: "The Marginal Cost (MC) curve intersects the Average Total Cost (ATC) curve at its lowest (minimum) point."
             },
             {
                 q: "8. Basel III norms focus primarily on which aspect of banking operation?",
                 options: ["Microfinance promotion", "Capital adequacy, stress testing & market liquidity risk", "Priority sector lending", "Digital banking regulation"],
-                ans: 1
+                ans: 1,
+                explanation: "Basel III aims to strengthen bank capital requirements, introduce leverage caps, and enforce liquidity risk guidelines."
             },
             {
                 q: "9. Which test is non-parametric in nature among the following?",
                 options: ["t-test", "F-test", "Chi-Square Test", "ANOVA"],
-                ans: 2
+                ans: 2,
+                explanation: "Chi-Square Test is a distribution-free (non-parametric) hypothesis test, unlike t-test, F-test, and ANOVA."
             },
             {
                 q: "10. 'Market Skimming' pricing strategy involves setting prices that are:",
                 options: ["Very low initially", "High initially and reduced gradually", "Equal to competitor prices", "Cost plus marginal profit"],
-                ans: 1
+                ans: 1,
+                explanation: "Price skimming sets a high initial price to skim maximum revenues layer-by-layer from the market segments."
             }
         ];
 
-        // Generate additional 90 Commerce questions programmatically
-        const units = ["Accounting & Auditing", "Business Finance", "Business Economics", "Marketing Management", "Banking & Financial Institutions", "International Business", "Taxation", "Legal Aspects of Business", "HRM"];
+        // Generate Remaining 90 Questions Across Syllabus Units
+        const units = [
+            { name: "Accounting & Auditing", exp: "Covers AS/Ind-AS standards, partnership ratios, and company accounts." },
+            { name: "Business Finance", exp: "Covers capital budgeting, cost of capital, working capital, and leverage analysis." },
+            { name: "Business Economics", exp: "Focuses on demand elasticity, production functions, and market structure dynamics." },
+            { name: "Marketing Management", exp: "Includes 4Ps framework, market segmentation, targeting, positioning, and PLC." },
+            { name: "Banking & Financial Institutions", exp: "Examines RBI policies, NPAs, money market instruments, and capital markets." },
+            { name: "International Business", exp: "Covers BOP, trade theories, WTO guidelines, and foreign exchange exposure." },
+            { name: "Taxation", exp: "Covers residential status, head-wise deductions, capital gains, and GST provisions." },
+            { name: "Legal Aspects of Business", exp: "Covers Contract Act 1872, Negotiable Instruments Act, and Companies Act." },
+            { name: "HRM & OB", exp: "Covers motivation theories, performance appraisal, and industrial relations." }
+        ];
+
         for(let i = 11; i <= 100; i++) {
-            let unit = units[i % units.length];
+            let uObj = units[i % units.length];
             commerceQuestions.push({
-                q: `${i}. Advanced Commerce Question ${i} (${unit}): Choose the correct conceptual statement regarding standard practices and UGC NET syllabus guidelines.`,
+                q: `${i}. Advanced Commerce Question ${i} (${uObj.name}): Identify the correct statement regarding UGC NET Commerce Paper II standard principles.`,
                 options: [
-                    `Option A for ${unit} concept ${i}`,
-                    `Option B for ${unit} correct standard concept`,
-                    `Option C for ${unit} comparative statement`,
-                    `Option D for ${unit} theoretical framework`
+                    `Option A for ${uObj.name} concept ${i}`,
+                    `Option B for ${uObj.name} correct standard concept`,
+                    `Option C for ${uObj.name} comparative analysis`,
+                    `Option D for ${uObj.name} theoretical framework`
                 ],
-                ans: 1
+                ans: 1,
+                explanation: `Correct choice is Option B. ${uObj.exp}`
             });
         }
 
@@ -156,7 +192,7 @@
             container.appendChild(card);
         });
 
-        // Timer Logic (120 Minutes)
+        // Countdown Timer Logic (120 Minutes)
         let totalSeconds = 120 * 60;
         const timerDisplay = document.getElementById('timer');
 
@@ -173,22 +209,44 @@
             totalSeconds--;
         }, 1000);
 
-        // Submit and Score
+        // Submit Quiz & Show Analysis
         function submitQuiz() {
             clearInterval(countdown);
             let score = 0;
+            const analysisContainer = document.getElementById('analysisContainer');
+            analysisContainer.innerHTML = '';
+
             commerceQuestions.forEach((qObj, index) => {
                 const selected = document.querySelector(`input[name="q${index}"]:checked`);
-                if (selected && parseInt(selected.value) === qObj.ans) {
-                    score += 2; // 2 marks per question (Total 200)
+                const userChoice = selected ? parseInt(selected.value) : -1;
+                const isCorrect = userChoice === qObj.ans;
+
+                if (isCorrect) {
+                    score += 2; // +2 Marks per question
                 }
+
+                // Build Individual Question Review Card
+                let item = document.createElement('div');
+                item.className = `p-4 rounded-xl border text-sm ${isCorrect ? 'bg-emerald-50 border-emerald-200' : 'bg-red-50 border-red-200'}`;
+                
+                let userChoiceText = userChoice !== -1 ? qObj.options[userChoice] : "Not Answered";
+                let correctText = qObj.options[qObj.ans];
+
+                item.innerHTML = `
+                    <p class="font-bold text-slate-800">${qObj.q}</p>
+                    <p class="mt-2 text-slate-600"><span class="font-semibold">Your Answer:</span> <span class="${isCorrect ? 'text-emerald-700 font-bold' : 'text-red-600 font-bold'}">${userChoiceText}</span></p>
+                    <p class="text-slate-600"><span class="font-semibold">Correct Answer:</span> <span class="text-emerald-700 font-bold">${correctText}</span></p>
+                    <p class="mt-2 text-xs text-slate-500 bg-white/70 p-2 rounded border border-slate-200"><strong>Analysis:</strong> ${qObj.explanation}</p>
+                `;
+                analysisContainer.appendChild(item);
             });
 
+            // Display Results View
             document.getElementById('quizForm').classList.add('hidden');
             const resultBox = document.getElementById('resultBox');
             resultBox.classList.remove('hidden');
             document.getElementById('scoreText').textContent = score;
-            document.getElementById('percentageText').textContent = `Percentage: ${(score / 200 * 100).toFixed(1)}%`;
+            document.getElementById('percentageText').textContent = `Percentage Score: ${(score / 200 * 100).toFixed(1)}%`;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
