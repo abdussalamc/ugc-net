@@ -1,0 +1,18 @@
+<header class="bg-indigo-900 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <div class="p-2 bg-indigo-700 rounded-lg">
+                <i class="fa-solid fa-graduation-cap text-2xl text-yellow-400"></i>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold tracking-wide">UGC NET Paper 1 - Quiz 1</h1>
+                <p class="text-xs text-indigo-200">150 Questions Practice Test</p>
+            </div>
+        </div>
+        <div>
+            <a href="index.html" class="px-3 py-2 bg-indigo-800 hover:bg-indigo-700 rounded-lg text-white text-xs font-semibold transition inline-flex items-center">
+                <i class="fa-solid fa-house mr-1.5"></i> Back to Dashboard
+            </a>
+        </div>
+    </div>
+</header>
