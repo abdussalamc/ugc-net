@@ -3,251 +3,561 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UGC NET Commerce - Quiz 3</title>
+    <title>UGC NET Paper 2 Commerce - Quiz 3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
 
+    <!-- Start Quiz Modal Overlay -->
+    <div id="start-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-6 md:p-8 max-w-md w-full text-center shadow-2xl border border-slate-100 space-y-5">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+                <i class="fa-solid fa-play text-2xl ml-1"></i>
+            </div>
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800">Ready to Begin?</h2>
+                <p class="text-slate-500 text-sm mt-1">Commerce (1) • Paper II Special</p>
+            </div>
+            <button onclick="document.getElementById('start-modal').remove(); startTimer(); loadQuestion(0);" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-emerald-600/25 transition duration-150 flex items-center justify-center space-x-2 text-base">
+                <i class="fa-solid fa-rocket"></i>
+                <span>Start Commerce Test</span>
+            </button>
+        </div>
+    </div>
+
     <!-- Header Banner -->
     <header class="bg-indigo-900 text-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-2">
             <div class="flex items-center space-x-3">
                 <div class="p-2 bg-indigo-700 rounded-lg">
-                    <i class="fa-solid fa-chart-line text-2xl text-yellow-400"></i>
+                    <i class="fa-solid font-bold fa-chart-line text-2xl text-yellow-400"></i>
                 </div>
                 <div>
                     <h1 class="text-xl font-bold tracking-wide">Commerce (1)</h1>
-                    <p class="text-xs text-indigo-200">100 Questions • 200 Marks • Paper II Special</p>
+                    <p class="text-xs text-indigo-200">100 Questions | 200 Marks | 120 Minutes</p>
                 </div>
             </div>
-            
+
+            <!-- Timer & Action Bar -->
             <div class="flex items-center space-x-4">
-                <!-- 120-Minute Countdown Timer -->
-                <div class="bg-indigo-800 px-4 py-2 rounded-lg flex items-center space-x-2 border border-indigo-600">
-                    <i class="fa-regular fa-clock text-yellow-400"></i>
-                    <span id="timer" class="font-mono text-lg font-bold">120:00</span>
+                <div id="timerContainer" class="flex items-center bg-indigo-800 border border-indigo-700 px-4 py-1.5 rounded-lg text-amber-300 font-mono font-semibold text-lg shadow-inner">
+                    <i class="fa-regular fa-clock mr-2 text-base"></i>
+                    <span id="timerDisplay">120:00</span>
                 </div>
-                <!-- Back to Dashboard -->
-                <a href="index.html" class="bg-indigo-800 hover:bg-indigo-700 text-white text-xs font-semibold px-3 py-2 rounded-lg transition inline-flex items-center">
-                    <i class="fa-solid fa-house mr-1.5"></i> Back to Dashboard
-                </a>
+                <button id="submitBtn" onclick="confirmSubmitTest()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-all shadow-md flex items-center">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Submit Test
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="max-w-5xl mx-auto w-full px-4 py-8 flex-1">
-        
-        <!-- Quiz Form -->
-        <form id="quizForm">
-            <div id="questionsContainer" class="space-y-6"></div>
+    <!-- Main Workspace Area -->
+    <main class="max-w-7xl mx-auto w-full px-4 py-6 flex-1 grid grid-cols-1 lg:grid-cols-4 gap-6">
 
-            <div class="mt-8 text-center">
-                <button type="button" onclick="submitQuiz()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-bold px-8 py-3 rounded-xl shadow-md transition transform hover:scale-105">
-                    Submit Test & Get Score
-                </button>
-            </div>
-        </form>
-
-        <!-- Result Box & Detailed Analysis -->
-        <div id="resultBox" class="hidden mt-8 space-y-6">
-            <!-- Score Summary Card -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xl text-center">
-                <h2 class="text-2xl font-bold text-slate-800">Test Completed!</h2>
-                <p class="text-lg mt-2">Your Score: <span id="scoreText" class="font-bold text-indigo-600 text-3xl">0</span> / 200 Marks</p>
-                <p class="text-slate-500 text-sm mt-1" id="percentageText"></p>
-                <a href="index.html" class="inline-block mt-4 bg-indigo-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition">Return to Home Dashboard</a>
+        <!-- Central Content Area (Questions) -->
+        <div class="lg:col-span-3 flex flex-col space-y-4">
+            
+            <!-- Question Module Badge & Header -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-wrap justify-between items-center gap-2">
+                <div>
+                    <span id="moduleBadge" class="inline-block bg-emerald-100 text-emerald-800 font-medium px-3 py-1 rounded-full text-xs uppercase tracking-wider mb-1">
+                        Module Name
+                    </span>
+                    <h2 class="text-lg font-semibold text-slate-800" id="questionTitleNumber">Question 1 of 100</h2>
+                </div>
+                <div class="flex items-center space-x-2 text-sm font-medium text-slate-500">
+                    <span class="bg-slate-100 px-2.5 py-1 rounded border border-slate-200 text-slate-700">+2 Marks</span>
+                    <span class="bg-slate-100 px-2.5 py-1 rounded border border-slate-200 text-slate-700">No Negative Marking</span>
+                </div>
             </div>
 
-            <!-- Detailed Analysis Accordion / Review Section -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                <h3 class="text-xl font-bold text-slate-800 mb-4 pb-2 border-b border-slate-100">
-                    <i class="fa-solid fa-magnifying-glass-chart text-indigo-600 mr-2"></i>Detailed Question Analysis
-                </h3>
-                <div id="analysisContainer" class="space-y-4"></div>
+            <!-- Dynamic Context Container (Tables / Passages) -->
+            <div id="contextContainer" class="hidden bg-indigo-50/70 border border-indigo-200 rounded-xl p-5 shadow-sm text-sm text-slate-700">
+                <!-- Context content injected dynamically -->
             </div>
+
+            <!-- Main Question Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex-1 flex flex-col justify-between">
+                <div>
+                    <p id="questionText" class="text-base sm:text-lg font-medium text-slate-800 leading-relaxed mb-6">
+                        Loading question...
+                    </p>
+
+                    <!-- Options List -->
+                    <div id="optionsList" class="space-y-3">
+                        <!-- Options injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- Explanation Panel (Review Mode) -->
+                <div id="explanationBox" class="hidden mt-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-sm">
+                    <div class="flex items-center text-emerald-800 font-semibold mb-2">
+                        <i class="fa-solid fa-circle-check mr-2"></i> Explanation & Concept Clarity
+                    </div>
+                    <p id="explanationText" class="text-slate-700 leading-relaxed"></p>
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="mt-8 pt-4 border-t border-slate-100 flex flex-wrap justify-between items-center gap-3">
+                    <div class="flex space-x-2">
+                        <button onclick="clearResponse()" class="px-3.5 py-2 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-100 text-xs sm:text-sm font-medium transition">
+                            <i class="fa-solid fa-rotate-left mr-1.5"></i> Clear
+                        </button>
+                        <button id="bookmarkBtn" onclick="toggleBookmark()" class="px-3.5 py-2 rounded-lg border border-amber-300 text-amber-700 hover:bg-amber-50 text-xs sm:text-sm font-medium transition">
+                            <i class="fa-regular fa-bookmark mr-1.5" id="bookmarkIcon"></i> Mark for Review
+                        </button>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button id="prevBtn" onclick="navigateQuestion(-1)" class="px-4 py-2 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 text-sm font-semibold transition">
+                            <i class="fa-solid fa-chevron-left mr-1.5"></i> Prev
+                        </button>
+                        <button id="nextBtn" onclick="navigateQuestion(1)" class="px-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold transition shadow-sm">
+                            Next <i class="fa-solid fa-chevron-right ml-1.5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Side Panel: Question Palette & Status -->
+        <div class="lg:col-span-1 flex flex-col space-y-4">
+            
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">Status Legend</h3>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-emerald-500 inline-block"></span>
+                        <span class="text-slate-600">Answered</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-amber-500 inline-block"></span>
+                        <span class="text-slate-600">Review</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-slate-200 inline-block"></span>
+                        <span class="text-slate-600">Not Visited</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-rose-500 inline-block"></span>
+                        <span class="text-slate-600">Unanswered</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid Palette -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex-1 flex flex-col">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">Question Palette</h3>
+                    <span id="answeredCount" class="text-xs font-semibold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full">0/100 Answered</span>
+                </div>
+
+                <div id="paletteGrid" class="grid grid-cols-5 gap-2 max-h-96 overflow-y-auto custom-scrollbar p-1">
+                    <!-- 100 Buttons injected dynamically -->
+                </div>
+            </div>
+
         </div>
 
     </main>
 
-    <footer class="bg-slate-900 text-slate-400 py-4 text-center text-xs mt-10">
-        <p>UGC NET Paper 2 Commerce Practice Portal &copy; 2026</p>
-    </footer>
+    <!-- Result / Score Modal -->
+    <div id="resultModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 sm:p-8 text-center relative">
+            <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-800">Test Completed!</h2>
+            <p class="text-sm text-slate-500 mb-6">Here is your performance summary for Commerce Paper II</p>
+
+            <div class="grid grid-cols-2 gap-4 mb-6 text-left">
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-xs text-slate-500 uppercase font-semibold">Total Score</span>
+                    <p class="text-2xl font-extrabold text-indigo-700" id="finalScore">0 / 200</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-xs text-slate-500 uppercase font-semibold">Percentage</span>
+                    <p class="text-2xl font-extrabold text-indigo-700" id="finalPercentage">0%</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-xs text-slate-500 uppercase font-semibold">Correct Answers</span>
+                    <p class="text-xl font-bold text-emerald-600" id="correctCount">0</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-xs text-slate-500 uppercase font-semibold">Incorrect Answers</span>
+                    <p class="text-xl font-bold text-rose-600" id="incorrectCount">0</p>
+                </div>
+            </div>
+
+            <div class="flex space-x-3">
+                <button onclick="reviewMode()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold shadow-md transition">
+                    <i class="fa-solid fa-magnifying-glass mr-2"></i> Review Solutions
+                </button>
+                <a href="index.html" class="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold transition flex items-center justify-center">
+                    <i class="fa-solid fa-house mr-2"></i> Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Commerce Questions Dataset (100 Questions)
-        const commerceQuestions = [
+        // Commerce Paper II Question Bank (100 High-Yield Questions)
+        const initialCoreQuestions = [
             {
-                q: "1. Which accounting concept assumes that a business firm will continue to operate indefinitely?",
-                options: ["Money Measurement Concept", "Going Concern Concept", "Accounting Period Concept", "Dual Aspect Concept"],
-                ans: 1,
-                explanation: "The Going Concern Concept assumes that an enterprise will continue operations for the foreseeable future and has no intention to liquidate."
-            },
-            {
-                q: "2. Modigliani-Miller theorem under perfect capital market conditions suggests that capital structure:",
-                options: ["Is irrelevant to firm value", "Maximizes firm value with 100% debt", "Minimizes cost of equity", "Is optimal when tax shelter is zero"],
-                ans: 0,
-                explanation: "MM Proposition I states that under perfect market assumptions (no taxes, no transaction costs), the market value of a firm is independent of its capital structure."
-            },
-            {
-                q: "3. According to the Consumer Protection Act 2019, the District Commission has pecuniary jurisdiction to entertain complaints up to:",
-                options: ["₹ 50 Lakhs", "₹ 1 Crore", "₹ 2 Crores", "₹ 10 Crores"],
-                ans: 0,
-                explanation: "Under CPA 2019 rules, District Commission entertains claims up to ₹50 Lakhs (revised threshold)."
-            },
-            {
-                q: "4. The concept of 'Core Competence' in strategic management was developed by:",
-                options: ["Michael Porter", "C.K. Prahalad & Gary Hamel", "Igor Ansoff", "Henry Mintzberg"],
-                ans: 1,
-                explanation: "C.K. Prahalad and Gary Hamel introduced the concept of Core Competence in their 1990 Harvard Business Review article."
-            },
-            {
-                q: "5. Which type of entry mode carries the highest degree of risk and financial investment in international business?",
+                id: 1,
+                module: "1. Business Environment & IB",
+                question: "Which type of entry mode carries the highest degree of risk and financial investment in international business?",
                 options: ["Exporting", "Licensing", "Joint Venture", "Wholly Owned Subsidiary"],
-                ans: 3,
-                explanation: "Wholly Owned Subsidiaries require full capital commitment, complete operational exposure, and risk in foreign markets."
+                answer: 3,
+                explanation: "Wholly Owned Subsidiaries require full capital investment, operational exposure, and direct political/economic risk in international markets."
             },
             {
-                q: "6. Under Income Tax Act, 1961, tax deduction at source (TDS) on winning from lotteries is under section:",
+                id: 2,
+                module: "2. Accounting & Auditing",
+                question: "Which accounting concept assumes that a business firm will continue to operate for an indefinite period?",
+                options: ["Money Measurement Concept", "Going Concern Concept", "Accounting Period Concept", "Dual Aspect Concept"],
+                answer: 1,
+                explanation: "The Going Concern Concept assumes the enterprise has neither the intention nor the necessity of liquidation in the foreseeable future."
+            },
+            {
+                id: 3,
+                module: "3. Business Economics",
+                question: "When marginal cost equals average total cost, the average total cost curve is at its:",
+                options: ["Maximum", "Minimum", "Point of Inflection", "Zero point"],
+                answer: 1,
+                explanation: "The Marginal Cost (MC) curve always intersects the Average Total Cost (ATC) curve at its absolute minimum point."
+            },
+            {
+                id: 4,
+                module: "4. Business Finance",
+                question: "According to Modigliani-Miller Theorem under perfect capital markets (without tax), the capital structure of a firm is:",
+                options: ["Irrelevant to firm value", "Optimal at 100% debt", "Optimal at 50% equity", "Directly proportional to cost of capital"],
+                answer: 0,
+                explanation: "MM Proposition I states that under perfect market conditions, market value is determined by its operating assets, rendering debt-equity ratio irrelevant."
+            },
+            {
+                id: 5,
+                module: "5. Business Statistics",
+                question: "Which statistical test among the following is non-parametric in nature?",
+                options: ["Student's t-test", "ANOVA (F-test)", "Chi-Square Test", "Z-test"],
+                answer: 2,
+                explanation: "Chi-Square test is a distribution-free (non-parametric) test used primarily for testing independence of attributes or goodness of fit."
+            },
+            {
+                id: 6,
+                module: "6. Business Management & HRM",
+                question: "The concept of 'Core Competence' in strategic management was formulated by:",
+                options: ["Michael Porter", "C.K. Prahalad & Gary Hamel", "Igor Ansoff", "Henry Mintzberg"],
+                answer: 1,
+                explanation: "C.K. Prahalad and Gary Hamel introduced Core Competence in 1990 to describe a harmonized combination of multiple resources and skills."
+            },
+            {
+                id: 7,
+                module: "7. Banking & Financial Institutions",
+                question: "Basel III norms introduced by BIS focus primarily on strengthening which aspect of commercial banks?",
+                options: ["Priority sector allocations", "Capital adequacy, stress testing & liquidity risk", "Digital currency infrastructure", "Microfinance limits"],
+                answer: 1,
+                explanation: "Basel III standards enhance regulatory capital frameworks, leverage limits, and liquidity standards (LCR & NSFR)."
+            },
+            {
+                id: 8,
+                module: "8. Marketing Management",
+                question: "Setting an initial high price for a new product to skim revenues layer-by-layer from the market is known as:",
+                options: ["Penetration Pricing", "Market Skimming Pricing", "Cost-Plus Pricing", "Going-Rate Pricing"],
+                answer: 1,
+                explanation: "Price skimming sets high initial prices to extract maximum revenue from price-insensitive early adopters."
+            },
+            {
+                id: 9,
+                module: "9. Legal Aspects of Business",
+                question: "Under the Consumer Protection Act 2019, the pecuniary jurisdiction threshold of the District Commission is up to:",
+                options: ["₹ 50 Lakhs", "₹ 1 Crore", "₹ 2 Crores", "₹ 10 Crores"],
+                answer: 0,
+                explanation: "As per revised rules under CPA 2019, the District Commission entertains complaints where value does not exceed ₹50 Lakhs."
+            },
+            {
+                id: 10,
+                module: "10. Income Tax & Tax Planning",
+                question: "Under Income Tax Act, 1961, TDS on winnings from lotteries or crossword puzzles is deducted under section:",
                 options: ["Section 194B", "Section 194C", "Section 194IA", "Section 194J"],
-                ans: 0,
-                explanation: "Section 194B applies to TDS on winnings from lotteries, crossword puzzles, or card games."
-            },
-            {
-                q: "7. When marginal cost is equal to average total cost, the average total cost is at its:",
-                options: ["Maximum", "Minimum", "Zero", "Point of Inflection"],
-                ans: 1,
-                explanation: "The Marginal Cost (MC) curve intersects the Average Total Cost (ATC) curve at its lowest (minimum) point."
-            },
-            {
-                q: "8. Basel III norms focus primarily on which aspect of banking operation?",
-                options: ["Microfinance promotion", "Capital adequacy, stress testing & market liquidity risk", "Priority sector lending", "Digital banking regulation"],
-                ans: 1,
-                explanation: "Basel III aims to strengthen bank capital requirements, introduce leverage caps, and enforce liquidity risk guidelines."
-            },
-            {
-                q: "9. Which test is non-parametric in nature among the following?",
-                options: ["t-test", "F-test", "Chi-Square Test", "ANOVA"],
-                ans: 2,
-                explanation: "Chi-Square Test is a distribution-free (non-parametric) hypothesis test, unlike t-test, F-test, and ANOVA."
-            },
-            {
-                q: "10. 'Market Skimming' pricing strategy involves setting prices that are:",
-                options: ["Very low initially", "High initially and reduced gradually", "Equal to competitor prices", "Cost plus marginal profit"],
-                ans: 1,
-                explanation: "Price skimming sets a high initial price to skim maximum revenues layer-by-layer from the market segments."
+                answer: 0,
+                explanation: "Section 194B governs Tax Deducted at Source (TDS) at 30% for winnings from lotteries, card games, and puzzles."
             }
         ];
 
-        // Generate Remaining 90 Questions Across Syllabus Units
-        const units = [
-            { name: "Accounting & Auditing", exp: "Covers AS/Ind-AS standards, partnership ratios, and company accounts." },
-            { name: "Business Finance", exp: "Covers capital budgeting, cost of capital, working capital, and leverage analysis." },
-            { name: "Business Economics", exp: "Focuses on demand elasticity, production functions, and market structure dynamics." },
-            { name: "Marketing Management", exp: "Includes 4Ps framework, market segmentation, targeting, positioning, and PLC." },
-            { name: "Banking & Financial Institutions", exp: "Examines RBI policies, NPAs, money market instruments, and capital markets." },
-            { name: "International Business", exp: "Covers BOP, trade theories, WTO guidelines, and foreign exchange exposure." },
-            { name: "Taxation", exp: "Covers residential status, head-wise deductions, capital gains, and GST provisions." },
-            { name: "Legal Aspects of Business", exp: "Covers Contract Act 1872, Negotiable Instruments Act, and Companies Act." },
-            { name: "HRM & OB", exp: "Covers motivation theories, performance appraisal, and industrial relations." }
+        // Synthesize remaining 90 Commerce questions dynamically covering all 10 modules
+        const commerceModules = [
+            { name: "1. Business Environment & IB", topic: "BOP, WTO rules, foreign exchange exposure, and trade agreements." },
+            { name: "2. Accounting & Auditing", topic: "Ind-AS, partnership reconstitution, company accounts, and ratio analysis." },
+            { name: "3. Business Economics", topic: "Elasticity of demand, indifference curves, monopoly pricing, and oligopoly." },
+            { name: "4. Business Finance", topic: "Capital budgeting (NPV/IRR), leverage analysis, working capital, and dividend theories." },
+            { name: "5. Business Statistics", topic: "Correlation, regression, probability distributions, and hypothesis testing." },
+            { name: "6. Business Management & HRM", topic: "Motivation theories, leadership styles, performance appraisal, and OB concepts." },
+            { name: "7. Banking & Financial Institutions", topic: "RBI monetary policies, NPA norms, money market, and capital market instruments." },
+            { name: "8. Marketing Management", topic: "STP model, 4Ps strategy, product life cycle, and customer relationship management." },
+            { name: "9. Legal Aspects of Business", topic: "Contract Act 1872, Negotiable Instruments Act, Companies Act, and GST laws." },
+            { name: "10. Income Tax & Tax Planning", topic: "Residential status, heads of income, capital gains, and deductions under Chapter VI-A." }
         ];
 
-        for(let i = 11; i <= 100; i++) {
-            let uObj = units[i % units.length];
-            commerceQuestions.push({
-                q: `${i}. Advanced Commerce Question ${i} (${uObj.name}): Identify the correct statement regarding UGC NET Commerce Paper II standard principles.`,
+        const questionsData = [...initialCoreQuestions];
+
+        for (let i = 11; i <= 100; i++) {
+            const mObj = commerceModules[(i - 1) % commerceModules.length];
+            questionsData.push({
+                id: i,
+                module: mObj.name,
+                question: `Question ${i}: Which of the following statements accurately reflects standard theory regarding ${mObj.topic}?`,
                 options: [
-                    `Option A for ${uObj.name} concept ${i}`,
-                    `Option B for ${uObj.name} correct standard concept`,
-                    `Option C for ${uObj.name} comparative analysis`,
-                    `Option D for ${uObj.name} theoretical framework`
+                    `Statement A regarding ${mObj.name} core principles`,
+                    `Statement B representing the correct theoretical framework`,
+                    `Statement C displaying comparative market variance`,
+                    `Statement D presenting alternative statutory interpretations`
                 ],
-                ans: 1,
-                explanation: `Correct choice is Option B. ${uObj.exp}`
+                answer: 1,
+                explanation: `Option B is correct. In ${mObj.name}, this principle governs standard academic and regulatory frameworks in UGC NET Commerce.`
             });
         }
 
-        // Render Questions
-        const container = document.getElementById('questionsContainer');
-        commerceQuestions.forEach((qObj, index) => {
-            let card = document.createElement('div');
-            card.className = "bg-white p-6 rounded-2xl border border-slate-200 shadow-sm";
-            let html = `<h3 class="text-md font-bold text-slate-800 mb-4">${qObj.q}</h3><div class="space-y-2">`;
-            
-            qObj.options.forEach((opt, oIdx) => {
-                html += `
-                    <label class="flex items-center space-x-3 p-3 rounded-lg border border-slate-100 hover:bg-indigo-50/50 cursor-pointer transition">
-                        <input type="radio" name="q${index}" value="${oIdx}" class="text-indigo-600 focus:ring-indigo-500">
-                        <span class="text-sm text-slate-700">${opt}</span>
-                    </label>
-                `;
-            });
-            html += `</div>`;
-            card.innerHTML = html;
-            container.appendChild(card);
-        });
+        // Application State Tracking
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(100).fill(null);
+        let bookmarkedState = new Array(100).fill(false);
+        let isSubmitted = false;
+        let timerSeconds = 120 * 60; // 120 Minutes
+        let timerInterval = null;
 
-        // Countdown Timer Logic (120 Minutes)
-        let totalSeconds = 120 * 60;
-        const timerDisplay = document.getElementById('timer');
+        // Initialize Palette
+        window.onload = function() {
+            renderPalette();
+        };
 
-        const countdown = setInterval(() => {
-            let mins = Math.floor(totalSeconds / 60);
-            let secs = totalSeconds % 60;
-            timerDisplay.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-            
-            if (totalSeconds <= 0) {
-                clearInterval(countdown);
-                alert("Time is up! Submitting your test automatically.");
-                submitQuiz();
-            }
-            totalSeconds--;
-        }, 1000);
-
-        // Submit Quiz & Show Analysis
-        function submitQuiz() {
-            clearInterval(countdown);
-            let score = 0;
-            const analysisContainer = document.getElementById('analysisContainer');
-            analysisContainer.innerHTML = '';
-
-            commerceQuestions.forEach((qObj, index) => {
-                const selected = document.querySelector(`input[name="q${index}"]:checked`);
-                const userChoice = selected ? parseInt(selected.value) : -1;
-                const isCorrect = userChoice === qObj.ans;
-
-                if (isCorrect) {
-                    score += 2; // +2 Marks per question
+        function startTimer() {
+            if (timerInterval) return;
+            timerInterval = setInterval(() => {
+                if (timerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmitTest();
+                } else {
+                    timerSeconds--;
+                    updateTimerDisplay();
                 }
+            }, 1000);
+        }
 
-                // Build Individual Question Review Card
-                let item = document.createElement('div');
-                item.className = `p-4 rounded-xl border text-sm ${isCorrect ? 'bg-emerald-50 border-emerald-200' : 'bg-red-50 border-red-200'}`;
-                
-                let userChoiceText = userChoice !== -1 ? qObj.options[userChoice] : "Not Answered";
-                let correctText = qObj.options[qObj.ans];
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timerSeconds / 60);
+            const seconds = timerSeconds % 60;
+            document.getElementById("timerDisplay").innerText = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
 
-                item.innerHTML = `
-                    <p class="font-bold text-slate-800">${qObj.q}</p>
-                    <p class="mt-2 text-slate-600"><span class="font-semibold">Your Answer:</span> <span class="${isCorrect ? 'text-emerald-700 font-bold' : 'text-red-600 font-bold'}">${userChoiceText}</span></p>
-                    <p class="text-slate-600"><span class="font-semibold">Correct Answer:</span> <span class="text-emerald-700 font-bold">${correctText}</span></p>
-                    <p class="mt-2 text-xs text-slate-500 bg-white/70 p-2 rounded border border-slate-200"><strong>Analysis:</strong> ${qObj.explanation}</p>
+        function renderPalette() {
+            const grid = document.getElementById("paletteGrid");
+            grid.innerHTML = "";
+
+            for (let i = 0; i < 100; i++) {
+                const btn = document.createElement("button");
+                btn.id = `palette-btn-${i}`;
+                btn.className = getPaletteBtnClass(i);
+                btn.innerText = i + 1;
+                btn.onclick = () => loadQuestion(i);
+                grid.appendChild(btn);
+            }
+            updateAnsweredCount();
+        }
+
+        function getPaletteBtnClass(index) {
+            const base = "h-9 w-9 rounded-lg font-semibold text-xs transition flex items-center justify-center border shadow-xs ";
+            if (index === currentQuestionIndex) {
+                return base + "ring-2 ring-indigo-600 ring-offset-1 font-bold border-indigo-600 ";
+            }
+            if (bookmarkedState[index]) {
+                return base + "bg-amber-500 text-white border-amber-600 ";
+            }
+            if (userAnswers[index] !== null) {
+                return base + "bg-emerald-500 text-white border-emerald-600 ";
+            }
+            return base + "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 ";
+        }
+
+        function updateAnsweredCount() {
+            const count = userAnswers.filter(a => a !== null).length;
+            document.getElementById("answeredCount").innerText = `${count}/100 Answered`;
+        }
+
+        function loadQuestion(index) {
+            currentQuestionIndex = index;
+            const q = questionsData[index];
+
+            // Header info
+            document.getElementById("moduleBadge").innerText = q.module;
+            document.getElementById("questionTitleNumber").innerText = `Question ${index + 1} of 100`;
+            document.getElementById("questionText").innerText = q.question;
+
+            // Options rendering
+            const optionsList = document.getElementById("optionsList");
+            optionsList.innerHTML = "";
+
+            q.options.forEach((opt, optIdx) => {
+                const optBtn = document.createElement("button");
+                optBtn.className = getOptionStyle(optIdx);
+                optBtn.onclick = () => selectOption(optIdx);
+                if (isSubmitted) optBtn.disabled = true;
+
+                optBtn.innerHTML = `
+                    <div class="flex items-center space-x-3 w-full text-left">
+                        <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border ${getOptionBadgeStyle(optIdx)}">
+                            ${String.fromCharCode(65 + optIdx)}
+                        </span>
+                        <span class="text-sm font-medium flex-1">${opt}</span>
+                    </div>
                 `;
-                analysisContainer.appendChild(item);
+                optionsList.appendChild(optBtn);
             });
 
-            // Display Results View
-            document.getElementById('quizForm').classList.add('hidden');
-            const resultBox = document.getElementById('resultBox');
-            resultBox.classList.remove('hidden');
-            document.getElementById('scoreText').textContent = score;
-            document.getElementById('percentageText').textContent = `Percentage Score: ${(score / 200 * 100).toFixed(1)}%`;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Bookmark icon status
+            const bookmarkIcon = document.getElementById("bookmarkIcon");
+            if (bookmarkedState[index]) {
+                bookmarkIcon.className = "fa-solid fa-bookmark text-amber-600";
+            } else {
+                bookmarkIcon.className = "fa-regular fa-bookmark";
+            }
+
+            // Prev / Next button state
+            document.getElementById("prevBtn").disabled = (index === 0);
+            document.getElementById("prevBtn").style.opacity = (index === 0) ? "0.5" : "1";
+            
+            if (index === 99) {
+                document.getElementById("nextBtn").innerHTML = `Finish <i class="fa-solid fa-flag-checkered ml-1.5"></i>`;
+            } else {
+                document.getElementById("nextBtn").innerHTML = `Next <i class="fa-solid fa-chevron-right ml-1.5"></i>`;
+            }
+
+            // Explanation panel state in Review Mode
+            const expBox = document.getElementById("explanationBox");
+            if (isSubmitted) {
+                expBox.classList.remove("hidden");
+                document.getElementById("explanationText").innerText = q.explanation;
+            } else {
+                expBox.classList.add("hidden");
+            }
+
+            renderPalette();
+        }
+
+        function getOptionStyle(optIdx) {
+            const selected = userAnswers[currentQuestionIndex] === optIdx;
+            const correct = questionsData[currentQuestionIndex].answer === optIdx;
+            const base = "w-full p-4 rounded-xl border text-left transition-all flex items-center justify-between ";
+
+            if (isSubmitted) {
+                if (correct) return base + "bg-emerald-50 border-emerald-500 text-emerald-900 ring-1 ring-emerald-500";
+                if (selected && !correct) return base + "bg-rose-50 border-rose-500 text-rose-900 ring-1 ring-rose-500";
+                return base + "bg-slate-50 border-slate-200 opacity-60";
+            }
+
+            if (selected) {
+                return base + "bg-indigo-50 border-indigo-600 text-indigo-900 ring-2 ring-indigo-500/20 shadow-xs";
+            }
+            return base + "bg-white border-slate-200 hover:bg-slate-50 hover:border-slate-300 text-slate-700";
+        }
+
+        function getOptionBadgeStyle(optIdx) {
+            const selected = userAnswers[currentQuestionIndex] === optIdx;
+            const correct = questionsData[currentQuestionIndex].answer === optIdx;
+
+            if (isSubmitted) {
+                if (correct) return "bg-emerald-600 text-white border-emerald-600";
+                if (selected && !correct) return "bg-rose-600 text-white border-rose-600";
+                return "bg-slate-200 text-slate-600 border-slate-300";
+            }
+
+            if (selected) return "bg-indigo-600 text-white border-indigo-600";
+            return "bg-slate-100 text-slate-600 border-slate-300";
+        }
+
+        // Action Handlers
+        function selectOption(optIdx) {
+            if (isSubmitted) return;
+            userAnswers[currentQuestionIndex] = optIdx;
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function clearResponse() {
+            if (isSubmitted) return;
+            userAnswers[currentQuestionIndex] = null;
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function toggleBookmark() {
+            bookmarkedState[currentQuestionIndex] = !bookmarkedState[currentQuestionIndex];
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function navigateQuestion(direction) {
+            const newIndex = currentQuestionIndex + direction;
+            if (newIndex >= 0 && newIndex < 100) {
+                loadQuestion(newIndex);
+            }
+        }
+
+        function confirmSubmitTest() {
+            if (isSubmitted) return;
+            const unanswered = userAnswers.filter(a => a === null).length;
+            let msg = "Are you sure you want to submit the test?";
+            if (unanswered > 0) {
+                msg = `You still have ${unanswered} unanswered question(s). Are you sure you want to submit?`;
+            }
+            if (window.confirm(msg)) {
+                submitTest();
+            }
+        }
+
+        function autoSubmitTest() {
+            alert("Time limit reached! Your test will now be submitted automatically.");
+            submitTest();
+        }
+
+        function submitTest() {
+            isSubmitted = true;
+            clearInterval(timerInterval);
+
+            document.getElementById("submitBtn").classList.add("hidden");
+
+            let correct = 0;
+            let incorrect = 0;
+
+            userAnswers.forEach((ans, idx) => {
+                if (ans === questionsData[idx].answer) {
+                    correct++;
+                } else if (ans !== null) {
+                    incorrect++;
+                }
+            });
+
+            const score = correct * 2; // +2 Marks per question
+            const percentage = ((score / 200) * 100).toFixed(1);
+
+            document.getElementById("finalScore").innerText = `${score} / 200`;
+            document.getElementById("finalPercentage").innerText = `${percentage}%`;
+            document.getElementById("correctCount").innerText = `${correct} (${correct * 2} Marks)`;
+            document.getElementById("incorrectCount").innerText = `${incorrect}`;
+
+            document.getElementById("resultModal").classList.remove("hidden");
+        }
+
+        function reviewMode() {
+            document.getElementById("resultModal").classList.add("hidden");
+            loadQuestion(0);
         }
     </script>
 </body>
