@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UGC NET Commerce - Official Paper CBT Quiz 3</title>
+    <title>UGC NET Commerce - December 2025 CBT Quiz</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
             </div>
             <div>
                 <h2 class="text-2xl font-bold text-slate-800">Ready to Begin?</h2>
-                <p class="text-slate-500 text-sm mt-1">UGC NET Commerce • Full Mock Paper (Quiz 3)</p>
+                <p class="text-slate-500 text-sm mt-1">UGC NET Commerce • December Paper Mock</p>
             </div>
             <div class="text-xs text-slate-500 bg-slate-50 p-3 rounded-lg border border-slate-200 text-left space-y-1">
                 <p><i class="fa-solid fa-check text-emerald-500 mr-1.5"></i> <strong>200 Marks</strong> Total Score (+2 per correct response)</p>
@@ -34,7 +34,7 @@
             </div>
             <button onclick="document.getElementById('start-modal').remove(); startTimer(); loadQuestion(0);" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-emerald-600/25 transition duration-150 flex items-center justify-center space-x-2 text-base">
                 <i class="fa-solid fa-rocket"></i>
-                <span>Start Quiz 3 Test</span>
+                <span>Start Quiz Test</span>
             </button>
         </div>
     </div>
@@ -47,7 +47,7 @@
                     <i class="fa-solid font-bold fa-chart-line text-2xl text-yellow-400"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold tracking-wide">UGC NET Commerce (Paper 2)</h1>
+                    <h1 class="text-xl font-bold tracking-wide">UGC NET Commerce (December Paper)</h1>
                     <p class="text-xs text-indigo-200">100 Questions | 200 Marks | 120 Minutes</p>
                 </div>
             </div>
@@ -85,8 +85,8 @@
                 </div>
             </div>
 
-            <!-- Dynamic Context Container (Tables / Passages) -->
-            <div id="contextContainer" class="hidden bg-indigo-50/70 border border-indigo-200 rounded-xl p-5 shadow-sm text-sm text-slate-700">
+            <!-- Dynamic Context Container (Passages) -->
+            <div id="contextContainer" class="hidden bg-indigo-50/70 border border-indigo-200 rounded-xl p-5 shadow-sm text-sm text-slate-700 leading-relaxed whitespace-pre-line">
                 <!-- Context content injected dynamically -->
             </div>
 
@@ -167,7 +167,7 @@
                 </div>
 
                 <div id="paletteGrid" class="grid grid-cols-5 gap-2 max-h-96 overflow-y-auto custom-scrollbar p-1">
-                    <!-- 100 Buttons injected dynamically -->
+                    <!-- Buttons injected dynamically -->
                 </div>
             </div>
 
@@ -182,7 +182,7 @@
                 <i class="fa-solid fa-trophy"></i>
             </div>
             <h2 class="text-2xl font-bold text-slate-800">Quiz Completed!</h2>
-            <p class="text-sm text-slate-500 mb-6">UGC NET Commerce Paper II Result Summary</p>
+            <p class="text-sm text-slate-500 mb-6">UGC NET Commerce December Paper Summary</p>
 
             <div class="grid grid-cols-2 gap-4 mb-6 text-left">
                 <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
@@ -207,163 +207,354 @@
                 <button onclick="reviewMode()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold shadow-md transition">
                     <i class="fa-solid fa-magnifying-glass mr-2"></i> Review Solutions
                 </button>
-                <a href="index.html" class="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold transition flex items-center justify-center">
-                    <i class="fa-solid fa-house mr-2"></i> Dashboard
+                <a href="#" onclick="location.reload()" class="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold transition flex items-center justify-center">
+                    <i class="fa-solid fa-rotate-right mr-2"></i> Retake
                 </a>
             </div>
         </div>
     </div>
 
     <script>
-        // Official UGC NET Commerce Questions (Curated across 10 Modules)
-        const realQuestions = [
+        const parsedQuestions = [
             {
                 id: 1,
-                module: "1. Business Environment & IB",
-                question: "Which of the following is NOT an essential feature of a Current Account in the Balance of Payments (BOP)?",
+                module: "Business Environment & IB",
+                question: "A possible cost of FDI to the host country is:",
                 options: [
-                    "Import and export of visible goods",
-                    "Import and export of invisible services",
-                    "Unilateral transfers from abroad",
-                    "Foreign Direct Investments (FDI) inflows"
+                    "Employment opportunities may increase in the short run but long run competitiveness will be reduced.",
+                    "Technology transfer always leads to dependency and no local innovation gets encouraged.",
+                    "Repatriation of profits may lead to capital outflows.",
+                    "FDI inflows always worsen the host country's BoP position."
                 ],
-                answer: 3,
-                explanation: "Correct Answer: Foreign Direct Investments (FDI) inflows.\n\nExplanation: FDI inflows, Portfolio investments, and external borrowings fall under the Capital Account of Balance of Payments, whereas the Current Account handles merchandise trade, services, and unilateral transfers."
+                answer: 2,
+                explanation: "Correct Answer: Repatriation of profits may lead to capital outflows.\n\nAnalysis: While FDI brings in initial capital, the long-term repatriation of dividends and profits by the foreign entity back to its home country can result in a significant outflow of capital, negatively impacting the host country's current account balance over time."
             },
             {
                 id: 2,
-                module: "2. Accounting & Auditing",
-                question: "According to Indian Accounting Standard (Ind AS) 16, which of the following costs CANNOT be capitalized as part of Property, Plant, and Equipment?",
-                options: [
-                    "Costs of site preparation",
-                    "Initial delivery and handling costs",
-                    "Costs of opening a new facility",
-                    "Professional fees directly attributable"
-                ],
+                module: "Business Statistics",
+                question: "The probability that a leap year selected at random contains either 53 Sundays or 53 Mondays is:",
+                options: ["1/7", "2/7", "3/7", "4/7"],
                 answer: 2,
-                explanation: "Correct Answer: Costs of opening a new facility.\n\nExplanation: Under Ind AS 16, initial operating losses and administrative/general overhead costs (like grand opening expenses of a new facility) are excluded and recognized directly in profit or loss."
+                explanation: "Correct Answer: 3/7\n\nAnalysis: A leap year has 366 days, which is 52 weeks and 2 extra days. The possible combinations for these 2 extra days are: (Sun, Mon), (Mon, Tue), (Tue, Wed), (Wed, Thu), (Thu, Fri), (Fri, Sat), (Sat, Sun). Out of these 7 equally likely outcomes, the ones containing either Sunday or Monday are: (Sat, Sun), (Sun, Mon), (Mon, Tue). Thus, the probability is 3/7."
             },
             {
                 id: 3,
-                module: "3. Business Economics",
-                question: "In a perfectly competitive market in long-run equilibrium, which condition must hold true for all individual firms?",
+                module: "Marketing Management",
+                question: "Which of the followings are the myths about Rural Market?\n\nA. All Villages are equally populated\nB. Rural Consumers are a hetrogeneous lot\nC. Being illiterate, rural consumer is not able to discriminate between products and brands\nD. Only low priced products will sell in rural India\nE. Rural markets are the consumer durable markets",
                 options: [
-                    "Price = Marginal Cost = Minimum Average Total Cost",
-                    "Price = Marginal Revenue > Marginal Cost",
-                    "Price = Total Fixed Cost + Total Variable Cost",
-                    "Price > Marginal Cost = Average Variable Cost"
+                    "A, B, C and D Only",
+                    "A, C and D Only",
+                    "C, D and E Only",
+                    "B, C, D and E Only"
                 ],
-                answer: 0,
-                explanation: "Correct Answer: Price = Marginal Cost = Minimum Average Total Cost.\n\nExplanation: In long-run competitive equilibrium, zero economic profits are made. Firms produce at the lowest point of their Average Total Cost curve where P = MR = MC = Min ATC."
+                answer: 1,
+                explanation: "Correct Answer: A, C and D Only.\n\nAnalysis: Statement B is true (rural consumers are heterogeneous), and E is partially true but not a strict myth in the same vein. The major established myths are that all villages are the same (A), rural consumers cannot discern brand quality due to illiteracy (C), and they only buy cheap products (D)."
             },
             {
                 id: 4,
-                module: "4. Business Finance",
-                question: "If a company has a Degree of Operating Leverage (DOL) of 2 and a Degree of Financial Leverage (DFL) of 3, what will be the percentage change in EPS if Sales increase by 10%?",
-                options: ["20%", "30%", "50%", "60%"],
-                answer: 3,
-                explanation: "Correct Answer: 60%.\n\nExplanation:\nDegree of Combined Leverage (DCL) = DOL × DFL = 2 × 3 = 6.\nPercentage Change in EPS = DCL × Percentage Change in Sales = 6 × 10% = 60%."
+                module: "Business Economics",
+                question: "Identify the correct equation of Cobb-Douglas production function:",
+                options: [
+                    "Q = A + L^α K^β",
+                    "Q = A × L^α K^β",
+                    "Q = A ÷ L^α K^β",
+                    "Q = A - L^α K^β"
+                ],
+                answer: 1,
+                explanation: "Correct Answer: Q = A × L^α K^β\n\nAnalysis: The Cobb-Douglas production function is a multiplicative function representing the technological relationship between the amounts of two or more inputs (particularly physical capital K and labor L) and the amount of output that can be produced. It is expressed as Q = A * L^α * K^β."
             },
             {
                 id: 5,
-                module: "5. Business Statistics",
-                question: "If the two regression coefficients are b_xy = 0.8 and b_yx = 0.45, what is the value of the Pearson Correlation Coefficient (r)?",
-                options: ["0.36", "0.60", "0.65", "0.80"],
-                answer: 1,
-                explanation: "Correct Answer: 0.60.\n\nExplanation:\nThe correlation coefficient r is the geometric mean of two regression coefficients: r = √(b_xy × b_yx) = √(0.8 × 0.45) = √0.36 = 0.60."
+                module: "Business Environment & IB",
+                question: "Which statement best captures the difference between FDI and FPI?",
+                options: [
+                    "FDI is investment with lasting interest and managerial control; FPI is passive investment without control.",
+                    "FDI involves only equity investment; FPI involves both equity and debt security.",
+                    "FDI is recorded in current account; FPI is recorded in capital account.",
+                    "Both FDI and FPI give investors voting rights in the host country."
+                ],
+                answer: 0,
+                explanation: "Correct Answer: FDI is investment with lasting interest and managerial control; FPI is passive investment without control.\n\nAnalysis: Foreign Direct Investment (FDI) implies acquiring a lasting management interest (typically 10% or more of voting stock), whereas Foreign Portfolio Investment (FPI) consists of passive holdings of securities without active management control."
             },
             {
                 id: 6,
-                module: "6. Business Management & HRM",
-                question: "Match the Motivation Theory with its proponent:\n(A) Two-Factor Theory - (I) Victor Vroom\n(B) Expectancy Theory - (II) Frederick Herzberg\n(C) ERG Theory - (III) David McClelland\n(D) Three Needs Theory - (IV) Clayton Alderfer\n\nWhich option represents the correct matching?",
+                module: "Accounting & Auditing",
+                question: "Arrange the followings in the correct sequence in which they are computed for determining Net Cash from operating activities as per AS-3 (Revised):\n\nA. Operating profit before Working Capital Changes\nB. Cash flow before extra ordinary items\nC. Cash generated from operations\nD. Net Profit before taxation and extra ordinary items",
                 options: [
-                    "A-II, B-I, C-IV, D-III",
-                    "A-I, B-II, C-III, D-IV",
-                    "A-II, B-IV, C-I, D-III",
-                    "A-III, B-I, C-IV, D-II"
+                    "A, B, C, D",
+                    "D, B, A, C",
+                    "C, D, B, A",
+                    "D, A, C, B"
                 ],
-                answer: 0,
-                explanation: "Correct Answer: A-II, B-I, C-IV, D-III.\n\nExplanation:\n• Two-Factor Theory: Herzberg\n• Expectancy Theory: Vroom\n• ERG Theory: Clayton Alderfer\n• Need Theory (Achievement/Affiliation/Power): McClelland."
+                answer: 3,
+                explanation: "Correct Answer: D, A, C, B.\n\nAnalysis: Under the indirect method of AS-3: First determine Net Profit before tax and extraordinary items (D), adjust non-cash items to get Operating profit before working capital changes (A), adjust working capital changes to get Cash generated from operations (C), pay taxes to reach Cash flow before extraordinary items (B)."
             },
             {
                 id: 7,
-                module: "7. Banking & Financial Institutions",
-                question: "Which of the following monetary policy instruments is categorized as a Qualitative (Selective) Credit Control tool of the Reserve Bank of India?",
+                module: "Business Finance",
+                question: "Which one of the followings is not an external technique of Foreign Exchange Risk Management?",
                 options: [
-                    "Repo Rate",
-                    "Cash Reserve Ratio (CRR)",
-                    "Margin Requirements",
-                    "Open Market Operations (OMO)"
+                    "Forward Contracts",
+                    "Currency Futures",
+                    "Netting",
+                    "Swaps"
                 ],
                 answer: 2,
-                explanation: "Correct Answer: Margin Requirements.\n\nExplanation: Repo rate, CRR, and OMO are quantitative/general credit control tools. Fixation of margin requirements, credit rationing, and moral suasion are qualitative/selective credit control tools."
+                explanation: "Correct Answer: Netting.\n\nAnalysis: Netting is an internal technique used by MNCs to offset inter-subsidiary currency obligations. Forwards, Futures, and Swaps are external market hedging instruments."
             },
             {
                 id: 8,
-                module: "8. Marketing Management",
-                question: "Which strategy involves dividing a market based on consumer knowledge, attitude, use, or response to a product?",
+                module: "Accounting & Auditing",
+                question: "Match List - I with List - II.\nList - I\nA. Ind AS 7\nB. Ind AS 24\nC. Ind AS 36\nD. Ind AS 110\n\nList - II\nI. Impairment of Assets\nII. Related Party Disclosures\nIII. Consolidated Financial Statement\nIV. Statement of Cash Flows",
                 options: [
-                    "Geographic Segmentation",
-                    "Demographic Segmentation",
-                    "Psychographic Segmentation",
-                    "Behavioral Segmentation"
+                    "A-I, B-II, C-III, D-IV",
+                    "A-IV, B-II, C-I, D-III",
+                    "A-III, B-IV, C-I, D-II",
+                    "A-IV, B-III, C-II, D-I"
                 ],
-                answer: 3,
-                explanation: "Correct Answer: Behavioral Segmentation.\n\nExplanation: Behavioral segmentation divides buyers into groups based on their knowledge, attitudes, user status, usage rate, loyalty status, and readiness stage."
+                answer: 1,
+                explanation: "Correct Answer: A-IV, B-II, C-I, D-III.\n\nAnalysis: \nInd AS 7: Statement of Cash Flows (IV)\nInd AS 24: Related Party Disclosures (II)\nInd AS 36: Impairment of Assets (I)\nInd AS 110: Consolidated Financial Statements (III)."
             },
             {
                 id: 9,
-                module: "9. Legal Aspects of Business",
-                question: "An agreement without consideration is void under Section 25 of the Indian Contract Act, 1872 EXCEPT when:",
+                module: "Business Management",
+                question: "Which of the following sections of research reports contains Executive Summary?",
                 options: [
-                    "It is expressed in writing and registered on account of natural love and affection between near relatives.",
-                    "It is made orally between business partners.",
-                    "It is a future contingent promise.",
-                    "It involves an illegal object."
+                    "Prefatory Information",
+                    "Introductory Information",
+                    "Main Research Body",
+                    "Supplementary Information"
                 ],
                 answer: 0,
-                explanation: "Correct Answer: It is expressed in writing and registered on account of natural love and affection between near relatives.\n\nExplanation: Under Sec 25, exceptions to 'No Consideration, No Contract' include written & registered love/affection promises between close relatives, compensation for past voluntary service, or time-barred debts."
+                explanation: "Correct Answer: Prefatory Information.\n\nAnalysis: The executive summary is part of the preliminary/prefatory pages of a research report, typically placed before the main introductory chapter to give decision-makers a quick overview."
             },
             {
                 id: 10,
-                module: "10. Income Tax & Tax Planning",
-                question: "Under the Income Tax Act, 1961, what is the maximum deductible limit allowed under Section 80C for an individual assessee?",
-                options: ["₹ 1,00,000", "₹ 1,50,000", "₹ 2,00,000", "₹ 2,50,000"],
+                module: "Legal Aspects of Business",
+                question: "Assertion (A): A gentlemen died leaving a young widow. The relatives of the deceased threatened the widow to adopt a boy otherwise they would not allow her to remove the dead body of her husband for cremation. The widow adopted the boy.\nReason (R): The widow subsequently cancelled the adoption. The court held her consent was not free due to coercion.",
+                options: [
+                    "Both (A) and (R) are correct and (R) is the correct explanation of (A)",
+                    "Both (A) and (R) are correct but (R) is not the correct explanation of (A)",
+                    "(A) is correct but (R) is not correct",
+                    "(A) is not correct but (R) is correct"
+                ],
+                answer: 0,
+                explanation: "Correct Answer: Both (A) and (R) are correct and (R) is the correct explanation of (A).\n\nAnalysis: This is a classic case referencing Ranganayakamma vs. Alwar Setti. Threatening to prevent the cremation of a dead body falls under coercion under Section 15 of the Indian Contract Act. Since consent was obtained via coercion, the contract (adoption) was voidable."
+            },
+            {
+                id: 11,
+                module: "Business Management & HRM",
+                question: "Arrange the following steps of Selection Process in correct order:\nA. Selection Tests\nB. Reference and Background Analysis\nC. Preliminary Interview\nD. Employment Interview\nE. Job Offer",
+                options: [
+                    "A, B, C, D, E",
+                    "C, A, B, D, E",
+                    "C, A, D, B, E",
+                    "A, C, B, D, E"
+                ],
+                answer: 2,
+                explanation: "Correct Answer: C, A, D, B, E.\n\nAnalysis: Standard selection process: Preliminary Interview (C) filters out obvious mismatches. Then Selection Tests (A) are administered. Passed candidates undergo an in-depth Employment Interview (D). This is followed by Reference Checks (B), and finally the Job Offer (E)."
+            },
+            {
+                id: 12,
+                module: "Business Management",
+                question: "Which one of the followings is not a type of organizational culture?",
+                options: [
+                    "Non-Entrepreneurial Culture",
+                    "Power Culture",
+                    "Role Culture",
+                    "Task Culture"
+                ],
+                answer: 0,
+                explanation: "Correct Answer: Non-Entrepreneurial Culture.\n\nAnalysis: Charles Handy identified four main types of organizational culture: Power, Role, Task, and Person cultures. 'Non-Entrepreneurial Culture' is not a standard formal classification in Handy's framework."
+            },
+            {
+                id: 13,
+                module: "Business Statistics",
+                question: "Which of the followings are properties of Normal Distribution?\nA. The normal curve approaches the x-axis asymptotically.\nB. The normal curve has its points of inflection at Mean ± 2SD.\nC. Total area under the normal curve is always equal to 1.\nD. About 68.27% of the total area is covered from Mean ± 2SD.\nE. The normal distribution is unimodal.",
+                options: [
+                    "A, B and E Only",
+                    "B, C and D Only",
+                    "C, D and E Only",
+                    "A, C and E Only"
+                ],
+                answer: 3,
+                explanation: "Correct Answer: A, C and E Only.\n\nAnalysis: Statement B is wrong (inflection points are at Mean ± 1SD). Statement D is wrong (68.27% is covered by Mean ± 1SD, whereas Mean ± 2SD covers 95.45%). Statements A, C, and E accurately describe a normal distribution."
+            },
+            {
+                id: 14,
+                module: "Business Statistics",
+                question: "Karl Pearson's Coefficient of Skewness for a distribution having mean of 6.82, median of 6.8 and standard Deviation of 1.4 is:",
+                options: ["0.014", "0.043", "0.028", "0.056"],
                 answer: 1,
-                explanation: "Correct Answer: ₹ 1,50,000.\n\nExplanation: Under Section 80C, the total aggregate deduction allowed for investments like PPF, EPF, ELSS, tuition fees, principal repayment of housing loan etc., is capped at ₹1,50,000 per financial year."
+                explanation: "Correct Answer: 0.043\n\nAnalysis: Karl Pearson's coefficient of skewness = 3(Mean - Median) / SD = 3(6.82 - 6.8) / 1.4 = 3(0.02) / 1.4 = 0.06 / 1.4 = 0.04285... which rounds to 0.043."
+            },
+            {
+                id: 15,
+                module: "Income Tax & Tax Planning",
+                question: "An assessee who declares his business/professional income in accordance with the provisions of Section 44 AD(1) or Section 44 ADA(1), must pay up to 100 percent of advance tax payable on or before:",
+                options: [
+                    "December 15 of the previous year",
+                    "January 15 of the previous year",
+                    "February 15 of the previous year",
+                    "March 15 of the previous year"
+                ],
+                answer: 3,
+                explanation: "Correct Answer: March 15 of the previous year.\n\nAnalysis: Assessees opting for the presumptive taxation scheme under 44AD or 44ADA are required to pay the entire amount of their advance tax in a single installment on or before March 15 of the financial year."
+            },
+            {
+                id: 16,
+                module: "Accounting & Auditing",
+                question: "Which of the followings are the types of decentralisation in an organisation (responsibility centers)?\nA. Profit Centres\nB. Service Centres\nC. Cost Centres\nD. Investment Centres",
+                options: [
+                    "A, B and C Only",
+                    "A, C and D Only",
+                    "A, B and D Only",
+                    "B, C and D Only"
+                ],
+                answer: 1,
+                explanation: "Correct Answer: A, C and D Only.\n\nAnalysis: In management accounting, responsibility centers used for decentralization typically include Cost Centers, Profit Centers, Revenue Centers, and Investment Centers. Service center is not classified as a primary structural decentralization type."
+            },
+            {
+                id: 17,
+                module: "Business Management & HRM",
+                question: "Arrange the following steps of Control Process in the correct order:\nA. Measurement of Actual Performance\nB. Establishment of Standards\nC. Corrective action where required\nD. Comparison of actual performance with the standards",
+                options: [
+                    "B, A, C, D",
+                    "B, A, D, C",
+                    "A, B, C, D",
+                    "A, B, D, C"
+                ],
+                answer: 1,
+                explanation: "Correct Answer: B, A, D, C.\n\nAnalysis: The standard control process: 1) Establish standards (B). 2) Measure actual performance (A). 3) Compare performance with standards (D). 4) Take corrective action if necessary (C)."
+            },
+            {
+                id: 18,
+                module: "Marketing Management",
+                question: "Arrange the following steps of Personal Selling in sequence:\nA. Pre approach\nB. Presentation and Demonstration\nC. Approach\nD. Prospecting and Qualifying\nE. Handling Objections",
+                options: [
+                    "A, D, C, E, B",
+                    "A, C, D, E, B",
+                    "C, A, D, B, E",
+                    "D, A, C, B, E"
+                ],
+                answer: 3,
+                explanation: "Correct Answer: D, A, C, B, E.\n\nAnalysis: The personal selling process starts with Prospecting (D), followed by Pre-approach planning (A), the actual Approach/meeting (C), Presentation (B), and then Handling Objections (E), leading finally to closing the sale."
+            },
+            {
+                id: 19,
+                module: "Banking & Financial Institutions",
+                question: "Which of the followings are the techniques of Monetary Control adopted by RBI?\nA. Loans and Advances to the Industries\nB. Cash Reserve Ratio\nC. Open Market Operations\nD. Statutory Liquidity Ratio\nE. Repo Rates",
+                options: [
+                    "A, B, C, D Only",
+                    "A, B, D, E Only",
+                    "B, C, D, E Only",
+                    "A, C, D, E Only"
+                ],
+                answer: 2,
+                explanation: "Correct Answer: B, C, D, E Only.\n\nAnalysis: RBI controls monetary policy through CRR, SLR, OMO, and Repo Rates. Giving direct loans to industries is not a monetary control tool but rather a function of commercial and development banks."
+            },
+            {
+                id: 20,
+                module: "Business Economics",
+                question: "If demand equation is given by D = 10,000 - P and the supply equation is given by S = 1000 + 4P, the equilibrium price would be:",
+                options: ["1600", "1800", "1700", "2000"],
+                answer: 1,
+                explanation: "Correct Answer: 1800.\n\nAnalysis: Equilibrium occurs where Quantity Demanded equals Quantity Supplied (D = S). \n10,000 - P = 1000 + 4P\n9,000 = 5P\nP = 9,000 / 5 = 1800."
+            },
+            {
+                id: 21,
+                module: "Income Tax & Tax Planning",
+                question: "Mr. A, a resident in India, aged 60 years, earned agricultural income of ₹5,00,000 and non-agricultural income of ₹3,80,000 for AY 2025-26. The tax liability of Mr. A assuming he does not opt for the new tax regime is:",
+                options: ["₹38,000", "₹3,640", "₹8,000", "Nil"],
+                answer: 3,
+                explanation: "Correct Answer: Nil.\n\nAnalysis: For a senior citizen under the old tax regime, the basic exemption limit is ₹3,000,000. Under the scheme of partial integration of agricultural income, calculating tax on (Agri + Non-Agri) minus tax on (Agri + Basic Exemption) yields a gross tax liability. However, since the non-agricultural income is below ₹5 Lakhs, full rebate under section 87A applies, reducing tax liability to Nil."
+            },
+            {
+                id: 22,
+                module: "Legal Aspects of Business",
+                question: "Arrange the followings on the basis of Sections of Indian Contract Act, 1872 in ascending order:\nA. Agreement in restraint of Marriage\nB. Agreement made without consideration\nC. Agreement with unlawful objects or consideration\nD. Agreement in restraint of Trade\nE. Agreement by way of wager",
+                options: [
+                    "C, B, A, D, E",
+                    "C, A, D, B, E",
+                    "A, B, C, E, D",
+                    "D, B, A, C, E"
+                ],
+                answer: 0,
+                explanation: "Correct Answer: C, B, A, D, E.\n\nAnalysis: \nC: Unlawful object/consideration (Section 23/24)\nB: Without consideration (Section 25)\nA: Restraint of marriage (Section 26)\nD: Restraint of trade (Section 27)\nE: Wager (Section 30)."
+            },
+            {
+                id: 23,
+                module: "Banking & Financial Institutions",
+                question: "Which one of the followings is not a component of formal (organized) financial system?",
+                options: [
+                    "Financial Markets",
+                    "Financial Instruments",
+                    "Chit-fund Companies",
+                    "Financial Services"
+                ],
+                answer: 2,
+                explanation: "Correct Answer: Chit-fund Companies.\n\nAnalysis: Formal financial systems consist of regulators, financial institutions, markets, instruments, and services. Chit-fund companies and local moneylenders typically fall under the unorganized or informal financial sector, despite some state-level regulations."
+            },
+            {
+                id: 24,
+                module: "Marketing Management",
+                question: "[Comprehension based] Ecofresh Pvt. Ltd sells eco-friendly cleaning products. The launch of herbal air freshener during its introduction stage of the product life cycle primarily requires heavy investment in promotion and awareness building activity. It will lead to (in short run):",
+                options: [
+                    "High Profit",
+                    "Low/Negative Profit",
+                    "High Revenue, low cost",
+                    "High Revenue, High cost"
+                ],
+                answer: 1,
+                explanation: "Correct Answer: Low/Negative Profit.\n\nAnalysis: In the introduction stage of the Product Life Cycle (PLC), massive capital goes into promotional activities to build brand awareness while sales volume remains low. Consequently, profitability is typically low or negative initially."
+            },
+            {
+                id: 25,
+                module: "Legal Aspects of Business",
+                question: "[Comprehension based] A contract made by a promoter (Raj) to buy a certain machinery from Pooja on 20 June 2024 before the incorporation certificate was issued on 30 June 2024 is called:",
+                options: [
+                    "Pre-incorporation Contract",
+                    "Provisional Contract",
+                    "Preliminary Contract",
+                    "Standard Contract"
+                ],
+                answer: 0,
+                explanation: "Correct Answer: Pre-incorporation Contract.\n\nAnalysis: Any contract entered into by the promoters of a company on its behalf before the company is legally incorporated is termed a pre-incorporation contract. The company is not bound by it unless it adopts the contract post-incorporation."
             }
         ];
 
         // Systematically expand question bank up to 100 UGC NET level questions
         const commerceModulesList = [
-            { name: "1. Business Environment & IB", topic: "BOP adjustment, WTO principles, Tariff vs Non-tariff barriers, TRIPS, Foreign Direct Investment, and Incoterms." },
-            { name: "2. Accounting & Auditing", topic: "Partnership goodwill, Liquidation of companies, Holding company accounts, Cost accounting variances, and Internal Audit." },
-            { name: "3. Business Economics", topic: "Indifference curve analysis, Law of variable proportions, Kinked demand curve, Oligopoly models, and Price elasticity." },
-            { name: "4. Business Finance", topic: "NPV vs IRR, Capital Asset Pricing Model (CAPM), Dividend discount models, Net Income theory, and Working Capital Management." },
-            { name: "5. Business Statistics", topic: "Normal distribution properties, Type I and Type II errors, Hypothesis testing (Z, t, F, Chi-square), and Skewness." },
-            { name: "6. Business Management & HRM", topic: "Span of control, Delegation vs Decentralization, Performance appraisal systems, Grievance redressal, and Management by Objectives (MBO)." },
-            { name: "7. Banking & Financial Institutions", topic: "Basel III norms, NPAs classification (Substandard, Doubtful, Loss), Money market instruments (CP, CD, T-Bills), and Insurance IRDAI rules." },
-            { name: "8. Marketing Management", topic: "Product Life Cycle stages, Service marketing 7Ps, Brand equity, Push vs Pull promotional strategy, and Logistics management." },
-            { name: "9. Legal Aspects of Business", topic: "Holder in due course (NI Act), Companies Act 2013 corporate social responsibility (CSR), Goods and Services Tax (GST) council, and Consumer Rights." },
-            { name: "10. Income Tax & Tax Planning", topic: "Residential status determination, Capital Gains taxation, Deductions under Chapter VI-A, Set-off and carry forward of losses, and TDS rates." }
+            "Business Environment & IB",
+            "Accounting & Auditing",
+            "Business Economics",
+            "Business Finance",
+            "Business Statistics",
+            "Business Management & HRM",
+            "Banking & Financial Institutions",
+            "Marketing Management",
+            "Legal Aspects of Business",
+            "Income Tax & Tax Planning"
         ];
 
-        const questionsData = [...realQuestions];
+        const questionsData = [...parsedQuestions];
+        const initialCount = parsedQuestions.length;
 
-        for (let i = 11; i <= 100; i++) {
-            const mod = commerceModulesList[(i - 1) % commerceModulesList.length];
+        // Auto-generate the remaining up to 100 to support the UI
+        for (let i = initialCount + 1; i <= 100; i++) {
+            const mod = commerceModulesList[i % 10];
             questionsData.push({
                 id: i,
-                module: mod.name,
-                question: `Question ${i}: Which of the following statements is TRUE regarding standard concepts in ${mod.name} concerning ${mod.topic}?`,
+                module: mod,
+                question: `Standard Mock Question ${i}: Which of the following statements most accurately reflects the core principles of ${mod}?`,
                 options: [
-                    `Option A: It violates standard analytical frameworks in ${mod.name}.`,
-                    `Option B: It correctly represents the core regulation/principle governing ${mod.topic}.`,
-                    `Option C: It applies exclusively to non-profit entities.`,
-                    `Option D: It is invalid under Indian statutory rules.`
+                    "Statement asserting a foundational rule conforming to standard UGC NET parameters.",
+                    "An incorrect assumption related to outdated practices.",
+                    "A statistically irrelevant proposition.",
+                    "A principle exclusively applicable to public sector undertakings."
                 ],
-                answer: 1,
-                explanation: `Correct Answer: Option B.\n\nExplanation: Option B correctly reflects the statutory standard and conceptual framework prescribed in UGC NET syllabus for ${mod.name}.`
+                answer: 0,
+                explanation: `Correct Answer: Option 1.\n\nAnalysis: This placeholder mimics standard structural knowledge checking in ${mod}.`
             });
         }
 
@@ -440,7 +631,17 @@
 
             document.getElementById("moduleBadge").innerText = q.module;
             document.getElementById("questionTitleNumber").innerText = `Question ${index + 1} of 100`;
-            document.getElementById("questionText").innerText = q.question;
+            
+            // Check for Comprehension Context
+            const ctxContainer = document.getElementById("contextContainer");
+            if (q.question.includes("[Comprehension based]")) {
+                ctxContainer.classList.remove("hidden");
+                ctxContainer.innerHTML = "<strong>Reading Passage Context:</strong><br>This question relates to a specific case study or reading passage provided in the examination text.";
+                document.getElementById("questionText").innerText = q.question.replace("[Comprehension based]", "").trim();
+            } else {
+                ctxContainer.classList.add("hidden");
+                document.getElementById("questionText").innerText = q.question;
+            }
 
             const optionsList = document.getElementById("optionsList");
             optionsList.innerHTML = "";
@@ -456,7 +657,7 @@
                         <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border ${getOptionBadgeStyle(optIdx)}">
                             ${String.fromCharCode(65 + optIdx)}
                         </span>
-                        <span class="text-sm font-medium flex-1">${opt}</span>
+                        <span class="text-sm font-medium flex-1 whitespace-pre-line">${opt}</span>
                     </div>
                 `;
                 optionsList.appendChild(optBtn);
@@ -509,15 +710,15 @@
         function getOptionBadgeStyle(optIdx) {
             const selected = userAnswers[currentQuestionIndex] === optIdx;
             const correct = questionsData[currentQuestionIndex].answer === optIdx;
-
+            
             if (isSubmitted) {
-                if (correct) return "bg-emerald-600 text-white border-emerald-600";
-                if (selected && !correct) return "bg-rose-600 text-white border-rose-600";
-                return "bg-slate-200 text-slate-600 border-slate-300";
+                if (correct) return "bg-emerald-500 border-emerald-500 text-white";
+                if (selected && !correct) return "bg-rose-500 border-rose-500 text-white";
+                return "bg-slate-100 border-slate-300 text-slate-500";
             }
-
-            if (selected) return "bg-indigo-600 text-white border-indigo-600";
-            return "bg-slate-100 text-slate-600 border-slate-300";
+            
+            if (selected) return "bg-indigo-600 border-indigo-600 text-white";
+            return "bg-slate-100 border-slate-300 text-slate-500";
         }
 
         function selectOption(optIdx) {
@@ -537,60 +738,55 @@
             loadQuestion(currentQuestionIndex);
         }
 
-        function navigateQuestion(direction) {
-            const newIndex = currentQuestionIndex + direction;
-            if (newIndex >= 0 && newIndex < 100) {
-                loadQuestion(newIndex);
+        function navigateQuestion(step) {
+            const nextIdx = currentQuestionIndex + step;
+            if (nextIdx >= 0 && nextIdx < 100) {
+                loadQuestion(nextIdx);
+            } else if (nextIdx === 100) {
+                confirmSubmitTest();
             }
         }
 
         function confirmSubmitTest() {
-            if (isSubmitted) return;
-            const unanswered = userAnswers.filter(a => a === null).length;
-            let msg = "Are you sure you want to submit the test?";
-            if (unanswered > 0) {
-                msg = `You still have ${unanswered} unanswered question(s). Are you sure you want to submit?`;
-            }
-            if (window.confirm(msg)) {
+            const answered = userAnswers.filter(a => a !== null).length;
+            if (confirm(`You have answered ${answered} out of 100 questions. Are you sure you want to submit the test?`)) {
                 submitTest();
             }
         }
 
         function autoSubmitTest() {
-            alert("Time limit reached! Your test will now be submitted automatically.");
+            alert("Time is up! Your test is being automatically submitted.");
             submitTest();
         }
 
         function submitTest() {
-            isSubmitted = true;
             clearInterval(timerInterval);
-
-            document.getElementById("submitBtn").classList.add("hidden");
-
+            isSubmitted = true;
+            
+            let score = 0;
             let correct = 0;
             let incorrect = 0;
 
             userAnswers.forEach((ans, idx) => {
                 if (ans === questionsData[idx].answer) {
+                    score += 2;
                     correct++;
                 } else if (ans !== null) {
                     incorrect++;
                 }
             });
 
-            const score = correct * 2;
-            const percentage = ((score / 200) * 100).toFixed(1);
-
             document.getElementById("finalScore").innerText = `${score} / 200`;
-            document.getElementById("finalPercentage").innerText = `${percentage}%`;
-            document.getElementById("correctCount").innerText = `${correct} (${correct * 2} Marks)`;
-            document.getElementById("incorrectCount").innerText = `${incorrect + (100 - (correct + incorrect))}`;
+            document.getElementById("finalPercentage").innerText = `${(score/2).toFixed(1)}%`;
+            document.getElementById("correctCount").innerText = correct;
+            document.getElementById("incorrectCount").innerText = (100 - correct);
 
             document.getElementById("resultModal").classList.remove("hidden");
         }
 
         function reviewMode() {
             document.getElementById("resultModal").classList.add("hidden");
+            document.getElementById("submitBtn").classList.add("hidden");
             loadQuestion(0);
         }
     </script>
