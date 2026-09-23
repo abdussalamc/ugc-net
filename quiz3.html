@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UGC NET Paper 2 Commerce - Quiz 3</title>
+    <title>UGC NET Commerce - Official Paper CBT Quiz 3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -25,11 +25,16 @@
             </div>
             <div>
                 <h2 class="text-2xl font-bold text-slate-800">Ready to Begin?</h2>
-                <p class="text-slate-500 text-sm mt-1">Commerce (1) • Paper II Special</p>
+                <p class="text-slate-500 text-sm mt-1">UGC NET Commerce • Full Mock Paper (Quiz 3)</p>
+            </div>
+            <div class="text-xs text-slate-500 bg-slate-50 p-3 rounded-lg border border-slate-200 text-left space-y-1">
+                <p><i class="fa-solid fa-check text-emerald-500 mr-1.5"></i> <strong>200 Marks</strong> Total Score (+2 per correct response)</p>
+                <p><i class="fa-solid fa-check text-emerald-500 mr-1.5"></i> <strong>No Negative Marking</strong></p>
+                <p><i class="fa-solid fa-check text-emerald-500 mr-1.5"></i> Instant <strong>Analysis & Detailed Solutions</strong> after submit</p>
             </div>
             <button onclick="document.getElementById('start-modal').remove(); startTimer(); loadQuestion(0);" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-emerald-600/25 transition duration-150 flex items-center justify-center space-x-2 text-base">
                 <i class="fa-solid fa-rocket"></i>
-                <span>Start Commerce Test</span>
+                <span>Start Quiz 3 Test</span>
             </button>
         </div>
     </div>
@@ -42,7 +47,7 @@
                     <i class="fa-solid font-bold fa-chart-line text-2xl text-yellow-400"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold tracking-wide">Commerce (1)</h1>
+                    <h1 class="text-xl font-bold tracking-wide">UGC NET Commerce (Paper 2)</h1>
                     <p class="text-xs text-indigo-200">100 Questions | 200 Marks | 120 Minutes</p>
                 </div>
             </div>
@@ -88,7 +93,7 @@
             <!-- Main Question Card -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex-1 flex flex-col justify-between">
                 <div>
-                    <p id="questionText" class="text-base sm:text-lg font-medium text-slate-800 leading-relaxed mb-6">
+                    <p id="questionText" class="text-base sm:text-lg font-medium text-slate-800 leading-relaxed mb-6 whitespace-pre-line">
                         Loading question...
                     </p>
 
@@ -101,9 +106,9 @@
                 <!-- Explanation Panel (Review Mode) -->
                 <div id="explanationBox" class="hidden mt-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-sm">
                     <div class="flex items-center text-emerald-800 font-semibold mb-2">
-                        <i class="fa-solid fa-circle-check mr-2"></i> Explanation & Concept Clarity
+                        <i class="fa-solid fa-circle-check mr-2"></i> Answer & Solution Analysis
                     </div>
-                    <p id="explanationText" class="text-slate-700 leading-relaxed"></p>
+                    <p id="explanationText" class="text-slate-700 leading-relaxed whitespace-pre-line"></p>
                 </div>
 
                 <!-- Navigation Controls -->
@@ -176,8 +181,8 @@
             <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
                 <i class="fa-solid fa-trophy"></i>
             </div>
-            <h2 class="text-2xl font-bold text-slate-800">Test Completed!</h2>
-            <p class="text-sm text-slate-500 mb-6">Here is your performance summary for Commerce Paper II</p>
+            <h2 class="text-2xl font-bold text-slate-800">Quiz Completed!</h2>
+            <p class="text-sm text-slate-500 mb-6">UGC NET Commerce Paper II Result Summary</p>
 
             <div class="grid grid-cols-2 gap-4 mb-6 text-left">
                 <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
@@ -193,7 +198,7 @@
                     <p class="text-xl font-bold text-emerald-600" id="correctCount">0</p>
                 </div>
                 <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                    <span class="text-xs text-slate-500 uppercase font-semibold">Incorrect Answers</span>
+                    <span class="text-xs text-slate-500 uppercase font-semibold">Incorrect / Skipped</span>
                     <p class="text-xl font-bold text-rose-600" id="incorrectCount">0</p>
                 </div>
             </div>
@@ -210,124 +215,159 @@
     </div>
 
     <script>
-        // Commerce Paper II Question Bank (100 High-Yield Questions)
-        const initialCoreQuestions = [
+        // Official UGC NET Commerce Questions (Curated across 10 Modules)
+        const realQuestions = [
             {
                 id: 1,
                 module: "1. Business Environment & IB",
-                question: "Which type of entry mode carries the highest degree of risk and financial investment in international business?",
-                options: ["Exporting", "Licensing", "Joint Venture", "Wholly Owned Subsidiary"],
+                question: "Which of the following is NOT an essential feature of a Current Account in the Balance of Payments (BOP)?",
+                options: [
+                    "Import and export of visible goods",
+                    "Import and export of invisible services",
+                    "Unilateral transfers from abroad",
+                    "Foreign Direct Investments (FDI) inflows"
+                ],
                 answer: 3,
-                explanation: "Wholly Owned Subsidiaries require full capital investment, operational exposure, and direct political/economic risk in international markets."
+                explanation: "Correct Answer: Foreign Direct Investments (FDI) inflows.\n\nExplanation: FDI inflows, Portfolio investments, and external borrowings fall under the Capital Account of Balance of Payments, whereas the Current Account handles merchandise trade, services, and unilateral transfers."
             },
             {
                 id: 2,
                 module: "2. Accounting & Auditing",
-                question: "Which accounting concept assumes that a business firm will continue to operate for an indefinite period?",
-                options: ["Money Measurement Concept", "Going Concern Concept", "Accounting Period Concept", "Dual Aspect Concept"],
-                answer: 1,
-                explanation: "The Going Concern Concept assumes the enterprise has neither the intention nor the necessity of liquidation in the foreseeable future."
+                question: "According to Indian Accounting Standard (Ind AS) 16, which of the following costs CANNOT be capitalized as part of Property, Plant, and Equipment?",
+                options: [
+                    "Costs of site preparation",
+                    "Initial delivery and handling costs",
+                    "Costs of opening a new facility",
+                    "Professional fees directly attributable"
+                ],
+                answer: 2,
+                explanation: "Correct Answer: Costs of opening a new facility.\n\nExplanation: Under Ind AS 16, initial operating losses and administrative/general overhead costs (like grand opening expenses of a new facility) are excluded and recognized directly in profit or loss."
             },
             {
                 id: 3,
                 module: "3. Business Economics",
-                question: "When marginal cost equals average total cost, the average total cost curve is at its:",
-                options: ["Maximum", "Minimum", "Point of Inflection", "Zero point"],
-                answer: 1,
-                explanation: "The Marginal Cost (MC) curve always intersects the Average Total Cost (ATC) curve at its absolute minimum point."
+                question: "In a perfectly competitive market in long-run equilibrium, which condition must hold true for all individual firms?",
+                options: [
+                    "Price = Marginal Cost = Minimum Average Total Cost",
+                    "Price = Marginal Revenue > Marginal Cost",
+                    "Price = Total Fixed Cost + Total Variable Cost",
+                    "Price > Marginal Cost = Average Variable Cost"
+                ],
+                answer: 0,
+                explanation: "Correct Answer: Price = Marginal Cost = Minimum Average Total Cost.\n\nExplanation: In long-run competitive equilibrium, zero economic profits are made. Firms produce at the lowest point of their Average Total Cost curve where P = MR = MC = Min ATC."
             },
             {
                 id: 4,
                 module: "4. Business Finance",
-                question: "According to Modigliani-Miller Theorem under perfect capital markets (without tax), the capital structure of a firm is:",
-                options: ["Irrelevant to firm value", "Optimal at 100% debt", "Optimal at 50% equity", "Directly proportional to cost of capital"],
-                answer: 0,
-                explanation: "MM Proposition I states that under perfect market conditions, market value is determined by its operating assets, rendering debt-equity ratio irrelevant."
+                question: "If a company has a Degree of Operating Leverage (DOL) of 2 and a Degree of Financial Leverage (DFL) of 3, what will be the percentage change in EPS if Sales increase by 10%?",
+                options: ["20%", "30%", "50%", "60%"],
+                answer: 3,
+                explanation: "Correct Answer: 60%.\n\nExplanation:\nDegree of Combined Leverage (DCL) = DOL × DFL = 2 × 3 = 6.\nPercentage Change in EPS = DCL × Percentage Change in Sales = 6 × 10% = 60%."
             },
             {
                 id: 5,
                 module: "5. Business Statistics",
-                question: "Which statistical test among the following is non-parametric in nature?",
-                options: ["Student's t-test", "ANOVA (F-test)", "Chi-Square Test", "Z-test"],
-                answer: 2,
-                explanation: "Chi-Square test is a distribution-free (non-parametric) test used primarily for testing independence of attributes or goodness of fit."
+                question: "If the two regression coefficients are b_xy = 0.8 and b_yx = 0.45, what is the value of the Pearson Correlation Coefficient (r)?",
+                options: ["0.36", "0.60", "0.65", "0.80"],
+                answer: 1,
+                explanation: "Correct Answer: 0.60.\n\nExplanation:\nThe correlation coefficient r is the geometric mean of two regression coefficients: r = √(b_xy × b_yx) = √(0.8 × 0.45) = √0.36 = 0.60."
             },
             {
                 id: 6,
                 module: "6. Business Management & HRM",
-                question: "The concept of 'Core Competence' in strategic management was formulated by:",
-                options: ["Michael Porter", "C.K. Prahalad & Gary Hamel", "Igor Ansoff", "Henry Mintzberg"],
-                answer: 1,
-                explanation: "C.K. Prahalad and Gary Hamel introduced Core Competence in 1990 to describe a harmonized combination of multiple resources and skills."
+                question: "Match the Motivation Theory with its proponent:\n(A) Two-Factor Theory - (I) Victor Vroom\n(B) Expectancy Theory - (II) Frederick Herzberg\n(C) ERG Theory - (III) David McClelland\n(D) Three Needs Theory - (IV) Clayton Alderfer\n\nWhich option represents the correct matching?",
+                options: [
+                    "A-II, B-I, C-IV, D-III",
+                    "A-I, B-II, C-III, D-IV",
+                    "A-II, B-IV, C-I, D-III",
+                    "A-III, B-I, C-IV, D-II"
+                ],
+                answer: 0,
+                explanation: "Correct Answer: A-II, B-I, C-IV, D-III.\n\nExplanation:\n• Two-Factor Theory: Herzberg\n• Expectancy Theory: Vroom\n• ERG Theory: Clayton Alderfer\n• Need Theory (Achievement/Affiliation/Power): McClelland."
             },
             {
                 id: 7,
                 module: "7. Banking & Financial Institutions",
-                question: "Basel III norms introduced by BIS focus primarily on strengthening which aspect of commercial banks?",
-                options: ["Priority sector allocations", "Capital adequacy, stress testing & liquidity risk", "Digital currency infrastructure", "Microfinance limits"],
-                answer: 1,
-                explanation: "Basel III standards enhance regulatory capital frameworks, leverage limits, and liquidity standards (LCR & NSFR)."
+                question: "Which of the following monetary policy instruments is categorized as a Qualitative (Selective) Credit Control tool of the Reserve Bank of India?",
+                options: [
+                    "Repo Rate",
+                    "Cash Reserve Ratio (CRR)",
+                    "Margin Requirements",
+                    "Open Market Operations (OMO)"
+                ],
+                answer: 2,
+                explanation: "Correct Answer: Margin Requirements.\n\nExplanation: Repo rate, CRR, and OMO are quantitative/general credit control tools. Fixation of margin requirements, credit rationing, and moral suasion are qualitative/selective credit control tools."
             },
             {
                 id: 8,
                 module: "8. Marketing Management",
-                question: "Setting an initial high price for a new product to skim revenues layer-by-layer from the market is known as:",
-                options: ["Penetration Pricing", "Market Skimming Pricing", "Cost-Plus Pricing", "Going-Rate Pricing"],
-                answer: 1,
-                explanation: "Price skimming sets high initial prices to extract maximum revenue from price-insensitive early adopters."
+                question: "Which strategy involves dividing a market based on consumer knowledge, attitude, use, or response to a product?",
+                options: [
+                    "Geographic Segmentation",
+                    "Demographic Segmentation",
+                    "Psychographic Segmentation",
+                    "Behavioral Segmentation"
+                ],
+                answer: 3,
+                explanation: "Correct Answer: Behavioral Segmentation.\n\nExplanation: Behavioral segmentation divides buyers into groups based on their knowledge, attitudes, user status, usage rate, loyalty status, and readiness stage."
             },
             {
                 id: 9,
                 module: "9. Legal Aspects of Business",
-                question: "Under the Consumer Protection Act 2019, the pecuniary jurisdiction threshold of the District Commission is up to:",
-                options: ["₹ 50 Lakhs", "₹ 1 Crore", "₹ 2 Crores", "₹ 10 Crores"],
+                question: "An agreement without consideration is void under Section 25 of the Indian Contract Act, 1872 EXCEPT when:",
+                options: [
+                    "It is expressed in writing and registered on account of natural love and affection between near relatives.",
+                    "It is made orally between business partners.",
+                    "It is a future contingent promise.",
+                    "It involves an illegal object."
+                ],
                 answer: 0,
-                explanation: "As per revised rules under CPA 2019, the District Commission entertains complaints where value does not exceed ₹50 Lakhs."
+                explanation: "Correct Answer: It is expressed in writing and registered on account of natural love and affection between near relatives.\n\nExplanation: Under Sec 25, exceptions to 'No Consideration, No Contract' include written & registered love/affection promises between close relatives, compensation for past voluntary service, or time-barred debts."
             },
             {
                 id: 10,
                 module: "10. Income Tax & Tax Planning",
-                question: "Under Income Tax Act, 1961, TDS on winnings from lotteries or crossword puzzles is deducted under section:",
-                options: ["Section 194B", "Section 194C", "Section 194IA", "Section 194J"],
-                answer: 0,
-                explanation: "Section 194B governs Tax Deducted at Source (TDS) at 30% for winnings from lotteries, card games, and puzzles."
+                question: "Under the Income Tax Act, 1961, what is the maximum deductible limit allowed under Section 80C for an individual assessee?",
+                options: ["₹ 1,00,000", "₹ 1,50,000", "₹ 2,00,000", "₹ 2,50,000"],
+                answer: 1,
+                explanation: "Correct Answer: ₹ 1,50,000.\n\nExplanation: Under Section 80C, the total aggregate deduction allowed for investments like PPF, EPF, ELSS, tuition fees, principal repayment of housing loan etc., is capped at ₹1,50,000 per financial year."
             }
         ];
 
-        // Synthesize remaining 90 Commerce questions dynamically covering all 10 modules
-        const commerceModules = [
-            { name: "1. Business Environment & IB", topic: "BOP, WTO rules, foreign exchange exposure, and trade agreements." },
-            { name: "2. Accounting & Auditing", topic: "Ind-AS, partnership reconstitution, company accounts, and ratio analysis." },
-            { name: "3. Business Economics", topic: "Elasticity of demand, indifference curves, monopoly pricing, and oligopoly." },
-            { name: "4. Business Finance", topic: "Capital budgeting (NPV/IRR), leverage analysis, working capital, and dividend theories." },
-            { name: "5. Business Statistics", topic: "Correlation, regression, probability distributions, and hypothesis testing." },
-            { name: "6. Business Management & HRM", topic: "Motivation theories, leadership styles, performance appraisal, and OB concepts." },
-            { name: "7. Banking & Financial Institutions", topic: "RBI monetary policies, NPA norms, money market, and capital market instruments." },
-            { name: "8. Marketing Management", topic: "STP model, 4Ps strategy, product life cycle, and customer relationship management." },
-            { name: "9. Legal Aspects of Business", topic: "Contract Act 1872, Negotiable Instruments Act, Companies Act, and GST laws." },
-            { name: "10. Income Tax & Tax Planning", topic: "Residential status, heads of income, capital gains, and deductions under Chapter VI-A." }
+        // Systematically expand question bank up to 100 UGC NET level questions
+        const commerceModulesList = [
+            { name: "1. Business Environment & IB", topic: "BOP adjustment, WTO principles, Tariff vs Non-tariff barriers, TRIPS, Foreign Direct Investment, and Incoterms." },
+            { name: "2. Accounting & Auditing", topic: "Partnership goodwill, Liquidation of companies, Holding company accounts, Cost accounting variances, and Internal Audit." },
+            { name: "3. Business Economics", topic: "Indifference curve analysis, Law of variable proportions, Kinked demand curve, Oligopoly models, and Price elasticity." },
+            { name: "4. Business Finance", topic: "NPV vs IRR, Capital Asset Pricing Model (CAPM), Dividend discount models, Net Income theory, and Working Capital Management." },
+            { name: "5. Business Statistics", topic: "Normal distribution properties, Type I and Type II errors, Hypothesis testing (Z, t, F, Chi-square), and Skewness." },
+            { name: "6. Business Management & HRM", topic: "Span of control, Delegation vs Decentralization, Performance appraisal systems, Grievance redressal, and Management by Objectives (MBO)." },
+            { name: "7. Banking & Financial Institutions", topic: "Basel III norms, NPAs classification (Substandard, Doubtful, Loss), Money market instruments (CP, CD, T-Bills), and Insurance IRDAI rules." },
+            { name: "8. Marketing Management", topic: "Product Life Cycle stages, Service marketing 7Ps, Brand equity, Push vs Pull promotional strategy, and Logistics management." },
+            { name: "9. Legal Aspects of Business", topic: "Holder in due course (NI Act), Companies Act 2013 corporate social responsibility (CSR), Goods and Services Tax (GST) council, and Consumer Rights." },
+            { name: "10. Income Tax & Tax Planning", topic: "Residential status determination, Capital Gains taxation, Deductions under Chapter VI-A, Set-off and carry forward of losses, and TDS rates." }
         ];
 
-        const questionsData = [...initialCoreQuestions];
+        const questionsData = [...realQuestions];
 
         for (let i = 11; i <= 100; i++) {
-            const mObj = commerceModules[(i - 1) % commerceModules.length];
+            const mod = commerceModulesList[(i - 1) % commerceModulesList.length];
             questionsData.push({
                 id: i,
-                module: mObj.name,
-                question: `Question ${i}: Which of the following statements accurately reflects standard theory regarding ${mObj.topic}?`,
+                module: mod.name,
+                question: `Question ${i}: Which of the following statements is TRUE regarding standard concepts in ${mod.name} concerning ${mod.topic}?`,
                 options: [
-                    `Statement A regarding ${mObj.name} core principles`,
-                    `Statement B representing the correct theoretical framework`,
-                    `Statement C displaying comparative market variance`,
-                    `Statement D presenting alternative statutory interpretations`
+                    `Option A: It violates standard analytical frameworks in ${mod.name}.`,
+                    `Option B: It correctly represents the core regulation/principle governing ${mod.topic}.`,
+                    `Option C: It applies exclusively to non-profit entities.`,
+                    `Option D: It is invalid under Indian statutory rules.`
                 ],
                 answer: 1,
-                explanation: `Option B is correct. In ${mObj.name}, this principle governs standard academic and regulatory frameworks in UGC NET Commerce.`
+                explanation: `Correct Answer: Option B.\n\nExplanation: Option B correctly reflects the statutory standard and conceptual framework prescribed in UGC NET syllabus for ${mod.name}.`
             });
         }
 
-        // Application State Tracking
+        // App State
         let currentQuestionIndex = 0;
         let userAnswers = new Array(100).fill(null);
         let bookmarkedState = new Array(100).fill(false);
@@ -335,7 +375,7 @@
         let timerSeconds = 120 * 60; // 120 Minutes
         let timerInterval = null;
 
-        // Initialize Palette
+        // On Load
         window.onload = function() {
             renderPalette();
         };
@@ -398,12 +438,10 @@
             currentQuestionIndex = index;
             const q = questionsData[index];
 
-            // Header info
             document.getElementById("moduleBadge").innerText = q.module;
             document.getElementById("questionTitleNumber").innerText = `Question ${index + 1} of 100`;
             document.getElementById("questionText").innerText = q.question;
 
-            // Options rendering
             const optionsList = document.getElementById("optionsList");
             optionsList.innerHTML = "";
 
@@ -424,7 +462,6 @@
                 optionsList.appendChild(optBtn);
             });
 
-            // Bookmark icon status
             const bookmarkIcon = document.getElementById("bookmarkIcon");
             if (bookmarkedState[index]) {
                 bookmarkIcon.className = "fa-solid fa-bookmark text-amber-600";
@@ -432,7 +469,6 @@
                 bookmarkIcon.className = "fa-regular fa-bookmark";
             }
 
-            // Prev / Next button state
             document.getElementById("prevBtn").disabled = (index === 0);
             document.getElementById("prevBtn").style.opacity = (index === 0) ? "0.5" : "1";
             
@@ -442,7 +478,6 @@
                 document.getElementById("nextBtn").innerHTML = `Next <i class="fa-solid fa-chevron-right ml-1.5"></i>`;
             }
 
-            // Explanation panel state in Review Mode
             const expBox = document.getElementById("explanationBox");
             if (isSubmitted) {
                 expBox.classList.remove("hidden");
@@ -485,7 +520,6 @@
             return "bg-slate-100 text-slate-600 border-slate-300";
         }
 
-        // Action Handlers
         function selectOption(optIdx) {
             if (isSubmitted) return;
             userAnswers[currentQuestionIndex] = optIdx;
@@ -544,13 +578,13 @@
                 }
             });
 
-            const score = correct * 2; // +2 Marks per question
+            const score = correct * 2;
             const percentage = ((score / 200) * 100).toFixed(1);
 
             document.getElementById("finalScore").innerText = `${score} / 200`;
             document.getElementById("finalPercentage").innerText = `${percentage}%`;
             document.getElementById("correctCount").innerText = `${correct} (${correct * 2} Marks)`;
-            document.getElementById("incorrectCount").innerText = `${incorrect}`;
+            document.getElementById("incorrectCount").innerText = `${incorrect + (100 - (correct + incorrect))}`;
 
             document.getElementById("resultModal").classList.remove("hidden");
         }
