@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGC NET Commerce - Q51 to Q150 CBT Quiz (100 Questions)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <!-- Start Quiz Modal Overlay -->
+    <div id="start-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-6 md:p-8 max-w-md w-full text-center shadow-2xl border border-slate-100 space-y-5">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+                <i class="fa-solid fa-play text-2xl ml-1"></i>
+            </div>
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800">Ready to Begin?</h2>
+                <p class="text-slate-500 text-sm mt-1">UGC NET Commerce &bull; Q51&ndash;Q150 Mock Paper</p>
+            </div>
+            <div class="text-xs text-slate-500 bg-slate-50 p-3 rounded-lg border border-slate-200 text-left space-y-1">
+                <p><i class="fa-solid fa-check text-emerald-500 mr-1.5"></i> <strong>100 Questions</strong> &bull; Original numbering Q51&ndash;Q150</p>
+                <p><i class="fa-solid fa-check text-emerald-500 mr-1.5"></i> <strong>200 Marks</strong> Total Score (+2 per correct response)</p>
+                <p><i class="fa-solid fa-check text-emerald-500 mr-1.5"></i> <strong>120 Minutes</strong> Timer &bull; No Negative Marking</p>
+                <p><i class="fa-solid fa-check text-emerald-500 mr-1.5"></i> Instant <strong>Analysis &amp; Detailed Solutions</strong> after submit</p>
+            </div>
+            <button onclick="document.getElementById('start-modal').remove(); startTimer(); loadQuestion(0);" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-emerald-600/25 transition duration-150 flex items-center justify-center space-x-2 text-base">
+                <i class="fa-solid fa-rocket"></i>
+                <span>Start Full Test</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Header Banner -->
+    <header class="bg-indigo-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center space-x-3">
+                <div class="p-2 bg-indigo-700 rounded-lg">
+                    <i class="fa-solid font-bold fa-chart-line text-2xl text-yellow-400"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-wide">UGC NET Commerce (Q51&ndash;Q150)</h1>
+                    <p class="text-xs text-indigo-200">100 Questions | 200 Marks | 120 Minutes</p>
+                </div>
+            </div>
+
+            <!-- Timer & Action Bar -->
+            <div class="flex items-center space-x-4">
+                <div id="timerContainer" class="flex items-center bg-indigo-800 border border-indigo-700 px-4 py-1.5 rounded-lg text-amber-300 font-mono font-semibold text-lg shadow-inner">
+                    <i class="fa-regular fa-clock mr-2 text-base"></i>
+                    <span id="timerDisplay">120:00</span>
+                </div>
+                <button id="submitBtn" onclick="confirmSubmitTest()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-all shadow-md flex items-center">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Submit Test
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace Area -->
+    <main class="max-w-7xl mx-auto w-full px-4 py-6 flex-1 grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+        <!-- Central Content Area (Questions) -->
+        <div class="lg:col-span-3 flex flex-col space-y-4">
+
+            <!-- Question Module Badge & Header -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-wrap justify-between items-center gap-2">
+                <div>
+                    <span id="sectionBadge" class="inline-block bg-indigo-100 text-indigo-800 font-medium px-3 py-1 rounded-full text-xs uppercase tracking-wider mb-1 mr-1.5">
+                        Section
+                    </span>
+                    <span id="moduleBadge" class="inline-block bg-emerald-100 text-emerald-800 font-medium px-3 py-1 rounded-full text-xs uppercase tracking-wider mb-1">
+                        Module Name
+                    </span>
+                    <h2 class="text-lg font-semibold text-slate-800" id="questionTitleNumber">Question 1 of 100</h2>
+                </div>
+                <div class="flex items-center space-x-2 text-sm font-medium text-slate-500">
+                    <span class="bg-slate-100 px-2.5 py-1 rounded border border-slate-200 text-slate-700">+2 Marks</span>
+                    <span class="bg-slate-100 px-2.5 py-1 rounded border border-slate-200 text-slate-700">No Negative Marking</span>
+                </div>
+            </div>
+
+            <!-- Dynamic Context Container (Tables / Passages) -->
+            <div id="contextContainer" class="hidden bg-indigo-50/70 border border-indigo-200 rounded-xl p-5 shadow-sm text-sm text-slate-700">
+                <div class="flex items-center text-indigo-700 font-semibold mb-2 text-xs uppercase tracking-wider">
+                    <i class="fa-solid fa-book-open mr-2"></i> Comprehension / Case Study Passage
+                </div>
+                <div id="contextContent"></div>
+            </div>
+
+            <!-- Main Question Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex-1 flex flex-col justify-between">
+                <div>
+                    <p id="questionText" class="text-base sm:text-lg font-medium text-slate-800 leading-relaxed mb-6 whitespace-pre-line">
+                        Loading question...
+                    </p>
+
+                    <!-- Options List -->
+                    <div id="optionsList" class="space-y-3">
+                        <!-- Options injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- Explanation Panel (Review Mode) -->
+                <div id="explanationBox" class="hidden mt-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-sm">
+                    <div class="flex items-center text-emerald-800 font-semibold mb-2">
+                        <i class="fa-solid fa-circle-check mr-2"></i> Answer & Solution Analysis
+                    </div>
+                    <p id="explanationText" class="text-slate-700 leading-relaxed whitespace-pre-line"></p>
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="mt-8 pt-4 border-t border-slate-100 flex flex-wrap justify-between items-center gap-3">
+                    <div class="flex space-x-2">
+                        <button onclick="clearResponse()" class="px-3.5 py-2 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-100 text-xs sm:text-sm font-medium transition">
+                            <i class="fa-solid fa-rotate-left mr-1.5"></i> Clear
+                        </button>
+                        <button id="bookmarkBtn" onclick="toggleBookmark()" class="px-3.5 py-2 rounded-lg border border-amber-300 text-amber-700 hover:bg-amber-50 text-xs sm:text-sm font-medium transition">
+                            <i class="fa-regular fa-bookmark mr-1.5" id="bookmarkIcon"></i> Mark for Review
+                        </button>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button id="prevBtn" onclick="navigateQuestion(-1)" class="px-4 py-2 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 text-sm font-semibold transition">
+                            <i class="fa-solid fa-chevron-left mr-1.5"></i> Prev
+                        </button>
+                        <button id="nextBtn" onclick="navigateQuestion(1)" class="px-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold transition shadow-sm">
+                            Next <i class="fa-solid fa-chevron-right ml-1.5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Side Panel: Question Palette & Status -->
+        <div class="lg:col-span-1 flex flex-col space-y-4">
+
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">Status Legend</h3>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-emerald-500 inline-block"></span>
+                        <span class="text-slate-600">Answered</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-amber-500 inline-block"></span>
+                        <span class="text-slate-600">Review</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-slate-200 inline-block"></span>
+                        <span class="text-slate-600">Not Visited</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-rose-500 inline-block"></span>
+                        <span class="text-slate-600">Unanswered</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Part Jump -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">Jump to Part</h3>
+                <div class="grid grid-cols-1 gap-2 text-xs">
+                    <button onclick="loadQuestion(0)" class="px-3 py-2 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-medium text-left border border-indigo-100">
+                        Part I&ndash;IV: Q51&ndash;Q130 (Business, Finance, Stats, HRM, Legal)
+                    </button>
+                    <button onclick="loadQuestion(80)" class="px-3 py-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-medium text-left border border-emerald-100">
+                        Part V: Q131&ndash;Q140 (Income Tax)
+                    </button>
+                    <button onclick="loadQuestion(90)" class="px-3 py-2 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-700 font-medium text-left border border-amber-100">
+                        Part VI&ndash;VII: Q141&ndash;Q150 (Case Studies)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Grid Palette -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex-1 flex flex-col">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">Question Palette</h3>
+                    <span id="answeredCount" class="text-xs font-semibold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full">0/100 Answered</span>
+                </div>
+
+                <div id="paletteGrid" class="grid grid-cols-5 gap-2 max-h-96 overflow-y-auto custom-scrollbar p-1">
+                    <!-- 100 Buttons injected dynamically -->
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Result / Score Modal -->
+    <div id="resultModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 sm:p-8 text-center relative">
+            <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-800">Quiz Completed!</h2>
+            <p class="text-sm text-slate-500 mb-6">UGC NET Commerce Q51&ndash;Q150 Result Summary</p>
+
+            <div class="grid grid-cols-2 gap-4 mb-6 text-left">
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-xs text-slate-500 uppercase font-semibold">Total Score</span>
+                    <p class="text-2xl font-extrabold text-indigo-700" id="finalScore">0 / 200</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-xs text-slate-500 uppercase font-semibold">Percentage</span>
+                    <p class="text-2xl font-extrabold text-indigo-700" id="finalPercentage">0%</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-xs text-slate-500 uppercase font-semibold">Correct Answers</span>
+                    <p class="text-xl font-bold text-emerald-600" id="correctCount">0</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-xs text-slate-500 uppercase font-semibold">Incorrect / Skipped</span>
+                    <p class="text-xl font-bold text-rose-600" id="incorrectCount">0</p>
+                </div>
+            </div>
+
+            <div class="flex space-x-3">
+                <button onclick="reviewMode()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold shadow-md transition">
+                    <i class="fa-solid fa-magnifying-glass mr-2"></i> Review Solutions
+                </button>
+                <button onclick="location.reload()" class="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold transition flex items-center justify-center">
+                    <i class="fa-solid fa-rotate-right mr-2"></i> Restart
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // UGC NET Commerce Question Bank (Q51-Q150, 100 Questions)
+        const questionsData = [{"id": 51, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Environment", "context": null, "question": "Which of the following is NOT the feature of business environment?", "options": ["Complex", "Dynamic", "Multi faceted", "Static"], "answer": 3, "explanation": "Business environment is complex, dynamic and multifaceted. It changes continuously and consists of many interacting forces. Therefore, static is not a feature."}, {"id": 52, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Environment", "context": null, "question": "Which of the following is NOT an element of Micro environment?", "options": ["Customers", "Suppliers", "Technology", "Competitors"], "answer": 2, "explanation": "Customers, suppliers and competitors are components of the micro environment because they directly affect a firm's operations. Technology is generally treated as part of the macro/technological environment."}, {"id": 53, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Environment", "context": null, "question": "In PESTLE framework, what does 'L' denote?", "options": ["Labour", "Legal", "Land", "Latest"], "answer": 1, "explanation": "PESTLE = Political, Economic, Social, Technological, Legal, Environmental."}, {"id": 54, "section": "UGC NET Commerce (Q51–Q150)", "module": "International Business", "context": null, "question": "Which of the following types of FDI includes creation of new assets and production facilities in the country?", "options": ["Brownfield investment", "Merger and Acquisition", "Strategic alliances", "Greenfield investment"], "answer": 3, "explanation": "A greenfield investment establishes new production facilities/assets from the ground up. Brownfield investment generally involves acquiring or expanding existing facilities."}, {"id": 55, "section": "UGC NET Commerce (Q51–Q150)", "module": "International Business", "context": null, "question": "Which of the following countries were part of NAFTA?\nA. United States\nB. Canada\nC. Mexico\nD. Brazil", "options": ["A, B Only", "A, B, C Only", "B, C, D Only", "B, C Only"], "answer": 1, "explanation": "NAFTA involved the United States, Canada and Mexico. Brazil was not a NAFTA member."}, {"id": 56, "section": "UGC NET Commerce (Q51–Q150)", "module": "International Business", "context": null, "question": "Which of the following are the key objectives of WTO?\nA. To set rules for international trade\nB. To resolve trade disputes\nC. To resolve border disputes\nD. To provide a forum for negotiating trade liberalisation", "options": ["A, B, D Only", "A, C Only", "B, C, D Only", "A, B, C and D"], "answer": 0, "explanation": "The WTO establishes a framework for international trade, provides dispute settlement, and facilitates negotiations on trade liberalisation. Border disputes are not a core WTO function."}, {"id": 57, "section": "UGC NET Commerce (Q51–Q150)", "module": "International Business", "context": null, "question": "Arrange the following theories of international trade in chronological order (old to new):\nA. Mercantilism Theory\nB. Comparative Advantage Theory\nC. Product Life Cycle Theory\nD. Heckscher-Ohlin Theory", "options": ["A, B, C, D", "A, B, D, C", "C, B, A, D", "B, A, C, D"], "answer": 1, "explanation": "Chronology: Mercantilism → Comparative Advantage (Ricardo) → Heckscher-Ohlin → Product Life Cycle (Vernon)."}, {"id": 58, "section": "UGC NET Commerce (Q51–Q150)", "module": "International Business", "context": null, "question": "Arrange the following in chronological order of their establishment (Old to New):\nA. NAFTA\nB. European Union\nC. SAARC\nD. ASEAN", "options": ["A, B, C, D", "B, A, D, C", "D, C, B, A", "C, D, A, B"], "answer": 2, "explanation": "ASEAN 1967 → SAARC 1985 → European Union 1993 → NAFTA 1994."}, {"id": 59, "section": "UGC NET Commerce (Q51–Q150)", "module": "International Business", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I: A. Balance of payment-current A/C, B. Balance of payment-capital A/C, C. Balance of Trade, D. Balancing item\nLIST-II: I. Inflow and outflow of capital, II. International transactions of goods and services, III. Import and export of goods only, IV. Entry for net errors and omissions", "options": ["A-I, B-II, C-III, D-IV", "A-III, B-II, C-IV, D-I", "A-IV, B-III, C-I, D-II", "A-II, B-I, C-III, D-IV"], "answer": 3, "explanation": "Current account covers goods/services and related transactions; capital account concerns capital flows; balance of trade deals specifically with merchandise exports/imports; balancing item accounts for errors and omissions."}, {"id": 60, "section": "UGC NET Commerce (Q51–Q150)", "module": "International Business", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I — Trade Tariff: A. Specific Tariff, B. Ad valorem Tariff, C. Compound Tariff, D. Variable Tariff\nLIST-II — Explanation: I. Fixed percentage of the value of the commodity, II. Fixed amount of money per unit, III. Duty fixed to bring the price of imported commodity to the level of domestic support price, IV. Combination of Ad valorem and Specific Tariff", "options": ["A-I, B-II, C-III, D-IV", "A-II, B-I, C-IV, D-III", "A-III, B-IV, C-II, D-I", "A-IV, B-III, C-II, D-I"], "answer": 1, "explanation": "Specific = fixed amount per unit; Ad valorem = percentage of value; Compound = combination; Variable = variable duty designed to achieve a target domestic price."}, {"id": 61, "section": "UGC NET Commerce (Q51–Q150)", "module": "Accounting & Auditing", "context": null, "question": "Which of the following are the applications of the conservatism principle of accounting?\nA. Valuation of stock in trade at the lower of cost or market value\nB. Debiting drawings account and crediting purchases account when goods are withdrawn by the proprietor\nC. Making provision for bad and doubtful debts\nD. Making provision for discount on creditors\nE. Creation of investment fluctuation fund", "options": ["A and C Only", "A, B and D Only", "B, C and E Only", "A, C and E Only"], "answer": 3, "explanation": "Conservatism/prudence recognises expected losses but does not anticipate uncertain profits. Hence lower-of-cost/market valuation, bad-debt provisions and investment fluctuation provisions fit the principle."}, {"id": 62, "section": "UGC NET Commerce (Q51–Q150)", "module": "Accounting & Auditing", "context": null, "question": "Identify the correct order in which the assets of the firm shall be applied in case of dissolution of a partnership firm.\nA. Paying to each partner rateably what is due to him from the firm for advances as distinguished from capital.\nB. Paying the residues, if any, to partners in the proportion in which they were entitled to share profit.\nC. Paying the debts of the firm to third parties.\nD. Paying to each partner rateably what is due to him on account of capital.", "options": ["A, C, D, B", "C, A, B, D", "C, A, D, B", "A, B, C, D"], "answer": 2, "explanation": "Order under partnership dissolution: Outside debts → Partner advances → Partner capital → Residual profit-sharing amount."}, {"id": 63, "section": "UGC NET Commerce (Q51–Q150)", "module": "Accounting & Auditing", "context": null, "question": "Which of the following statements are incorrect for amalgamation in the nature of merger?\nA. All the assets and liabilities of the transferor company are taken over by transferee company.\nB. Shareholders holding not less than 95% of the face value of the equity shares of the transferor company become equity shareholders of the transferee company.\nC. Payment of purchase consideration may be made in cash per share.\nD. Journal entries for recording the merger are passed by pooling of interest method.\nE. The business of the transferor company is not intended to be carried on by the transferee company.", "options": ["A, B, and C Only", "B, C and D Only", "A and D Only", "B, C and E Only"], "answer": 3, "explanation": "For a merger, at least 90%, not 95%, of the equity shareholders should become shareholders of the transferee company. The pooling-of-interests method is used, and the transferor's business is intended to continue. Hence B, C and E are incorrect."}, {"id": 64, "section": "UGC NET Commerce (Q51–Q150)", "module": "Accounting & Auditing", "context": null, "question": "Which of the following Ind AS specifically deals with consolidated financial statements?", "options": ["Ind AS 29", "Ind AS 101", "Ind AS 110", "Ind AS 41"], "answer": 2, "explanation": "Ind AS 110 = Consolidated Financial Statements."}, {"id": 65, "section": "UGC NET Commerce (Q51–Q150)", "module": "Cost & Management Accounting", "context": null, "question": "A Ltd. makes plastic buckets. Selling price per bucket is ₹210 and variable cost per bucket is ₹60. Fixed cost of making buckets is ₹1,50,000 for the year. The number of buckets to be sold to get a profit of ₹90,000 is:", "options": ["714 buckets", "428 buckets", "1000 buckets", "1600 buckets"], "answer": 3, "explanation": "Contribution/unit = ₹210 − ₹60 = ₹150. Required total contribution = Fixed cost + Desired profit = ₹1,50,000 + ₹90,000 = ₹2,40,000. Units = ₹2,40,000 / ₹150 = 1,600 units."}, {"id": 66, "section": "UGC NET Commerce (Q51–Q150)", "module": "Accounting & Auditing", "context": null, "question": "What is the amount of net cash from operating activities of A Ltd. if it has: Net profit before tax = ₹5,90,000; Depreciation on Property, Plant and Equipment = ₹4,30,000; Decrease in current assets = ₹30,000; Decrease in current liabilities = ₹85,000; Tax paid = ₹80,000", "options": ["₹9,65,000", "₹8,85,000", "₹10,75,000", "₹9,95,000"], "answer": 1, "explanation": "₹5,90,000 + ₹4,30,000 depreciation + ₹30,000 decrease in current assets − ₹85,000 decrease in current liabilities − ₹80,000 tax paid = ₹8,85,000."}, {"id": 67, "section": "UGC NET Commerce (Q51–Q150)", "module": "Accounting & Auditing", "context": null, "question": "The working of Current Purchasing Power Accounting requires classification of balance sheet items into Monetary Items and Non-Monetary Items. Which of the following is a Non-Monetary Item?", "options": ["Cash", "Debentures", "Debtors", "Inventories"], "answer": 3, "explanation": "Cash, debtors and similar items are monetary items because their monetary amount is fixed. Inventory is a non-monetary asset."}, {"id": 68, "section": "UGC NET Commerce (Q51–Q150)", "module": "Accounting & Auditing", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I: A. Ind AS 2, B. Ind AS 16, C. Ind AS 103, D. Ind AS 113\nLIST-II: I. Property, Plant and Equipment, II. Fair Value Measurement, III. Inventories, IV. Business Combinations", "options": ["A-I, B-II, C-III, D-IV", "A-IV, B-II, C-III, D-I", "A-III, B-I, C-IV, D-II", "A-III, B-I, C-II, D-IV"], "answer": 2, "explanation": "Ind AS 2 = Inventories; Ind AS 16 = PPE; Ind AS 103 = Business Combinations; Ind AS 113 = Fair Value Measurement."}, {"id": 69, "section": "UGC NET Commerce (Q51–Q150)", "module": "Accounting & Auditing", "context": null, "question": "Which of the following types of audit report are termed together as modified reports as per Standards on Auditing (SA) 705?\nA. Qualified Report\nB. Audit Report with an 'Emphasis of Matter' paragraph\nC. Disclaimer of opinion Report\nD. Adverse Report", "options": ["A and B Only", "A, B and C Only", "B and C Only", "A, C and D Only"], "answer": 3, "explanation": "SA 705 deals with modified opinions: qualified, adverse and disclaimer. An Emphasis of Matter paragraph under SA 706 does not itself modify the opinion."}, {"id": 70, "section": "UGC NET Commerce (Q51–Q150)", "module": "Accounting & Auditing", "context": null, "question": "Which of the following statement is incorrect for Management Audit?", "options": ["Management audit is a statutory requirement.", "Management audit is a comprehensive and critical review of all aspects of management process.", "Management audit covers wide area of management activities and may be for more than one financial year.", "The shareholders or board of directors may appoint the management auditor."], "answer": 0, "explanation": "Management audit is generally not a statutory requirement. It is a comprehensive review of management performance and processes."}, {"id": 71, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Economics", "context": null, "question": "The cross price elasticity between two goods 'A' and 'B' is (−) 0.8. If the price of good 'B' rises by 20%, how will the demand for 'A' change?", "options": ["(−) 16%", "6%", "(−) 8%", "(−) 12%"], "answer": 0, "explanation": "Cross elasticity = % change in demand for A / % change in price of B. −0.8 = ΔQ/20. ΔQ = −16%."}, {"id": 72, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Economics", "context": null, "question": "The price of a product decreases from ₹100 to ₹60 per unit. If the price elasticity of demand is 1.5 and the original quantity demanded is 30 units, what will be the new quantity demanded?", "options": ["38", "48", "56", "62"], "answer": 1, "explanation": "Percentage price change = 40%. Elasticity = 1.5. % change in quantity = 1.5 × 40% = 60% increase. Increase in quantity = 30 × 60% = 18. New quantity = 30 + 18 = 48 units."}, {"id": 73, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Economics", "context": null, "question": "The type of market where few sellers are selling competing products to many buyers is known as:", "options": ["Monopoly", "Monopolistic Competition", "Oligopoly", "Perfect Competition"], "answer": 2, "explanation": "An oligopoly is characterised by a small number of sellers and many buyers."}, {"id": 74, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Economics", "context": null, "question": "Which of the following formula correctly shows the relationship between Average Revenue (AR), Marginal Revenue (MR) and price elasticity of demand?", "options": ["MR = AR + (e − 1)", "AR = MR × e − 1/e", "MR = AR × (e − 1)/e", "MR = AR + (e − 1)/(e + 1)"], "answer": 2, "explanation": "The standard elasticity-revenue relation is: MR = AR × (e − 1)/e, where e denotes price elasticity in absolute form."}, {"id": 75, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Economics", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I — Concept: A. Production Function, B. Average Product, C. Marginal Product, D. Constant Return to Scale\nLIST-II — Formula: I. K (K, L), II. TPₙ − TPₙ₋₁, III. Total Product / No. of units of variable factor, IV. Q = f(a, b, c, ……n)", "options": ["A-I, B-II, C-III, D-IV", "A-II, B-I, C-IV, D-III", "A-I, B-II, C-IV, D-III", "A-IV, B-III, C-II, D-I"], "answer": 3, "explanation": "Average product = TP / units of variable factor; marginal product = change in TP; production function expresses output as a function of inputs. The remaining expression corresponds to the constant-return formulation used in the paper."}, {"id": 76, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Economics", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I — Concept: A. Total Utility, B. Marginal Utility, C. Average Fixed Cost, D. Marginal Cost\nLIST-II — Formula: I. MU₁ + MU₂ + …… + MUₙ, II. TUₙ − TUₙ₋₁, III. ΔTC / ΔQ, IV. TFC / Q", "options": ["A-IV, B-III, C-II, D-I", "A-II, B-I, C-III, D-IV", "A-I, B-II, C-IV, D-III", "A-III, B-II, C-I, D-IV"], "answer": 2, "explanation": "TU is the sum of marginal utilities; MU is the change in TU; AFC = TFC/Q; MC = ΔTC/ΔQ."}, {"id": 77, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Economics", "context": null, "question": "Arrange the following examples of business cycles in chronological order (Old to New):\nA. Dot Com bubble burst\nB. Great Depression\nC. Covid Pandemic\nD. Global Financial Crisis", "options": ["A, B, C, D", "B, A, D, C", "D, B, A, C", "C, D, A, B"], "answer": 1, "explanation": "Great Depression (1929) → Dot-com crash (2000) → Global Financial Crisis (2008) → COVID-19 pandemic (2020)."}, {"id": 78, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Economics", "context": null, "question": "Identify the factors that determine the demand.\nA. Price of the Commodity\nB. Income of the Consumer\nC. Taste and Preferences of Consumer\nD. Size of Population", "options": ["A and B Only", "A, B and C Only", "B, C and D Only", "A, B, C and D"], "answer": 3, "explanation": "All four are standard determinants of demand."}, {"id": 79, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Economics", "context": null, "question": "Which of the following are part of micro economics?\nA. Product pricing\nB. Consumer behaviour\nC. Interest rate\nD. Factor pricing", "options": ["A, B and C Only", "A, B and D Only", "A and D Only", "A, B, C and D"], "answer": 1, "explanation": "Product pricing, consumer behaviour and factor pricing are microeconomic subjects. The general interest-rate level is mainly a macroeconomic variable."}, {"id": 80, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Economics", "context": null, "question": "Identify the areas of macro economics:\nA. National Income\nB. Balance of Payments\nC. Level of savings and investment\nD. Location of industry\nE. Behaviour of firms", "options": ["A, B and C Only", "B, C and E Only", "B, C and D Only", "A, B, C, D and E"], "answer": 0, "explanation": "National income, balance of payments and aggregate saving/investment are macroeconomic. Location of an industry and individual firm behaviour are micro-oriented."}, {"id": 81, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Finance", "context": null, "question": "A company holds raw material for 60 days. It gets credit from suppliers for 15 days, production process takes 15 days, finished goods are held for 30 days and 30 days credit is given to debtors. Calculate the total working capital cycle.", "options": ["150 days", "120 days", "100 days", "90 days"], "answer": 1, "explanation": "Raw material = 60 + Production = 15 + Finished goods = 30 + Debtors = 30 − Supplier credit = 15. Working capital cycle = 60 + 15 + 30 + 30 − 15 = 120 days."}, {"id": 82, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Finance", "context": null, "question": "A company has 10%, ₹20 lakh debentures. The EBIT of the company is ₹5,00,000 and the equity capitalisation rate is 16%. Calculate overall cost of capital.", "options": ["9.5%", "10.8%", "12.9%", "14.5%"], "answer": 2, "explanation": "Interest = 10% × ₹20 lakh = ₹2 lakh. Earnings available to equity = ₹5 lakh − ₹2 lakh = ₹3 lakh. Equity value = ₹3 lakh / 0.16 = ₹18.75 lakh. Total capital = ₹20 + ₹18.75 = ₹38.75 lakh. Overall cost of capital = EBIT / Total capital = ₹5/₹38.75 × 100 ≈ 12.9%."}, {"id": 83, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Finance", "context": null, "question": "ABC Ltd. issued 2,000, 10% preference shares of ₹100 each at ₹95. Calculate the cost of preference shares.", "options": ["8.50%", "10.53%", "12.35%", "15.25%"], "answer": 1, "explanation": "Annual dividend = ₹10. Net proceeds = ₹95. Cost = 10/95 × 100 = 10.53%."}, {"id": 84, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Finance", "context": null, "question": "A company produces and sells 10,000 toys. The selling price per toy is ₹500, variable cost is ₹200 per unit and fixed operating cost is ₹25,00,000. Calculate operating leverage.", "options": ["4 times", "5 times", "6 times", "8 times"], "answer": 2, "explanation": "Sales = 10,000 × ₹500 = ₹50,00,000. Variable cost = 10,000 × ₹200 = ₹20,00,000. Contribution = ₹30,00,000. EBIT = ₹30,00,000 − ₹25,00,000 = ₹5,00,000. Degree of Operating Leverage = Contribution / EBIT = ₹30,00,000 / ₹5,00,000 = 6 times."}, {"id": 85, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Finance", "context": null, "question": "Which of the following are the discounted cash flow techniques of capital budgeting?\nA. Payback Period\nB. Accounting Rate of Return (ARR)\nC. Net Present Value (NPV)\nD. Internal Rate of Return (IRR)\nE. Profitability Index", "options": ["A, C, D Only", "B, C, E Only", "C and D Only", "C, D and E Only"], "answer": 3, "explanation": "DCF methods recognise the time value of money. NPV, IRR and Profitability Index are DCF techniques. Payback and ARR are traditionally non-DCF methods."}, {"id": 86, "section": "UGC NET Commerce (Q51–Q150)", "module": "Banking & Financial Institutions", "context": null, "question": "Arrange the following Development Financial Institutions in chronological order of their establishment (Old to New):\nA. IFCI\nB. IDBI\nC. NABARD\nD. SIDBI", "options": ["A, B, C, D", "B, A, C, D", "C, D, A, B", "D, C, B, A"], "answer": 0, "explanation": "IFCI (1948) → IDBI (1964) → NABARD (1982) → SIDBI (1990)."}, {"id": 87, "section": "UGC NET Commerce (Q51–Q150)", "module": "International Business", "context": null, "question": "Arrange the following exchange rate arrangements of international monetary system in chronological order (Old to New):\nA. Gold Standard\nB. Commodity Specie Standard\nC. Fixed Parity System\nD. Floating Exchange Rate", "options": ["A, B, C, D", "B, A, C, D", "C, B, D, A", "B, C, A, D"], "answer": 1, "explanation": "The sequence moves from the earlier commodity/specie basis to gold standard, then Bretton-Woods-type fixed parities, and finally widespread floating exchange rates."}, {"id": 88, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Finance", "context": null, "question": "Arrange the following steps of Multinational Capital Budgeting in correct order:\nA. Estimate net cash flow from the project\nB. Determine net investment outlay\nC. Apply appropriate evaluation technique\nD. Identify appropriate discount rate", "options": ["A, B, C, D", "C, A, B, D", "D, C, B, A", "B, A, D, C"], "answer": 3, "explanation": "First determine the initial investment, then estimate project cash flows, identify the appropriate discount rate, and finally apply the capital-budgeting evaluation technique."}, {"id": 89, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Finance", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I: A. Present Value, B. Future Value, C. Future Value of Annuity, D. Present Value of Annuity\nLIST-II: I. Cash flow × (1+r)^t, II. Cash flow / (1+r)^t, III. R(PVIF i,n), IV. R(FVIF Ai,n)", "options": ["A-II, B-I, C-IV, D-III", "A-I, B-II, C-IV, D-III", "A-III, B-IV, C-I, D-II", "A-I, B-III, C-II, D-IV"], "answer": 0, "explanation": "Present value discounts future cash flows; future value compounds them. Annuity formulas use PVIFA and FVIFA respectively."}, {"id": 90, "section": "UGC NET Commerce (Q51–Q150)", "module": "International Business", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I — Term: A. Nostro Account, B. Vostro Account, C. Bid, D. Offer\nLIST-II — Explanation: I. Account held by a foreign bank, II. An Indian Bank's Swiss Franc A/C with a bank in Switzerland, III. Price at which the dealer is willing to buy another currency, IV. Price at which the dealer is willing to sell another currency", "options": ["A-I, B-II, C-III, D-IV", "A-II, B-I, C-III, D-IV", "A-III, B-II, C-IV, D-I", "A-IV, B-III, C-I, D-II"], "answer": 1, "explanation": "Nostro = our account with a foreign bank. Vostro = a foreign bank's account with us. Bid = dealer buys. Offer/ask = dealer sells."}, {"id": 91, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Statistics", "context": null, "question": "What is the Harmonic Mean of two numbers whose Arithmetic Mean and Geometric Mean are 30 and 24 respectively?", "options": ["4.8", "9.6", "19.2", "76.8"], "answer": 2, "explanation": "For two positive numbers: AM × HM = GM². HM = 24² / 30 = 576/30 = 19.2."}, {"id": 92, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Statistics", "context": null, "question": "Which of the following statements are correct with regard to mathematical properties of standard deviation?\nA. Standard deviation is independent of change of origin and change of scale.\nB. Standard deviation is independent of change of origin but not of scale.\nC. The standard deviation of first n natural numbers is √((n²−1)/12).\nD. The standard deviation of first n natural numbers is √((n²−1)/6).\nE. For moderately skewed distributions standard deviation is 0.8 of mean deviation.", "options": ["B and C Only", "B, C, and E Only", "A and C Only", "B, D and E Only"], "answer": 0, "explanation": "SD is independent of origin but dependent on scale, so B is true and A is false. For 1 to n, population SD = √((n²−1)/12), so C is true. D is false. The approximate 0.8 relationship is associated in the opposite direction with SD and mean deviation, so E as written is false."}, {"id": 93, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Statistics", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I — Relative measures of Skewness: A. Karl Pearson's coefficient of skewness, B. Bowley's coefficient of skewness, C. Kelly's coefficient of skewness, D. Moment coefficient of skewness\nLIST-II — Formula: I. (μ₃)²/(μ₂)³, II. (P₉₀ + P₁₀ − 2 Median)/(P₉₀ − P₁₀), III. (Q₃ + Q₁ − 2 Median)/(Q₃ − Q₁), IV. (Mean − Mode)/Standard Deviation", "options": ["A-I, B-II, C-III, D-IV", "A-IV, B-III, C-II, D-I", "A-II, B-III, C-IV, D-I", "A-III, B-IV, C-I, D-II"], "answer": 1, "explanation": "Pearson → (Mean − Mode)/SD. Bowley → quartiles. Kelly → percentiles. Moment coefficient → β₁ = μ₃²/μ₂³."}, {"id": 94, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Statistics", "context": null, "question": "Which of the following are properties of regression coefficients?\nA. The coefficient of correlation and the two regression coefficients have the same signs.\nB. The coefficient of correlation is the harmonic mean between the regression coefficients.\nC. If one of the regression coefficients is greater than unity, the other must also be greater than unity.\nD. If one of the regression coefficients is greater than unity, the other must be less than unity.\nE. The regression coefficients are independent of change of origin but not of scale.", "options": ["A and D Only", "B, C and E Only", "A, B and C Only", "A, D and E Only"], "answer": 3, "explanation": "Regression coefficients have the same sign as correlation and are independent of origin but not scale. Their product is r² ≤ 1; therefore, if one coefficient exceeds 1, the other must be less than 1."}, {"id": 95, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Statistics", "context": null, "question": "If a random variable X follows a Poisson distribution such that P(X=1) = 4P(X=2), the variance of X is:", "options": ["1/2", "1", "2", "1/4"], "answer": 0, "explanation": "For Poisson: P(1) = e^-λ λ; P(2) = e^-λ λ²/2. Therefore, P(1)/P(2) = 2/λ = 4, so λ = 1/2. For Poisson, variance = λ = 1/2."}, {"id": 96, "section": "UGC NET Commerce (Q51–Q150)", "module": "Research Methodology", "context": null, "question": "Identify the correct sequence of Research Design Process.\nA. Measurement technique selection\nB. Research approach selection\nC. Data collection technique selection\nD. Sample design selection\nE. Data analysis method selection", "options": ["A, B, C, D, E", "B, A, D, C, E", "D, C, E, A, B", "C, E, D, B, A"], "answer": 1, "explanation": "A logical sequence is: Research approach → measurement techniques → sampling design → data collection → data analysis."}, {"id": 97, "section": "UGC NET Commerce (Q51–Q150)", "module": "Research Methodology", "context": null, "question": "The questions that are actually asked from the respondent are known as:", "options": ["Management Questions", "Research Questions", "Investigative Questions", "Measurement Questions"], "answer": 3, "explanation": "Research questions represent the broader research problem, whereas the actual questions put before respondents are measurement questions."}, {"id": 98, "section": "UGC NET Commerce (Q51–Q150)", "module": "Research Methodology", "context": null, "question": "Identify the correct sequence of sampling design process.\nA. Determine the sample size\nB. Select a sampling technique\nC. Selection of sampling frame\nD. Defining target population", "options": ["A, B, C, D", "B, A, D, C", "A, B, D, C", "D, C, B, A"], "answer": 3, "explanation": "First define the target population, then identify/select the sampling frame, choose the sampling technique, and finally determine sample size."}, {"id": 99, "section": "UGC NET Commerce (Q51–Q150)", "module": "Research Methodology", "context": null, "question": "The parametric test that can be used for hypothesis testing of paired samples is:", "options": ["t test", "z test", "Chi-Square test", "Mann-Whitney test"], "answer": 0, "explanation": "For two related/paired samples, the standard parametric procedure is the paired-samples t-test."}, {"id": 100, "section": "UGC NET Commerce (Q51–Q150)", "module": "Research Methodology", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I — Components commonly present in reports: A. Prefatory Information, B. Introductory Information, C. Main Research Body, D. Supplementary Information\nLIST-II — Contents: I. Executive Summary, II. Glossary, III. Problem Definition, IV. Research Design", "options": ["A-I, B-II, C-III, D-IV", "A-II, B-I, C-IV, D-III", "A-I, B-III, C-II, D-IV", "A-I, B-III, C-IV, D-II"], "answer": 3, "explanation": "Executive summary belongs to prefatory matter; problem definition is introductory; research design is part of the main body; glossary is supplementary."}, {"id": 101, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Management & HRM", "context": null, "question": "A type of validity which demonstrates statistically a relationship between scores on a selection procedure and job performance is called:", "options": ["Test validity", "Criterion validity", "Content validity", "Construct validity"], "answer": 1, "explanation": "Criterion validity examines whether test/selection scores relate to an external criterion such as job performance."}, {"id": 102, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Management & HRM", "context": null, "question": "The ongoing process of systematically identifying, assessing and developing organisational leadership to enhance performance is known as:", "options": ["Strategy and Workforce Planning", "Predictive Workforce Monitoring", "Succession Planning", "Managerial Judgement"], "answer": 2, "explanation": "Succession planning identifies and develops employees who can fill important future leadership positions."}, {"id": 103, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Management & HRM", "context": null, "question": "Keeping a record of uncommonly good or undesirable examples of an employee's work-related behaviour and reviewing it with the employee at predetermined times is known as:", "options": ["Behaviorally Anchored Rating Scale", "Critical Incident Method", "Paired Comparison Method", "Mixed Standard Scales"], "answer": 1, "explanation": "The critical incident method records particularly effective or ineffective examples of employee behaviour."}, {"id": 104, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Management & HRM", "context": null, "question": "Matrix Structure can be made more effective by following which of the guidelines given below?\nA. Collective learning, coordination and integration of skills for obtaining the streams of technology.\nB. Define the objectives of the project or task.\nC. Clarify the roles, authority and responsibilities of managers and team members.\nD. Ensure that influence is based on knowledge, information, rather than on rank.\nE. Balance the power of functional and project managers.", "options": ["A, B, C, D Only", "A, B, D and E Only", "B, C, D, and E Only", "A, B, C, E Only"], "answer": 2, "explanation": "Effective matrix structures require clear objectives, clearly defined authority/responsibilities, knowledge-based influence and balance between functional and project managers."}, {"id": 105, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Management & HRM", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I: A. Job enlargement, B. Job descriptions, C. Job specifications, D. Job enrichment\nLIST-II: I. A list of jobs' human requirements, i.e. education, skills, personality etc., II. A list of jobs duties, responsibilities, reporting relationships, working conditions and supervisory responsibilities, III. Assigning workers additional same-level activities, IV. Redesigning jobs in a way that increases opportunities for responsibility, achievement, growth and recognition", "options": ["A-III, B-II, C-I, D-IV", "A-IV, B-II, C-I, D-III", "A-III, B-I, C-II, D-IV", "A-IV, B-II, C-III, D-I"], "answer": 0, "explanation": "Job enlargement = more same-level tasks; job description = duties/responsibilities; job specification = human requirements; job enrichment = greater responsibility/achievement."}, {"id": 106, "section": "UGC NET Commerce (Q51–Q150)", "module": "Banking & Financial Institutions", "context": null, "question": "The State Bank of India came into existence in the year:", "options": ["1947", "1950", "1955", "1969"], "answer": 2, "explanation": "The State Bank of India Act, 1955 led to the establishment of SBI in 1955."}, {"id": 107, "section": "UGC NET Commerce (Q51–Q150)", "module": "Banking & Financial Institutions", "context": null, "question": "A term loan becomes Non Performing Asset (NPA) if its interest and/or instalment of principal remains overdue for a period of more than:", "options": ["30 days", "60 days", "75 days", "90 days"], "answer": 3, "explanation": "The standard banking norm is that a term-loan account becomes NPA when interest and/or principal remains overdue for more than 90 days, subject to applicable regulatory rules."}, {"id": 108, "section": "UGC NET Commerce (Q51–Q150)", "module": "Banking & Financial Institutions", "context": null, "question": "An unsecured short term promissory note, negotiable and transferable by endorsement and delivery with a fixed maturity period, issued at a discount by creditworthy corporates, primary dealers and all-India financial institutions is known as:", "options": ["Treasury Bill", "Commercial Paper", "Certificates of Deposit", "Repo"], "answer": 1, "explanation": "Commercial Paper (CP) is an unsecured short-term money-market instrument issued by eligible, creditworthy entities."}, {"id": 109, "section": "UGC NET Commerce (Q51–Q150)", "module": "Banking & Financial Institutions", "context": null, "question": "Arrange the following in chronological order of the milestone achieved by the National Stock Exchange of India:\nA. Commencement of Trading in Index Options\nB. Launch of Securities Lending and Borrowing Scheme\nC. Commencement of Derivatives Trading in Index Futures\nD. Launch of Mutual Fund Service System\nE. Launch of S&P CNX Nifty", "options": ["B, D, E, A, C", "A, C, E, B, D", "E, A, C, D, B", "E, C, A, B, D"], "answer": 3, "explanation": "The chronology is approximately: S&P CNX Nifty → Index Futures → Index Options → Securities Lending & Borrowing → Mutual Fund Service System."}, {"id": 110, "section": "UGC NET Commerce (Q51–Q150)", "module": "Banking & Financial Institutions", "context": null, "question": "In which of the following year Investor Protection and Education Fund Regulations was issued by the Securities and Exchange Board of India?", "options": ["1992", "1999", "2003", "2009"], "answer": 3, "explanation": "The SEBI Investor Protection and Education Fund Regulations were issued in 2009."}, {"id": 111, "section": "UGC NET Commerce (Q51–Q150)", "module": "Marketing Management", "context": null, "question": "Symbols, Icons, Rituals and values are the manifestations of:", "options": ["Social class", "Culture", "Sub-culture", "Social Factors"], "answer": 1, "explanation": "Symbols, rituals, values and icons are fundamental manifestations of culture."}, {"id": 112, "section": "UGC NET Commerce (Q51–Q150)", "module": "Marketing Management", "context": null, "question": "The term 'marketing myopia' was coined by:", "options": ["Philip Kotler", "Gary Armstrong", "Peter Drucker", "Theodore Levitt"], "answer": 3, "explanation": "Theodore Levitt coined \"Marketing Myopia\" in his influential 1960 article."}, {"id": 113, "section": "UGC NET Commerce (Q51–Q150)", "module": "Marketing Management", "context": null, "question": "According to Levitt and Drucker, the essence of marketing is:", "options": ["Profit Orientation", "Product Orientation", "Market Orientation", "Customer Orientation"], "answer": 3, "explanation": "Both thinkers emphasise understanding and satisfying the customer, rather than merely concentrating on the product."}, {"id": 114, "section": "UGC NET Commerce (Q51–Q150)", "module": "Business Management & HRM", "context": null, "question": "Arrange the following human needs as per Maslow's Hierarchy of needs.\nA. Social Needs\nB. Safety Needs\nC. Esteem Needs\nD. Physiological Needs\nE. Self-actualisation Needs", "options": ["D, B, A, C, E", "A, B, C, D, E", "B, D, C, E, A", "D, A, B, C, E"], "answer": 0, "explanation": "Maslow's sequence from lower to higher: Physiological → Safety → Social → Esteem → Self-actualisation."}, {"id": 115, "section": "UGC NET Commerce (Q51–Q150)", "module": "Marketing Management", "context": null, "question": "Arrange the following stages of Adoption process in correct order:\nA. Interest\nB. Awareness\nC. Trial\nD. Evaluation\nE. Adoption", "options": ["A, D, C, B, E", "A, B, C, D, E", "B, C, A, E, D", "B, A, D, C, E"], "answer": 3, "explanation": "The classic adoption sequence is: Awareness → Interest → Evaluation → Trial → Adoption."}, {"id": 116, "section": "UGC NET Commerce (Q51–Q150)", "module": "Marketing Management", "context": null, "question": "Which of the following methods belong to the category of demand/market-based pricing?\nA. Surge pricing\nB. Premium pricing\nC. 'What the traffic can bear' pricing\nD. Discount pricing\nE. Parity pricing", "options": ["A, B, C and D Only", "B, C and D Only", "A, B and C Only", "C, D and E Only"], "answer": 0, "explanation": "The paper treats surge, premium, ‘what the traffic can bear’ and discount pricing as demand/market-based approaches. Parity pricing is more closely associated with competitor/going-rate pricing."}, {"id": 117, "section": "UGC NET Commerce (Q51–Q150)", "module": "Marketing Management", "context": null, "question": "Arrange the following steps of New Product Development in sequential order:\nA. Product Development\nB. Feasibility Analysis\nC. Concept Development and Testing\nD. Identifying Prospective Customers\nE. Idea Generation", "options": ["A, B, C, E, D", "D, E, B, C, A", "E, D, C, B, A", "E, B, C, A, D"], "answer": 2, "explanation": "The sequence is: Idea Generation → Identifying prospective customers → Concept development/testing → Feasibility analysis → Product development."}, {"id": 118, "section": "UGC NET Commerce (Q51–Q150)", "module": "Marketing Management", "context": null, "question": "Geographical Price differentials include which of the following?\nA. F.O.B Factory Pricing\nB. Zone Pricing\nC. Loss Leader Pricing\nD. Postage Stamp Pricing\nE. Basing Point Pricing", "options": ["A, B, C and D Only", "B, C, D and E Only", "A, B, D and E Only", "B, D and E Only"], "answer": 2, "explanation": "FOB factory, zone, postage-stamp and basing-point methods are geographic pricing approaches. Loss leader pricing is a promotional pricing method."}, {"id": 119, "section": "UGC NET Commerce (Q51–Q150)", "module": "Marketing Management", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I: A. Perception, B. Learning, C. Belief, D. Attitude\nLIST-II: I. A descriptive thought that a person holds about something, II. A person's consistently favourable or unfavourable evaluations, feelings and tendencies toward an object or idea, III. Changes in an individual's behaviour arising from experience, IV. The process by which people select, organise and interpret information to form a meaningful picture of the world", "options": ["A-I, B-II, C-III, D-IV", "A-III, B-IV, C-II, D-I", "A-IV, B-III, C-I, D-II", "A-II, B-III, C-I, D-IV"], "answer": 2, "explanation": "Perception = interpreting information; learning = behavioural change from experience; belief = descriptive thought; attitude = favourable/unfavourable evaluation."}, {"id": 120, "section": "UGC NET Commerce (Q51–Q150)", "module": "Marketing Management", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I — Stages of Product Life Cycle: A. Introduction, B. Growth, C. Maturity, D. Decline\nLIST-II — Types of Customers: I. Laggards, II. Early adopters, III. Middle majority, IV. Innovators", "options": ["A-I, B-II, C-III, D-IV", "A-II, B-III, C-I, D-IV", "A-IV, B-II, C-III, D-I", "A-III, B-II, C-IV, D-I"], "answer": 2, "explanation": "Introduction is associated with innovators, growth with early adopters, maturity with the middle majority, and decline with laggards."}, {"id": 121, "section": "UGC NET Commerce (Q51–Q150)", "module": "Legal Aspects of Business", "context": null, "question": "In India, the term of every utility patent granted shall be of ___ years.", "options": ["10", "20", "30", "50"], "answer": 1, "explanation": "As framed in the question, the patent term is 20 years, counted from the filing date under the Indian patent system."}, {"id": 122, "section": "UGC NET Commerce (Q51–Q150)", "module": "Legal Aspects of Business", "context": null, "question": "“Active concealment of fact” is associated with which one of the following?", "options": ["Misrepresentation", "Undue influence", "Fraud", "Mistake"], "answer": 2, "explanation": "Intentional active concealment of a material fact constitutes fraud."}, {"id": 123, "section": "UGC NET Commerce (Q51–Q150)", "module": "Legal Aspects of Business", "context": null, "question": "Which of the following is a horizontal agreement?", "options": ["Tie-in arrangement", "Resale Price Maintenance", "Cartel", "Exclusive Distribution"], "answer": 2, "explanation": "A cartel is an agreement among firms at the same level of the market, making it a horizontal arrangement."}, {"id": 124, "section": "UGC NET Commerce (Q51–Q150)", "module": "Legal Aspects of Business", "context": null, "question": "Arrange the following steps of incorporation of a new Limited Liability Partnership in proper sequence.\nA. Reserve LLP Name\nB. Preparation of Documents for Incorporation of LLP\nC. Procure Digital Signature Certificate\nD. LLP incorporation and DIN application and apply for PAN and TAN\nE. Drafting and filing LLP Agreement", "options": ["B, A, C, D, E", "A, B, C, E, D", "C, A, B, D, E", "D, E, B, A, C"], "answer": 2, "explanation": "The process begins with digital signature, followed by name reservation, preparation/filing of incorporation documents, incorporation and related registrations, and finally the LLP agreement."}, {"id": 125, "section": "UGC NET Commerce (Q51–Q150)", "module": "Legal Aspects of Business", "context": null, "question": "Who can file petition to the Tribunal for the Winding up of a Limited Liability Partnership?\nA. Secured Creditors\nB. LLP or any of its Partners\nC. Registrar of Companies\nD. Any person authorised by the Central Government\nE. Any Voluntary Association", "options": ["A, B, C Only", "A and B Only", "A, B, C and D Only", "B, C and E Only"], "answer": 2, "explanation": "The specified statutory categories include creditors, the LLP/partners, the Registrar and a person authorised by the Central Government. The voluntary association in E is not one of the listed categories."}, {"id": 126, "section": "UGC NET Commerce (Q51–Q150)", "module": "Legal Aspects of Business", "context": null, "question": "Arrange the following steps involved in the process of Voluntary Liquidation of a Limited Liability Partnership in correct order.\nA. Declaration of Solvency\nB. Designated Partners' Meeting\nC. Partners' Meeting\nD. Identification of an Insolvency Professional as liquidator\nE. Filing of resolutions with Registrar of Companies and IBBI", "options": ["A, B, C, D, E", "C, B, D, A, E", "A, D, B, C, E", "E, D, C, B, A"], "answer": 0, "explanation": "The intended sequence in the paper is Declaration of Solvency → designated partners' formal action → partners' approval → liquidator identification/appointment → filing."}, {"id": 127, "section": "UGC NET Commerce (Q51–Q150)", "module": "Legal Aspects of Business", "context": null, "question": "In case of transmission of shares, which of the following is correct?\nA. No instrument of transfer is required.\nB. Transmission of securities is generally made without any consideration.\nC. Shares continue to be subject to the original liabilities.\nD. Transmission takes place on death or insolvency of a holder of securities.\nE. Stamp duty is payable on transmission of securities.", "options": ["A, B, C and D Only", "B, C and D Only", "C, D and E Only", "A, B, C Only"], "answer": 0, "explanation": "Transmission occurs by operation of law, generally on death/insolvency, and does not require an instrument of transfer. It is generally without consideration. Stamp duty is not payable merely for transmission, so E is false."}, {"id": 128, "section": "UGC NET Commerce (Q51–Q150)", "module": "Legal Aspects of Business", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I: A. Section 2(6), B. Section 455, C. Section 378A, D. Section 2(85)\nLIST-II: I. Associate Company, II. Producer Company, III. Dormant Company, IV. Small Company", "options": ["A-IV, B-III, C-II, D-I", "A-I, B-III, C-II, D-IV", "A-II, B-II, C-I, D-IV", "A-IV, B-III, C-II, D-I"], "answer": 1, "explanation": "Section 2(6) = associate company; Section 455 = dormant company; Section 378A = producer company; Section 2(85) = small company."}, {"id": 129, "section": "UGC NET Commerce (Q51–Q150)", "module": "Legal Aspects of Business", "context": null, "question": "What rights does an unpaid seller have against the goods?\nA. Right of lien\nB. Right to sue for specific performance\nC. Right of resale\nD. Right of stoppage of goods in transit\nE. Right to reorganise possession of goods", "options": ["A, B and C Only", "B, C and D Only", "C, D and E Only", "A, C, D Only"], "answer": 3, "explanation": "Rights against goods include: Lien + stoppage in transit + resale. Specific performance is not one of these specific rights against the goods."}, {"id": 130, "section": "UGC NET Commerce (Q51–Q150)", "module": "Legal Aspects of Business", "context": null, "question": "What is the primary liability of the drawer of a bill of exchange or cheque?", "options": ["Liability to compensate the holder in case of dishonour.", "Liability to pay the amount at maturity.", "Liability to provide sufficient funds to the drawee.", "Liability to pay the holder without any condition."], "answer": 0, "explanation": "The drawer's liability is generally secondary/conditional, arising on dishonour subject to the applicable requirements. Among the options, compensation to the holder on dishonour is the correct description."}, {"id": 131, "section": "UGC NET Commerce (Q51–Q150)", "module": "Income Tax & Tax Planning", "context": null, "question": "If the employee pays tax within the parameters of alternative tax regime under section 115BAC then from assessment year 2025-26, standard deduction from salary income is:", "options": ["NIL", "₹50,000 or gross salary, whichever is lower", "₹75,000 or gross salary, whichever is lower", "₹40,000 or gross salary, whichever is lower"], "answer": 2, "explanation": "For AY 2025–26 under the new tax regime, the standard deduction is ₹75,000, subject to the salary amount."}, {"id": 132, "section": "UGC NET Commerce (Q51–Q150)", "module": "Income Tax & Tax Planning", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I — Item: A. Deduction in respect of medical insurance premium, B. Deduction in case of a person with disability, C. Deduction in respect of interest on loan taken for higher education, D. Deduction in respect of contribution to Agnipath Scheme\nLIST-II — Section: I. Section 80CCH, II. Section 80D, III. Section 80U, IV. Section 80E", "options": ["A-IV, B-I, C-II, D-III", "A-III, B-IV, C-I, D-II", "A-II, B-III, C-IV, D-I", "A-I, B-II, C-III, D-IV"], "answer": 2, "explanation": "80D = medical insurance; 80U = disability; 80E = education-loan interest; 80CCH = Agnipath contribution."}, {"id": 133, "section": "UGC NET Commerce (Q51–Q150)", "module": "Income Tax & Tax Planning", "context": null, "question": "The scheme of partial integration of tax or non-agricultural income with income derived from agricultural is applicable if an individual has:", "options": ["Non-Agricultural income of more than the exemption limit or agricultural income exceeding ₹5000", "Non-Agricultural income of more than the exemption limit or agricultural income exceeding ₹2500", "Non-Agricultural income of more than the exemption limit and agricultural income exceeding ₹2500", "Non-Agricultural income of more than the exemption limit and agricultural income exceeding ₹5000"], "answer": 3, "explanation": "Partial integration applies when both conditions are satisfied: agricultural income > ₹5,000 and non-agricultural income exceeds the basic exemption limit."}, {"id": 134, "section": "UGC NET Commerce (Q51–Q150)", "module": "Income Tax & Tax Planning", "context": null, "question": "In case the income of an individual includes the income of ₹25,000 of his minor child in terms of section 64(1A), such individual shall be entitled to an exemption under section 10(32) of:", "options": ["₹25,000", "₹1,500", "₹2,500", "₹15,000"], "answer": 1, "explanation": "Under Section 10(32), the exemption is ₹1,500 per minor child, or the amount of the minor's income included under section 64(1A), whichever is lower."}, {"id": 135, "section": "UGC NET Commerce (Q51–Q150)", "module": "Income Tax & Tax Planning", "context": null, "question": "Which of the following requirements have to be satisfied in order that an assessee is entitled to claim deduction under section 91 for doubly taxed income?\nA. The assessee must have been non-resident in India in the relevant previous year.\nB. The assessee must have been resident in India in the relevant previous year.\nC. Income must have been accrued or arisen to him during that previous year in India.\nD. Income must have been accrued or arisen to him during that previous year outside India.\nE. In respect of that income which accrued or arose outside India, he must have paid by deduction or otherwise tax under the law in force in the country in question.", "options": ["A and C Only", "B and D Only", "B, D and E Only", "A, C and E Only"], "answer": 2, "explanation": "For relief under Section 91, the person must be resident in India, have foreign income, and have paid tax on that foreign income in the foreign country."}, {"id": 136, "section": "UGC NET Commerce (Q51–Q150)", "module": "Income Tax & Tax Planning", "context": null, "question": "Arm's length price as per section 92F is the price applied or proposed to be applied when:", "options": ["two unrelated persons enter into a transaction in uncontrolled conditions", "two related persons enter into a transaction in uncontrolled conditions", "two unrelated persons enter into a transaction in controlled conditions", "two related persons enter into a transaction in controlled conditions"], "answer": 0, "explanation": "The arm's-length principle compares associated-enterprise transactions with the price that would be found between independent parties in uncontrolled conditions."}, {"id": 137, "section": "UGC NET Commerce (Q51–Q150)", "module": "Income Tax & Tax Planning", "context": null, "question": "Any assessee (except an eligible assessee in respect of an eligible business referred to in section 44AD or 44ADA) must pay up to 75 percent of advance tax payable:", "options": ["on or before June 15 of the previous year", "on or before September 15 of the previous year", "on or before December 15 of the previous year", "on or before March 15 of the previous year"], "answer": 2, "explanation": "The normal advance-tax instalment schedule requires 75% cumulative payment by 15 December."}, {"id": 138, "section": "UGC NET Commerce (Q51–Q150)", "module": "Income Tax & Tax Planning", "context": null, "question": "Which of the following statements are correct with regard to tax avoidance?\nA. Tax avoidance is legitimate arrangement of affairs in such a way so as to minimise tax liability.\nB. There is an element of mala fide motive involved in tax avoidance.\nC. Tax avoidance takes into account the loopholes of law.\nD. Tax avoidance is intentional attempt to avoid payment of tax after the liability to tax has arisen.\nE. Tax avoidance is same as tax omission.", "options": ["A and C Only", "A, B and C Only", "B, D and E Only", "A, C and E Only"], "answer": 0, "explanation": "Tax avoidance traditionally refers to arranging affairs within the framework of law to reduce tax and may exploit loopholes. D describes tax evasion more closely; E is false."}, {"id": 139, "section": "UGC NET Commerce (Q51–Q150)", "module": "Income Tax & Tax Planning", "context": null, "question": "Which of the following statements are correct?\nA. If a company is an Indian company, it will automatically be considered as a domestic company.\nB. Foreign company means a company which is not a domestic company.\nC. The residential status of an Indian company can be non-resident in India.\nD. The residential status of a Foreign company can never be resident in India.\nE. Foreign income is taxable in the hands of company resident in India.", "options": ["A, B and C Only", "B, C and D Only", "A, C and E Only", "A, B and E Only"], "answer": 3, "explanation": "An Indian company is resident and is a domestic company; a foreign company can under specified circumstances be resident in India, so C and D are false. A resident company is generally taxable on its global income."}, {"id": 140, "section": "UGC NET Commerce (Q51–Q150)", "module": "Income Tax & Tax Planning", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I: A. Deduction of Tax at source on fees for professional and technical services, B. Deduction of Tax at source from income by way of rent, C. Deduction of Tax at source from winnings from lotteries or crossword puzzles, etc., D. Deduction of Tax at source from interest on securities\nLIST-II: I. Section 194B, II. Section 193, III. Section 194-I, IV. Section 194J", "options": ["A-I, B-II, C-III, D-IV", "A-IV, B-III, C-II, D-I", "A-IV, B-III, C-I, D-II", "A-II, B-I, C-IV, D-III"], "answer": 2, "explanation": "194J = professional/technical fees; 194-I = rent; 194B = lottery/crossword winnings; 193 = interest on securities."}, {"id": 141, "section": "UGC NET Commerce (Q51–Q150)", "module": "Case Study: HR Management", "context": "<p>A mid-sized IT firm in India is facing multiple HR challenges as it expands. The company recently hired 200 employees but is struggling with high attrition, lack of structured training program and a weak performance appraisal system. Employees often feel over worked and underappreciated, leading to low engagement and motivation. The HR manager Priya wants to improve HR practices by implementing a structured performance appraisal system, launching an employee wellness program and using HR technology for recruitment. However, she faces resistance from senior management, who think those initiatives will increase cost without direct financial benefits. Additionally, employee feedback indicates dissatisfaction with work-life balance and unclear career progression. Some employees also feel that promotions are biased and that the company lacks a proper succession plan. Priya is considering introducing flexible work arrangements, setting up a leadership development program and adopting AI-driven HR analytics to improve decision making. However, she needs to convince top management of the long-term benefits of these changes.</p>", "question": "Priya needs to address employee dissatisfaction with career progression. What should be her first step?", "options": ["Encouraging employee to find new jobs", "Reducing training budgets", "Conducting skill gap analysis and creating career development plan", "Promoting only senior employee"], "answer": 2, "explanation": "The passage says employees are dissatisfied with career progression. A skill-gap assessment identifies development needs, after which a structured career-development plan can be created."}, {"id": 142, "section": "UGC NET Commerce (Q51–Q150)", "module": "Case Study: HR Management", "context": "<p>A mid-sized IT firm in India is facing multiple HR challenges as it expands. The company recently hired 200 employees but is struggling with high attrition, lack of structured training program and a weak performance appraisal system. Employees often feel over worked and underappreciated, leading to low engagement and motivation. The HR manager Priya wants to improve HR practices by implementing a structured performance appraisal system, launching an employee wellness program and using HR technology for recruitment. However, she faces resistance from senior management, who think those initiatives will increase cost without direct financial benefits. Additionally, employee feedback indicates dissatisfaction with work-life balance and unclear career progression. Some employees also feel that promotions are biased and that the company lacks a proper succession plan. Priya is considering introducing flexible work arrangements, setting up a leadership development program and adopting AI-driven HR analytics to improve decision making. However, she needs to convince top management of the long-term benefits of these changes.</p>", "question": "Which strategy would be most effective in retaining employees and reducing attrition rate?", "options": ["Making the resignation process more difficult", "Increasing workload", "Offering voluntary retirement", "Offering increments and career growth opportunities"], "answer": 3, "explanation": "The passage specifically identifies low engagement, poor career progression and dissatisfaction. Better compensation together with career-growth opportunities directly addresses retention."}, {"id": 143, "section": "UGC NET Commerce (Q51–Q150)", "module": "Case Study: HR Management", "context": "<p>A mid-sized IT firm in India is facing multiple HR challenges as it expands. The company recently hired 200 employees but is struggling with high attrition, lack of structured training program and a weak performance appraisal system. Employees often feel over worked and underappreciated, leading to low engagement and motivation. The HR manager Priya wants to improve HR practices by implementing a structured performance appraisal system, launching an employee wellness program and using HR technology for recruitment. However, she faces resistance from senior management, who think those initiatives will increase cost without direct financial benefits. Additionally, employee feedback indicates dissatisfaction with work-life balance and unclear career progression. Some employees also feel that promotions are biased and that the company lacks a proper succession plan. Priya is considering introducing flexible work arrangements, setting up a leadership development program and adopting AI-driven HR analytics to improve decision making. However, she needs to convince top management of the long-term benefits of these changes.</p>", "question": "To convince senior management about HR investments, Priya should highlight:", "options": ["The number of training programs conducted", "The positive feedback of customers", "The financial impact of HR initiatives on business growth", "The employees performance appraisal methods"], "answer": 2, "explanation": "The central resistance is cost versus financial benefit. Therefore Priya should translate HR investments into business outcomes such as productivity, retention, reduced hiring costs and growth."}, {"id": 144, "section": "UGC NET Commerce (Q51–Q150)", "module": "Case Study: HR Management", "context": "<p>A mid-sized IT firm in India is facing multiple HR challenges as it expands. The company recently hired 200 employees but is struggling with high attrition, lack of structured training program and a weak performance appraisal system. Employees often feel over worked and underappreciated, leading to low engagement and motivation. The HR manager Priya wants to improve HR practices by implementing a structured performance appraisal system, launching an employee wellness program and using HR technology for recruitment. However, she faces resistance from senior management, who think those initiatives will increase cost without direct financial benefits. Additionally, employee feedback indicates dissatisfaction with work-life balance and unclear career progression. Some employees also feel that promotions are biased and that the company lacks a proper succession plan. Priya is considering introducing flexible work arrangements, setting up a leadership development program and adopting AI-driven HR analytics to improve decision making. However, she needs to convince top management of the long-term benefits of these changes.</p>", "question": "If Priya wants to use HR analytics to predict labour turnover, which data should she analyse?", "options": ["Employees social media engagements", "Attrition trends and exit interview feedback", "The number of training program", "The number of leaves taken by employees"], "answer": 1, "explanation": "Historical attrition patterns and reasons given in exit interviews directly help identify predictors of employee turnover."}, {"id": 145, "section": "UGC NET Commerce (Q51–Q150)", "module": "Case Study: HR Management", "context": "<p>A mid-sized IT firm in India is facing multiple HR challenges as it expands. The company recently hired 200 employees but is struggling with high attrition, lack of structured training program and a weak performance appraisal system. Employees often feel over worked and underappreciated, leading to low engagement and motivation. The HR manager Priya wants to improve HR practices by implementing a structured performance appraisal system, launching an employee wellness program and using HR technology for recruitment. However, she faces resistance from senior management, who think those initiatives will increase cost without direct financial benefits. Additionally, employee feedback indicates dissatisfaction with work-life balance and unclear career progression. Some employees also feel that promotions are biased and that the company lacks a proper succession plan. Priya is considering introducing flexible work arrangements, setting up a leadership development program and adopting AI-driven HR analytics to improve decision making. However, she needs to convince top management of the long-term benefits of these changes.</p>", "question": "Which HR strategy can help to develop future leaders in the organisation?", "options": ["Implementing intensive employee development program", "Hiring only external candidates for leadership role", "Implementing performance linked bonus", "Promoting employees on seniority basis"], "answer": 0, "explanation": "Future leaders are developed through training, mentoring, leadership development and deliberate employee-development programmes, rather than seniority alone."}, {"id": 146, "section": "UGC NET Commerce (Q51–Q150)", "module": "Case Study: Financial Markets", "context": "<p>A large real estate company in India is facing challenges in raising funds for expansion. Despite a solid track record, the company is struggling to attract investors due to increasing concern about liquidity in the financial market. The company has earlier relied on bank loans and debt instruments for financing but is now looking for other funding options. The CFO of the company is evaluating different options such as corporate bonds, private equity, public deposit and securitization to raise capital. He is also looking at the evolving role of financial institutions such as investment banks, development banks and insurance companies in providing finance. However, he is concerned about the volatility of the stock market and the risk of inflation affecting the company's future cashflow. To address these challenges, the company plans to consult with financial advisors and explore new avenues of funding, including green bonds and venture capital. The CFO must navigate the complex world of financial markets to ensure that the company secures the right funding at the right cost.</p>", "question": "What is the main advantage of raising capital through venture capital?", "options": ["To avoid giving up ownership or control", "To access expertise and guidance from investors", "To get the fund for a very long term", "To get a low cost funding"], "answer": 1, "explanation": "Venture capital investors commonly bring not just capital but also managerial expertise, industry knowledge, networks and strategic guidance."}, {"id": 147, "section": "UGC NET Commerce (Q51–Q150)", "module": "Case Study: Financial Markets", "context": "<p>A large real estate company in India is facing challenges in raising funds for expansion. Despite a solid track record, the company is struggling to attract investors due to increasing concern about liquidity in the financial market. The company has earlier relied on bank loans and debt instruments for financing but is now looking for other funding options. The CFO of the company is evaluating different options such as corporate bonds, private equity, public deposit and securitization to raise capital. He is also looking at the evolving role of financial institutions such as investment banks, development banks and insurance companies in providing finance. However, he is concerned about the volatility of the stock market and the risk of inflation affecting the company's future cashflow. To address these challenges, the company plans to consult with financial advisors and explore new avenues of funding, including green bonds and venture capital. The CFO must navigate the complex world of financial markets to ensure that the company secures the right funding at the right cost.</p>", "question": "What would be the main concern for the company if it has to issue green bonds for financing?", "options": ["High interest rate", "Less repayment period", "Limited investor demand due to niche market", "Government restriction"], "answer": 2, "explanation": "Green bonds target investors interested in environmentally related projects and may have a more specialised investor base, making investor demand a possible concern."}, {"id": 148, "section": "UGC NET Commerce (Q51–Q150)", "module": "Case Study: Financial Markets", "context": "<p>A large real estate company in India is facing challenges in raising funds for expansion. Despite a solid track record, the company is struggling to attract investors due to increasing concern about liquidity in the financial market. The company has earlier relied on bank loans and debt instruments for financing but is now looking for other funding options. The CFO of the company is evaluating different options such as corporate bonds, private equity, public deposit and securitization to raise capital. He is also looking at the evolving role of financial institutions such as investment banks, development banks and insurance companies in providing finance. However, he is concerned about the volatility of the stock market and the risk of inflation affecting the company's future cashflow. To address these challenges, the company plans to consult with financial advisors and explore new avenues of funding, including green bonds and venture capital. The CFO must navigate the complex world of financial markets to ensure that the company secures the right funding at the right cost.</p>", "question": "Which of the following is a primary function of financial markets in the economy?", "options": ["Facilitating buying and selling of financial instruments", "Offering financial advice to individual investors", "Providing loan without collateral", "Increasing revenues for the Government"], "answer": 0, "explanation": "A core function of financial markets is to facilitate the transfer and trading of financial assets/instruments and channel funds between savers and users of capital."}, {"id": 149, "section": "UGC NET Commerce (Q51–Q150)", "module": "Case Study: Financial Markets", "context": "<p>A large real estate company in India is facing challenges in raising funds for expansion. Despite a solid track record, the company is struggling to attract investors due to increasing concern about liquidity in the financial market. The company has earlier relied on bank loans and debt instruments for financing but is now looking for other funding options. The CFO of the company is evaluating different options such as corporate bonds, private equity, public deposit and securitization to raise capital. He is also looking at the evolving role of financial institutions such as investment banks, development banks and insurance companies in providing finance. However, he is concerned about the volatility of the stock market and the risk of inflation affecting the company's future cashflow. To address these challenges, the company plans to consult with financial advisors and explore new avenues of funding, including green bonds and venture capital. The CFO must navigate the complex world of financial markets to ensure that the company secures the right funding at the right cost.</p>", "question": "In a volatile stock market, how can the company reduce financing risk when raising funds through equity?", "options": ["Issue shares only when market is at peak", "Raise funds through long-term bonds only", "Reduce dividend payout to increase internal funds", "Diversify source of funds by combining debt and equity financing"], "answer": 3, "explanation": "Diversification reduces dependence on any single financing source. A combination of debt and equity can spread financing risk."}, {"id": 150, "section": "UGC NET Commerce (Q51–Q150)", "module": "Case Study: Financial Markets", "context": "<p>A large real estate company in India is facing challenges in raising funds for expansion. Despite a solid track record, the company is struggling to attract investors due to increasing concern about liquidity in the financial market. The company has earlier relied on bank loans and debt instruments for financing but is now looking for other funding options. The CFO of the company is evaluating different options such as corporate bonds, private equity, public deposit and securitization to raise capital. He is also looking at the evolving role of financial institutions such as investment banks, development banks and insurance companies in providing finance. However, he is concerned about the volatility of the stock market and the risk of inflation affecting the company's future cashflow. To address these challenges, the company plans to consult with financial advisors and explore new avenues of funding, including green bonds and venture capital. The CFO must navigate the complex world of financial markets to ensure that the company secures the right funding at the right cost.</p>", "question": "The company is considering corporate bonds as a funding option. Which factor is most likely to affect the interest rate of bond?", "options": ["The number of projects completed by the company", "The interest rate on Government securities", "The credit rating of the bond", "The level of Foreign Direct Investment"], "answer": 2, "explanation": "Credit rating reflects perceived default/credit risk. A lower-rated corporate bond generally requires a higher yield to compensate investors for higher risk."}];
+
+        const TOTAL_QUESTIONS = questionsData.length;
+        const TOTAL_MARKS = TOTAL_QUESTIONS * 2;
+
+        // App State
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(TOTAL_QUESTIONS).fill(null);
+        let bookmarkedState = new Array(TOTAL_QUESTIONS).fill(false);
+        let isSubmitted = false;
+        let timerSeconds = 120 * 60; // 120 Minutes
+        let timerInterval = null;
+
+        // On Load
+        window.onload = function() {
+            renderPalette();
+        };
+
+        function startTimer() {
+            if (timerInterval) return;
+            timerInterval = setInterval(() => {
+                if (timerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmitTest();
+                } else {
+                    timerSeconds--;
+                    updateTimerDisplay();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timerSeconds / 60);
+            const seconds = timerSeconds % 60;
+            document.getElementById("timerDisplay").innerText =
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function renderPalette() {
+            const grid = document.getElementById("paletteGrid");
+            grid.innerHTML = "";
+
+            for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+                const btn = document.createElement("button");
+                btn.id = `palette-btn-${i}`;
+                btn.className = getPaletteBtnClass(i);
+                btn.innerText = questionsData[i].id;
+                btn.title = `Question ${i + 1} of ${TOTAL_QUESTIONS} (Original Q${questionsData[i].id})`;
+                btn.onclick = () => loadQuestion(i);
+                grid.appendChild(btn);
+            }
+            updateAnsweredCount();
+        }
+
+        function getPaletteBtnClass(index) {
+            const base = "h-9 w-9 rounded-lg font-semibold text-[10px] transition flex items-center justify-center border shadow-xs ";
+            if (index === currentQuestionIndex) {
+                return base + "ring-2 ring-indigo-600 ring-offset-1 font-bold border-indigo-600 ";
+            }
+            if (bookmarkedState[index]) {
+                return base + "bg-amber-500 text-white border-amber-600 ";
+            }
+            if (userAnswers[index] !== null) {
+                return base + "bg-emerald-500 text-white border-emerald-600 ";
+            }
+            return base + "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 ";
+        }
+
+        function updateAnsweredCount() {
+            const count = userAnswers.filter(a => a !== null).length;
+            document.getElementById("answeredCount").innerText = `${count}/${TOTAL_QUESTIONS} Answered`;
+        }
+
+        function loadQuestion(index) {
+            currentQuestionIndex = index;
+            const q = questionsData[index];
+
+            document.getElementById("sectionBadge").innerText = q.section;
+            document.getElementById("moduleBadge").innerText = q.module;
+            document.getElementById("questionTitleNumber").innerText = `Question ${index + 1} of ${TOTAL_QUESTIONS} (Original Q${q.id})`;
+            document.getElementById("questionText").innerText = q.question;
+
+            // Context container (passage) - subsumed per-question
+            const contextContainer = document.getElementById("contextContainer");
+            const contextContent = document.getElementById("contextContent");
+            if (q.context) {
+                contextContainer.classList.remove("hidden");
+                contextContent.innerHTML = q.context;
+            } else {
+                contextContainer.classList.add("hidden");
+                contextContent.innerHTML = "";
+            }
+
+            const optionsList = document.getElementById("optionsList");
+            optionsList.innerHTML = "";
+
+            q.options.forEach((opt, optIdx) => {
+                const optBtn = document.createElement("button");
+                optBtn.className = getOptionStyle(optIdx);
+                optBtn.onclick = () => selectOption(optIdx);
+                if (isSubmitted) optBtn.disabled = true;
+
+                optBtn.innerHTML = `
+                    <div class="flex items-center space-x-3 w-full text-left">
+                        <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border ${getOptionBadgeStyle(optIdx)}">
+                            ${optIdx + 1}
+                        </span>
+                        <span class="text-sm font-medium flex-1">${opt}</span>
+                    </div>
+                `;
+                optionsList.appendChild(optBtn);
+            });
+
+            const bookmarkIcon = document.getElementById("bookmarkIcon");
+            if (bookmarkedState[index]) {
+                bookmarkIcon.className = "fa-solid fa-bookmark text-amber-600";
+            } else {
+                bookmarkIcon.className = "fa-regular fa-bookmark";
+            }
+
+            document.getElementById("prevBtn").disabled = (index === 0);
+            document.getElementById("prevBtn").style.opacity = (index === 0) ? "0.5" : "1";
+
+            if (index === TOTAL_QUESTIONS - 1) {
+                document.getElementById("nextBtn").innerHTML = `Finish <i class="fa-solid fa-flag-checkered ml-1.5"></i>`;
+            } else {
+                document.getElementById("nextBtn").innerHTML = `Next <i class="fa-solid fa-chevron-right ml-1.5"></i>`;
+            }
+
+            const expBox = document.getElementById("explanationBox");
+            if (isSubmitted) {
+                expBox.classList.remove("hidden");
+                document.getElementById("explanationText").innerText = q.explanation;
+            } else {
+                expBox.classList.add("hidden");
+            }
+
+            renderPalette();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function getOptionStyle(optIdx) {
+            const selected = userAnswers[currentQuestionIndex] === optIdx;
+            const correct = questionsData[currentQuestionIndex].answer === optIdx;
+            const base = "w-full p-4 rounded-xl border text-left transition-all flex items-center justify-between ";
+
+            if (isSubmitted) {
+                if (correct) return base + "bg-emerald-50 border-emerald-500 text-emerald-900 ring-1 ring-emerald-500";
+                if (selected && !correct) return base + "bg-rose-50 border-rose-500 text-rose-900 ring-1 ring-rose-500";
+                return base + "bg-slate-50 border-slate-200 opacity-60";
+            }
+
+            if (selected) {
+                return base + "bg-indigo-50 border-indigo-600 text-indigo-900 ring-2 ring-indigo-500/20 shadow-xs";
+            }
+            return base + "bg-white border-slate-200 hover:bg-slate-50 hover:border-slate-300 text-slate-700";
+        }
+
+        function getOptionBadgeStyle(optIdx) {
+            const selected = userAnswers[currentQuestionIndex] === optIdx;
+            const correct = questionsData[currentQuestionIndex].answer === optIdx;
+
+            if (isSubmitted) {
+                if (correct) return "bg-emerald-600 text-white border-emerald-600";
+                if (selected && !correct) return "bg-rose-600 text-white border-rose-600";
+                return "bg-slate-200 text-slate-600 border-slate-300";
+            }
+
+            if (selected) return "bg-indigo-600 text-white border-indigo-600";
+            return "bg-slate-100 text-slate-600 border-slate-300";
+        }
+
+        function selectOption(optIdx) {
+            if (isSubmitted) return;
+            userAnswers[currentQuestionIndex] = optIdx;
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function clearResponse() {
+            if (isSubmitted) return;
+            userAnswers[currentQuestionIndex] = null;
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function toggleBookmark() {
+            bookmarkedState[currentQuestionIndex] = !bookmarkedState[currentQuestionIndex];
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function navigateQuestion(direction) {
+            const newIndex = currentQuestionIndex + direction;
+            if (newIndex >= 0 && newIndex < TOTAL_QUESTIONS) {
+                loadQuestion(newIndex);
+            } else if (newIndex === TOTAL_QUESTIONS) {
+                confirmSubmitTest();
+            }
+        }
+
+        function confirmSubmitTest() {
+            if (isSubmitted) return;
+            const unanswered = userAnswers.filter(a => a === null).length;
+            let msg = "Are you sure you want to submit the test?";
+            if (unanswered > 0) {
+                msg = `You still have ${unanswered} unanswered question(s). Are you sure you want to submit?`;
+            }
+            if (window.confirm(msg)) {
+                submitTest();
+            }
+        }
+
+        function autoSubmitTest() {
+            alert("Time limit reached! Your test will now be submitted automatically.");
+            submitTest();
+        }
+
+        function submitTest() {
+            isSubmitted = true;
+            clearInterval(timerInterval);
+
+            document.getElementById("submitBtn").classList.add("hidden");
+
+            let correct = 0;
+            let incorrect = 0;
+
+            userAnswers.forEach((ans, idx) => {
+                if (ans === questionsData[idx].answer) {
+                    correct++;
+                } else if (ans !== null) {
+                    incorrect++;
+                }
+            });
+
+            const skipped = TOTAL_QUESTIONS - (correct + incorrect);
+            const score = correct * 2;
+            const percentage = ((score / TOTAL_MARKS) * 100).toFixed(1);
+
+            document.getElementById("finalScore").innerText = `${score} / ${TOTAL_MARKS}`;
+            document.getElementById("finalPercentage").innerText = `${percentage}%`;
+            document.getElementById("correctCount").innerText = `${correct} (${correct * 2} Marks)`;
+            document.getElementById("incorrectCount").innerText = `${incorrect + skipped}`;
+
+            document.getElementById("resultModal").classList.remove("hidden");
+        }
+
+        function reviewMode() {
+            document.getElementById("resultModal").classList.add("hidden");
+            loadQuestion(0);
+        }
+    </script>
+</body>
+</html>
