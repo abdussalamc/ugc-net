@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGC NET General Paper - CBT Quiz (50 Questions)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <!-- Start Quiz Modal Overlay -->
+    <div id="start-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-6 md:p-8 max-w-md w-full text-center shadow-2xl border border-slate-100 space-y-5">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+                <i class="fa-solid fa-play text-2xl ml-1"></i>
+            </div>
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800">Ready to Begin?</h2>
+                <p class="text-slate-500 text-sm mt-1">UGC NET Paper 1 &bull; General Paper Mock Test</p>
+            </div>
+            <div class="text-xs text-slate-500 bg-slate-50 p-3 rounded-lg border border-slate-200 text-left space-y-1">
+                <p><i class="fa-solid fa-check text-emerald-500 mr-1.5"></i> <strong>50 Questions</strong> &bull; Teaching &amp; Research Aptitude</p>
+                <p><i class="fa-solid fa-check text-emerald-500 mr-1.5"></i> <strong>100 Marks</strong> Total Score (+2 per correct response)</p>
+                <p><i class="fa-solid fa-check text-emerald-500 mr-1.5"></i> <strong>60 Minutes</strong> Timer &bull; No Negative Marking</p>
+                <p><i class="fa-solid fa-check text-emerald-500 mr-1.5"></i> Instant <strong>Analysis &amp; Detailed Solutions</strong> after submit</p>
+            </div>
+            <button onclick="document.getElementById('start-modal').remove(); startTimer(); loadQuestion(0);" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-emerald-600/25 transition duration-150 flex items-center justify-center space-x-2 text-base">
+                <i class="fa-solid fa-rocket"></i>
+                <span>Start Full Test</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Header Banner -->
+    <header class="bg-indigo-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center space-x-3">
+                <div class="p-2 bg-indigo-700 rounded-lg">
+                    <i class="fa-solid font-bold fa-chart-line text-2xl text-yellow-400"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-wide">UGC NET General Paper (Paper 1)</h1>
+                    <p class="text-xs text-indigo-200">50 Questions | 100 Marks | 60 Minutes</p>
+                </div>
+            </div>
+
+            <!-- Timer & Action Bar -->
+            <div class="flex items-center space-x-4">
+                <div id="timerContainer" class="flex items-center bg-indigo-800 border border-indigo-700 px-4 py-1.5 rounded-lg text-amber-300 font-mono font-semibold text-lg shadow-inner">
+                    <i class="fa-regular fa-clock mr-2 text-base"></i>
+                    <span id="timerDisplay">60:00</span>
+                </div>
+                <button id="submitBtn" onclick="confirmSubmitTest()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-all shadow-md flex items-center">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Submit Test
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace Area -->
+    <main class="max-w-7xl mx-auto w-full px-4 py-6 flex-1 grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+        <!-- Central Content Area (Questions) -->
+        <div class="lg:col-span-3 flex flex-col space-y-4">
+
+            <!-- Question Module Badge & Header -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-wrap justify-between items-center gap-2">
+                <div>
+                    <span id="sectionBadge" class="inline-block bg-indigo-100 text-indigo-800 font-medium px-3 py-1 rounded-full text-xs uppercase tracking-wider mb-1 mr-1.5">
+                        Section
+                    </span>
+                    <span id="moduleBadge" class="inline-block bg-emerald-100 text-emerald-800 font-medium px-3 py-1 rounded-full text-xs uppercase tracking-wider mb-1">
+                        Module Name
+                    </span>
+                    <h2 class="text-lg font-semibold text-slate-800" id="questionTitleNumber">Question 1 of 50</h2>
+                </div>
+                <div class="flex items-center space-x-2 text-sm font-medium text-slate-500">
+                    <span class="bg-slate-100 px-2.5 py-1 rounded border border-slate-200 text-slate-700">+2 Marks</span>
+                    <span class="bg-slate-100 px-2.5 py-1 rounded border border-slate-200 text-slate-700">No Negative Marking</span>
+                </div>
+            </div>
+
+            <!-- Dynamic Context Container (Tables / Passages) -->
+            <div id="contextContainer" class="hidden bg-indigo-50/70 border border-indigo-200 rounded-xl p-5 shadow-sm text-sm text-slate-700">
+                <div class="flex items-center text-indigo-700 font-semibold mb-2 text-xs uppercase tracking-wider">
+                    <i class="fa-solid fa-book-open mr-2"></i> Comprehension / Data Passage
+                </div>
+                <div id="contextContent"></div>
+            </div>
+
+            <!-- Main Question Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex-1 flex flex-col justify-between">
+                <div>
+                    <p id="questionText" class="text-base sm:text-lg font-medium text-slate-800 leading-relaxed mb-6 whitespace-pre-line">
+                        Loading question...
+                    </p>
+
+                    <!-- Options List -->
+                    <div id="optionsList" class="space-y-3">
+                        <!-- Options injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- Explanation Panel (Review Mode) -->
+                <div id="explanationBox" class="hidden mt-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-sm">
+                    <div class="flex items-center text-emerald-800 font-semibold mb-2">
+                        <i class="fa-solid fa-circle-check mr-2"></i> Answer & Solution Analysis
+                    </div>
+                    <p id="explanationText" class="text-slate-700 leading-relaxed whitespace-pre-line"></p>
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="mt-8 pt-4 border-t border-slate-100 flex flex-wrap justify-between items-center gap-3">
+                    <div class="flex space-x-2">
+                        <button onclick="clearResponse()" class="px-3.5 py-2 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-100 text-xs sm:text-sm font-medium transition">
+                            <i class="fa-solid fa-rotate-left mr-1.5"></i> Clear
+                        </button>
+                        <button id="bookmarkBtn" onclick="toggleBookmark()" class="px-3.5 py-2 rounded-lg border border-amber-300 text-amber-700 hover:bg-amber-50 text-xs sm:text-sm font-medium transition">
+                            <i class="fa-regular fa-bookmark mr-1.5" id="bookmarkIcon"></i> Mark for Review
+                        </button>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button id="prevBtn" onclick="navigateQuestion(-1)" class="px-4 py-2 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 text-sm font-semibold transition">
+                            <i class="fa-solid fa-chevron-left mr-1.5"></i> Prev
+                        </button>
+                        <button id="nextBtn" onclick="navigateQuestion(1)" class="px-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold transition shadow-sm">
+                            Next <i class="fa-solid fa-chevron-right ml-1.5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Side Panel: Question Palette & Status -->
+        <div class="lg:col-span-1 flex flex-col space-y-4">
+
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">Status Legend</h3>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-emerald-500 inline-block"></span>
+                        <span class="text-slate-600">Answered</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-amber-500 inline-block"></span>
+                        <span class="text-slate-600">Review</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-slate-200 inline-block"></span>
+                        <span class="text-slate-600">Not Visited</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-rose-500 inline-block"></span>
+                        <span class="text-slate-600">Unanswered</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Part Jump -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">Jump to Section</h3>
+                <div class="grid grid-cols-1 gap-2 text-xs">
+                    <button onclick="loadQuestion(0)" class="px-3 py-2 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-medium text-left border border-indigo-100">
+                        Data Interpretation (Q1&ndash;5)
+                    </button>
+                    <button onclick="loadQuestion(5)" class="px-3 py-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-medium text-left border border-emerald-100">
+                        General Paper Core (Q6&ndash;45)
+                    </button>
+                    <button onclick="loadQuestion(45)" class="px-3 py-2 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-700 font-medium text-left border border-amber-100">
+                        Reading Comprehension (Q46&ndash;50)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Grid Palette -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex-1 flex flex-col">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">Question Palette</h3>
+                    <span id="answeredCount" class="text-xs font-semibold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full">0/50 Answered</span>
+                </div>
+
+                <div id="paletteGrid" class="grid grid-cols-5 gap-2 max-h-96 overflow-y-auto custom-scrollbar p-1">
+                    <!-- 50 Buttons injected dynamically -->
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Result / Score Modal -->
+    <div id="resultModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 sm:p-8 text-center relative">
+            <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-800">Quiz Completed!</h2>
+            <p class="text-sm text-slate-500 mb-6">UGC NET General Paper Result Summary</p>
+
+            <div class="grid grid-cols-2 gap-4 mb-6 text-left">
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-xs text-slate-500 uppercase font-semibold">Total Score</span>
+                    <p class="text-2xl font-extrabold text-indigo-700" id="finalScore">0 / 100</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-xs text-slate-500 uppercase font-semibold">Percentage</span>
+                    <p class="text-2xl font-extrabold text-indigo-700" id="finalPercentage">0%</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-xs text-slate-500 uppercase font-semibold">Correct Answers</span>
+                    <p class="text-xl font-bold text-emerald-600" id="correctCount">0</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="text-xs text-slate-500 uppercase font-semibold">Incorrect / Skipped</span>
+                    <p class="text-xl font-bold text-rose-600" id="incorrectCount">0</p>
+                </div>
+            </div>
+
+            <div class="flex space-x-3">
+                <button onclick="reviewMode()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold shadow-md transition">
+                    <i class="fa-solid fa-magnifying-glass mr-2"></i> Review Solutions
+                </button>
+                <button onclick="location.reload()" class="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold transition flex items-center justify-center">
+                    <i class="fa-solid fa-rotate-right mr-2"></i> Restart
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // UGC NET Commerce Question Bank (Q51-Q150, 100 Questions)
+        const questionsData = [{"id": 1, "section": "Paper 1: General Paper", "module": "Data Interpretation", "context": "<p class=\"mb-3\">The table below shows the number of students admitted in five programs from 2021 to 2025.</p><div class=\"overflow-x-auto\"><table class=\"min-w-full text-xs sm:text-sm border border-indigo-200 rounded-lg overflow-hidden\"><thead class=\"bg-indigo-100 text-indigo-900\"><tr><th class=\"p-2 border border-indigo-200\">Year</th><th class=\"p-2 border border-indigo-200\">B.A.</th><th class=\"p-2 border border-indigo-200\">B.Sc.</th><th class=\"p-2 border border-indigo-200\">B.B.A.</th><th class=\"p-2 border border-indigo-200\">B.Com.</th><th class=\"p-2 border border-indigo-200\">B.C.A.</th></tr></thead><tbody class=\"bg-white\"><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2021</td><td class=\"p-2 border border-indigo-100\">150</td><td class=\"p-2 border border-indigo-100\">25</td><td class=\"p-2 border border-indigo-100\">50</td><td class=\"p-2 border border-indigo-100\">45</td><td class=\"p-2 border border-indigo-100\">75</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2022</td><td class=\"p-2 border border-indigo-100\">225</td><td class=\"p-2 border border-indigo-100\">40</td><td class=\"p-2 border border-indigo-100\">45</td><td class=\"p-2 border border-indigo-100\">62</td><td class=\"p-2 border border-indigo-100\">70</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2023</td><td class=\"p-2 border border-indigo-100\">450</td><td class=\"p-2 border border-indigo-100\">65</td><td class=\"p-2 border border-indigo-100\">30</td><td class=\"p-2 border border-indigo-100\">90</td><td class=\"p-2 border border-indigo-100\">73</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2024</td><td class=\"p-2 border border-indigo-100\">470</td><td class=\"p-2 border border-indigo-100\">73</td><td class=\"p-2 border border-indigo-100\">35</td><td class=\"p-2 border border-indigo-100\">105</td><td class=\"p-2 border border-indigo-100\">70</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2025</td><td class=\"p-2 border border-indigo-100\">500</td><td class=\"p-2 border border-indigo-100\">80</td><td class=\"p-2 border border-indigo-100\">36</td><td class=\"p-2 border border-indigo-100\">132</td><td class=\"p-2 border border-indigo-100\">74</td></tr></tbody></table></div>", "question": "Which program has the second highest percentage increase from 2021 to 2025 in the number of admitted students?", "options": ["B.A.", "B.Sc.", "B.B.A.", "B.Com."], "answer": 1, "explanation": "B.A.: (500-150)/150×100 = 233.33%. B.Sc.: (80-25)/25×100 = 220%. B.B.A.: (36-50)/50×100 = -28%. B.Com.: (132-45)/45×100 = 193.33%. B.A. is highest and B.Sc. is second highest. Always calculate percentage increase relative to the base-year value."}, {"id": 2, "section": "Paper 1: General Paper", "module": "Data Interpretation", "context": "<p class=\"mb-3\">The table below shows the number of students admitted in five programs from 2021 to 2025.</p><div class=\"overflow-x-auto\"><table class=\"min-w-full text-xs sm:text-sm border border-indigo-200 rounded-lg overflow-hidden\"><thead class=\"bg-indigo-100 text-indigo-900\"><tr><th class=\"p-2 border border-indigo-200\">Year</th><th class=\"p-2 border border-indigo-200\">B.A.</th><th class=\"p-2 border border-indigo-200\">B.Sc.</th><th class=\"p-2 border border-indigo-200\">B.B.A.</th><th class=\"p-2 border border-indigo-200\">B.Com.</th><th class=\"p-2 border border-indigo-200\">B.C.A.</th></tr></thead><tbody class=\"bg-white\"><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2021</td><td class=\"p-2 border border-indigo-100\">150</td><td class=\"p-2 border border-indigo-100\">25</td><td class=\"p-2 border border-indigo-100\">50</td><td class=\"p-2 border border-indigo-100\">45</td><td class=\"p-2 border border-indigo-100\">75</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2022</td><td class=\"p-2 border border-indigo-100\">225</td><td class=\"p-2 border border-indigo-100\">40</td><td class=\"p-2 border border-indigo-100\">45</td><td class=\"p-2 border border-indigo-100\">62</td><td class=\"p-2 border border-indigo-100\">70</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2023</td><td class=\"p-2 border border-indigo-100\">450</td><td class=\"p-2 border border-indigo-100\">65</td><td class=\"p-2 border border-indigo-100\">30</td><td class=\"p-2 border border-indigo-100\">90</td><td class=\"p-2 border border-indigo-100\">73</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2024</td><td class=\"p-2 border border-indigo-100\">470</td><td class=\"p-2 border border-indigo-100\">73</td><td class=\"p-2 border border-indigo-100\">35</td><td class=\"p-2 border border-indigo-100\">105</td><td class=\"p-2 border border-indigo-100\">70</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2025</td><td class=\"p-2 border border-indigo-100\">500</td><td class=\"p-2 border border-indigo-100\">80</td><td class=\"p-2 border border-indigo-100\">36</td><td class=\"p-2 border border-indigo-100\">132</td><td class=\"p-2 border border-indigo-100\">74</td></tr></tbody></table></div>", "question": "In which year is the ratio of admitted students to its previous year's admitted students the highest?", "options": ["2022", "2023", "2024", "2025"], "answer": 1, "explanation": "Totals: 2021 = 345, 2022 = 442, 2023 = 708, 2024 = 753, 2025 = 822. Ratios: 2022/2021 ≈ 1.28; 2023/2022 ≈ 1.60; 2024/2023 ≈ 1.06; 2025/2024 ≈ 1.09. Highest is 2023."}, {"id": 3, "section": "Paper 1: General Paper", "module": "Data Interpretation", "context": "<p class=\"mb-3\">The table below shows the number of students admitted in five programs from 2021 to 2025.</p><div class=\"overflow-x-auto\"><table class=\"min-w-full text-xs sm:text-sm border border-indigo-200 rounded-lg overflow-hidden\"><thead class=\"bg-indigo-100 text-indigo-900\"><tr><th class=\"p-2 border border-indigo-200\">Year</th><th class=\"p-2 border border-indigo-200\">B.A.</th><th class=\"p-2 border border-indigo-200\">B.Sc.</th><th class=\"p-2 border border-indigo-200\">B.B.A.</th><th class=\"p-2 border border-indigo-200\">B.Com.</th><th class=\"p-2 border border-indigo-200\">B.C.A.</th></tr></thead><tbody class=\"bg-white\"><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2021</td><td class=\"p-2 border border-indigo-100\">150</td><td class=\"p-2 border border-indigo-100\">25</td><td class=\"p-2 border border-indigo-100\">50</td><td class=\"p-2 border border-indigo-100\">45</td><td class=\"p-2 border border-indigo-100\">75</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2022</td><td class=\"p-2 border border-indigo-100\">225</td><td class=\"p-2 border border-indigo-100\">40</td><td class=\"p-2 border border-indigo-100\">45</td><td class=\"p-2 border border-indigo-100\">62</td><td class=\"p-2 border border-indigo-100\">70</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2023</td><td class=\"p-2 border border-indigo-100\">450</td><td class=\"p-2 border border-indigo-100\">65</td><td class=\"p-2 border border-indigo-100\">30</td><td class=\"p-2 border border-indigo-100\">90</td><td class=\"p-2 border border-indigo-100\">73</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2024</td><td class=\"p-2 border border-indigo-100\">470</td><td class=\"p-2 border border-indigo-100\">73</td><td class=\"p-2 border border-indigo-100\">35</td><td class=\"p-2 border border-indigo-100\">105</td><td class=\"p-2 border border-indigo-100\">70</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2025</td><td class=\"p-2 border border-indigo-100\">500</td><td class=\"p-2 border border-indigo-100\">80</td><td class=\"p-2 border border-indigo-100\">36</td><td class=\"p-2 border border-indigo-100\">132</td><td class=\"p-2 border border-indigo-100\">74</td></tr></tbody></table></div>", "question": "In which year did the number of students double with reference to the previous year in a particular program?", "options": ["2022", "2023", "2024", "2025"], "answer": 1, "explanation": "B.A. students increased from 225 in 2022 to 450 in 2023, exactly double."}, {"id": 4, "section": "Paper 1: General Paper", "module": "Data Interpretation", "context": "<p class=\"mb-3\">The table below shows the number of students admitted in five programs from 2021 to 2025.</p><div class=\"overflow-x-auto\"><table class=\"min-w-full text-xs sm:text-sm border border-indigo-200 rounded-lg overflow-hidden\"><thead class=\"bg-indigo-100 text-indigo-900\"><tr><th class=\"p-2 border border-indigo-200\">Year</th><th class=\"p-2 border border-indigo-200\">B.A.</th><th class=\"p-2 border border-indigo-200\">B.Sc.</th><th class=\"p-2 border border-indigo-200\">B.B.A.</th><th class=\"p-2 border border-indigo-200\">B.Com.</th><th class=\"p-2 border border-indigo-200\">B.C.A.</th></tr></thead><tbody class=\"bg-white\"><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2021</td><td class=\"p-2 border border-indigo-100\">150</td><td class=\"p-2 border border-indigo-100\">25</td><td class=\"p-2 border border-indigo-100\">50</td><td class=\"p-2 border border-indigo-100\">45</td><td class=\"p-2 border border-indigo-100\">75</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2022</td><td class=\"p-2 border border-indigo-100\">225</td><td class=\"p-2 border border-indigo-100\">40</td><td class=\"p-2 border border-indigo-100\">45</td><td class=\"p-2 border border-indigo-100\">62</td><td class=\"p-2 border border-indigo-100\">70</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2023</td><td class=\"p-2 border border-indigo-100\">450</td><td class=\"p-2 border border-indigo-100\">65</td><td class=\"p-2 border border-indigo-100\">30</td><td class=\"p-2 border border-indigo-100\">90</td><td class=\"p-2 border border-indigo-100\">73</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2024</td><td class=\"p-2 border border-indigo-100\">470</td><td class=\"p-2 border border-indigo-100\">73</td><td class=\"p-2 border border-indigo-100\">35</td><td class=\"p-2 border border-indigo-100\">105</td><td class=\"p-2 border border-indigo-100\">70</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2025</td><td class=\"p-2 border border-indigo-100\">500</td><td class=\"p-2 border border-indigo-100\">80</td><td class=\"p-2 border border-indigo-100\">36</td><td class=\"p-2 border border-indigo-100\">132</td><td class=\"p-2 border border-indigo-100\">74</td></tr></tbody></table></div>", "question": "In how many years is 50% of the total number of admitted students less than the number admitted in the B.A. program that year?", "options": ["1", "2", "3", "4"], "answer": 3, "explanation": "2021: 172.5 vs 150 (No); 2022: 221 vs 225 (Yes); 2023: 354 vs 450 (Yes); 2024: 376.5 vs 470 (Yes); 2025: 411 vs 500 (Yes). Hence 4 years."}, {"id": 5, "section": "Paper 1: General Paper", "module": "Data Interpretation", "context": "<p class=\"mb-3\">The table below shows the number of students admitted in five programs from 2021 to 2025.</p><div class=\"overflow-x-auto\"><table class=\"min-w-full text-xs sm:text-sm border border-indigo-200 rounded-lg overflow-hidden\"><thead class=\"bg-indigo-100 text-indigo-900\"><tr><th class=\"p-2 border border-indigo-200\">Year</th><th class=\"p-2 border border-indigo-200\">B.A.</th><th class=\"p-2 border border-indigo-200\">B.Sc.</th><th class=\"p-2 border border-indigo-200\">B.B.A.</th><th class=\"p-2 border border-indigo-200\">B.Com.</th><th class=\"p-2 border border-indigo-200\">B.C.A.</th></tr></thead><tbody class=\"bg-white\"><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2021</td><td class=\"p-2 border border-indigo-100\">150</td><td class=\"p-2 border border-indigo-100\">25</td><td class=\"p-2 border border-indigo-100\">50</td><td class=\"p-2 border border-indigo-100\">45</td><td class=\"p-2 border border-indigo-100\">75</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2022</td><td class=\"p-2 border border-indigo-100\">225</td><td class=\"p-2 border border-indigo-100\">40</td><td class=\"p-2 border border-indigo-100\">45</td><td class=\"p-2 border border-indigo-100\">62</td><td class=\"p-2 border border-indigo-100\">70</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2023</td><td class=\"p-2 border border-indigo-100\">450</td><td class=\"p-2 border border-indigo-100\">65</td><td class=\"p-2 border border-indigo-100\">30</td><td class=\"p-2 border border-indigo-100\">90</td><td class=\"p-2 border border-indigo-100\">73</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2024</td><td class=\"p-2 border border-indigo-100\">470</td><td class=\"p-2 border border-indigo-100\">73</td><td class=\"p-2 border border-indigo-100\">35</td><td class=\"p-2 border border-indigo-100\">105</td><td class=\"p-2 border border-indigo-100\">70</td></tr><tr><td class=\"p-2 border border-indigo-100 font-semibold\">2025</td><td class=\"p-2 border border-indigo-100\">500</td><td class=\"p-2 border border-indigo-100\">80</td><td class=\"p-2 border border-indigo-100\">36</td><td class=\"p-2 border border-indigo-100\">132</td><td class=\"p-2 border border-indigo-100\">74</td></tr></tbody></table></div>", "question": "In which year is the ratio of admitted students in B.A. to those in all programs the lowest?", "options": ["2021", "2022", "2023", "2024"], "answer": 0, "explanation": "2021: 150/345 ≈ 43.48%; 2022: 225/442 ≈ 50.90%; 2023: 450/708 ≈ 63.56%; 2024: 470/753 ≈ 62.42%. Lowest = 2021."}, {"id": 6, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "The mental or psychological recasting of a message so that its meaning is in line with a person's beliefs and attitudes, is:", "options": ["Selective Perception", "Assertion", "Lobbying", "Reflection"], "answer": 0, "explanation": "Selective perception occurs when individuals interpret information according to their existing beliefs, attitudes, expectations and experiences."}, {"id": 7, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Arrange the following p-values from lower level to higher level of significance:\nA. 0.0001\nB. 0.01\nC. 0.05\nD. 0.001\nE. 0.5", "options": ["A, B, D, C, E", "A, D, B, C, E", "E, C, B, D, A", "E, C, D, B, A"], "answer": 2, "explanation": "A smaller p-value means a higher level of significance. Ordering from lowest to highest significance: 0.5 (E) → 0.05 (C) → 0.01 (B) → 0.001 (D) → 0.0001 (A) = E, C, B, D, A. (Your supplied key marked option 4, E, C, D, B, A, which places 0.001 before 0.01 and is numerically inconsistent.)"}, {"id": 8, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I — Syllogism:\nA. All M are P; Some M are S; ∴ Some S are P\nB. No M are P; Some S are not M; ∴ Some S are not P\nC. All P are M; All S are M; ∴ All S are P\nD. Some P are M; Some S are M; ∴ Some S are P\nLIST-II — Mood and Figure:\nI. EOO-1\nII. AAA-2\nIII. III-2\nIV. AII-3", "options": ["A-II, B-III, C-IV, D-I", "A-III, B-I, C-IV, D-II", "A-I, B-II, C-III, D-IV", "A-IV, B-I, C-II, D-III"], "answer": 3, "explanation": "Determine the mood from A/E/I/O and the figure from the position of the middle term. Answer: A-IV, B-I, C-II, D-III."}, {"id": 9, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Which of the following are characteristics of sustainable development?\nA. Intergenerational equity regarding natural resources.\nB. Equitable distribution of natural resources in society.\nC. Economic development at the expense of environment.\nD. Reduction in society's use of non-renewable resources.", "options": ["A and D only", "A and B only", "A, B and C only", "A, B and D only"], "answer": 3, "explanation": "Sustainable development balances economic development, environmental protection and social equity. Development at the expense of the environment is contrary to sustainability."}, {"id": 10, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Which behavioural ability is associated with the affective domain of a learner?", "options": ["Evaluation", "Synthesis", "Characterization", "Skilled movements"], "answer": 2, "explanation": "The affective domain concerns attitudes, values and internalization. Characterization is the highest level of Krathwohl's affective hierarchy."}, {"id": 11, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Liquid that passes through a landfill and has extracted dissolved and suspended matter from it is called:", "options": ["Activated sludge", "Leachate", "Ultrafiltration", "Refuse"], "answer": 1, "explanation": "Leachate is contaminated liquid formed when water percolates through solid waste."}, {"id": 12, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "A train running at 54 km/hr takes 20 seconds to cross a platform and 15 seconds to pass a man walking in the same direction at 6 km/hr. Then the length of the platform is:", "options": ["200 metres", "100 metres", "160 metres", "140 metres"], "answer": 1, "explanation": "Train speed = 54 km/h = 15 m/s. Relative speed with man = 48 km/h = 13.33 m/s; train length = 13.33×15 = 200 m. Train + platform = 15×20 = 300 m. Platform = 300 − 200 = 100 m."}, {"id": 13, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Which is NOT a valid file format for images?", "options": [".bmp", ".tiff", ".jpg", ".wav"], "answer": 3, "explanation": "BMP, TIFF and JPG are image formats. WAV is an audio format."}, {"id": 14, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Which of the following is/are TRUE?\nA. The categorical syllogism AAA-2 commits the fallacy of exclusive premises.\nB. The categorical syllogism EIO-3 commits the fallacy of four terms.\nC. The categorical syllogism AAA-1 commits no fallacy.\nD. The categorical syllogism EAA-1 commits no fallacy.", "options": ["A only", "B and C only", "C only", "A and D only"], "answer": 2, "explanation": "AAA-1 = valid Barbara. AAA-2 is invalid because of undistributed middle, not exclusive premises. EIO-3 is a valid form, not four terms. EAA-1 is invalid. Therefore only C."}, {"id": 15, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Which of the following is a criteria air pollutant as well as a greenhouse gas?", "options": ["N₂O", "CO₂", "O₃", "NO₂"], "answer": 2, "explanation": "Ground-level ozone is a criteria air pollutant and also acts as a greenhouse gas."}, {"id": 16, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I — Commission on Education:\nA. The Education Commission\nB. University Education Commission\nC. The Knowledge Commission\nD. Secondary Education Commission\nLIST-II — Major Recommendation:\nI. Setting up of the University Grants Commission\nII. 12th Class should be attached to the university\nIII. Creation of Indian Educational Services\nIV. Establishing an independent Regulatory Authority for Higher Education", "options": ["A-III, B-I, C-IV, D-II", "A-II, B-III, C-IV, D-I", "A-III, B-I, C-II, D-IV", "A-I, B-IV, C-II, D-III"], "answer": 0, "explanation": "Education Commission (Kothari) → Indian Educational Service; University Education Commission (Radhakrishnan) → UGC; Knowledge Commission → independent regulator; Secondary Education Commission → 12th class attached to university."}, {"id": 17, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Choose the correct statements:\nA. The capacity to think about our own thinking is Metacognition.\nB. Metacognition is instrumental in controlling our own cognitive and motivational processes.\nC. Teaching people how to learn stems from fostering agency and responsibility within learners.\nD. Metacognition does not help in teaching people how to learn.\nE. Metacognition knowledge and self-regulation are related components.", "options": ["A, D and E Only", "A, C and D Only", "B, D and E Only", "A, B, C and E Only"], "answer": 3, "explanation": "D is false. Metacognition is directly connected with learning how to learn."}, {"id": 18, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "For the purpose of credit calculations under the National Credit Framework (NCrF), overall, one Credit is equivalent to:", "options": ["30 notional learning hours", "40 notional learning hours", "45 notional learning hours", "60 notional learning hours"], "answer": 2, "explanation": "Under NCrF, one credit corresponds to 45 notional learning hours."}, {"id": 19, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I:\nA. Reliability\nB. Validity\nC. Objectivity\nD. Norms\nLIST-II:\nI. Minimization of Personal Error\nII. Minimization of Constant Error\nIII. Minimization of Variable Error\nIV. Minimization of Interpretive Error", "options": ["A-III, B-II, C-I, D-IV", "A-I, B-II, C-III, D-IV", "A-III, B-IV, C-II, D-I", "A-IV, B-II, C-I, D-III"], "answer": 0, "explanation": "Reliability → consistency → minimizes variable/random error. Validity → minimizes systematic/constant error. Objectivity → minimizes personal judgment. Norms → aid interpretation."}, {"id": 20, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Arrange the following developments of education in chronological order:\nA. SWAYAM MOOCs\nB. Open education\nC. Distance Education\nD. Correspondence Education\nE. Credit Transfer through Academic Bank of Credit", "options": ["C, B, D, A, E", "D, C, A, B, E", "B, D, C, E, A", "D, C, B, A, E"], "answer": 3, "explanation": "Correspondence education predates modern distance/open education, followed by MOOCs and the recent Academic Bank of Credits."}, {"id": 21, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Assertion A: ROM is a non-volatile memory.\nReason R: ROM does not lose its contents when power is switched off.", "options": ["Both A and R are correct and R is the correct explanation of A", "Both A and R are correct but R is NOT the correct explanation of A", "A is correct but R is not correct", "A is not correct but R is correct"], "answer": 0, "explanation": "Non-volatile memory retains information without electrical power. Thus R directly explains A."}, {"id": 22, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Assertion A: Leaders in higher education institutions set the tone for academic and research excellence.\nReason R: Effective leadership is essential for effective allocation and management of resources in higher education.", "options": ["Both A and R are correct and R is the correct explanation of A", "Both A and R are correct but R is NOT the correct explanation of A", "A is correct but R is not correct", "A is not correct but R is correct"], "answer": 1, "explanation": "Both statements are true, but resource allocation alone does not fully explain how leaders set the overall academic/research tone."}, {"id": 23, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Qualitative research can be construed as a research strategy that:", "options": ["Entails a deductive approach to the relationship between theory and research", "Has incorporated the practices and norms of the natural scientific model", "Embodies a view of social reality as a constantly shifting emergent property of individuals' creation", "Embodies a view of social reality as an external objective reality"], "answer": 2, "explanation": "Qualitative research generally views social reality as constructed, dynamic and interpretive, rather than fixed and objectively existing independently of people."}, {"id": 24, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Which among the following is NOT a fundamental principle of National Education Policy 2020?", "options": ["Highest priority to foundational literacy and numeracy", "Emphasis on conceptual understanding", "Promoting translingualism and the power of language", "Respect for diversity and local context"], "answer": 2, "explanation": "NEP 2020 emphasizes multilingualism and the power of language, not \"translingualism\" as stated here."}, {"id": 25, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I — Number:\nA. 4\nB. 5\nC. 7\nD. 11\nLIST-II — Code:\nI. 126\nII. 65\nIII. 1332\nIV. 344", "options": ["A-II, B-I, C-IV, D-III", "A-I, B-II, C-III, D-IV", "A-III, B-I, C-IV, D-II", "A-IV, B-II, C-III, D-I"], "answer": 0, "explanation": "The code is n³ + 1: 4³+1 = 65 (II); 5³+1 = 126 (I); 7³+1 = 344 (IV); 11³+1 = 1332 (III). Hence A-II, B-I, C-IV, D-III = option 1. (Your supplied key marked option 3, which conflicts with its own working.)"}, {"id": 26, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Assertion A: Probability sampling is appropriate for quantitative research.\nReason R: Probability sampling helps in reducing bias in the selection of samples.", "options": ["Both A and R are correct and R is the correct explanation of A", "Both A and R are correct but R is NOT the correct explanation of A", "A is correct but R is not correct", "A is not correct but R is correct"], "answer": 0, "explanation": "Probability sampling gives each population unit a known probability of selection and helps reduce selection bias, making it suitable for quantitative research and generalization."}, {"id": 27, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Arrange the following in decreasing order of processing power:\nA. Mainframe Computer\nB. Super Computer\nC. Mini Computer\nD. Micro Computer", "options": ["B, A, C, D", "B, A, D, C", "A, B, C, D", "A, B, D, C"], "answer": 0, "explanation": "Supercomputer > Mainframe > Minicomputer > Microcomputer."}, {"id": 28, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Which of the following is NOT correct about Criterion-Referenced Testing?", "options": ["It is also called Domain-Referenced Testing.", "It is also called Objective-Referenced Testing.", "Its principal uses are in mastery tests.", "It is useful in testing the relative position of an individual in a group."], "answer": 3, "explanation": "Criterion-referenced testing measures performance against a fixed criterion/standard, not relative position within a group. Relative ranking is characteristic of norm-referenced testing."}, {"id": 29, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Survey research on a sample at a single point in time pertains to which research design?", "options": ["Cross-sectional", "Experimental", "Longitudinal", "Case study"], "answer": 0, "explanation": "A cross-sectional study collects data at one point in time."}, {"id": 30, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Planned publicity that spreads spontaneously and rapidly \"by word of mouth\" and through social networking sites throughout a potential media consumer market refers to:", "options": ["News", "Viral Advertising", "Communique", "Rejoinder"], "answer": 1, "explanation": "Viral advertising is designed to encourage rapid person-to-person sharing, especially through social media."}, {"id": 31, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Arrange the following levels of communication in sequential order of complexity beginning with the most personal:\nA. Intergroup\nB. Interpersonal\nC. Intragroup\nD. Intrapersonal\nE. Institutional", "options": ["B, D, A, C, E", "B, A, D, C, E", "D, B, E, C, A", "D, B, C, A, E"], "answer": 3, "explanation": "Intrapersonal → Interpersonal → Intragroup → Intergroup → Institutional."}, {"id": 32, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Which of the following principles are true for a typical communication process?\nA. Communication messages are both verbal and non-verbal.\nB. The communication process does not involve mutual influence.\nC. Communication messages can be intentional or unintentional.\nD. Communication is both complex and subtle.", "options": ["A, B & C Only", "B, C & D Only", "A, C & D Only", "A, B & D Only"], "answer": 2, "explanation": "B is false. Communication involves mutual influence between communicators."}, {"id": 33, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Assertion A: AAA-2 is an invalid categorical syllogism.\nReason R: AAA-2 commits the fallacy of exclusive premises.", "options": ["Both A and R are correct and R is the correct explanation of A", "Both A and R are correct but R is NOT the correct explanation of A", "A is correct but R is false", "A is false but R is correct"], "answer": 2, "explanation": "AAA-2 is invalid, but its problem is undistributed middle, not exclusive premises. Therefore A is true and R is false."}, {"id": 34, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Complete the following series:\n4, 36, 252, 1260, ?", "options": ["2520", "3780", "2780", "3520"], "answer": 1, "explanation": "4×9 = 36; 36×7 = 252; 252×5 = 1260; 1260×3 = 3780. Multipliers decrease by 2: 9, 7, 5, 3."}, {"id": 35, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I — Type of Noise in Communication:\nA. Physiological\nB. Physical\nC. Psychological\nD. Semantic\nLIST-II — Example:\nI. Words not understood\nII. Fatigue\nIII. Prejudice\nIV. Bright Lights", "options": ["A-III, B-IV, C-II, D-I", "A-II, B-IV, C-III, D-I", "A-I, B-IV, C-II, D-III", "A-III, B-II, C-IV, D-I"], "answer": 1, "explanation": "Physiological → fatigue; Physical → bright lights; Psychological → prejudice; Semantic → words not understood."}, {"id": 36, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Identify the correct mathematical statements:\nA. 1/(5×6) + 1/(6×7) + 1/(7×8) + … + 1/(24×25) is equal to 4/25.\nB. Of the three numbers, the second is twice the first and is also thrice the third. If the average of three numbers is 55, then the largest number is 90.\nC. If (a+b):(b+c):(c+a) = 6:7:8 and a+b+c = 14, then the value of c is 8.\nD. 0.2×0.2 + 0.02×0.02 − 0.4×0.02 is equal to 0.09.", "options": ["A, B and D only", "B and C only", "B and D only", "A and B only"], "answer": 3, "explanation": "A: sum telescopes to 1/5 − 1/25 = 4/25 (True). B: third = x, second = 3x, first = 1.5x; average 55 gives x = 30, largest = 90 (True). C: solving the ratios gives c = 10/3, not 8 (False). D: 0.04 + 0.0004 − 0.008 = 0.0324, not 0.09 (False)."}, {"id": 37, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Contraposition is not valid in the case of which categorical proposition?", "options": ["A", "O", "I", "E"], "answer": 3, "explanation": "Exam-intended answer: E (option 4). Note: strictly speaking, contraposition is invalid for both I and E propositions; the question as printed gives only one choice, which makes it technically problematic."}, {"id": 38, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I — Scale of Measurement:\nA. Nominal\nB. Ordinal\nC. Ratio\nD. Interval\nLIST-II — Characteristic:\nI. Place items from least to most or lowest to highest\nII. Precisely how far apart the items are\nIII. Denotes the categories only\nIV. Enables researcher to determine the proportions easily", "options": ["A-III, B-I, C-IV, D-II", "A-IV, B-II, C-III, D-I", "A-I, B-II, C-IV, D-III", "A-III, B-II, C-I, D-IV"], "answer": 0, "explanation": "Nominal → categories only; Ordinal → rank/order; Interval → equal intervals; Ratio → meaningful ratios/proportions."}, {"id": 39, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I:\nA. Digit keys\nB. Special character keys\nC. Non-printable keys\nD. Function keys\nLIST-II:\nI. Backspace, return, spacebar\nII. Numeric keypad\nIII. F1, F2, ..., F12\nIV. @, &", "options": ["A-II, B-IV, C-II, D-IV", "A-IV, B-I, C-I, D-III", "A-III, B-IV, C-II, D-I", "A-II, B-IV, C-I, D-III"], "answer": 3, "explanation": "Numeric keypad = digit keys; @ and & = special characters; Backspace/Return/Spacebar = non-printable keys; F1–F12 = function keys."}, {"id": 40, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Which of the following is a scripting language?", "options": ["FORTRAN 95", "COBOL", "C++", "Visual Basic"], "answer": 3, "explanation": "As per the answer key: Visual Basic."}, {"id": 41, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Arrange the following in descending order of installed capacity of total solar power as of August 2025:\nA. Gujarat\nB. Rajasthan\nC. Maharashtra\nD. Tamil Nadu", "options": ["A, B, C, D", "A, B, D, C", "B, A, D, C", "B, A, C, D"], "answer": 2, "explanation": "Order: Rajasthan > Gujarat > Tamil Nadu > Maharashtra."}, {"id": 42, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Arrange the following fractions in descending order:\nA. 2/5\nB. 3/8\nC. 5/13\nD. 6/11\nE. 4/9", "options": ["D, E, C, A, B", "D, A, E, B, C", "B, A, C, D, E", "D, E, A, C, B"], "answer": 3, "explanation": "D = 6/11 = 0.5455; E = 4/9 = 0.4444; A = 2/5 = 0.4000; C = 5/13 ≈ 0.3846; B = 3/8 = 0.375. Therefore D > E > A > C > B."}, {"id": 43, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Arrange the following psychomotor domains of development from simple level to more complex one:\nA. Perception\nB. Set\nC. Guided response\nD. Mechanism\nE. Complex overt response", "options": ["A, B, C, D, E", "A, C, D, E, B", "A, B, D, E, C", "B, D, A, C, E"], "answer": 0, "explanation": "The psychomotor progression moves from perception → set → guided response → mechanism → complex overt response."}, {"id": 44, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Match the LIST-I with LIST-II\nLIST-I — Mission LiFE Objective:\nA. Energy saved\nB. E-waste reduced\nC. Healthy lifestyles adopted\nD. Single-use plastic reduced\nLIST-II — Action:\nI. Use menstrual cups instead of sanitary napkins\nII. Start biodiversity conservation at community level\nIII. Use carpooling with friends and colleagues\nIV. Prefer cloud storage over a pen drive/hard drive", "options": ["A-III, B-IV, C-I, D-II", "A-IV, B-III, C-II, D-I", "A-III, B-IV, C-II, D-I", "A-I, B-III, C-IV, D-II"], "answer": 2, "explanation": "Energy saved → carpooling (III); E-waste reduced → cloud storage (IV); Healthy lifestyles → biodiversity/community action (II); Single-use plastic reduced → menstrual cups (I)."}, {"id": 45, "section": "Paper 1: General Paper", "module": "General Paper Core", "context": null, "question": "Assertion A: In Indian logic, a material fallacy is called hetvabhasa.\nReason R: In a fallacious inference (anumana), the middle term appears to be a reason but is not a valid reason.", "options": ["Both A and R are correct and R is the correct explanation of A", "Both A and R are correct but R is NOT the correct explanation of A", "A is correct but R is false", "A is false but R is correct"], "answer": 0, "explanation": "Hetvabhasa means a fallacious reason/semblance of a reason. The defective middle term (hetu) is what makes an inference fallacious. Therefore R explains A."}, {"id": 46, "section": "Paper 1: General Paper", "module": "Reading Comprehension", "context": "<p>Conventional and outdated wisdom asserts that we each have ‘learning styles’ unique to ourselves. The implication is that if you don’t learn using your preferred style you'll fail to acquire the knowledge desired. It also allows you an excuse not to work hard at learning something new. In Soft-Wired, however, Michael Merzenich shows that the plasticity of the brain extends to the way we learn. In other words, we can learn how to learn. Indeed, we should focus strongly on doing this.</p><p class=\"mt-3\">As well as reading or attending lectures, look at cultivating different learning styles—or, more precisely, learning strategies. Micromastery enables you to experiment and use a vast array of different learning strategies. Since all are designed to succeed brilliantly (with a modicum of persistence) at the micromastery concerned, you have a perfect chance to increase your store of potential learning strategies. This in turn increases your ideational fluency — your ability to switch between idea sets that may be opposed or contradictory. If one strategy doesn't seem to work, no matter how wedded you are to it, you switch seamlessly to another. Ideational fluency is an attribute required of anyone working in a fast-changing, rapid-learning environment — the kind increasingly encountered today.</p>", "question": "What becomes an excuse to not learn something new?", "options": ["The plasticity of the brain", "The rationale of ideational fluency", "The presence of micromastery", "Each person has a unique learning style"], "answer": 3, "explanation": "The passage says the belief in a unique preferred learning style \"allows you an excuse\" not to work hard at learning something new."}, {"id": 47, "section": "Paper 1: General Paper", "module": "Reading Comprehension", "context": "<p>Conventional and outdated wisdom asserts that we each have ‘learning styles’ unique to ourselves. The implication is that if you don’t learn using your preferred style you'll fail to acquire the knowledge desired. It also allows you an excuse not to work hard at learning something new. In Soft-Wired, however, Michael Merzenich shows that the plasticity of the brain extends to the way we learn. In other words, we can learn how to learn. Indeed, we should focus strongly on doing this.</p><p class=\"mt-3\">As well as reading or attending lectures, look at cultivating different learning styles—or, more precisely, learning strategies. Micromastery enables you to experiment and use a vast array of different learning strategies. Since all are designed to succeed brilliantly (with a modicum of persistence) at the micromastery concerned, you have a perfect chance to increase your store of potential learning strategies. This in turn increases your ideational fluency — your ability to switch between idea sets that may be opposed or contradictory. If one strategy doesn't seem to work, no matter how wedded you are to it, you switch seamlessly to another. Ideational fluency is an attribute required of anyone working in a fast-changing, rapid-learning environment — the kind increasingly encountered today.</p>", "question": "Select the skill which would be the best one in a fast-changing rapid-learning environment, according to the passage:", "options": ["Ideational fluency", "A unique learning style", "Plasticity of the brain", "Capacity of hard work"], "answer": 0, "explanation": "The passage states that ideational fluency is an attribute required in a fast-changing, rapid-learning environment."}, {"id": 48, "section": "Paper 1: General Paper", "module": "Reading Comprehension", "context": "<p>Conventional and outdated wisdom asserts that we each have ‘learning styles’ unique to ourselves. The implication is that if you don’t learn using your preferred style you'll fail to acquire the knowledge desired. It also allows you an excuse not to work hard at learning something new. In Soft-Wired, however, Michael Merzenich shows that the plasticity of the brain extends to the way we learn. In other words, we can learn how to learn. Indeed, we should focus strongly on doing this.</p><p class=\"mt-3\">As well as reading or attending lectures, look at cultivating different learning styles—or, more precisely, learning strategies. Micromastery enables you to experiment and use a vast array of different learning strategies. Since all are designed to succeed brilliantly (with a modicum of persistence) at the micromastery concerned, you have a perfect chance to increase your store of potential learning strategies. This in turn increases your ideational fluency — your ability to switch between idea sets that may be opposed or contradictory. If one strategy doesn't seem to work, no matter how wedded you are to it, you switch seamlessly to another. Ideational fluency is an attribute required of anyone working in a fast-changing, rapid-learning environment — the kind increasingly encountered today.</p>", "question": "According to the passage, micromastery refers to:", "options": ["The ability to master both macro and micro skills", "The ability to experiment and apply diverse learning strategies", "The aptitude to learn better and achieve all goals", "The ability to be a master of both process and product"], "answer": 1, "explanation": "The passage connects micromastery with experimenting with and using a vast array of different learning strategies."}, {"id": 49, "section": "Paper 1: General Paper", "module": "Reading Comprehension", "context": "<p>Conventional and outdated wisdom asserts that we each have ‘learning styles’ unique to ourselves. The implication is that if you don’t learn using your preferred style you'll fail to acquire the knowledge desired. It also allows you an excuse not to work hard at learning something new. In Soft-Wired, however, Michael Merzenich shows that the plasticity of the brain extends to the way we learn. In other words, we can learn how to learn. Indeed, we should focus strongly on doing this.</p><p class=\"mt-3\">As well as reading or attending lectures, look at cultivating different learning styles—or, more precisely, learning strategies. Micromastery enables you to experiment and use a vast array of different learning strategies. Since all are designed to succeed brilliantly (with a modicum of persistence) at the micromastery concerned, you have a perfect chance to increase your store of potential learning strategies. This in turn increases your ideational fluency — your ability to switch between idea sets that may be opposed or contradictory. If one strategy doesn't seem to work, no matter how wedded you are to it, you switch seamlessly to another. Ideational fluency is an attribute required of anyone working in a fast-changing, rapid-learning environment — the kind increasingly encountered today.</p>", "question": "Another word for \"seamlessly\" can be:", "options": ["Speedily", "Slowly", "Smoothly", "Gracefully"], "answer": 2, "explanation": "\"Seamlessly\" means smoothly, without interruption or difficulty."}, {"id": 50, "section": "Paper 1: General Paper", "module": "Reading Comprehension", "context": "<p>Conventional and outdated wisdom asserts that we each have ‘learning styles’ unique to ourselves. The implication is that if you don’t learn using your preferred style you'll fail to acquire the knowledge desired. It also allows you an excuse not to work hard at learning something new. In Soft-Wired, however, Michael Merzenich shows that the plasticity of the brain extends to the way we learn. In other words, we can learn how to learn. Indeed, we should focus strongly on doing this.</p><p class=\"mt-3\">As well as reading or attending lectures, look at cultivating different learning styles—or, more precisely, learning strategies. Micromastery enables you to experiment and use a vast array of different learning strategies. Since all are designed to succeed brilliantly (with a modicum of persistence) at the micromastery concerned, you have a perfect chance to increase your store of potential learning strategies. This in turn increases your ideational fluency — your ability to switch between idea sets that may be opposed or contradictory. If one strategy doesn't seem to work, no matter how wedded you are to it, you switch seamlessly to another. Ideational fluency is an attribute required of anyone working in a fast-changing, rapid-learning environment — the kind increasingly encountered today.</p>", "question": "Ideational fluency in the passage is defined as:", "options": ["The ability to switch between contradictory idea sets", "Various kinds of learning strategies and ideas", "Possessing the skill in one kind of learning strategy", "The ability to avoid many kinds of idea sets"], "answer": 0, "explanation": "The passage defines ideational fluency as the ability to switch between idea sets that may be opposed or contradictory."}];
+
+        const TOTAL_QUESTIONS = questionsData.length;
+        const TOTAL_MARKS = TOTAL_QUESTIONS * 2;
+
+        // App State
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(TOTAL_QUESTIONS).fill(null);
+        let bookmarkedState = new Array(TOTAL_QUESTIONS).fill(false);
+        let isSubmitted = false;
+        let timerSeconds = 60 * 60; // 60 Minutes
+        let timerInterval = null;
+
+        // On Load
+        window.onload = function() {
+            renderPalette();
+        };
+
+        function startTimer() {
+            if (timerInterval) return;
+            timerInterval = setInterval(() => {
+                if (timerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmitTest();
+                } else {
+                    timerSeconds--;
+                    updateTimerDisplay();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timerSeconds / 60);
+            const seconds = timerSeconds % 60;
+            document.getElementById("timerDisplay").innerText =
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function renderPalette() {
+            const grid = document.getElementById("paletteGrid");
+            grid.innerHTML = "";
+
+            for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+                const btn = document.createElement("button");
+                btn.id = `palette-btn-${i}`;
+                btn.className = getPaletteBtnClass(i);
+                btn.innerText = questionsData[i].id;
+                btn.title = `Question ${i + 1} of ${TOTAL_QUESTIONS} `;
+                btn.onclick = () => loadQuestion(i);
+                grid.appendChild(btn);
+            }
+            updateAnsweredCount();
+        }
+
+        function getPaletteBtnClass(index) {
+            const base = "h-9 w-9 rounded-lg font-semibold text-xs transition flex items-center justify-center border shadow-xs ";
+            if (index === currentQuestionIndex) {
+                return base + "ring-2 ring-indigo-600 ring-offset-1 font-bold border-indigo-600 ";
+            }
+            if (bookmarkedState[index]) {
+                return base + "bg-amber-500 text-white border-amber-600 ";
+            }
+            if (userAnswers[index] !== null) {
+                return base + "bg-emerald-500 text-white border-emerald-600 ";
+            }
+            return base + "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 ";
+        }
+
+        function updateAnsweredCount() {
+            const count = userAnswers.filter(a => a !== null).length;
+            document.getElementById("answeredCount").innerText = `${count}/${TOTAL_QUESTIONS} Answered`;
+        }
+
+        function loadQuestion(index) {
+            currentQuestionIndex = index;
+            const q = questionsData[index];
+
+            document.getElementById("sectionBadge").innerText = q.section;
+            document.getElementById("moduleBadge").innerText = q.module;
+            document.getElementById("questionTitleNumber").innerText = `Question ${index + 1} of ${TOTAL_QUESTIONS}`;
+            document.getElementById("questionText").innerText = q.question;
+
+            // Context container (passage) - subsumed per-question
+            const contextContainer = document.getElementById("contextContainer");
+            const contextContent = document.getElementById("contextContent");
+            if (q.context) {
+                contextContainer.classList.remove("hidden");
+                contextContent.innerHTML = q.context;
+            } else {
+                contextContainer.classList.add("hidden");
+                contextContent.innerHTML = "";
+            }
+
+            const optionsList = document.getElementById("optionsList");
+            optionsList.innerHTML = "";
+
+            q.options.forEach((opt, optIdx) => {
+                const optBtn = document.createElement("button");
+                optBtn.className = getOptionStyle(optIdx);
+                optBtn.onclick = () => selectOption(optIdx);
+                if (isSubmitted) optBtn.disabled = true;
+
+                optBtn.innerHTML = `
+                    <div class="flex items-center space-x-3 w-full text-left">
+                        <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border ${getOptionBadgeStyle(optIdx)}">
+                            ${optIdx + 1}
+                        </span>
+                        <span class="text-sm font-medium flex-1">${opt}</span>
+                    </div>
+                `;
+                optionsList.appendChild(optBtn);
+            });
+
+            const bookmarkIcon = document.getElementById("bookmarkIcon");
+            if (bookmarkedState[index]) {
+                bookmarkIcon.className = "fa-solid fa-bookmark text-amber-600";
+            } else {
+                bookmarkIcon.className = "fa-regular fa-bookmark";
+            }
+
+            document.getElementById("prevBtn").disabled = (index === 0);
+            document.getElementById("prevBtn").style.opacity = (index === 0) ? "0.5" : "1";
+
+            if (index === TOTAL_QUESTIONS - 1) {
+                document.getElementById("nextBtn").innerHTML = `Finish <i class="fa-solid fa-flag-checkered ml-1.5"></i>`;
+            } else {
+                document.getElementById("nextBtn").innerHTML = `Next <i class="fa-solid fa-chevron-right ml-1.5"></i>`;
+            }
+
+            const expBox = document.getElementById("explanationBox");
+            if (isSubmitted) {
+                expBox.classList.remove("hidden");
+                document.getElementById("explanationText").innerText = q.explanation;
+            } else {
+                expBox.classList.add("hidden");
+            }
+
+            renderPalette();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function getOptionStyle(optIdx) {
+            const selected = userAnswers[currentQuestionIndex] === optIdx;
+            const correct = questionsData[currentQuestionIndex].answer === optIdx;
+            const base = "w-full p-4 rounded-xl border text-left transition-all flex items-center justify-between ";
+
+            if (isSubmitted) {
+                if (correct) return base + "bg-emerald-50 border-emerald-500 text-emerald-900 ring-1 ring-emerald-500";
+                if (selected && !correct) return base + "bg-rose-50 border-rose-500 text-rose-900 ring-1 ring-rose-500";
+                return base + "bg-slate-50 border-slate-200 opacity-60";
+            }
+
+            if (selected) {
+                return base + "bg-indigo-50 border-indigo-600 text-indigo-900 ring-2 ring-indigo-500/20 shadow-xs";
+            }
+            return base + "bg-white border-slate-200 hover:bg-slate-50 hover:border-slate-300 text-slate-700";
+        }
+
+        function getOptionBadgeStyle(optIdx) {
+            const selected = userAnswers[currentQuestionIndex] === optIdx;
+            const correct = questionsData[currentQuestionIndex].answer === optIdx;
+
+            if (isSubmitted) {
+                if (correct) return "bg-emerald-600 text-white border-emerald-600";
+                if (selected && !correct) return "bg-rose-600 text-white border-rose-600";
+                return "bg-slate-200 text-slate-600 border-slate-300";
+            }
+
+            if (selected) return "bg-indigo-600 text-white border-indigo-600";
+            return "bg-slate-100 text-slate-600 border-slate-300";
+        }
+
+        function selectOption(optIdx) {
+            if (isSubmitted) return;
+            userAnswers[currentQuestionIndex] = optIdx;
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function clearResponse() {
+            if (isSubmitted) return;
+            userAnswers[currentQuestionIndex] = null;
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function toggleBookmark() {
+            bookmarkedState[currentQuestionIndex] = !bookmarkedState[currentQuestionIndex];
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function navigateQuestion(direction) {
+            const newIndex = currentQuestionIndex + direction;
+            if (newIndex >= 0 && newIndex < TOTAL_QUESTIONS) {
+                loadQuestion(newIndex);
+            } else if (newIndex === TOTAL_QUESTIONS) {
+                confirmSubmitTest();
+            }
+        }
+
+        function confirmSubmitTest() {
+            if (isSubmitted) return;
+            const unanswered = userAnswers.filter(a => a === null).length;
+            let msg = "Are you sure you want to submit the test?";
+            if (unanswered > 0) {
+                msg = `You still have ${unanswered} unanswered question(s). Are you sure you want to submit?`;
+            }
+            if (window.confirm(msg)) {
+                submitTest();
+            }
+        }
+
+        function autoSubmitTest() {
+            alert("Time limit reached! Your test will now be submitted automatically.");
+            submitTest();
+        }
+
+        function submitTest() {
+            isSubmitted = true;
+            clearInterval(timerInterval);
+
+            document.getElementById("submitBtn").classList.add("hidden");
+
+            let correct = 0;
+            let incorrect = 0;
+
+            userAnswers.forEach((ans, idx) => {
+                if (ans === questionsData[idx].answer) {
+                    correct++;
+                } else if (ans !== null) {
+                    incorrect++;
+                }
+            });
+
+            const skipped = TOTAL_QUESTIONS - (correct + incorrect);
+            const score = correct * 2;
+            const percentage = ((score / TOTAL_MARKS) * 100).toFixed(1);
+
+            document.getElementById("finalScore").innerText = `${score} / ${TOTAL_MARKS}`;
+            document.getElementById("finalPercentage").innerText = `${percentage}%`;
+            document.getElementById("correctCount").innerText = `${correct} (${correct * 2} Marks)`;
+            document.getElementById("incorrectCount").innerText = `${incorrect + skipped}`;
+
+            document.getElementById("resultModal").classList.remove("hidden");
+        }
+
+        function reviewMode() {
+            document.getElementById("resultModal").classList.add("hidden");
+            loadQuestion(0);
+        }
+    </script>
+</body>
+</html>
