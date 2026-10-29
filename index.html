@@ -4,11 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UGC NET Prep Portal</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Fallback styling so the site never looks broken if a network blocks scripts -->
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f8fafc;
+            color: #1e293b;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            justify-content: space-between;
+        }
+        /* Fallback safety for cards if CDN fails to load */
+        .fallback-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
@@ -36,7 +57,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
             <!-- Quiz 1 -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
+            <div class="fallback-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
                 <div>
                     <div class="flex justify-between items-start mb-4">
                         <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Quiz 1</span>
@@ -52,7 +73,7 @@
             </div>
 
             <!-- Quiz 2 -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
+            <div class="fallback-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
                 <div>
                     <div class="flex justify-between items-start mb-4">
                         <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Quiz 2</span>
@@ -68,7 +89,7 @@
             </div>
 
             <!-- Quiz 3 -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
+            <div class="fallback-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
                 <div>
                     <div class="flex justify-between items-start mb-4">
                         <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Quiz 3</span>
@@ -84,7 +105,7 @@
             </div>
 
             <!-- Quiz 4 -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
+            <div class="fallback-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
                 <div>
                     <div class="flex justify-between items-start mb-4">
                         <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Quiz 4</span>
@@ -100,7 +121,7 @@
             </div>
 
             <!-- Quiz 5 -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
+            <div class="fallback-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
                 <div>
                     <div class="flex justify-between items-start mb-4">
                         <span class="bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Quiz 5</span>
@@ -116,7 +137,7 @@
             </div>
 
             <!-- Quiz 6 -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
+            <div class="fallback-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
                 <div>
                     <div class="flex justify-between items-start mb-4">
                         <span class="bg-violet-100 text-violet-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Quiz 6</span>
@@ -132,7 +153,7 @@
             </div>
 
             <!-- Quiz 7 -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
+            <div class="fallback-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
                 <div>
                     <div class="flex justify-between items-start mb-4">
                         <span class="bg-cyan-100 text-cyan-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Quiz 7</span>
@@ -148,7 +169,7 @@
             </div>
 
             <!-- Quiz 8 -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
+            <div class="fallback-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
                 <div>
                     <div class="flex justify-between items-start mb-4">
                         <span class="bg-teal-100 text-teal-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Quiz 8</span>
@@ -164,7 +185,7 @@
             </div>
 
             <!-- Quiz 9 -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
+            <div class="fallback-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
                 <div>
                     <div class="flex justify-between items-start mb-4">
                         <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Quiz 9</span>
@@ -186,4 +207,4 @@
         <p>UGC NET Practice Portal &copy; 2026</p>
     </footer>
 </body>
-</html>
+</html>v
