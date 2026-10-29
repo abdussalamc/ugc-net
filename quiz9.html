@@ -1,0 +1,2335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="UGC NET 150-Question CBT Mock Quiz for Paper 1 (General Paper) and Paper 2 (Commerce Code 08) - 18 June 2024 Sitting with 180-minute timer, subsumed DI & RC passages, and verified solutions.">
+    <title>UGC NET Paper 1 &amp; Commerce (Code 08) - 150 Questions CBT Mock Test</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <!-- Start Quiz Modal Overlay -->
+    <div id="start-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-6 md:p-8 max-w-lg w-full text-center shadow-2xl border border-slate-100 space-y-5">
+            <div class="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto shadow-inner">
+                <i class="fa-solid fa-graduation-cap text-3xl"></i>
+            </div>
+            <div>
+                <span class="inline-block bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">June 2024 • Cancelled Exam</span>
+                <h2 class="text-2xl font-extrabold text-slate-800">UGC NET CBT Mock Test</h2>
+                <p class="text-slate-500 text-sm mt-1">Paper 1 (General Aptitude) + Paper 2 (Commerce Code 08)</p>
+            </div>
+            <div class="text-xs sm:text-sm text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-200 text-left space-y-2">
+                <p class="flex items-start"><i class="fa-solid fa-circle-check text-emerald-500 mt-0.5 mr-2 shrink-0"></i> <span><strong>150 Questions:</strong> Q1–Q50 General Paper I &amp; Q51–Q150 Commerce Paper II</span></p>
+                <p class="flex items-start"><i class="fa-solid fa-clock text-indigo-500 mt-0.5 mr-2 shrink-0"></i> <span><strong>180 Minutes Timer:</strong> Full 3-hour CBT simulation</span></p>
+                <p class="flex items-start"><i class="fa-solid fa-award text-amber-500 mt-0.5 mr-2 shrink-0"></i> <span><strong>300 Marks Total:</strong> +2 Marks per correct answer, <strong>No Negative Marking</strong></span></p>
+        
+            </div>
+            <button onclick="startQuizSession()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-indigo-600/25 transition duration-150 flex items-center justify-center space-x-2 text-base">
+                <i class="fa-solid fa-play"></i>
+                <span>Start 180-Minute Quiz</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Submit Confirmation Modal (No browser confirm/alert) -->
+    <div id="confirmModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 text-center space-y-4 border border-slate-100">
+            <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto text-2xl">
+                <i class="fa-solid fa-circle-question"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800">Submit Examination?</h3>
+            <p id="confirmModalText" class="text-sm text-slate-600 leading-relaxed"></p>
+            <div class="grid grid-cols-3 gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs">
+                <div>
+                    <span class="text-slate-400 block">Answered</span>
+                    <strong id="modalAnsweredCount" class="text-emerald-600 text-base">0</strong>
+                </div>
+                <div>
+                    <span class="text-slate-400 block">Unanswered</span>
+                    <strong id="modalUnansweredCount" class="text-rose-600 text-base">0</strong>
+                </div>
+                <div>
+                    <span class="text-slate-400 block">Marked</span>
+                    <strong id="modalBookmarkedCount" class="text-amber-600 text-base">0</strong>
+                </div>
+            </div>
+            <div class="flex space-x-3 pt-2">
+                <button onclick="closeConfirmModal()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-sm transition">
+                    Resume Test
+                </button>
+                <button onclick="submitTest()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold text-sm shadow-md transition">
+                    Final Submit
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Banner -->
+    <header class="bg-indigo-950 text-white shadow-lg sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="p-2 bg-indigo-800 rounded-lg border border-indigo-700">
+                    <i class="fa-solid fa-building-columns text-xl text-amber-400"></i>
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-bold tracking-wide">UGC NET Paper 1 + Paper 2 Commerce (Code 08)</h1>
+                    <p class="text-xs text-indigo-300">150 Questions &bull; 300 Marks &bull; 180 Minutes &bull; Verified Key &amp; Solutions</p>
+                </div>
+            </div>
+
+            <!-- Timer & Action Bar -->
+            <div class="flex items-center space-x-3">
+                <div id="timerContainer" class="flex items-center bg-indigo-900 border border-indigo-700 px-3.5 py-1.5 rounded-lg text-amber-300 font-mono font-bold text-base sm:text-lg shadow-inner">
+                    <i class="fa-regular fa-clock mr-2 text-sm"></i>
+                    <span id="timerDisplay">180:00</span>
+                </div>
+                <button id="submitBtn" onclick="openConfirmModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all shadow-md flex items-center">
+                    <i class="fa-solid fa-paper-plane mr-1.5"></i> Submit Test
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace Area -->
+    <main class="max-w-7xl mx-auto w-full px-4 py-6 flex-1 grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+        <!-- Left/Center Content Area: Questions (3 columns on large screens) -->
+        <div class="lg:col-span-3 flex flex-col space-y-4">
+
+            <!-- Question Module Badge & Header -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-wrap justify-between items-center gap-2">
+                <div class="space-y-1">
+                    <div class="flex flex-wrap items-center gap-1.5">
+                        <span id="sectionBadge" class="inline-block bg-indigo-100 text-indigo-800 font-semibold px-3 py-0.5 rounded-full text-xs uppercase tracking-wider">
+                            Paper 1: General
+                        </span>
+                        <span id="moduleBadge" class="inline-block bg-emerald-100 text-emerald-800 font-semibold px-3 py-0.5 rounded-full text-xs uppercase tracking-wider">
+                            Data Interpretation
+                        </span>
+                        <span id="verifiedBadge" class="hidden bg-rose-100 text-rose-800 font-semibold px-2.5 py-0.5 rounded-full text-xs">
+                            <i class="fa-solid fa-wrench mr-1"></i>Researched &amp; Corrected
+                        </span>
+                    </div>
+                    <h2 class="text-lg font-bold text-slate-800" id="questionTitleNumber">Question 1 of 150</h2>
+                </div>
+                <div class="flex items-center space-x-2 text-xs font-semibold text-slate-600">
+                    <span class="bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-md border border-emerald-200">+2.0 Marks</span>
+                    <span class="bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md border border-slate-200">0.0 Negative</span>
+                </div>
+            </div>
+
+            <!-- Dynamic Subsumed Context Container (DI Tables / RC Passages / Matching Lists) -->
+            <div id="contextContainer" class="hidden bg-indigo-50/70 border border-indigo-200 rounded-xl p-4 sm:p-5 shadow-sm text-sm text-slate-700">
+                <div class="flex items-center justify-between text-indigo-800 font-bold mb-2.5 text-xs uppercase tracking-wider border-b border-indigo-200/80 pb-2">
+                    <span><i class="fa-solid fa-book-open mr-2"></i><span id="contextHeading">Subsumed Passage / Reference Data</span></span>
+                    <span class="text-[11px] font-medium text-indigo-600">Included directly under this question</span>
+                </div>
+                <div id="contextContent" class="overflow-x-auto custom-scrollbar leading-relaxed"></div>
+            </div>
+
+            <!-- Main Question Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                <div>
+                    <p id="questionText" class="text-base sm:text-lg font-semibold text-slate-800 leading-relaxed mb-6 whitespace-pre-line">
+                        Loading question...
+                    </p>
+
+                    <!-- Options List -->
+                    <div id="optionsList" class="space-y-3">
+                        <!-- Options injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- Explanation Panel (Visible in Review Mode or via Quick Check) -->
+                <div id="explanationBox" class="hidden mt-6 p-4 sm:p-5 rounded-xl bg-emerald-50/90 border border-emerald-200 text-sm">
+                    <div class="flex items-center text-emerald-900 font-bold mb-2 text-sm">
+                        <i class="fa-solid fa-lightbulb text-amber-500 mr-2 text-base"></i> Verified Answer &amp; Detailed Solution Analysis
+                    </div>
+                    <p id="explanationText" class="text-slate-700 leading-relaxed whitespace-pre-line"></p>
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="mt-8 pt-4 border-t border-slate-100 flex flex-wrap justify-between items-center gap-3">
+                    <div class="flex flex-wrap gap-2">
+                        <button id="clearBtn" onclick="clearResponse()" class="px-3.5 py-2 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-100 text-xs sm:text-sm font-medium transition">
+                            <i class="fa-solid fa-eraser mr-1.5"></i> Clear Response
+                        </button>
+                        <button id="bookmarkBtn" onclick="toggleBookmark()" class="px-3.5 py-2 rounded-lg border border-amber-300 text-amber-700 hover:bg-amber-50 text-xs sm:text-sm font-medium transition">
+                            <i class="fa-regular fa-bookmark mr-1.5" id="bookmarkIcon"></i> Mark for Review
+                        </button>
+                        <button id="toggleSolutionBtn" onclick="toggleInstantSolution()" class="px-3.5 py-2 rounded-lg border border-indigo-200 text-indigo-700 bg-indigo-50/60 hover:bg-indigo-100 text-xs sm:text-sm font-medium transition">
+                            <i class="fa-regular fa-eye mr-1.5"></i> View Solution
+                        </button>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button id="prevBtn" onclick="navigateQuestion(-1)" class="px-4 py-2 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 text-sm font-semibold transition">
+                            <i class="fa-solid fa-chevron-left mr-1.5"></i> Previous
+                        </button>
+                        <button id="nextBtn" onclick="navigateQuestion(1)" class="px-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold transition shadow-sm">
+                            Next <i class="fa-solid fa-chevron-right ml-1.5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Side Panel: Section Jumper & Question Palette -->
+        <div class="lg:col-span-1 flex flex-col space-y-4">
+
+            <!-- Status Legend -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+                <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">Palette Legend</h3>
+                <div class="grid grid-cols-2 gap-2.5 text-xs">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-emerald-500 inline-block"></span>
+                        <span class="text-slate-600">Answered</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-amber-500 inline-block"></span>
+                        <span class="text-slate-600">Marked Review</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded bg-slate-100 border border-slate-300 inline-block"></span>
+                        <span class="text-slate-600">Unanswered</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3.5 h-3.5 rounded ring-2 ring-indigo-600 inline-block"></span>
+                        <span class="text-slate-600">Current</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section Quick Jump -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+                <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">Jump to Section</h3>
+                <div class="grid grid-cols-1 gap-1.5 text-xs">
+                    <button onclick="loadQuestion(0)" class="px-3 py-2 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-800 font-semibold text-left border border-indigo-200 flex justify-between items-center transition">
+                        <span>1. Paper I: Data Interpretation</span>
+                        <span class="bg-indigo-200 text-indigo-900 px-1.5 py-0.5 rounded text-[10px]">Q1–5</span>
+                    </button>
+                    <button onclick="loadQuestion(5)" class="px-3 py-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-semibold text-left border border-emerald-200 flex justify-between items-center transition">
+                        <span>2. Paper I: General Core</span>
+                        <span class="bg-emerald-200 text-emerald-900 px-1.5 py-0.5 rounded text-[10px]">Q6–45</span>
+                    </button>
+                    <button onclick="loadQuestion(45)" class="px-3 py-2 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold text-left border border-amber-200 flex justify-between items-center transition">
+                        <span>3. Paper I: Comprehension</span>
+                        <span class="bg-amber-200 text-amber-900 px-1.5 py-0.5 rounded text-[10px]">Q46–50</span>
+                    </button>
+                    <button onclick="loadQuestion(50)" class="px-3 py-2 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-800 font-semibold text-left border border-sky-200 flex justify-between items-center transition">
+                        <span>4. Paper II: Commerce Core</span>
+                        <span class="bg-sky-200 text-sky-900 px-1.5 py-0.5 rounded text-[10px]">Q51–140</span>
+                    </button>
+                    <button onclick="loadQuestion(140)" class="px-3 py-2 rounded-lg bg-violet-50 hover:bg-violet-100 text-violet-800 font-semibold text-left border border-violet-200 flex justify-between items-center transition">
+                        <span>5. Paper II: Commerce RC</span>
+                        <span class="bg-violet-200 text-violet-900 px-1.5 py-0.5 rounded text-[10px]">Q141–150</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question Palette Grid -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex-1 flex flex-col">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Question Palette</h3>
+                    <span id="answeredCount" class="text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full">0 / 150 Answered</span>
+                </div>
+
+                <div id="paletteGrid" class="grid grid-cols-5 gap-2 max-h-96 overflow-y-auto custom-scrollbar p-1">
+                    <!-- 150 buttons injected dynamically -->
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Result / Score Modal -->
+    <div id="resultModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-xl w-full p-6 sm:p-8 text-center relative border border-slate-100">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-3 text-3xl shadow-inner">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <h2 class="text-2xl font-extrabold text-slate-800">Examination Completed!</h2>
+            <p id="resultSubheading" class="text-xs sm:text-sm text-slate-500 mb-5">UGC NET Paper 1 + Paper 2 Commerce (Code 08) Performance Report</p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4 text-left">
+                <div class="p-3 bg-indigo-50 rounded-xl border border-indigo-100">
+                    <span class="text-[11px] text-indigo-600 uppercase font-bold">Total Score</span>
+                    <p class="text-xl font-extrabold text-indigo-900" id="finalScore">0 / 300</p>
+                </div>
+                <div class="p-3 bg-indigo-50 rounded-xl border border-indigo-100">
+                    <span class="text-[11px] text-indigo-600 uppercase font-bold">Accuracy / %</span>
+                    <p class="text-xl font-extrabold text-indigo-900" id="finalPercentage">0%</p>
+                </div>
+                <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-100">
+                    <span class="text-[11px] text-emerald-700 uppercase font-bold">Correct</span>
+                    <p class="text-xl font-bold text-emerald-700" id="correctCount">0</p>
+                </div>
+                <div class="p-3 bg-rose-50 rounded-xl border border-rose-100">
+                    <span class="text-[11px] text-rose-700 uppercase font-bold">Wrong / Skipped</span>
+                    <p class="text-xl font-bold text-rose-700" id="incorrectCount">0</p>
+                </div>
+            </div>
+
+            <!-- Paper-wise Breakdown -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 text-left text-xs">
+                <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <span class="font-bold text-slate-700 block">Paper 1: General Paper (Q1–50)</span>
+                        <span class="text-slate-500">Max Marks: 100</span>
+                    </div>
+                    <span id="paper1ScoreBadge" class="text-base font-extrabold text-indigo-700 bg-indigo-100 px-3 py-1 rounded-lg">0 / 100</span>
+                </div>
+                <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <span class="font-bold text-slate-700 block">Paper 2: Commerce (Q51–150)</span>
+                        <span class="text-slate-500">Max Marks: 200</span>
+                    </div>
+                    <span id="paper2ScoreBadge" class="text-base font-extrabold text-sky-700 bg-sky-100 px-3 py-1 rounded-lg">0 / 200</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3">
+                <button onclick="reviewMode()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold shadow-md transition flex items-center justify-center">
+                    <i class="fa-solid fa-magnifying-glass-chart mr-2"></i> Review All Solutions
+                </button>
+                <button onclick="resetQuizSession()" class="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold transition flex items-center justify-center">
+                    <i class="fa-solid fa-rotate-right mr-2"></i> Retake Test
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Shared Subsumed Contexts for DI and Reading Comprehension
+        const DI_TABLE_P1 = `<p class="mb-2 font-medium text-slate-700">The following table shows the city-wise percentage distribution of IT magazine readers across six cities (A–F) in 2019 and 2023. Total percentage in each year = 100%. Use the 2019 and 2023 columns as specified in the question.</p><div class="overflow-x-auto my-2"><table class="min-w-full text-xs sm:text-sm border border-indigo-200 rounded-lg overflow-hidden"><thead class="bg-indigo-100 text-indigo-900 font-semibold"><tr><th class="p-2 border border-indigo-200 text-left">City</th><th class="p-2 border border-indigo-200 text-left">2019 (%)</th><th class="p-2 border border-indigo-200 text-left">2023 (%)</th></tr></thead><tbody class="bg-white"><tr><td class="p-2 border border-indigo-100 font-medium">A</td><td class="p-2 border border-indigo-100">10%</td><td class="p-2 border border-indigo-100">15%</td></tr><tr><td class="p-2 border border-indigo-100 font-medium">B</td><td class="p-2 border border-indigo-100">14%</td><td class="p-2 border border-indigo-100">16%</td></tr><tr><td class="p-2 border border-indigo-100 font-medium">C</td><td class="p-2 border border-indigo-100">17%</td><td class="p-2 border border-indigo-100">28%</td></tr><tr><td class="p-2 border border-indigo-100 font-medium">D</td><td class="p-2 border border-indigo-100">9%</td><td class="p-2 border border-indigo-100">10%</td></tr><tr><td class="p-2 border border-indigo-100 font-medium">E</td><td class="p-2 border border-indigo-100">24%</td><td class="p-2 border border-indigo-100">9%</td></tr><tr><td class="p-2 border border-indigo-100 font-medium">F</td><td class="p-2 border border-indigo-100">26%</td><td class="p-2 border border-indigo-100">22%</td></tr></tbody></table></div>`;
+
+        const RC_PASSAGE_P1 = `<p class="mb-3 leading-relaxed">According to a World Health Organization (WHO) report, about 80 percent of the world population uses traditional medicine systems in some or the other way. India has a distinctive and unique traditional medicine base, with each system having its own ancient philosophy, medicinal knowledge, perception and practices that align with the regional cultures, traditions and beliefs. The WHO Global Centre for Traditional Medicine has been established in Jamnagar, India.</p><p class="mb-3 leading-relaxed">The traditional medicine systems in India include Ayurveda, Yoga, Naturopathy, Unani, Siddha, Sowa Rigpa and Homeopathy which is known as Ayush. All these systems were formulated, practised and perfected in a continuum much before the advent of modern health science.</p><p class="leading-relaxed">In many countries of the world, medical pluralism is the norm and traditional medicine is one of the surest means to achieve total healthcare coverage for the world population using acceptable, safe and economically-feasible methods. No system of medicine can single-handedly address all health concerns, but an integrative approach incorporating the positives of each can surely benefit mankind.</p>`;
+
+        const RC_COMMERCE_1 = `<p class="mb-3 leading-relaxed">Introduction of Corporate Governance in a company brings order and methods into the decision-making process and fixes who should own the responsibility. That is the goal and role of corporate governance: it brings order and method into decision-making. The company will focus on its mission and vision, and not on the personal likes and dislikes of a few top officers. The benefits of corporate governance are difficult to quantify in the short run. Accounting jugglery and showing profits give a company short-term gains, but they are not long-term policies for financial credibility. True financial performance of a company, openness, and sound governance policies give investors confidence.</p><p class="mb-3 leading-relaxed">Unethical policies or mismanagement by a CEO or director will be exposed by adhering to corporate-governance principles. Corporate governance throws light on excessive remuneration given to directors or CEOs. It improves investor confidence and relations.</p><p class="leading-relaxed">Fraud and mismanagement can be detected early so that remedial action can be taken. It is also acknowledged that no system can remove fraudulent practices completely. Corporate governance is an open, democratic system. It may appear long-winded or time-consuming, and individual decision-making may be hindered. However, the risk of fraud is much bigger and more damaging to a company.</p>`;
+
+        const RC_COMMERCE_2 = `<p class="mb-3 leading-relaxed">It is rightly said that, ‘It is easy to dodge our responsibilities, but we cannot dodge the consequences of dodging our responsibilities.’ Josiah Charles Stamp (1880–1941) was a former director of the Bank of England. In this modern digitalized world, businesses are required to be mindful both of what they are doing and of how they are doing it. A company’s brand depends not only on the quality of the products it offers but also on the overall impact of its operations on society, the environment, and the economy.</p><p class="mb-3 leading-relaxed">A sense of social responsibility provides companies with a competitive edge over competitors in a crowded marketplace. Corporate Social Responsibility (CSR) is a holistic and integrated management concept through which companies integrate social and environmental objectives with business objectives. It follows a Triple Bottom Line approach: the company focuses on the 3 Ps—People, Planet, and Profit—while addressing the expectations of its stakeholders. Many positive initiatives in the country are driven by objectives such as equal opportunities, minimizing poverty and human deprivation, and focusing on fundamental rights, thereby contributing to human development.</p><p class="leading-relaxed">The choices we make today will affect future generations. Despite these initiatives, inequality and disparity still exist. The passage states that the Indian Government implemented new CSR guidelines requiring Indian companies to spend 2 percent of their net profit on CSR, and that India was the first country to make this mandatory. Including the CSR mandate in the Companies Act, 2013, is presented as an important step in engaging the corporate sector in equitable development. Earlier, companies were required to spend 2 percent of profits on CSR and, if they failed to do so, to give reasons. Under the amendment described in the passage, companies must spend the specified amount within the prescribed time limit or transfer the amount to government-run funds. The amendment requires every company that qualifies under the CSR guidelines to spend the specified part of its profits on Corporate Social Responsibility. Researchers have attempted to study issues and challenges associated with CSR in India and to determine the factors driving CSR practices in Indian companies.</p>`;
+
+        // Helper to generate clean HTML matching tables for List-I and List-II questions
+        function createMatchTable(col1Title, col2Title, rows) {
+            let tbody = rows.map(r => `<tr><td class="p-2 border border-indigo-100 font-medium">${r[0]}</td><td class="p-2 border border-indigo-100">${r[1]}</td></tr>`).join('');
+            return `<div class="overflow-x-auto my-1"><table class="min-w-full text-xs sm:text-sm border border-indigo-200 rounded-lg overflow-hidden"><thead class="bg-indigo-100 text-indigo-900 font-semibold"><tr><th class="p-2 border border-indigo-200 text-left w-1/2">${col1Title}</th><th class="p-2 border border-indigo-200 text-left w-1/2">${col2Title}</th></tr></thead><tbody class="bg-white">${tbody}</tbody></table></div>`;
+        }
+
+        // Complete 150-Question Dataset (Q1-50 Paper 1, Q51-150 Paper 2 Commerce)
+        const questionsData = [
+            // ================= PAPER 1: DATA INTERPRETATION (Q1 - Q5) =================
+            {
+                id: 1,
+                section: "Paper 1: General Paper",
+                module: "Data Interpretation",
+                context: DI_TABLE_P1,
+                question: "If the total number of readers from all six cities A–F together in 2023 was 50,000, then the number of readers was more than 7,400 in exactly how many cities in the same year?",
+                options: ["2", "3", "4", "5"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — 4\nIn 2023, total readers = 50,000. Note that 7,400 out of 50,000 is 14.8%.\nCity-wise readers in 2023:\n• City A (15%) = 7,500 (> 7,400)\n• City B (16%) = 8,000 (> 7,400)\n• City C (28%) = 14,000 (> 7,400)\n• City D (10%) = 5,000\n• City E (9%) = 4,500\n• City F (22%) = 11,000 (> 7,400)\nThus, exactly 4 cities (A, B, C, and F) had more than 7,400 readers."
+            },
+            {
+                id: 2,
+                section: "Paper 1: General Paper",
+                module: "Data Interpretation",
+                context: DI_TABLE_P1,
+                question: "If the total number of readers in 2019 and 2023 were 4.3 lakh and 5.7 lakh respectively, what was the difference between the combined number of readers from City B and City C in the two years?",
+                options: ["1.175 lakh", "1.415 lakh", "1.625 lakh", "1.596 lakh"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — 1.175 lakh\n• In 2019: Combined share of City B and City C = 14% + 17% = 31%. Number of readers = 31% of 4.3 lakh = 0.31 × 4.3 = 1.333 lakh.\n• In 2023: Combined share of City B and City C = 16% + 28% = 44%. Number of readers = 44% of 5.7 lakh = 0.44 × 5.7 = 2.508 lakh.\n• Difference = 2.508 − 1.333 = 1.175 lakh."
+            },
+            {
+                id: 3,
+                section: "Paper 1: General Paper",
+                module: "Data Interpretation",
+                context: DI_TABLE_P1,
+                question: "If the ratio of the number of readers from City A in 2019 to that in 2023 was 2 : 5, what was the ratio of total readers from all six cities in 2019 to that in 2023?",
+                options: ["3 : 5", "4 : 5", "4 : 9", "2 : 5"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — 3 : 5\nLet total readers in 2019 and 2023 be T₁₉ and T₂₃ respectively.\nCity A had 10% of T₁₉ in 2019 and 15% of T₂₃ in 2023.\nGiven: (0.10 × T₁₉) / (0.15 × T₂₃) = 2 / 5\nT₁₉ / T₂₃ = (2 / 5) × (0.15 / 0.10) = (2 / 5) × (3 / 2) = 3 / 5, or 3 : 5."
+            },
+            {
+                id: 4,
+                section: "Paper 1: General Paper",
+                module: "Data Interpretation",
+                context: DI_TABLE_P1,
+                question: "If the number of readers from City D in 2019 and 2023 were 77,400 and 1,14,000 respectively, what is the difference between the number of readers from City F in 2019 and in 2023?",
+                options: ["24,800", "27,200", "28,400", "33,600"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — 27,200\n• In 2019: City D (9%) = 77,400 ⇒ Total readers in 2019 = 77,400 / 0.09 = 8,60,000. City F (26%) = 0.26 × 8,60,000 = 2,23,600.\n• In 2023: City D (10%) = 1,14,000 ⇒ Total readers in 2023 = 1,14,000 / 0.10 = 11,40,000. City F (22%) = 0.22 × 11,40,000 = 2,50,800.\n• Difference for City F = 2,50,800 − 2,23,600 = 27,200."
+            },
+            {
+                id: 5,
+                section: "Paper 1: General Paper",
+                module: "Data Interpretation",
+                context: DI_TABLE_P1,
+                question: "If City C had 73,100 readers in 2019 and City E had 51,300 readers in 2023, approximately what percentage more readers did City B have in 2023 than in 2019?",
+                options: ["53.7%", "50.3%", "52.8%", "51.5%"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — 51.5%\n• 2019 Total = 73,100 / 0.17 = 4,30,000 ⇒ City B in 2019 (14%) = 0.14 × 4,30,000 = 60,200.\n• 2023 Total = 51,300 / 0.09 = 5,70,000 ⇒ City B in 2023 (16%) = 0.16 × 5,70,000 = 91,200.\n• Percentage increase = [(91,200 − 60,200) / 60,200] × 100 = (31,000 / 60,200) × 100 ≈ 51.495% ≈ 51.5%."
+            },
+
+            // ================= PAPER 1: GENERAL CORE (Q6 - Q45) =================
+            {
+                id: 6,
+                section: "Paper 1: General Paper",
+                module: "Research Aptitude",
+                context: createMatchTable("List I (Abbreviation)", "List II (Meaning)", [
+                    ["A. et al.", "I. in the same place"],
+                    ["B. ante", "II. and others"],
+                    ["C. cf.", "III. before"],
+                    ["D. ibid.", "IV. compare"]
+                ]),
+                question: "Match List I (Research Abbreviation) with List II (Meaning) and select the correct code:",
+                options: ["A-I, B-II, C-III, D-IV", "A-II, B-III, C-IV, D-I", "A-III, B-IV, C-I, D-II", "A-IV, B-III, C-II, D-I"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — A-II, B-III, C-IV, D-I\n• et al. (et alii) = and others (II)\n• ante = before (III)\n• cf. (confer) = compare (IV)\n• ibid. (ibidem) = in the same place / work cited immediately above (I)."
+            },
+            {
+                id: 7,
+                section: "Paper 1: General Paper",
+                module: "People, Development & Environment",
+                context: "",
+                question: "Which of the following are essential requirements for the formation of photochemical smog?\nA. Carbon monoxide (CO)\nB. Nitrogen dioxide (NO₂)\nC. Carbon dioxide (CO₂)\nD. Volatile Organic Compounds (VOCs)\nE. Sunlight",
+                options: ["A, B and D only", "A, C and E only", "B, C, D and E only", "B, D and E only"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — B, D and E only\nPhotochemical smog (oxidizing / Los Angeles smog) forms when nitrogen oxides (particularly NO₂) and Volatile Organic Compounds (VOCs) react in the presence of ultraviolet radiation (Sunlight) to produce ground-level ozone and PAN."
+            },
+            {
+                id: 8,
+                section: "Paper 1: General Paper",
+                module: "Mathematical Reasoning",
+                context: "",
+                question: "Choose the correct statements from the following:\nA. x% of y equals y% of 100x.\nB. If 40% of 60% of (3/5) of a number is 504, then 25% of (2/5) of that number is 350.\nC. If A is 15% more than B, then B is about 13.04% less than A.\nD. 10% of 5 and 5% of 10 add up to 0.1.",
+                options: ["A and B only", "B and C only", "C and D only", "A and D only"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — B and C only\n• Statement A is false: x% of y = xy/100, whereas y% of 100x = xy.\n• Statement B is true: 0.4 × 0.6 × 0.6 × N = 0.144N = 504 ⇒ N = 3,500. Then 0.25 × 0.4 × 3,500 = 350.\n• Statement C is true: (15 / 115) × 100 ≈ 13.04%.\n• Statement D is false: 0.5 + 0.5 = 1.0 (not 0.1)."
+            },
+            {
+                id: 9,
+                section: "Paper 1: General Paper",
+                module: "Logical Reasoning",
+                context: "",
+                question: "Which informal fallacy is committed in the following statement?\n\"People with cases of flu should be kept in quarantine, because it has never been disproven as the best means of keeping the disease from spreading.\"",
+                options: ["Appeal to ignorance", "Hasty generalisation", "Slippery slope", "False cause"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — Appeal to ignorance\nAn appeal to ignorance (argumentum ad ignorantiam) argues that a proposition is true simply because it has not been proven false."
+            },
+            {
+                id: 10,
+                section: "Paper 1: General Paper",
+                module: "Mathematical Reasoning",
+                context: "",
+                question: "A motor boat covers a certain distance downstream in 5 hours but takes 6 hours to return upstream. If the speed of the stream is 4 km/h, what is the speed of the boat in still water?",
+                options: ["40 km/h", "42 km/h", "44 km/h", "46 km/h"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — 44 km/h\nLet the speed of the boat in still water be v km/h.\nDistance downstream = Distance upstream ⇒ 5(v + 4) = 6(v − 4)\n5v + 20 = 6v − 24 ⇒ v = 44 km/h."
+            },
+            {
+                id: 11,
+                section: "Paper 1: General Paper",
+                module: "Research Aptitude",
+                context: "",
+                question: "Which epistemological approach to the study of reality suggests that only knowledge gained through experience and the senses is acceptable?",
+                options: ["Constructionism", "Ethnography", "Empiricism", "Operationalism"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — Empiricism\nEmpiricism holds that sensory experience and direct observation are the primary and valid sources of knowledge."
+            },
+            {
+                id: 12,
+                section: "Paper 1: General Paper",
+                module: "Teaching & Higher Education",
+                context: "",
+                question: "Which organisation is the National Coordinator of SWAYAM courses for non-technical post-graduation education?",
+                options: ["All India Council for Technical Education (AICTE)", "National Institute of Technical Teachers Training and Research (NITTTR)", "National Council of Educational Research and Training (NCERT)", "University Grants Commission (UGC)"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — University Grants Commission (UGC)\nAmong the 9 National Coordinators of SWAYAM, UGC is responsible for non-technical post-graduate degree programmes."
+            },
+            {
+                id: 13,
+                section: "Paper 1: General Paper",
+                module: "Higher Education System",
+                context: createMatchTable("List I (Ancient Treatise)", "List II (Author)", [
+                    ["A. Lilavati", "I. Chanakya"],
+                    ["B. Yoga-Sutras", "II. Gautama"],
+                    ["C. Nyaya-Sutras", "III. Patanjali"],
+                    ["D. Arthashastra", "IV. Bhaskaracharya"]
+                ]),
+                question: "Match List I (Ancient Treatises) with List II (Authors):",
+                options: ["A-IV, B-III, C-II, D-I", "A-III, B-IV, C-II, D-I", "A-IV, B-III, C-I, D-II", "A-I, B-III, C-II, D-IV"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — A-IV, B-III, C-II, D-I\n• Lilavati — Bhaskaracharya (Bhaskara II) (IV)\n• Yoga-Sutras — Patanjali (III)\n• Nyaya-Sutras — Akshapada Gautama (II)\n• Arthashastra — Chanakya / Kautilya (I)."
+            },
+            {
+                id: 14,
+                section: "Paper 1: General Paper",
+                module: "People, Development & Environment",
+                context: "",
+                question: "What is the full form of POPs in environmental science?",
+                options: ["Persistent Organic Pollutants", "Persistent Oxygenated Pollutants", "Polycyclic Organic Pollutants", "Polymerised Organic Pollutants"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — Persistent Organic Pollutants\nPOPs are toxic organic chemical substances (regulated under the Stockholm Convention) that persist in the environment and bioaccumulate through the food web."
+            },
+            {
+                id: 15,
+                section: "Paper 1: General Paper",
+                module: "Mathematical Reasoning",
+                context: "",
+                question: "Arrange the following fractions in increasing (ascending) order:\nA. 6/7\nB. 11/13\nC. 16/19\nD. 19/22",
+                options: ["A, B, C, D", "D, C, B, A", "C, B, A, D", "D, A, B, C"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — C, B, A, D\nConverting to decimals:\n• C = 16/19 ≈ 0.8421\n• B = 11/13 ≈ 0.8462\n• A = 6/7 ≈ 0.8571\n• D = 19/22 ≈ 0.8636\nIncreasing order: C < B < A < D."
+            },
+            {
+                id: 16,
+                section: "Paper 1: General Paper",
+                module: "Information & Communication Technology",
+                context: createMatchTable("List I (Use)", "List II (Input Device)", [
+                    ["A. Input voiceovers for a presentation", "I. Mouse"],
+                    ["B. Input a PIN", "II. Joystick"],
+                    ["C. Select options from a menu", "III. Microphone"],
+                    ["D. Operate a flight simulator", "IV. Number pad"]
+                ]),
+                question: "Match List I (Use) with List II (Appropriate Computer Input Device):",
+                options: ["A-II, B-IV, C-I, D-III", "A-III, B-IV, C-I, D-II", "A-IV, B-II, C-I, D-III", "A-I, B-III, C-II, D-IV"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — A-III, B-IV, C-I, D-II\n• Voiceovers — Microphone (III)\n• Input a PIN — Number pad (IV)\n• Select options from a menu — Mouse (I)\n• Operate a flight simulator — Joystick (II)."
+            },
+            {
+                id: 17,
+                section: "Paper 1: General Paper",
+                module: "Information & Communication Technology",
+                context: "",
+                question: "A device used to convert a computer's digital signal to an analogue signal (and vice versa) for communication over telephone/cable lines is called a:",
+                options: ["Bridge", "Modem", "Switch", "Network Interface Card (NIC)"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Modem\nModem stands for Modulator-Demodulator; it modulates digital data into analogue signals for transmission and demodulates incoming analogue signals back into digital form."
+            },
+            {
+                id: 18,
+                section: "Paper 1: General Paper",
+                module: "Higher Education & ICT",
+                context: createMatchTable("List I (Digital Initiative)", "List II (Purpose)", [
+                    ["A. e-ShodhSindhu", "I. Hosts synopses of research topics in Indian universities"],
+                    ["B. ShodhGangotri", "II. Free/Libre and Open-Source Software for Education"],
+                    ["C. ShodhShuddhi", "III. Provides access to e-resources to universities and colleges"],
+                    ["D. FOSSEE", "IV. Plagiarism-checking initiative aimed at originality in academic writing"]
+                ]),
+                question: "Match List I (Digital Initiative) with List II (Purpose):",
+                options: ["A-IV, B-III, C-II, D-I", "A-III, B-I, C-IV, D-II", "A-I, B-II, C-III, D-IV", "A-II, B-IV, C-III, D-I"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — A-III, B-I, C-IV, D-II\n• e-ShodhSindhu provides access to scholarly e-resources/journals (III).\n• ShodhGangotri hosts synopses of approved research proposals (I).\n• ShodhShuddhi provides plagiarism detection software (Ouriginal/DrillBit) to universities (IV).\n• FOSSEE promotes Free/Libre and Open-Source Software in Education (II)."
+            },
+            {
+                id: 19,
+                section: "Paper 1: General Paper",
+                module: "Communication",
+                context: "",
+                question: "When communication helps a group achieve its task and goals effectively, it is known as playing a:",
+                options: ["Disruptive role", "Promotive role", "Counteractive role", "Devotional role"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Promotive role\nIn functional group communication theory, communication that facilitates decision-making and advances group goals performs a promotive role."
+            },
+            {
+                id: 20,
+                section: "Paper 1: General Paper",
+                module: "Mathematical Reasoning",
+                context: "",
+                question: "A boat's speed in still water is 5 km/h and the stream speed is 1 km/h. A man rows to a place 24 km away and returns to the starting point. Find the total time taken.",
+                options: ["8 hours", "10 hours", "12 hours", "15 hours"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — 10 hours\n• Downstream speed = 5 + 1 = 6 km/h ⇒ Time downstream = 24 / 6 = 4 hours.\n• Upstream speed = 5 − 1 = 4 km/h ⇒ Time upstream = 24 / 4 = 6 hours.\n• Total time = 4 + 6 = 10 hours."
+            },
+            {
+                id: 21,
+                section: "Paper 1: General Paper",
+                module: "People, Development & Environment",
+                verified: true,
+                context: "",
+                question: "Which statements about breeder reactors are true?\nA. They produce more fissile material than they consume.\nB. There are no breeder reactors in India.\nC. There are two types (fast and slow) of breeder reactors.\nD. For breeding, the conversion ratio (fissile material produced / fissile material consumed) should exceed one.\nE. Breeder reactors produce more nuclear waste than conventional reactors.",
+                options: ["A, C and D only", "A, B and D only", "B, C and E only", "A, C, D and E only"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — A, C and D only\nA breeder reactor is designed to produce more fissile material than it consumes, so A and D (conversion ratio > 1) are true. C follows the question’s conventional fast/thermal (sometimes called fast/slow) classification. B is false: India’s Fast Breeder Test Reactor (FBTR) at Kalpakkam (IGCAR) has been operating since 1985, distinct from the larger Prototype Fast Breeder Reactor (PFBR). E is not accepted as true in this item."
+            },
+            {
+                id: 22,
+                section: "Paper 1: General Paper",
+                module: "Logical Reasoning",
+                context: "",
+                question: "Arrange the following terms in increasing order of connotation (intension):\nA. Fielder\nB. Ball Player\nC. Baseball Player\nD. Athlete",
+                options: ["B, C, A, D", "B, A, C, D", "D, B, C, A", "A, C, B, D"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — D, B, C, A\nIncreasing connotation (intension) moves from the most general term (fewest defining attributes) to the most specific term (most defining attributes):\nAthlete (D) → Ball Player (B) → Baseball Player (C) → Fielder (A)."
+            },
+            {
+                id: 23,
+                section: "Paper 1: General Paper",
+                module: "Research Aptitude",
+                context: "",
+                question: "When you try to predict the value of an outcome variable from one or more predictor variables, you are likely to be using:\nA. Pearson product-moment correlation\nB. Bivariate regression\nC. Multivariate / Multiple regression\nD. Analysis of variance",
+                options: ["A, B and C only", "B and C only", "B, C and D only", "A and D only"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — B and C only\nRegression analysis (bivariate for one predictor, multiple/multivariate for multiple predictors) models and predicts the value of a dependent variable. Correlation only measures strength/direction of association, and ANOVA tests differences among group means."
+            },
+            {
+                id: 24,
+                section: "Paper 1: General Paper",
+                module: "Research Aptitude",
+                context: "",
+                question: "If a research project is designed so that everyone in the population of interest has an equal (and known non-zero) chance of being included in the sample, the research involves:",
+                options: ["Quota sampling", "Judgemental sampling", "Probability sampling", "Convenience sampling"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — Probability sampling\nProbability sampling (specifically Simple Random Sampling) ensures every member of the population has an equal and independent chance of selection."
+            },
+            {
+                id: 25,
+                section: "Paper 1: General Paper",
+                module: "Logical Reasoning",
+                context: "",
+                question: "Which statement about the classical Indian Nyaya syllogism (Pararthaanumana) is correct?",
+                options: ["Nyaya syllogism has three propositions.", "Nyaya syllogism has five terms.", "Nyaya syllogism has five propositions.", "Nyaya syllogism has three propositions and three terms."],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — Nyaya syllogism has five propositions.\nThe classical Nyaya syllogism consists of 5 propositions (avayavas): Pratijna (thesis), Hetu (reason), Udaharana (universal example), Upanaya (application), and Nigamana (conclusion), involving 3 terms (Paksha, Sadhya, Hetu)."
+            },
+            {
+                id: 26,
+                section: "Paper 1: General Paper",
+                module: "Communication",
+                context: "",
+                question: "Which technology first marked a definitive historical separation between physical transportation and communication?",
+                options: ["Telegraph", "Projection", "Printing", "Photography"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — Telegraph\nAs noted by communication theorist James W. Carey, the invention of the electric telegraph broke the historic link between communication and physical transportation by allowing messages to travel faster than a physical messenger."
+            },
+            {
+                id: 27,
+                section: "Paper 1: General Paper",
+                module: "Higher Education System",
+                verified: true,
+                context: "",
+                question: "According to the National Credit Framework (NCrF; the scan’s acronym is blurred), after a four-year Bachelor’s Degree (Honours/Research/Engineering), what credit level is earned?",
+                options: ["5.5", "6", "6.5", "7"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — 6 [Editorial & Researched Correction]\nUnder the notified UGC National Credit Framework (NCrF) / National Higher Education Qualifications Framework (NHEQF), a four-year Bachelor’s degree (Honours / Research / Engineering) is mapped to Credit Level 6 (whereas a 3-year Bachelor's is Level 5.5 and a PG Diploma / 1st year Master's is Level 6.5). Some non-official keys listed 6.5 (Option 3), which conflicts with the official NCrF report table; Option 2 (Level 6) is scored here."
+            },
+            {
+                id: 28,
+                section: "Paper 1: General Paper",
+                module: "Information & Communication Technology",
+                context: "",
+                question: "Arrange these computer storage/memory components from slowest to fastest in terms of access time:\nA. CPU cache\nB. RAM\nC. SSD\nD. Optical drive",
+                options: ["D, C, B, A", "A, B, C, D", "B, A, D, C", "C, D, A, B"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — D, C, B, A\nFrom slowest to fastest access speed:\nOptical drive (CD/DVD, milliseconds) → Solid State Drive (SSD, microseconds) → Main Memory (RAM, nanoseconds) → CPU Cache (picoseconds/low nanoseconds)."
+            },
+            {
+                id: 29,
+                section: "Paper 1: General Paper",
+                module: "Communication",
+                context: "",
+                question: "\"Mind to mind\" communication involves the communication of meanings through:\nA. Physical settings\nB. Shared beliefs\nC. Values\nD. Noise manipulation\nE. Context",
+                options: ["A, B and D only", "B, C and D only", "A, B, C and E only", "C, D and E only"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — A, B, C and E only\nShared meaning in human communication is constructed through physical settings, shared beliefs, cultural values, and situational context. 'Noise manipulation' distorts rather than conveys meaning."
+            },
+            {
+                id: 30,
+                section: "Paper 1: General Paper",
+                module: "Teaching Aptitude",
+                context: "",
+                question: "Which of the following are subdivisions of implicit (non-declarative / unconscious) memory?\nA. Priming\nB. Episodic memory\nC. Classical-conditioning effects\nD. Semantic memory\nE. Procedural memory",
+                options: ["B and D only", "A, B, D and E only", "A, C and E only", "A, B, C, D and E"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — A, C and E only\nImplicit (non-declarative) long-term memory comprises Procedural memory (E), Priming (A), and Classical conditioning effects (C). Episodic (B) and Semantic (D) memory are subdivisions of Explicit (declarative) memory."
+            },
+            {
+                id: 31,
+                section: "Paper 1: General Paper",
+                module: "Higher Education System",
+                context: "",
+                question: "The Second Five-Year Plan (1956–61) included higher-education recommendations of which bodies?\nA. University Education Commission\nB. Official Language Commission\nC. Rural Higher Education Committee\nD. Committee on Establishment of New Universities\nE. Three-Year Degree Course Committee",
+                options: ["A, B and C only", "B, C and D only", "C, D and E only", "A, B and E only"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — C, D and E only\nThe Second Five-Year Plan incorporated recommendations from the Rural Higher Education Committee (Shrimali Committee, 1954–55), the Three-Year Degree Course Committee (Deshmukh Committee), and the Committee on Establishment of New Universities."
+            },
+            {
+                id: 32,
+                section: "Paper 1: General Paper",
+                module: "Information & Communication Technology",
+                context: "",
+                question: "Which of the following statements about computer memory sizes are true?\nA. 25 KB is larger than 100 MB.\nB. 999 MB is larger than 50 GB.\nC. 3500 KB is smaller than 2 GB.\nD. 2350 bytes is smaller than 2 KB.",
+                options: ["A only", "C only", "B and D only", "B and C only"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — C only\n• A is false (25 KB < 100 MB).\n• B is false (999 MB < 50 GB).\n• C is true (3,500 KB ≈ 3.5 MB, which is much smaller than 2 GB).\n• D is false (2 KB = 2,000 or 2,048 bytes, so 2,350 bytes > 2 KB)."
+            },
+            {
+                id: 33,
+                section: "Paper 1: General Paper",
+                module: "Logical Reasoning",
+                context: "",
+                question: "Which statement is logically equivalent to the universal negative (E) proposition \"No horses are feline\"?",
+                options: ["No felines are horses.", "No horses are non-feline.", "All non-horses are felines.", "All non-felines are horses."],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — No felines are horses.\nBy simple conversion of an E-proposition ('No S is P'), the subject and predicate swap without changing truth value: 'No P is S' ('No felines are horses')."
+            },
+            {
+                id: 34,
+                section: "Paper 1: General Paper",
+                module: "Communication",
+                context: "",
+                question: "The media-accountability system intended to improve media quality focuses on:\nA. Evaluation\nB. Audience control\nC. Monitoring\nD. Education\nE. Feedback",
+                options: ["A, B and C only", "B, C and D only", "B, D and E only", "A, C, D and E only"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — A, C, D and E only\nMedia accountability mechanisms rely on independent evaluation (A), monitoring (C), professional education (D), and public feedback (E), rather than authoritarian audience control (B)."
+            },
+            {
+                id: 35,
+                section: "Paper 1: General Paper",
+                module: "Higher Education & ICT",
+                context: "",
+                question: "Which digital initiative of INFLIBNET provides a premier database of profiles of scientists, researchers, and faculty members working at leading academic institutions and R&D organisations in India?",
+                options: ["SWAYAM Prabha", "E-Vidwan (VIDWAN)", "National Academic Depository (NAD)", "e-ShodhSindhu"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — E-Vidwan (VIDWAN)\nVIDWAN is INFLIBNET's premier expert database and national researcher network housing profiles of Indian scientists and faculty."
+            },
+            {
+                id: 36,
+                section: "Paper 1: General Paper",
+                module: "Logical Reasoning",
+                context: "",
+                question: "Which of the following statements regarding truth and validity are true?\nA. Validity can never apply to a single proposition by itself.\nB. Truth can apply to single propositions.\nC. Propositions by themselves can be valid but not invalid.\nD. A proposition cannot be valid by itself though it can be invalid on its own.",
+                options: ["D only", "A and B only", "B and C only", "B and D only"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — A and B only\nIn deductive logic, individual propositions are either True or False (B is true), whereas only arguments as a whole are Valid or Invalid (A is true; C and D are false)."
+            },
+            {
+                id: 37,
+                section: "Paper 1: General Paper",
+                module: "Higher Education System",
+                context: "",
+                question: "Which was the first post-Independence Education Commission appointed in India (1948–49)?",
+                options: ["Indian Education Commission", "Calcutta University Commission", "University Education Commission", "Indian Universities Commission"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — University Education Commission\nAppointed in November 1948 under the chairmanship of Dr. S. Radhakrishnan, the University Education Commission (1948–49) was independent India's first education commission."
+            },
+            {
+                id: 38,
+                section: "Paper 1: General Paper",
+                module: "Teaching Aptitude",
+                context: "",
+                question: "Knowing that you find algebra more difficult than your sister does, but that you could improve with practice, is an example of:",
+                options: ["Self-regulation", "Metacognition", "Self-discipline", "Automation"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Metacognition\nMetacognition ('thinking about thinking') involves self-awareness of one's own cognitive strengths, weaknesses, and learning strategies."
+            },
+            {
+                id: 39,
+                section: "Paper 1: General Paper",
+                module: "People, Development & Environment",
+                context: createMatchTable("List I (Type of Toxicant)", "List II (Affected Organ / System)", [
+                    ["A. Nephrotoxic", "I. Lungs"],
+                    ["B. Hematotoxic", "II. Kidney"],
+                    ["C. Pulmonotoxic", "III. Liver"],
+                    ["D. Hepatotoxic", "IV. Blood"]
+                ]),
+                question: "Match List I (Types of Toxicants) with List II (Affected Organ):",
+                options: ["A-II, B-IV, C-I, D-III", "A-II, B-IV, C-III, D-I", "A-I, B-II, C-III, D-IV", "A-III, B-I, C-IV, D-II"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — A-II, B-IV, C-I, D-III\n• Nephrotoxic → Kidney (II)\n• Hematotoxic → Blood / hematopoietic system (IV)\n• Pulmonotoxic → Lungs (I)\n• Hepatotoxic → Liver (III)."
+            },
+            {
+                id: 40,
+                section: "Paper 1: General Paper",
+                module: "People, Development & Environment",
+                context: createMatchTable("List I (Global Development Framework)", "List II (Count)", [
+                    ["A. Goals in Millennium Development Goals (MDGs)", "I. 8"],
+                    ["B. Targets in MDGs", "II. 17"],
+                    ["C. Goals in Sustainable Development Goals (SDGs)", "III. 21"],
+                    ["D. Targets in SDGs", "IV. 169"]
+                ]),
+                question: "Match the goals and targets of MDGs and SDGs with their respective counts:",
+                options: ["A-II, B-I, C-III, D-IV", "A-I, B-III, C-II, D-IV", "A-III, B-I, C-IV, D-II", "A-IV, B-II, C-I, D-III"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — A-I, B-III, C-II, D-IV\n• MDGs (2000–2015) had 8 Goals (I) and 21 Targets (III).\n• SDGs (2015–2030) have 17 Goals (II) and 169 Targets (IV)."
+            },
+            {
+                id: 41,
+                section: "Paper 1: General Paper",
+                module: "Research Aptitude",
+                context: "",
+                question: "Arrange the concluding stages involved in the process of deduction in quantitative research in the correct sequence:\nA. Revision of theory\nB. Hypothesis confirmed or rejected\nC. Findings\nD. Data collection",
+                options: ["A, B, D, C", "D, C, B, A", "A, C, B, D", "B, D, A, C"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — D, C, B, A\nIn Bryman's deductive research sequence (Theory → Hypothesis → Data collection → Findings → Hypothesis confirmed or rejected → Revision of theory), the listed stages follow the order: D → C → B → A."
+            },
+            {
+                id: 42,
+                section: "Paper 1: General Paper",
+                module: "Communication",
+                context: createMatchTable("List I (Concept)", "List II (Thinker / Source)", [
+                    ["A. Free commerce and communication", "I. Alfred Marshall"],
+                    ["B. Communication in economics", "II. John Locke"],
+                    ["C. Language as a conduit of communication", "III. Karl Marx"],
+                    ["D. Lines of communication", "IV. Adam Smith"]
+                ]),
+                question: "Match List I (Communication Concept) with List II (Thinker):",
+                options: ["A-I, B-III, C-IV, D-II", "A-II, B-III, C-IV, D-I", "A-III, B-IV, C-I, D-II", "A-IV, B-I, C-II, D-III"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — A-IV, B-I, C-II, D-III\n• Free commerce and communication — Adam Smith (IV)\n• Communication in economics — Alfred Marshall (I)\n• Language as a conduit of communication — John Locke (II)\n• Lines of communication — Karl Marx (III)."
+            },
+            {
+                id: 43,
+                section: "Paper 1: General Paper",
+                module: "Information & Communication Technology (Supplement S1)",
+                context: "",
+                question: "What is the base-10 equivalent of the base-4 number 3013?",
+                options: ["182", "196", "199", "190"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — 199\nConvert (3013)₄ to base-10 by place value:\n3×4³ + 0×4² + 1×4¹ + 3×4⁰ = 192 + 0 + 4 + 3 = 199."
+            },
+            {
+                id: 44,
+                section: "Paper 1: General Paper",
+                module: "Higher Education System (Supplement S2)",
+                context: "",
+                question: "Identify the correct chronological sequence of these research organisations by year of establishment:\nA. ICSSR\nB. National Council for Rural Institutes (NCRI)\nC. ICPR\nD. ICHR\nE. Indian Institute of Advanced Studies (IIAS)",
+                options: ["A, D, E, B, C", "B, E, C, D, A", "E, A, D, C, B", "C, B, A, E, D"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — E, A, D, C, B\n• E. IIAS (1965)\n• A. ICSSR (1969)\n• D. ICHR (1972)\n• C. ICPR (1977)\n• B. NCRI (1995)."
+            },
+            {
+                id: 45,
+                section: "Paper 1: General Paper",
+                module: "Mathematical Reasoning (Supplement S3)",
+                context: createMatchTable("List I (Word)", "List II (Code)", [
+                    ["A. FIND", "I. RGKC"],
+                    ["B. CLOG", "II. DGLB"],
+                    ["C. SHOW", "III. AJME"],
+                    ["D. TIME", "IV. QFMU"]
+                ]),
+                question: "Match each word to the code formed by applying the same rule:",
+                options: ["A-I, B-II, C-III, D-IV", "A-II, B-III, C-IV, D-I", "A-III, B-IV, C-I, D-II", "A-IV, B-I, C-II, D-III"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — A-II, B-III, C-IV, D-I\nEach letter is shifted two places backwards (−2) in the alphabet:\n• FIND → DGLB (II)\n• CLOG → AJME (III)\n• SHOW → QFMU (IV)\n• TIME → RGKC (I)."
+            },
+
+            // ================= PAPER 1: READING COMPREHENSION (Q46 - Q50 / S4 - S8) =================
+            {
+                id: 46,
+                section: "Paper 1: General Paper",
+                module: "Reading Comprehension",
+                context: RC_PASSAGE_P1,
+                question: "According to the passage, where has the Global Centre for Traditional Medicine been established?",
+                options: ["World Health Organization", "Jamnagar", "New Delhi", "Haridwar"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Jamnagar\nThe passage explicitly names Jamnagar as the host location for the WHO Global Centre for Traditional Medicine."
+            },
+            {
+                id: 47,
+                section: "Paper 1: General Paper",
+                module: "Reading Comprehension",
+                context: RC_PASSAGE_P1,
+                question: "According to the WHO report cited in the passage, approximately what percentage of the world population uses traditional medicine systems in some way?",
+                options: ["About 20%", "About 50%", "About 100%", "About 80%"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — About 80%\nThe opening sentence states: 'According to a World Health Organization (WHO) report, about 80 percent of the world population uses traditional medicine systems in some way or the other.'"
+            },
+            {
+                id: 48,
+                section: "Paper 1: General Paper",
+                module: "Reading Comprehension",
+                context: RC_PASSAGE_P1,
+                question: "Choose the most appropriate title for the passage.",
+                options: ["Allopathy", "Holistic Healthcare", "Ayurveda", "Homeopathy"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Holistic Healthcare\nBecause the passage emphasizes medical pluralism and an integrative approach combining multiple traditional and modern systems for total healthcare coverage, 'Holistic Healthcare' is the most fitting title."
+            },
+            {
+                id: 49,
+                section: "Paper 1: General Paper",
+                module: "Reading Comprehension",
+                context: RC_PASSAGE_P1,
+                question: "Which statements about traditional Indian medicine systems are FALSE according to the passage?\nA. Each system is unique.\nB. They include Ayurveda, Naturopathy, Yoga, Unani, Siddha, Sowa Rigpa and Homeopathy.\nC. Modern health science preceded them.\nD. Each system has an essentially similar philosophy.",
+                options: ["A, B and D only", "B and C only", "C and D only", "B, C and D only"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — C and D only\nStatements A and B are true. Statement C is false because traditional systems were formulated 'much before the advent of modern health science.' Statement D is false because each system has 'its own ancient philosophy.'"
+            },
+            {
+                id: 50,
+                section: "Paper 1: General Paper",
+                module: "Reading Comprehension",
+                context: RC_PASSAGE_P1,
+                question: "In many countries, medical pluralism is the norm because:",
+                options: ["Traditional systems of medicine are useless.", "Traditional systems of medicine mislead the public.", "An integrative approach incorporating each system's positives cannot benefit mankind.", "No single system of medicine can address all health concerns by itself."],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — No single system of medicine can address all health concerns by itself.\nThe final sentence explicitly states: 'No system of medicine can single-handedly address all health concerns, but an integrative approach incorporating the positives of each can surely benefit mankind.'"
+            },
+
+            // ================= PAPER 2: COMMERCE CODE 08 (Q51 - Q140) =================
+            {
+                id: 51,
+                section: "Paper 2: Commerce",
+                module: "Business Finance",
+                context: "",
+                question: "If EBIT = 1,120, PBT = 320 and Fixed Cost = 700, what is the Degree of Operating Leverage (DOL)?",
+                options: ["3.5", "5.6", "1.25", "1.625"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — 1.625\nContribution = EBIT + Fixed Cost = 1,120 + 700 = 1,820.\nDegree of Operating Leverage (DOL) = Contribution / EBIT = 1,820 / 1,120 = 1.625. (PBT is only needed for Financial Leverage)."
+            },
+            {
+                id: 52,
+                section: "Paper 2: Commerce",
+                module: "Human Resource Management",
+                context: "",
+                question: "Arrange the following steps in the employee-selection process in the correct sequential order:\nA. Selection test\nB. Screening of application\nC. Physical examination\nD. Interview\nE. Approval by the appropriate authority and placement",
+                options: ["A, C, D, B, E", "B, A, D, C, E", "C, B, A, D, E", "A, B, C, D, E"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — B, A, D, C, E\nStandard HRM selection sequence: Screening of applications (B) → Selection tests (A) → Selection interview (D) → Physical/medical examination (C) → Final approval and placement (E)."
+            },
+            {
+                id: 53,
+                section: "Paper 2: Commerce",
+                module: "Business Finance",
+                context: "",
+                question: "Which assumptions are associated with David Durand's Net Income (NI) approach to capital structure?\nA. Cost of debt is lower than cost of equity\nB. No corporate taxes exist\nC. Investors' risk perception does not change with the use of debt\nD. Capital structure does not affect market value of the firm\nE. Business risk remains constant at every debt-equity mix",
+                options: ["A and B only", "D and E only", "A, B and C only", "C, D and E only"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — A, B and C only\nUnder the Net Income (NI) approach, the three core assumptions are: (A) Cost of debt (Kd) is less than cost of equity (Ke), (B) There are no taxes, and (C) Use of debt does not change the risk perception of investors. Consequently, higher leverage lowers WACC and increases firm value (making D false)."
+            },
+            {
+                id: 54,
+                section: "Paper 2: Commerce",
+                module: "Banking & Financial Institutions",
+                verified: true,
+                context: "",
+                question: "In which type of insurance must insurable interest be present when the policy is taken?",
+                options: ["Life insurance only", "Fire insurance only", "Marine insurance only", "Life and fire insurance only"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — Life and fire insurance only [Editorial & Researched Correction]\n• Standard Insurance Principle: Insurable interest must exist at the time the policy is effected (inception) in Life Insurance, and at both inception and the time of loss in Fire/Property Insurance. In Marine Insurance, insurable interest is generally required at the time of loss.\n• Exam Booklet Note: The original printed booklet listed Option (4) as 'Life and marine insurance only', under which Option (1) ('Life insurance only') was the keyed fallback. Option (4) has been repaired here to 'Life and fire insurance only' so that the question is conceptually accurate."
+            },
+            {
+                id: 55,
+                section: "Paper 2: Commerce",
+                module: "Accounting & Strategic Control",
+                context: "",
+                question: "Which of the following are key components of a Third Generation Balanced Scorecard?\nA. Destination statement\nB. Strategic objectives\nC. Strategic linkage model and perspectives\nD. Measures and initiatives\nE. Strategic growth diversification",
+                options: ["A, B, D and E only", "A, B, C and D only", "B, C, D and E only", "A, C, D and E only"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — A, B, C and D only\nA 3rd Generation Balanced Scorecard (Lawrie & Cobbold) consists of four design elements: a Destination Statement (A), Strategic Objectives (B), a Strategic Linkage Model & Perspectives (C), and Measures & Initiatives/Targets (D)."
+            },
+            {
+                id: 56,
+                section: "Paper 2: Commerce",
+                module: "International Business",
+                context: "",
+                question: "Who propounded the Theory of Absolute Advantage in the book 'An Inquiry into the Nature and Causes of the Wealth of Nations' (1776)?",
+                options: ["Alfred Marshall", "Adam Smith", "A. C. Pigou", "David Ricardo"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Adam Smith\nAdam Smith propounded the Theory of Absolute Advantage in 1776, whereas David Ricardo later formulated Comparative Advantage (1817)."
+            },
+            {
+                id: 57,
+                section: "Paper 2: Commerce",
+                module: "International Business",
+                context: "",
+                question: "In which month and year was the General Agreement on Tariffs and Trade (GATT) signed / set up?",
+                options: ["October 1947", "November 1964", "January 1995", "July 1991"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — October 1947\nGATT was signed on 30 October 1947 by 23 nations in Geneva and entered into force on 1 January 1948."
+            },
+            {
+                id: 58,
+                section: "Paper 2: Commerce",
+                module: "Accounting & Auditing",
+                verified: true,
+                context: createMatchTable("List I", "List II (Repaired Categories)", [
+                    ["A. Interest accrued on investment", "I. Current liabilities"],
+                    ["B. Bank overdraft", "II. Intangible non-current assets (e.g., trademarks)"],
+                    ["C. Trade mark", "III. Current-asset inventory"],
+                    ["D. Stores and spares", "IV. Other current assets / accrued income (e.g., interest accrued on investment)"]
+                ]),
+                question: "Match List-I with List-II.",
+                options: ["A-IV, B-III, C-II, D-I", "A-III, B-IV, C-II, D-I", "A-IV, B-I, C-III, D-II", "A-IV, B-I, C-II, D-III"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — A-IV, B-I, C-II, D-III [Editorially Repaired]\n• A. Interest accrued on investment → Other current assets / accrued income (IV).\n• B. Bank overdraft → Current liabilities (I).\n• C. Trade mark → Intangible non-current assets (II).\n• D. Stores and spares → Current-asset inventory (III).\n(Editorial Note: List-II in the scanned booklet contained corrupted wording such as 'Current assets other than current assets' and 'Property, plant and equipment'; the categories have been repaired above for conceptual accuracy)."
+            },
+            {
+                id: 59,
+                section: "Paper 2: Commerce",
+                module: "Accounting & Auditing",
+                context: createMatchTable("List I (Ind AS)", "List II (Subject)", [
+                    ["A. Ind AS 1", "I. Revenue"],
+                    ["B. Ind AS 2", "II. Property, plant and equipment"],
+                    ["C. Ind AS 16", "III. Inventories"],
+                    ["D. Ind AS 18", "IV. Presentation of financial statements"]
+                ]),
+                question: "Match each Indian Accounting Standard (Ind AS) in List I with its subject in List II:",
+                options: ["A-I, B-II, C-III, D-IV", "A-IV, B-III, C-II, D-I", "A-III, B-IV, C-II, D-I", "A-IV, B-II, C-I, D-III"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — A-IV, B-III, C-II, D-I\n• Ind AS 1 → Presentation of Financial Statements (IV)\n• Ind AS 2 → Inventories (III)\n• Ind AS 16 → Property, Plant and Equipment (II)\n• Ind AS 18 → Revenue (I) [Legacy reference; now superseded by Ind AS 115]."
+            },
+            {
+                id: 60,
+                section: "Paper 2: Commerce",
+                module: "Income-tax & Corporate Tax Planning",
+                context: "",
+                question: "Under Section 44AB of the Income-tax Act, 1961, the compulsory tax audit requirement for a person carrying on business is ordinarily triggered when total sales, turnover, or gross receipts exceed which amount (subject to digital transaction provisos)?",
+                options: ["Rs. 60 lakh", "Rs. 1 crore", "Rs. 50 lakh", "Rs. 2 crore"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Rs. 1 crore\nUnder Section 44AB(a), the base threshold for tax audit of a business is turnover exceeding Rs. 1 crore (extended to Rs. 10 crore if cash receipts and cash payments do not exceed 5%). For a profession, the limit is Rs. 50 lakh."
+            },
+            {
+                id: 61,
+                section: "Paper 2: Commerce",
+                module: "Business Economics",
+                context: createMatchTable("List I (Economic Concept)", "List II (Meaning)", [
+                    ["A. Income effect", "I. Total quantities consumers are willing to buy at different prices over a period"],
+                    ["B. Substitution effect", "II. Quantities one person is willing and able to buy at a price"],
+                    ["C. Demand schedule for an individual", "III. Change in quantity demanded caused by switching among alternatives"],
+                    ["D. Market demand schedule", "IV. Change in quantity demanded because the buyer's real purchasing power changes after a price change"]
+                ]),
+                question: "Match the economic concepts in List I with their meanings in List II:",
+                options: ["A-I, B-II, C-III, D-IV", "A-IV, B-III, C-II, D-I", "A-III, B-IV, C-I, D-II", "A-II, B-I, C-III, D-IV"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — A-IV, B-III, C-II, D-I\n• Income effect → Change in demand due to change in real income/purchasing power (IV).\n• Substitution effect → Switching between relatively cheaper/dearer alternatives (III).\n• Individual demand schedule → Quantities one consumer buys at various prices (II).\n• Market demand schedule → Aggregate quantities all consumers buy (I)."
+            },
+            {
+                id: 62,
+                section: "Paper 2: Commerce",
+                module: "Human Resource Management",
+                context: "",
+                question: "Who stated that \"Performance appraisal too often degenerates into a dishonest annual ritual\"?",
+                options: ["Newton and Findlay", "Armstrong and Murlis", "Barlow", "Grint"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Armstrong and Murlis\nMichael Armstrong and Helen Murlis famously remarked in 'Reward Management' that performance appraisal too often degenerates into 'a dishonest annual ritual.'"
+            },
+            {
+                id: 63,
+                section: "Paper 2: Commerce",
+                module: "Business Economics",
+                verified: true,
+                context: "",
+                question: "Which of the following is not included in the determinants of demand/quantity demanded as framed in the question?",
+                options: ["Tastes or desires of the consumer for a commodity", "Expenses of the consumer", "Price of related goods", "Substitutes or complements"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Expenses of the consumer\nThe intended answer is Option (2) ('Expenses of the consumer'), as selected by the key. Tastes and preferences and prices of related goods (substitutes or complements) are standard textbook determinants of demand, whereas 'income of the consumer' (rather than broad 'expenses') is the standard economic determinant."
+            },
+            {
+                id: 64,
+                section: "Paper 2: Commerce",
+                module: "Business Finance",
+                context: createMatchTable("List I (Type of Lease)", "List II (Description)", [
+                    ["A. Finance lease", "I. Substantially all risks and rewards of ownership pass to the lessee"],
+                    ["B. Operating lease", "II. Lessor owns or acquires the asset leased directly to a lessee"],
+                    ["C. Sale and leaseback", "III. Lessee sells an owned asset to a prospective lessor and leases it back"],
+                    ["D. Direct lease", "IV. Lessor does not transfer all risks and rewards of ownership"]
+                ]),
+                question: "Match the types of lease in List I with their descriptions in List II:",
+                options: ["A-I, B-IV, C-III, D-II", "A-IV, B-I, C-III, D-II", "A-I, B-II, C-III, D-IV", "A-I, B-III, C-IV, D-II"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — A-I, B-IV, C-III, D-II\n• Finance lease transfers substantially all risks and rewards of ownership (I).\n• Operating lease does not transfer all risks and rewards (IV).\n• Sale and leaseback involves selling an asset to a lessor and leasing it back (III).\n• Direct lease involves the lessor owning/acquiring the asset for direct lease to the lessee (II)."
+            },
+            {
+                id: 65,
+                section: "Paper 2: Commerce",
+                module: "Business Economics",
+                context: createMatchTable("List I (Economics Term)", "List II (Meaning)", [
+                    ["A. Scarcity", "I. Use of goods and services to satisfy wants"],
+                    ["B. Consumption", "II. Total amount of output demanded in an economy"],
+                    ["C. Macroeconomics", "III. Human wants exceed what can actually be produced to satisfy them"],
+                    ["D. Aggregate demand", "IV. Branch of economics concerned with aggregate prices, output and employment"]
+                ]),
+                question: "Match the economics terms in List I with their meanings in List II:",
+                options: ["A-I, B-II, C-III, D-IV", "A-III, B-IV, C-II, D-I", "A-III, B-I, C-IV, D-II", "A-IV, B-III, C-II, D-I"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — A-III, B-I, C-IV, D-II\n• Scarcity → Unlimited human wants exceeding limited resources/output (III).\n• Consumption → Using goods and services to satisfy wants (I).\n• Macroeconomics → Study of economy-wide aggregates (IV).\n• Aggregate demand → Total planned demand for output in an economy (II)."
+            },
+            {
+                id: 66,
+                section: "Paper 2: Commerce",
+                module: "Business Statistics & Research Methods",
+                context: "",
+                question: "Which of the following are probability-sampling methods?\nA. Simple random sampling\nB. Cluster sampling\nC. Quota sampling\nD. Stratified sampling\nE. Snowball sampling",
+                options: ["A, B and C only", "A, C, D and E only", "A, B and D only", "B, C and D only"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — A, B and D only\nSimple random sampling (A), Cluster sampling (B), and Stratified random sampling (D) are probability sampling methods. Quota (C) and Snowball (E) sampling are non-probability methods."
+            },
+            {
+                id: 67,
+                section: "Paper 2: Commerce",
+                module: "Accounting & Auditing",
+                context: "",
+                question: "In the Cash Flow Statement of a financial enterprise, dividends paid are classified under which cash-flow activity?",
+                options: ["Operating activities", "Financing activities", "Investing activities", "Both operating and financing activities"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Financing activities\nUnder AS-3 / Ind AS 7, dividends paid are always classified as Financing Activities for both financial and non-financial enterprises because they represent a cost of obtaining financial resources from owners."
+            },
+            {
+                id: 68,
+                section: "Paper 2: Commerce",
+                module: "Accounting & Auditing",
+                context: "",
+                question: "A firm has working capital of Rs. 6,00,000, a current ratio of 2.5 : 1 and a liquid (quick) ratio of 1.5 : 1. What is the value of its inventory?",
+                options: ["Rs. 6,00,000", "Rs. 10,00,000", "Rs. 4,00,000", "Rs. 2,00,000"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — Rs. 4,00,000\nWorking Capital = CA − CL = (2.5 − 1) CL = 1.5 CL = Rs. 6,00,000.\nTherefore, Current Liabilities (CL) = 6,00,000 / 1.5 = Rs. 4,00,000.\nInventory = CA − Liquid Assets = (2.5 − 1.5) × CL = 1.0 × 4,00,000 = Rs. 4,00,000."
+            },
+            {
+                id: 69,
+                section: "Paper 2: Commerce",
+                module: "Income-tax & Corporate Tax Planning",
+                context: "",
+                question: "What is the TDS rate under Section 194C of the Income-tax Act, 1961 for payment to a resident contractor/sub-contractor who is an Individual or HUF?",
+                options: ["1%", "2%", "5%", "10%"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — 1%\nUnder Section 194C, TDS on payment to contractors is deducted at 1% where the payee is an Individual or HUF, and at 2% for any other person (e.g., company/firm)."
+            },
+            {
+                id: 70,
+                section: "Paper 2: Commerce",
+                module: "Banking & Financial Institutions",
+                context: createMatchTable("List I (Financial Institution)", "List II (Year of Establishment)", [
+                    ["A. Industrial Finance Corporation of India (IFCI)", "I. 2006"],
+                    ["B. Industrial Development Bank of India (IDBI)", "II. 1964"],
+                    ["C. Industrial Credit and Investment Corporation of India (ICICI)", "III. 1955"],
+                    ["D. India Infrastructure Finance Company Ltd. (IIFCL)", "IV. 1948"]
+                ]),
+                question: "Match the financial institutions in List I with the years in which they were established in List II:",
+                options: ["A-IV, B-II, C-III, D-I", "A-IV, B-I, C-II, D-III", "A-III, B-II, C-I, D-IV", "A-III, B-I, C-IV, D-II"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — A-IV, B-II, C-III, D-I\n• IFCI → 1948 (IV)\n• IDBI → 1964 (II)\n• ICICI → 1955 (III)\n• IIFCL → 2006 (I)."
+            },
+            {
+                id: 71,
+                section: "Paper 2: Commerce",
+                module: "Legal Aspects of Business",
+                context: "",
+                question: "Under the Indian Partnership Act, 1932, a partnership formed to carry on business without specifying any fixed duration or determination of partnership and continuing for as long as the partners wish is called:",
+                options: ["Partnership for a fixed term", "Partnership at will", "Particular partnership", "Partnership for a long period"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Partnership at will\nUnder Section 7 of the Indian Partnership Act, 1932, where no provision is made by contract between the partners for the duration or determination of their partnership, the partnership is a 'Partnership at will'."
+            },
+            {
+                id: 72,
+                section: "Paper 2: Commerce",
+                module: "International Business",
+                context: "",
+                question: "Which of the following are core principles of GATT?\nA. Trade without discrimination (MFN & National Treatment)\nB. Protection only through tariffs\nC. Stable basis for trade (bound tariffs)\nD. Consultation and dispute settlement\nE. Unfair distribution of wealth",
+                options: ["A, B, C and E only", "A, B, C and D only", "B, C, D and E only", "A, C, D and E only"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — A, B, C and D only\nGATT's foundational principles are non-discrimination (A), protection through tariffs rather than quotas (B), predictable/stable trade via bound tariff schedules (C), and consultation (D). E is clearly false."
+            },
+            {
+                id: 73,
+                section: "Paper 2: Commerce",
+                module: "Business Management",
+                context: "",
+                question: "Which type of organisation operates across multiple locations through independent supplier/partner firms linked by IT as part of a strategic alliance or supply chain?",
+                options: ["Collateral organisations", "Network organisations", "Virtual organisations", "Typical matrix organisations"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — Virtual organisations\nA virtual organisation is a temporary or ongoing alliance of independent firms, suppliers, and partners linked through information technology to share skills, costs, and market access."
+            },
+            {
+                id: 74,
+                section: "Paper 2: Commerce",
+                module: "Accounting & Auditing",
+                context: "",
+                question: "Which of the following are Investing Activities in the cash-flow statement of a financial company?\nA. Cash proceeds from sale of a fixed asset\nB. Repayment of a loan taken\nC. Purchase of debentures held as long-term investment\nD. Loans and advances granted to customers\nE. Purchase of a patent",
+                options: ["A, B and C only", "A, C and E only", "B, C and D only", "B, D and E only"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — A, C and E only\nFor a financial company, loans and advances granted (D) are part of principal revenue-producing Operating Activities, and repayment of borrowings (B) is a Financing Activity. Sale of fixed assets (A), purchase of investment debentures (C), and purchase of intangible assets like patents (E) are Investing Activities."
+            },
+            {
+                id: 75,
+                section: "Paper 2: Commerce",
+                module: "Banking & Financial Institutions",
+                context: "",
+                question: "A banking system in which two or more independent banking companies are controlled by one or two individuals or a group of individuals (without a holding company) is called:",
+                options: ["Chain banking", "Group banking", "Mixed banking", "Bunch banking"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — Chain banking\nIn Chain Banking, three or more independently chartered banks are controlled by a small group of individuals through common stock ownership or interlocking directorates, whereas Group Banking uses a holding company."
+            },
+            {
+                id: 76,
+                section: "Paper 2: Commerce",
+                module: "Business Management & HRM",
+                verified: true,
+                context: "",
+                question: "Arrange the five variables/links under V. H. Vroom’s Expectancy Theory of Motivation:\nA. Individual activity\nB. Individual performance\nC. Organisational reward\nD. Individual goal\nE. Organisational goal",
+                options: ["A, C, D, B, E", "A, C, B, D, E", "A, B, C, D, E", "C, A, D, E, B"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — A, B, C, D, E [Editorial Correction]\nOption (3) has been editorially corrected from the corrupted 'B, A, C, D, E' transcription to 'A, B, C, D, E' so that the causal link follows Vroom's Expectancy Theory: Individual activity/effort (A) → Individual performance (B) → Organisational reward (C) → Individual goal (D) → Organisational goal context (E)."
+            },
+            {
+                id: 77,
+                section: "Paper 2: Commerce",
+                module: "International Business",
+                context: "",
+                question: "Which of the following is considered the primary substantive commercial document used in foreign trade?",
+                options: ["Commercial invoice", "Certificate of origin", "Bill of exchange", "Inspection certificate"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — Commercial invoice\nThe commercial invoice is the primary substantive document of the export-import transaction containing complete details of the seller, buyer, description of goods, quantity, unit price, and INCOTERMS."
+            },
+            {
+                id: 78,
+                section: "Paper 2: Commerce",
+                module: "Banking & Financial Institutions",
+                context: "",
+                question: "What minimum paid-up voting equity capital / net worth is prescribed by the RBI for setting up a new Small Finance Bank under the applicable on-tap licensing guidelines?",
+                options: ["Rs. 100 crore", "Rs. 200 crore", "Rs. 10 crore", "Rs. 1,000 crore"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Rs. 200 crore\nUnder RBI's Guidelines for 'On-Tap' Licensing of Small Finance Banks in the Private Sector (December 2019), the minimum paid-up voting equity capital was raised from Rs. 100 crore to Rs. 200 crore."
+            },
+            {
+                id: 79,
+                section: "Paper 2: Commerce",
+                module: "International Business",
+                context: "",
+                question: "Which statements accurately describe the meaning and significance of foreign exchange?\nA. It denotes the rate at which monetary units are exchanged.\nB. It is the mechanism/process through which international payments are settled.\nC. It indicates the rate of sale and purchase of foreign currency.\nD. Foreign exchange in a country does not indicate the strength of its economy.",
+                options: ["A, B and C only", "B, C and D only", "A, C and D only", "A, B, C and D"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — A, B and C only\nStatements A, B, and C are correct descriptions of foreign exchange and exchange rates. Statement D is false because foreign exchange reserves and currency stability are vital indicators of a nation's external economic strength."
+            },
+            {
+                id: 80,
+                section: "Paper 2: Commerce",
+                module: "Marketing Management",
+                context: "",
+                question: "Which of the following is NOT a distinctive characteristic of services (the '4 Is' of services)?",
+                options: ["Tangibility", "Inseparability", "Variability", "Perishability"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — Tangibility\nServices are characterised by Intangibility, Inseparability, Variability (Heterogeneity), and Perishability. Tangibility is a characteristic of physical goods."
+            },
+            {
+                id: 81,
+                section: "Paper 2: Commerce",
+                module: "Banking & Financial Institutions",
+                context: "",
+                question: "Arrange the following Indian financial institutions in chronological order of establishment (earliest to latest):\nA. Imperial Bank of India\nB. State Bank of India\nC. Life Insurance Corporation of India\nD. Unit Trust of India\nE. Regional Rural Banks",
+                options: ["A, B, C, D, E", "C, D, A, B, E", "B, E, C, A, D", "D, C, E, A, B"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — A, B, C, D, E\n• A. Imperial Bank of India — 1921\n• B. State Bank of India — 1955\n• C. Life Insurance Corporation of India (LIC) — 1956\n• D. Unit Trust of India (UTI) — 1963\n• E. Regional Rural Banks (RRBs) — 1975."
+            },
+            {
+                id: 82,
+                section: "Paper 2: Commerce",
+                module: "Business Finance",
+                context: "",
+                question: "Using the Capital Asset Pricing Model (CAPM), calculate the cost of equity if the risk-free rate is 6%, the market risk premium is 9%, and beta is 1.54.",
+                options: ["19.86%", "5.48%", "14.46%", "13.86%"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — 19.86%\nNote that Market Risk Premium (Rm − Rf) is already given as 9%.\nKe = Rf + β × (Rm − Rf) = 6% + (1.54 × 9%) = 6% + 13.86% = 19.86%."
+            },
+            {
+                id: 83,
+                section: "Paper 2: Commerce",
+                module: "Business Statistics & Research Methods",
+                context: "",
+                question: "Arrange the steps of qualitative research in the correct sequence:\nA. Reviewing the literature\nB. Identifying the research topic/problem\nC. Setting the purpose and selecting participants\nD. Writing the research report\nE. Data collection and data analysis",
+                options: ["A, B, C, E, D", "C, A, B, D, E", "C, B, A, E, D", "B, A, C, E, D"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — B, A, C, E, D\nIdentify the research topic (B) → Review literature (A) → Define purpose & select participants (C) → Collect and analyse data (E) → Write the report (D)."
+            },
+            {
+                id: 84,
+                section: "Paper 2: Commerce",
+                module: "Marketing Management",
+                context: "",
+                question: "Which of the following represent distribution channel levels / flow structures rather than distribution-intensity strategies?\nA. Direct / zero-level channel\nB. Dual-level or single-level channel\nC. Exclusive distribution\nD. Reverse-flow channel\nE. Selective distribution",
+                options: ["A, B and C", "C, D and E", "A, B and D", "B, D and E"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — A, B and D\nZero-level (direct), single/dual-level, and reverse-flow channels describe channel structure and flow direction (A, B, D). Exclusive, selective, and intensive distribution are market coverage/intensity strategies (C, E)."
+            },
+            {
+                id: 85,
+                section: "Paper 2: Commerce",
+                module: "Business Economics",
+                context: "",
+                question: "Which of the following are standard assumptions of the Law of Diminishing Marginal Utility?\nA. Rationality of the consumer\nB. Suitable / standard homogeneous units of consumption\nC. Cardinal measurability of utility\nD. A commodity may satisfy different wants simultaneously\nE. Introspection",
+                options: ["A, B and C only", "B, C and D only", "A, C and E only", "C, D and E only"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — A, B and C only\nGossen's First Law (Law of Diminishing Marginal Utility) assumes consumer rationality (A), continuous consumption of suitable homogeneous units (B), and cardinal measurement of utility (C)."
+            },
+            {
+                id: 86,
+                section: "Paper 2: Commerce",
+                module: "Legal Aspects of Business",
+                verified: true,
+                context: "",
+                question: "Which of the following can vitiate free consent under the Indian Contract Act, 1872?\nA. Coercion\nB. Undue influence\nC. Fraud\nD. Misrepresentation\nE. Bailment",
+                options: ["A, B and C only", "B, C and D only", "A, B, C and D only", "B, C, D and E only"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — A, B, C and D only\nUnder Section 14 of the Indian Contract Act, 1872, Coercion (Sec. 15), Undue influence (Sec. 16), Fraud (Sec. 17), and Misrepresentation (Sec. 18) vitiate free consent. Bailment (E) is a separate legal contract (Sec. 148) and does not vitiate consent."
+            },
+            {
+                id: 87,
+                section: "Paper 2: Commerce",
+                module: "Marketing Management",
+                context: createMatchTable("List I (SERVQUAL Dimension)", "List II (Description)", [
+                    ["A. Responsiveness", "I. Caring and individualised attention given to customers"],
+                    ["B. Assurance", "II. Appearance of physical facilities, equipment, staff and communication materials"],
+                    ["C. Empathy", "III. Employees' knowledge, courtesy and ability to convey trust and confidence"],
+                    ["D. Tangibles", "IV. Willingness to help customers and provide prompt service"]
+                ]),
+                question: "Match the SERVQUAL service-quality dimensions in List I with their descriptions in List II:",
+                options: ["A-IV, B-III, C-I, D-II", "A-I, B-II, C-III, D-IV", "A-III, B-I, C-II, D-IV", "A-II, B-I, C-IV, D-III"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — A-IV, B-III, C-I, D-II\n• Responsiveness → Willingness to help and provide prompt service (IV).\n• Assurance → Knowledge, courtesy, and ability to inspire trust/confidence (III).\n• Empathy → Caring, individualised attention (I).\n• Tangibles → Physical facilities, equipment, and staff appearance (II)."
+            },
+            {
+                id: 88,
+                section: "Paper 2: Commerce",
+                module: "Income-tax & Corporate Tax Planning",
+                context: "",
+                question: "SUGAM is also known as which Income-tax Return (ITR) form?",
+                options: ["ITR-1", "ITR-2", "ITR-3", "ITR-4"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — ITR-4\nITR-4 is known as SUGAM (applicable to Individuals, HUFs, and Firms other than LLPs opting for presumptive taxation under Sections 44AD, 44ADA, or 44AE with total income up to Rs. 50 lakh). ITR-1 is known as SAHAJ."
+            },
+            {
+                id: 89,
+                section: "Paper 2: Commerce",
+                module: "Income-tax & Corporate Tax Planning",
+                context: "",
+                question: "Which sections of the Central Goods and Services Tax (CGST) Act, 2017 contain the principal provisions relating to Input Tax Credit (ITC)?",
+                options: ["Sections 12–15", "Sections 16–21", "Sections 22–30", "Sections 31–34"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Sections 16–21\nChapter V (Sections 16 to 21) of the CGST Act, 2017 governs Input Tax Credit (eligibility, apportionment, blocked credits under Sec 17(5), job work, and ISD)."
+            },
+            {
+                id: 90,
+                section: "Paper 2: Commerce",
+                module: "Accounting & Auditing",
+                context: "",
+                question: "Which of the following are recognised methods for calculating Purchase Consideration in the amalgamation of companies?\nA. Lump-sum payment method\nB. Net-assets method\nC. Net-payment (total payment) method\nD. Net-realisation method\nE. Intrinsic value / Share-swap ratio method",
+                options: ["A, B and C only", "B, C and D only", "A, D and E only", "A, B, C and E only"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — A, B, C and E only\nThe four recognised methods of computing Purchase Consideration under AS-14 are: Lump-sum method (A), Net Assets method (B), Net Payment method (C), and Intrinsic Value / Share Exchange (Swap) method (E)."
+            },
+            {
+                id: 91,
+                section: "Paper 2: Commerce",
+                module: "Income-tax & Corporate Tax Planning",
+                context: createMatchTable("List I (Exempt Income Item)", "List II (Income-tax Provision)", [
+                    ["A. Agricultural income", "I. Section 10(13A)"],
+                    ["B. Amount received on voluntary retirement (VRS)", "II. Section 10(11)"],
+                    ["C. House Rent Allowance (HRA)", "III. Section 10(10C)"],
+                    ["D. Payment from Statutory / Public Provident Fund", "IV. Section 10(1)"]
+                ]),
+                question: "Match the income-tax items in List I with the applicable exemption provisions in List II:",
+                options: ["A-IV, B-III, C-I, D-II", "A-IV, B-III, C-II, D-I", "A-I, B-II, C-III, D-IV", "A-II, B-I, C-IV, D-III"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — A-IV, B-III, C-I, D-II\n• Agricultural income → Section 10(1) (IV)\n• Voluntary Retirement Scheme (VRS) compensation → Section 10(10C) (III)\n• House Rent Allowance (HRA) → Section 10(13A) (I)\n• Payment from Provident Fund → Section 10(11) (II)."
+            },
+            {
+                id: 92,
+                section: "Paper 2: Commerce",
+                module: "Accounting & Auditing",
+                context: "",
+                question: "Under Section 52(2) of the Companies Act, 2013, the balance in the Securities Premium Account CANNOT be utilised for which purpose?",
+                options: ["Writing off preliminary expenses of the company", "Writing off discount on issue of debentures", "Distribution of dividend to shareholders", "Issue of fully paid bonus shares to members"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — Distribution of dividend to shareholders\nSecurities Premium is a capital receipt restricted by Section 52(2) of the Companies Act, 2013; it cannot be treated as free revenue profit for paying dividends."
+            },
+            {
+                id: 93,
+                section: "Paper 2: Commerce",
+                module: "Legal Aspects of Business",
+                context: createMatchTable("List I (Indian Contract Act Concept)", "List II (Section)", [
+                    ["A. Contingent contract", "I. Section 31"],
+                    ["B. Bailment", "II. Section 15"],
+                    ["C. Fraud", "III. Section 17"],
+                    ["D. Coercion", "IV. Section 148"]
+                ]),
+                question: "Match the concepts under the Indian Contract Act, 1872 in List I with their corresponding sections in List II:",
+                options: ["A-I, B-IV, C-III, D-II", "A-I, B-III, C-II, D-IV", "A-II, B-III, C-IV, D-I", "A-IV, B-III, C-I, D-II"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — A-I, B-IV, C-III, D-II\n• Contingent contract → Section 31 (I)\n• Bailment → Section 148 (IV)\n• Fraud → Section 17 (III)\n• Coercion → Section 15 (II)."
+            },
+            {
+                id: 94,
+                section: "Paper 2: Commerce",
+                module: "Business Economics",
+                context: "",
+                question: "Which of the following are non-collusive oligopoly models?\nA. Cournot's duopoly model\nB. Price-leadership model\nC. Edgeworth model\nD. Bertrand model\nE. Market-sharing cartel model",
+                options: ["A, B and C only", "C, D and E only", "A, C and D only", "B, D and E only"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — A, C and D only\nCournot (1838), Bertrand (1883), Edgeworth (1897), Stackelberg, and Sweezy's Kinked Demand Curve are non-collusive oligopoly models. Price leadership (B) and cartels (E) are collusive oligopoly models."
+            },
+            {
+                id: 95,
+                section: "Paper 2: Commerce",
+                module: "Income-tax & Corporate Tax Planning",
+                context: "",
+                question: "Which of the following deductions/exemptions were NOT available to an employee opting for the default New Tax Regime under Section 115BAC for Assessment Year 2024–25?\nA. House Rent Allowance (HRA)\nB. Leave Travel Concession (LTC)\nC. Standard Deduction under Section 16(ia)\nD. Tax on employment / Professional tax under Section 16(iii)\nE. Interest on housing loan for a self-occupied property under Section 24(b)",
+                options: ["A, C, D and E only", "A, B and C only", "A, B, D and E only", "B, C, D and E only"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — A, B, D and E only\nFrom AY 2024–25 (Finance Act 2023), the Standard Deduction under Section 16(ia) (C) was extended to the New Tax Regime (Sec. 115BAC), whereas HRA (A), LTC (B), Professional Tax (D), and self-occupied home loan interest (E) remained unavailable."
+            },
+            {
+                id: 96,
+                section: "Paper 2: Commerce",
+                module: "Business Statistics & Research Methods",
+                context: "",
+                question: "If the average number of customers arriving per minute at a bank counter is 2 and e⁻² = 0.1353, what is the Poisson probability that exactly 4 customers arrive in a given minute?",
+                options: ["0.1804", "0.0902", "0.1353", "0.2706"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — 0.0902\nUsing the Poisson formula P(X = x) = (e⁻λ × λˣ) / x! with λ = 2 and x = 4:\nP(X = 4) = (0.1353 × 2⁴) / 4! = (0.1353 × 16) / 24 = 0.1353 × (2/3) = 0.0902."
+            },
+            {
+                id: 97,
+                section: "Paper 2: Commerce",
+                module: "Business Finance",
+                context: "",
+                question: "Arrange the phases in capital-expenditure planning and control (capital budgeting process) in the proper sequence:\nA. Evaluate net benefits\nB. Identify investment opportunities\nC. Forecast benefits and costs (cash flows)\nD. Authorise proceeding / capital spending\nE. Control and post-audit capital projects",
+                options: ["A, C, D, E, B", "B, C, A, D, E", "A, B, C, D, E", "B, A, D, C, E"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — B, C, A, D, E\nIdentify investment opportunities (B) → Forecast cash inflows and outflows (C) → Evaluate net benefits using appraisal criteria (A) → Authorise capital expenditure (D) → Monitor/control project implementation (E)."
+            },
+            {
+                id: 98,
+                section: "Paper 2: Commerce",
+                module: "International Business",
+                context: "",
+                question: "Arrange the following international trade institutions/schemes in chronological order by year of establishment (earliest to latest):\nA. GATT\nB. WTO\nC. UNCTAD\nD. ASIDE scheme",
+                options: ["A, B, C, D", "A, C, B, D", "B, A, C, D", "C, A, D, B"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — A, C, B, D\n• A. GATT — 1947\n• C. UNCTAD — 1964\n• B. WTO — 1995\n• D. ASIDE (Assistance to States for Developing Export Infrastructure and Allied Activities) — March 2002."
+            },
+            {
+                id: 99,
+                section: "Paper 2: Commerce",
+                module: "International Business",
+                context: createMatchTable("List I (EPRG Orientation)", "List II (Description)", [
+                    ["A. Ethnocentric", "I. Foreign subsidiaries are managed with substantial local autonomy (host-country focus)"],
+                    ["B. Polycentric", "II. Foreign markets are viewed as extensions of the domestic market (home-country focus)"],
+                    ["C. Regiocentric", "III. The entire world is viewed as one integrated market"],
+                    ["D. Geocentric", "IV. Strategy is developed on a regional bloc basis"]
+                ]),
+                question: "Match Perlmutter's international-business orientations (EPRG framework) in List I with their descriptions in List II:",
+                options: ["A-II, B-I, C-IV, D-III", "A-I, B-III, C-IV, D-II", "A-II, B-III, C-I, D-IV", "A-IV, B-I, C-II, D-III"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — A-II, B-I, C-IV, D-III\n• Ethnocentric → Home-country orientation; foreign markets treated as extensions of domestic market (II).\n• Polycentric → Host-country orientation with local autonomy (I).\n• Regiocentric → Regional orientation (IV).\n• Geocentric → World-oriented integrated approach (III)."
+            },
+            {
+                id: 100,
+                section: "Paper 2: Commerce",
+                module: "International Business",
+                verified: true,
+                context: "",
+                question: "In which book did Alfred Marshall analyse international trade and the concept of 'Terms of Trade', according to the exam question?",
+                options: ["Money, Credit and Commerce", "Principles of Economics", "The Economics of Industry", "On Rent"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Principles of Economics (Per Exam Key; see Verification Note)\n• Research & Verification Note: The published answer key for this sitting marked Option (2) 'Principles of Economics' (1890). However, in economic history, Alfred Marshall specifically devoted his 1923 treatise 'Money, Credit and Commerce' (Option 1) to international trade, reciprocal demand curves, and the 'terms of trade' (a phrase earlier coined by F.W. Taussig and J.S. Mill). Candidates should note both Option 2 (the exam key) and Option 1 ('Money, Credit and Commerce')."
+            },
+            {
+                id: 101,
+                section: "Paper 2: Commerce",
+                module: "Marketing Management",
+                context: "",
+                question: "Arrange the four major market-logistics decisions in the sequence presented in standard marketing management:\nA. Order processing\nB. Inventory\nC. Warehousing\nD. Transportation",
+                options: ["A, B, C, D", "A, C, B, D", "A, B, D, C", "C, A, B, D"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — A, C, B, D\nIn Kotler & Keller's Marketing Management section on Market Logistics Decisions, the four major decisions are discussed in the sequence: (1) Order Processing (A), (2) Warehousing (C), (3) Inventory (B), and (4) Transportation (D)."
+            },
+            {
+                id: 102,
+                section: "Paper 2: Commerce",
+                module: "Marketing Management",
+                context: createMatchTable("List I (Pricing Method)", "List II (Description)", [
+                    ["A. Mark-up pricing", "I. Start with the rate-of-return objective to yield the desired return on investment"],
+                    ["B. Target rate-of-return pricing", "II. Add a standard margin/percentage to the product's cost"],
+                    ["C. Economic value to customer (EVC) pricing", "III. Dispose of excess inventories/used goods through competitive bidding"],
+                    ["D. Auction-type pricing", "IV. Include value factors such as performance, warranty, service and support"]
+                ]),
+                question: "Match the pricing methods in List I with their descriptions in List II:",
+                options: ["A-I, B-II, C-III, D-IV", "A-II, B-IV, C-I, D-III", "A-II, B-I, C-IV, D-III", "A-IV, B-II, C-I, D-III"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — A-II, B-I, C-IV, D-III\n• Mark-up pricing → Add a standard mark-up to cost (II).\n• Target return pricing → Set price to achieve target ROI (I).\n• Economic value to customer (perceived-value) pricing → Price based on performance, warranty, and support value (IV).\n• Auction pricing → Used to dispose of excess inventories/second-hand goods via bidding (III)."
+            },
+            {
+                id: 103,
+                section: "Paper 2: Commerce",
+                module: "Income-tax & Corporate Tax Planning",
+                context: "",
+                question: "Which of the following items of Income from House Property are exempt / NOT charged to tax under the Income-tax Act, 1961?\nA. Income from a farm house [Sec. 2(1A)(c) read with Sec. 10(1)]\nB. Property held for charitable or religious purposes [Sec. 11]\nC. Annual value of more than two self-occupied houses [Sec. 23(4)]\nD. Annual value of any one palace of an ex-ruler [Sec. 10(19A)]\nE. House property of a registered trade union [Sec. 10(24)]",
+                options: ["B, C, D and E only", "A, C and D only", "A, D and E only", "A, B, D and E only"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — A, B, D and E only\nFarm houses meeting agricultural conditions (A), charitable trust properties (B), one palace of an ex-ruler (D), and properties of registered trade unions (E) are exempt from tax. However, if an assessee owns more than two self-occupied houses (C), only two can be treated as self-occupied (Nil annual value) and the remaining house(s) are deemed to be let out and taxed."
+            },
+            {
+                id: 104,
+                section: "Paper 2: Commerce",
+                module: "Legal Aspects of Business",
+                context: "",
+                question: "Under Section 2(i) of the Indian Contract Act, 1872, 'an agreement which is enforceable by law at the option of one or more of the parties thereto, but not at the option of the other or others' is a:",
+                options: ["Void contract", "Valid contract", "Voidable contract", "Illegal contract"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — Voidable contract\nSection 2(i) of the Indian Contract Act, 1872 defines a voidable contract as an agreement enforceable by law at the option of the aggrieved party(ies), but not at the option of the other(s)."
+            },
+            {
+                id: 105,
+                section: "Paper 2: Commerce",
+                module: "Business Management & HRM",
+                context: createMatchTable("List I (Motivation Theory)", "List II (Proponent)", [
+                    ["A. Need Hierarchy Theory", "I. Clayton Alderfer"],
+                    ["B. ERG Theory", "II. Sigmund Freud"],
+                    ["C. Psychoanalytic Theory", "III. Abraham Maslow"],
+                    ["D. Two-Factor (Hygiene-Motivation) Theory", "IV. Frederick Herzberg"]
+                ]),
+                question: "Match the motivation theories in List I with their proponents in List II:",
+                options: ["A-II, B-I, C-III, D-IV", "A-III, B-I, C-II, D-IV", "A-III, B-II, C-I, D-IV", "A-IV, B-I, C-II, D-III"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — A-III, B-I, C-II, D-IV\n• Need Hierarchy → Abraham Maslow (III)\n• ERG Theory → Clayton Alderfer (I)\n• Psychoanalytic Theory → Sigmund Freud (II)\n• Two-Factor Theory → Frederick Herzberg (IV)."
+            },
+            {
+                id: 106,
+                section: "Paper 2: Commerce",
+                module: "Business Economics",
+                context: "",
+                question: "Who defined economics as 'the science which studies human behaviour as a relationship between ends and scarce means which have alternative uses'?",
+                options: ["Alfred Marshall", "A. C. Pigou", "Lionel Robbins", "J. M. Keynes"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — Lionel Robbins\nLionel Robbins gave this famous scarcity definition of economics in his 1932 work 'An Essay on the Nature and Significance of Economic Science'."
+            },
+            {
+                id: 107,
+                section: "Paper 2: Commerce",
+                module: "Business Economics",
+                context: "",
+                question: "Arrange the following decision-making steps in REVERSE order (from last step to first step):\nA. Exploring alternatives\nB. Performing sensitivity analysis\nC. Determining objectives\nD. Choosing the best alternative\nE. Assessing consequences",
+                options: ["A, B, C, D, E", "B, A, D, C, E", "E, A, C, D, B", "B, D, E, A, C"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — B, D, E, A, C\nForward sequence: Determine objectives (C) → Explore alternatives (A) → Assess consequences (E) → Choose the best alternative (D) → Perform sensitivity analysis (B).\nReversing the order (last to first) gives: B → D → E → A → C."
+            },
+            {
+                id: 108,
+                section: "Paper 2: Commerce",
+                module: "Business Statistics & Research Methods",
+                verified: true,
+                context: "",
+                question: "Which of the following are properties of standard deviation (σ)?\nA. σ(x + K) = σ(x)\nB. σ(x − K) = σ(x) − K\nC. σ(x ÷ K) = σ(x)/K\nD. σ(x × K) = Kσ(x)\nE. σ(x × K) = σ(x)",
+                options: ["A, B and C only", "C, D and E only", "A, C and D only", "B, C and E only"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — A, C and D only [Caution: Marked 'Dropped' in Non-Official Key]\n• Conceptual Analysis: Adding or subtracting a constant K does not change standard deviation [σ(x + K) = σ(x), so A is true and B is false]. Multiplying or dividing by a positive constant K > 0 scales the standard deviation by K [σ(x ÷ K) = σ(x)/K and σ(x × K) = Kσ(x), so C and D are true and E is false].\n• Key Note: Because the printed question omitted the qualification K > 0 (or absolute value |K| for negative constants), the published non-official key marked Q108 as 'Dropped'. For practice scoring in this quiz, Option (3) (A, C and D only) is validated."
+            },
+            {
+                id: 109,
+                section: "Paper 2: Commerce",
+                module: "Banking & Financial Institutions",
+                context: "",
+                question: "Which of the following are quantitative (general) methods of credit control used by a Central Bank?\nA. Bank Rate Policy\nB. Open Market Operations\nC. Rationing of Credit\nD. Margin Requirements\nE. Variable Reserve Ratio (CRR / SLR)",
+                options: ["A, B and C only", "C, D and E only", "A, B and E only", "B, C and D only"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — A, B and E only\nBank Rate Policy (A), Open Market Operations (B), and Variable Reserve Ratios (E) are quantitative (general) credit control tools. Rationing of Credit (C) and Margin Requirements (D) are qualitative (selective) credit controls."
+            },
+            {
+                id: 110,
+                section: "Paper 2: Commerce",
+                module: "Marketing Management",
+                context: "",
+                question: "The Product Life Cycle (PLC) concept is based on which of the following core assumptions?\nA. Products have a limited life\nB. Product sales pass through distinct stages, each posing different challenges, opportunities, and problems to the seller\nC. A brand always occupies the most desirable position\nD. A firm erects outposts to protect a weak front or support a possible counterattack\nE. Profits rise and fall at different stages of the product life cycle",
+                options: ["A, B and D only", "B, C and D only", "C, D and E only", "A, B and E only"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — A, B and E only\nAccording to Kotler, saying a product has a life cycle asserts four things: (1) Products have a limited life (A), (2) Product sales pass through distinct stages (B), (3) Profits rise and fall at different stages (E), and (4) Products require different marketing, financial, manufacturing, purchasing, and human resource strategies in each stage. (D describes flank defense strategy)."
+            },
+            {
+                id: 111,
+                section: "Paper 2: Commerce",
+                module: "Business Statistics & Research Methods",
+                context: "",
+                question: "Two numbers have an Arithmetic Mean (AM) of 18 and a Harmonic Mean (HM) of 16. Which pair of numbers is correct?",
+                options: ["20 and 16", "30 and 6", "24 and 12", "22 and 14"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — 24 and 12\nFor two numbers a and b:\n• AM = (a + b) / 2 = 18 ⇒ a + b = 36.\n• Product ab = AM × HM = 18 × 16 = 288.\nTesting (24, 12): 24 + 12 = 36 and 24 × 12 = 288 (HM = 2 × 24 × 12 / 36 = 16). Thus, 24 and 12 is the exact pair."
+            },
+            {
+                id: 112,
+                section: "Paper 2: Commerce",
+                module: "Banking & Financial Institutions",
+                context: "",
+                question: "Arrange the following financial institutions in chronological order by date of establishment (earliest to latest):\nA. NABARD\nB. National Housing Bank (NHB)\nC. EXIM Bank\nD. SIDBI\nE. IFCI",
+                options: ["E, C, A, B, D", "A, C, D, B, E", "B, A, C, E, D", "C, B, D, A, E"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — E, C, A, B, D\n• E. IFCI — July 1948\n• C. EXIM Bank — January/March 1982\n• A. NABARD — 12 July 1982\n• B. NHB — 9 July 1988\n• D. SIDBI — 2 April 1990."
+            },
+            {
+                id: 113,
+                section: "Paper 2: Commerce",
+                module: "Business Finance",
+                context: "",
+                question: "Which of the following are genuine merits of the Net Present Value (NPV) method of capital budgeting?\nA. It considers all cash flows over the project's life\nB. It recognises the time value of money\nC. It gives greater weight to later cash receipts than earlier ones\nD. It satisfies the value-additivity principle\nE. It has no relation to shareholder wealth maximisation",
+                options: ["A, B and C only", "C, D and E only", "B, C and E only", "A, B and D only"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — A, B and D only\nNPV uses all project cash flows (A), discounts them for the time value of money (B), satisfies value additivity [NPV(A+B) = NPV(A) + NPV(B)] (D), and directly aligns with wealth maximisation (making E false). Because of discounting, earlier cash flows receive greater present-value weight than later ones (making C false)."
+            },
+            {
+                id: 114,
+                section: "Paper 2: Commerce",
+                module: "Business Finance",
+                verified: true,
+                context: "",
+                question: "Which statement is true regarding aggressive, conservative and matching approaches to working-capital financing?",
+                options: ["Liquidity is higher under the aggressive approach", "Profitability is higher under the conservative approach", "Liquidity is lower under the matching approach", "Profitability is higher under the aggressive approach"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — Profitability is higher under the aggressive approach [Researched & Corrected]\n• Conceptual Analysis: An aggressive working-capital financing approach uses a higher proportion of lower-cost short-term debt (even to finance a part of permanent current assets), which lowers financing costs and increases expected profitability (Option 4), while reducing liquidity and increasing refinancing risk.\n• Key Conflict Flag: The published non-official key reportedly listed Option (3), which conflicts with standard working-capital financing theory; Option (4) is scored here."
+            },
+            {
+                id: 115,
+                section: "Paper 2: Commerce",
+                module: "Business Statistics & Research Methods",
+                context: "",
+                question: "Arrange the steps of statistical hypothesis testing in the correct sequence:\nA. Set up null and alternative hypotheses\nB. Establish the decision rule (critical value)\nC. Select the appropriate test statistic\nD. Select the level of significance (α)\nE. Compute the test statistic and draw a conclusion",
+                options: ["A, D, C, B, E", "D, A, C, E, B", "D, A, C, B, E", "C, D, A, B, E"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — A, D, C, B, E\nFormulate H₀ and H₁ (A) → Choose significance level α (D) → Select test statistic Z/t/F/χ² (C) → Establish decision rule / critical region (B) → Compute test statistic from sample data and make decision (E)."
+            },
+            {
+                id: 116,
+                section: "Paper 2: Commerce",
+                module: "Income-tax & Corporate Tax Planning",
+                context: "",
+                question: "Which type of provident fund is set up under the Provident Funds Act, 1925?",
+                options: ["Statutory Provident Fund", "Recognised Provident Fund", "Unrecognised Provident Fund", "Public Provident Fund"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — Statutory Provident Fund\nStatutory Provident Funds are maintained by government/semi-government bodies, railways, universities, and local authorities under the Provident Funds Act, 1925."
+            },
+            {
+                id: 117,
+                section: "Paper 2: Commerce",
+                module: "Legal Aspects of Business",
+                context: "",
+                question: "Arrange the following provisions of the Companies Act, 2013 in ascending order of their Section numbers:\nA. Public offer and Prospectus\nB. Incorporation of company\nC. Articles of Association\nD. Formation of company\nE. Service of documents",
+                options: ["B, A, C, D, E", "E, C, B, D, A", "D, C, B, E, A", "A, B, C, D, E"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — D, C, B, E, A\n• D. Formation of company — Section 3\n• C. Articles of Association — Section 5\n• B. Incorporation of company — Section 7\n• E. Service of documents — Section 20\n• A. Prospectus and allotment of securities — Section 23 onwards."
+            },
+            {
+                id: 118,
+                section: "Paper 2: Commerce",
+                module: "Accounting & Auditing",
+                context: "",
+                question: "Arrange the stages of the financial accounting process in the proper chronological sequence:\nA. Summarisation (Trial Balance, P&L, Balance Sheet)\nB. Identification and measurement of financial transactions\nC. Classification (Ledger posting)\nD. Recording (Journalising)\nE. Analysis and interpretation of results",
+                options: ["C, B, A, E, D", "C, B, D, A, E", "B, D, C, A, E", "B, D, A, C, E"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — B, D, C, A, E\nAccounting cycle: Identification & measurement of transactions (B) → Recording in Journal (D) → Classification in Ledger (C) → Summarisation in Trial Balance & Final Accounts (A) → Interpretation and communication of results (E)."
+            },
+            {
+                id: 119,
+                section: "Paper 2: Commerce",
+                module: "Marketing Management",
+                context: "",
+                question: "A particular combination of a product, its price, promotional methods, and distribution channels used to make it available to target customers is called:",
+                options: ["Market", "Marketing", "Marketing mix", "Market segmentation"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — Marketing mix\nThe Marketing Mix (4 Ps: Product, Price, Place, Promotion) is the set of controllable tactical marketing tools that a firm blends to produce the response it wants in the target market."
+            },
+            {
+                id: 120,
+                section: "Paper 2: Commerce",
+                module: "Business Economics",
+                context: "",
+                question: "Which economist famously held that both demand (utility) and supply (cost of production) are equally important in determining the price of a product, comparing them to the two blades of a pair of scissors?",
+                options: ["A. C. Pigou", "Lionel Robbins", "J. M. Keynes", "Alfred Marshall"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — Alfred Marshall\nIn 'Principles of Economics' (1890), Alfred Marshall resolved the classical vs marginalist debate using his 'two blades of a pair of scissors' analogy to show that demand and supply jointly determine equilibrium price."
+            },
+            {
+                id: 121,
+                section: "Paper 2: Commerce",
+                module: "Business Economics",
+                verified: true,
+                context: "",
+                question: "When average revenue (AR) and marginal revenue (MR) are straight lines, how does the MR curve cut the distance between the AR curve and the Y-axis?",
+                options: ["At the middle", "Near the beginning", "Near the end", "It does not cut anywhere"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — At the middle [Editorial & Researched Correction]\nFor a straight-line downward-sloping AR (demand) curve P = a − bQ, the MR curve (MR = a − 2bQ) has exactly twice the slope and passes through the midpoint of any perpendicular horizontal line drawn between the Y-axis and the AR curve. Thus 'At the middle' (Option 1) is geometrically and theoretically correct (correcting the non-official key's Option 2)."
+            },
+            {
+                id: 122,
+                section: "Paper 2: Commerce",
+                module: "Marketing Management",
+                verified: true,
+                context: "",
+                question: "Which is not a key element of consumer psychology and pricing?",
+                options: ["Reference price", "Price indifference band", "Image pricing", "Pricing cues"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Price indifference band [Typo Fixed]\nReference prices (1), image pricing / price-quality inferences (3), and pricing cues / price endings (4) are the three classic elements of consumer psychology and pricing in Kotler & Keller. 'Price indifference band' (Option 2) is NOT one of those key elements."
+            },
+            {
+                id: 123,
+                section: "Paper 2: Commerce",
+                module: "International Business",
+                context: createMatchTable("List I (International Trade / Exchange Theory)", "List II (Proponent)", [
+                    ["A. Comparative Advantage Theory", "I. Michael Porter"],
+                    ["B. Competitive Advantage (Diamond Model)", "II. David Ricardo"],
+                    ["C. Purchasing Power Parity (PPP) Theory", "III. Adam Smith"],
+                    ["D. Absolute Advantage Theory", "IV. Gustav Cassel"]
+                ]),
+                question: "Match the international theories in List I with their proponents in List II:",
+                options: ["A-II, B-III, C-IV, D-I", "A-II, B-I, C-IV, D-III", "A-I, B-III, C-IV, D-II", "A-III, B-I, C-II, D-IV"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — A-II, B-I, C-IV, D-III\n• Comparative advantage → David Ricardo (II)\n• Competitive advantage of nations → Michael Porter (I)\n• Purchasing Power Parity → Gustav Cassel (IV)\n• Absolute advantage → Adam Smith (III)."
+            },
+            {
+                id: 124,
+                section: "Paper 2: Commerce",
+                module: "Legal Aspects of Business",
+                context: "",
+                question: "Under Section 3(1) of the Companies Act, 2013, a company may be formed for any lawful purpose by which of the following minimum number of persons?\nA. Seven or more persons for a public company\nB. Two or more persons for a private company\nC. One person for a One Person Company (OPC)\nD. Five or more persons for a public company",
+                options: ["A and B only", "B and C only", "A, B and C only", "B, C and D only"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — A, B and C only\nSection 3(1) prescribes a minimum of 7 persons for a public company (A), 2 persons for a private company (B), and 1 person for a One Person Company (C)."
+            },
+            {
+                id: 125,
+                section: "Paper 2: Commerce",
+                module: "Business Finance",
+                context: "",
+                question: "Who propounded the Net Income (NI) and Net Operating Income (NOI) approaches to capital structure in 1952?",
+                options: ["David Durand", "James E. Walter", "Myron J. Gordon", "Modigliani and Miller"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — David Durand\nDavid Durand presented the Net Income (NI) and Net Operating Income (NOI) approaches to capital structure valuation in 1952."
+            },
+            {
+                id: 126,
+                section: "Paper 2: Commerce",
+                module: "Business Management",
+                context: "",
+                question: "Who defined management as \"the art of getting things done through people\"?",
+                options: ["Peter F. Drucker", "Mary Parker Follett", "George R. Terry", "Henri Fayol"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Mary Parker Follett\nMary Parker Follett famously defined management as 'the art of getting things done through people'."
+            },
+            {
+                id: 127,
+                section: "Paper 2: Commerce",
+                module: "Legal Aspects of Business",
+                context: "",
+                question: "Under Section 172 of the Indian Contract Act, 1872, the bailment of goods as security for payment of a debt or performance of a promise is called:",
+                options: ["Bailment", "Pledge", "Pledgee", "Pawnee"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Pledge\nSection 172 defines 'Pledge' as the bailment of goods as security for payment of a debt or performance of a promise. The bailor is called the 'pawnor' (pledgor) and the bailee is called the 'pawnee' (pledgee)."
+            },
+            {
+                id: 128,
+                section: "Paper 2: Commerce",
+                module: "Business Statistics & Research Methods",
+                context: "",
+                question: "What is the probability of drawing a King OR a Red card in a single random draw from a standard pack of 52 playing cards?",
+                options: ["1/2", "30/52", "16/26", "7/13"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — 7/13\nLet A = drawing a King (4 cards) and B = drawing a Red card (26 cards). There are 2 Red Kings (King of Hearts and King of Diamonds) in common.\nBy the Addition Theorem:\nP(A ∪ B) = P(A) + P(B) − P(A ∩ B) = 4/52 + 26/52 − 2/52 = 28/52 = 7/13."
+            },
+            {
+                id: 129,
+                section: "Paper 2: Commerce",
+                module: "Human Resource Management",
+                context: "",
+                question: "Which career-path approaches are described by Rothwell and Kazanas?\nA. Traditional approach\nB. Career-path (network/behavioural) approach\nC. Lattice / dual-ladder approach\nD. Career-goal approach",
+                options: ["A, B and C only", "A, C and D only", "B, C and D only", "A, B, C and D"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — A, B and C only\nRothwell and Kazanas classify career progression structures into traditional linear career paths, network/career-path models, and lattice/dual-career ladders (A, B, and C)."
+            },
+            {
+                id: 130,
+                section: "Paper 2: Commerce",
+                module: "Income-tax & Corporate Tax Planning",
+                context: "",
+                question: "Arrange the main steps in the Income-tax e-filing process on the portal in chronological order:\nA. Login to e-Filing portal\nB. Register on the e-Filing portal\nC. e-Verification of return\nD. Download utility / prepare return data\nE. Submit / e-File ITR",
+                options: ["B, A, D, E, C", "A, B, C, D, E", "D, A, B, C, E", "B, A, C, D, E"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — B, A, D, E, C\nRegister on portal (B) → Login (A) → Download utility & prepare return (D) → e-File ITR (E) → Verify return via Aadhaar OTP/EVC/ITR-V (C)."
+            },
+            {
+                id: 131,
+                section: "Paper 2: Commerce",
+                module: "Banking & Financial Institutions",
+                context: "",
+                question: "Which of the following statements about Regional Rural Banks (RRBs) are correct?\nA. The first RRB (Prathama Bank) was established on 2 October 1975.\nB. The Regional Rural Banks Act, 1976 governs them.\nC. Minimum paid-up capital is Rs. 10 crore.\nD. RRB services were not established in Goa and Sikkim.\nE. Ownership share is Central Government 50%, State Government 15% and Sponsor Bank 35%.",
+                options: ["A, B, C and D only", "B, C, D and E only", "A, B, D and E only", "A, C, D and E only"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — A, B, D and E only\nPrathama Bank was set up on 2 Oct 1975 (A); the RRB Act was enacted in 1976 (B); Goa and Sikkim have no RRBs (D); and capital is contributed in the ratio 50% : 15% : 35% by Central Govt, State Govt, and Sponsor Bank (E)."
+            },
+            {
+                id: 132,
+                section: "Paper 2: Commerce",
+                module: "Income-tax & Corporate Tax Planning",
+                context: createMatchTable("List I (Chapter VI-A Section)", "List II (Eligible Deduction)", [
+                    ["A. Section 80DDB", "I. Contribution by an Indian company to a political party / electoral trust"],
+                    ["B. Section 80E", "II. Rent paid by self-employed or non-HRA assessee (subject to conditions)"],
+                    ["C. Section 80GG", "III. Interest on loan taken for higher education"],
+                    ["D. Section 80GGB", "IV. Medical treatment of specified diseases/ailments"]
+                ]),
+                question: "Match the Income-tax deduction sections in List I with the covered items in List II:",
+                options: ["A-I, B-II, C-III, D-IV", "A-II, B-III, C-I, D-IV", "A-IV, B-III, C-II, D-I", "A-III, B-IV, C-I, D-II"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — A-IV, B-III, C-II, D-I\n• Section 80DDB → Medical treatment of specified diseases (IV)\n• Section 80E → Interest on loan for higher education (III)\n• Section 80GG → House rent paid where HRA is not received (II)\n• Section 80GGB → Political contribution by an Indian company (I)."
+            },
+            {
+                id: 133,
+                section: "Paper 2: Commerce",
+                module: "Accounting & Auditing",
+                context: "",
+                question: "A bank overdraft that is repayable on demand and forms an integral part of an entity's cash management is included as a component of 'cash and cash equivalents' under which accounting standard?",
+                options: ["AS-3 (Revised)", "Ind AS 7", "Ind AS 107", "Ind AS 18"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Ind AS 7\nUnder paragraph 8 of Ind AS 7 (Statement of Cash Flows), bank borrowings are generally financing activities; however, bank overdrafts repayable on demand that form an integral part of an entity's cash management are included as a component of cash and cash equivalents."
+            },
+            {
+                id: 134,
+                section: "Paper 2: Commerce",
+                module: "Income-tax & Corporate Tax Planning",
+                context: createMatchTable("List I (CGST Act, 2017 Subject Area)", "List II (Chapter Number)", [
+                    ["A. Levy and collection of tax", "I. Chapter VI"],
+                    ["B. Registration", "II. Chapter III"],
+                    ["C. Input tax credit", "III. Chapter X"],
+                    ["D. Payment of tax", "IV. Chapter V"]
+                ]),
+                question: "Match the subject areas of the CGST Act, 2017 in List I with their respective Chapters in List II:",
+                options: ["A-III, B-I, C-II, D-IV", "A-II, B-I, C-IV, D-III", "A-III, B-II, C-IV, D-I", "A-IV, B-II, C-III, D-I"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — A-II, B-I, C-IV, D-III\n• Levy and collection of tax → Chapter III (Sections 7–11) (II)\n• Registration → Chapter VI (Sections 22–30) (I)\n• Input tax credit → Chapter V (Sections 16–21) (IV)\n• Payment of tax → Chapter X (Sections 49–53) (III)."
+            },
+            {
+                id: 135,
+                section: "Paper 2: Commerce",
+                module: "Banking & Financial Institutions",
+                context: "",
+                question: "The committee constituted in 1993 under the chairmanship of R. N. Malhotra was appointed to evaluate and recommend reforms in which sector?",
+                options: ["Banking sector", "Small-scale industry", "Mutual fund industry", "Insurance industry"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — Insurance industry\nThe R. N. Malhotra Committee (1993) recommended opening up the Indian insurance sector to private players and establishing the Insurance Regulatory and Development Authority (IRDA)."
+            },
+            {
+                id: 136,
+                section: "Paper 2: Commerce",
+                module: "Business Statistics & Research Methods",
+                context: "",
+                question: "If the two regression coefficients are b_yx = −6/9 and b_xy = −3/7, what is the correlation coefficient (r)?",
+                options: ["+0.2857", "−0.5345", "+0.5345", "−0.2857"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — −0.5345\nThe correlation coefficient is the geometric mean of the two regression coefficients and takes their common sign:\nr² = b_yx × b_xy = (−6/9) × (−3/7) = 18 / 63 = 2 / 7 ≈ 0.2857.\nSince both regression coefficients are negative, r = −√(2/7) ≈ −0.5345."
+            },
+            {
+                id: 137,
+                section: "Paper 2: Commerce",
+                module: "Business Finance",
+                context: createMatchTable("List I (Capital-Budgeting Risk Method)", "List II (Description)", [
+                    ["A. Sensitivity analysis", "I. Computer generates many scenarios using input probability distributions"],
+                    ["B. Scenario analysis", "II. Graphical representation of sequential decisions and chance outcomes"],
+                    ["C. Simulation (Monte Carlo) analysis", "III. Calculates NPV/IRR as one input variable changes at a time"],
+                    ["D. Decision-tree analysis", "IV. Calculates NPV/IRR under combined changes in multiple variables (e.g., best/worst case)"]
+                ]),
+                question: "Match the capital-budgeting risk-analysis methods in List I with their descriptions in List II:",
+                options: ["A-I, B-II, C-III, D-IV", "A-IV, B-III, C-I, D-II", "A-III, B-IV, C-II, D-I", "A-III, B-IV, C-I, D-II"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — A-III, B-IV, C-I, D-II\n• Sensitivity analysis → Changes one variable at a time ('what-if') (III).\n• Scenario analysis → Evaluates combined changes in multiple variables (IV).\n• Simulation analysis → Computer models random draws from probability distributions (I).\n• Decision-tree analysis → Maps sequential decision nodes and outcome branches (II)."
+            },
+            {
+                id: 138,
+                section: "Paper 2: Commerce",
+                module: "Business Statistics & Research Methods",
+                context: createMatchTable("List I (Probability Theorem / Concept)", "List II (Purpose / Use)", [
+                    ["A. Addition theorem", "I. Revises prior probability using new sample/empirical evidence"],
+                    ["B. Multiplication theorem", "II. Probability of an event occurring given that another event has occurred"],
+                    ["C. Conditional probability", "III. Probability of at least one of two events (A or B) occurring"],
+                    ["D. Bayes' theorem", "IV. Probability of simultaneous / joint occurrence of events (A and B)"]
+                ]),
+                question: "Match the probability theorems in List I with their uses in List II:",
+                options: ["A-III, B-IV, C-I, D-II", "A-IV, B-III, C-II, D-I", "A-III, B-IV, C-II, D-I", "A-IV, B-I, C-III, D-II"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — A-III, B-IV, C-II, D-I\n• Addition theorem → P(A ∪ B), probability of either event occurring (III).\n• Multiplication theorem → P(A ∩ B), probability of joint occurrence (IV).\n• Conditional probability → P(A|B), probability of A given B (II).\n• Bayes' theorem → Updates prior probabilities into posterior probabilities using new evidence (I)."
+            },
+            {
+                id: 139,
+                section: "Paper 2: Commerce",
+                module: "Marketing Management",
+                context: "",
+                question: "Major media forms/channels of advertising do NOT include which of the following?",
+                options: ["Informational appeals", "Television advertising", "Print advertising", "Online advertising"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — Informational appeals\nTelevision, print, and online advertising are advertising media/forms, whereas an 'informational appeal' (as opposed to a transformational/emotional appeal) is a creative message strategy."
+            },
+            {
+                id: 140,
+                section: "Paper 2: Commerce",
+                module: "Business Management",
+                context: "",
+                question: "Who is considered the father of the 'Principles of Management' / Administrative Management (Management Process) school of thought?",
+                options: ["Mary Parker Follett", "Henri Fayol", "Luther Gulick", "Peter Drucker"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Henri Fayol\nHenri Fayol (author of 'Administration Industrielle et Générale', 1916) formulated the 14 Principles of Management and the 5 functions of management, founding the Management Process / Administrative school."
+            },
+
+            // ================= PAPER 2: COMMERCE READING COMPREHENSION 1 (Q141 - Q145) =================
+            {
+                id: 141,
+                section: "Paper 2: Commerce",
+                module: "Reading Comprehension",
+                context: RC_COMMERCE_1,
+                question: "According to the passage, what benefit does corporate governance provide to investors?",
+                options: ["An assumed fixed return on investment", "Guaranteed gain on liquidation", "Confidence in the company's true financial performance", "Access to confidential insider information"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — Confidence in the company's true financial performance\nThe passage explicitly states: 'True financial performance of a company, openness, and sound governance policies give investors confidence.'"
+            },
+            {
+                id: 142,
+                section: "Paper 2: Commerce",
+                module: "Reading Comprehension",
+                context: RC_COMMERCE_1,
+                question: "According to the passage, how does corporate governance help expose unethical policies or mismanagement?",
+                options: ["By helping companies compete only with large companies", "By fixing responsibilities and promoting openness", "By focusing on short-term accounting gains", "By promoting a single-entry accounting system"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — By fixing responsibilities and promoting openness\nThe passage explains that corporate governance 'fixes who should own the responsibility' and operates as 'an open, democratic system', thereby exposing unethical policies or mismanagement by a CEO or director."
+            },
+            {
+                id: 143,
+                section: "Paper 2: Commerce",
+                module: "Reading Comprehension",
+                context: RC_COMMERCE_1,
+                question: "Which advantage of corporate governance is explicitly mentioned in the passage?",
+                options: ["Fixing excessive remuneration automatically without board review", "Discouraging individual decision-making in every case", "Promoting international accounting practices", "Improving investor confidence and relations"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — Improving investor confidence and relations\nThe second paragraph directly states: 'It improves investor confidence and relations.'"
+            },
+            {
+                id: 144,
+                section: "Paper 2: Commerce",
+                module: "Reading Comprehension",
+                context: RC_COMMERCE_1,
+                question: "How does the passage characterise corporate governance as a system?",
+                options: ["A time-consuming and completely ineffective system", "A system that hides fraud risk", "An open democratic system with some drawbacks", "A system that can completely eliminate all fraudulent practices"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — An open democratic system with some drawbacks\nThe passage states: 'Corporate governance is an open, democratic system. It may appear long-winded or time-consuming, and individual decision-making may be hindered. However, the risk of fraud is much bigger and more damaging to a company.'"
+            },
+            {
+                id: 145,
+                section: "Paper 2: Commerce",
+                module: "Reading Comprehension",
+                context: RC_COMMERCE_1,
+                question: "What is the primary goal of corporate governance according to the opening sentences of the passage?",
+                options: ["Maximising short-term gains through accounting jugglery", "Bringing order and method to decision-making and clarifying responsibility", "Window-dressing financial statements", "Implementing IFRS across subsidiaries"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — Bringing order and method to decision-making and clarifying responsibility\nThe first sentence states: 'Introduction of Corporate Governance in a company brings order and methods into the decision-making process and fixes who should own the responsibility.'"
+            },
+
+            // ================= PAPER 2: COMMERCE READING COMPREHENSION 2 (Q146 - Q150) =================
+            {
+                id: 146,
+                section: "Paper 2: Commerce",
+                module: "Reading Comprehension",
+                context: RC_COMMERCE_2,
+                question: "According to the passage, what happens when a qualifying company fails to meet the amended CSR spending requirements within the specified time limit?",
+                options: ["There are no repercussions", "It only has to provide reasons for failure in its report", "Its operations may be closed for a period", "It must transfer the specified unspent amount to government-run funds"],
+                answer: 3,
+                explanation: "Correct Answer: Option (4) — It must transfer the specified unspent amount to government-run funds\nThe passage states: 'Under the amended rules described in the passage, companies must spend the specified amount within the prescribed time limit or transfer the unspent amount to government-run funds.'"
+            },
+            {
+                id: 147,
+                section: "Paper 2: Commerce",
+                module: "Reading Comprehension",
+                context: RC_COMMERCE_2,
+                question: "What is the central meaning of the quote attributed to Josiah Charles Stamp in the passage?",
+                options: ["Companies cannot avoid the consequences of neglecting their responsibilities", "Companies must focus only on internal corporate governance", "CSR has no effect on a company's brand", "Consequences always occur immediately"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — Companies cannot avoid the consequences of neglecting their responsibilities\nThe quote 'It is easy to dodge our responsibilities, but we cannot dodge the consequences of dodging our responsibilities' warns that evading social/ethical obligations inevitably brings consequences."
+            },
+            {
+                id: 148,
+                section: "Paper 2: Commerce",
+                module: "Reading Comprehension",
+                context: RC_COMMERCE_2,
+                question: "What did the Indian Government implement with regard to CSR, according to the passage?",
+                options: ["Mandatory CSR spending of 2% of net profits for qualifying companies", "Voluntary guidelines with no spending requirement", "Only tax incentives for CSR donations", "No specific requirements"],
+                answer: 0,
+                explanation: "Correct Answer: Option (1) — Mandatory CSR spending of 2% of net profits for qualifying companies\nAccording to the passage, qualifying Indian companies are required to spend 2% of net profit on CSR. (Statutory note: Section 135 of the Companies Act, 2013 requires qualifying companies to spend at least 2% of their average net profits made during the three immediately preceding financial years)."
+            },
+            {
+                id: 149,
+                section: "Paper 2: Commerce",
+                module: "Reading Comprehension",
+                context: RC_COMMERCE_2,
+                question: "What is the Triple Bottom Line approach to CSR mentioned in the passage?",
+                options: ["Customer satisfaction, revenue and profit", "People, Planet and Profit", "Shareholder interests, environmental sustainability and innovation", "People, Planet and Plant"],
+                answer: 1,
+                explanation: "Correct Answer: Option (2) — People, Planet and Profit\nThe passage states: 'It follows a Triple Bottom Line approach: the company focuses on the 3 Ps—People, Planet, and Profit—while addressing the expectations of its stakeholders.'"
+            },
+            {
+                id: 150,
+                section: "Paper 2: Commerce",
+                module: "Reading Comprehension",
+                context: RC_COMMERCE_2,
+                question: "What strategic significance of CSR in a digitalized world is highlighted in the passage?",
+                options: ["CSR has no impact on a company's brand", "Product quality is unrelated to company image", "It provides a competitive edge over competitors in a crowded marketplace", "It only leads to short-term wealth maximisation"],
+                answer: 2,
+                explanation: "Correct Answer: Option (3) — It provides a competitive edge over competitors in a crowded marketplace\nThe passage explicitly states: 'A sense of social responsibility provides companies with a competitive edge over competitors in a crowded marketplace.'"
+            }
+        ];
+
+        const TOTAL_QUESTIONS = questionsData.length;
+        const TOTAL_MARKS = TOTAL_QUESTIONS * 2;
+
+        // Application State
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(TOTAL_QUESTIONS).fill(null);
+        let bookmarkedState = new Array(TOTAL_QUESTIONS).fill(false);
+        let instantSolutionVisible = new Array(TOTAL_QUESTIONS).fill(false);
+        let isSubmitted = false;
+        let timerSeconds = 180 * 60; // 180 Minutes (3 Hours) for 150 Questions
+        let timerInterval = null;
+
+        // Initialize on Window Load
+        window.onload = function() {
+            renderPalette();
+            loadQuestion(0);
+        };
+
+        function startQuizSession() {
+            const startModal = document.getElementById("start-modal");
+            if (startModal) startModal.classList.add("hidden");
+            startTimer();
+            loadQuestion(0);
+        }
+
+        function resetQuizSession() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            currentQuestionIndex = 0;
+            userAnswers = new Array(TOTAL_QUESTIONS).fill(null);
+            bookmarkedState = new Array(TOTAL_QUESTIONS).fill(false);
+            instantSolutionVisible = new Array(TOTAL_QUESTIONS).fill(false);
+            isSubmitted = false;
+            timerSeconds = 180 * 60;
+            updateTimerDisplay();
+            document.getElementById("submitBtn").classList.remove("hidden");
+            document.getElementById("resultModal").classList.add("hidden");
+            startTimer();
+            loadQuestion(0);
+        }
+
+        function startTimer() {
+            if (timerInterval) return;
+            timerInterval = setInterval(() => {
+                if (timerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    submitTest(true);
+                } else {
+                    timerSeconds--;
+                    updateTimerDisplay();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timerSeconds / 60);
+            const seconds = timerSeconds % 60;
+            const display = document.getElementById("timerDisplay");
+            display.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            // Visual warning when less than 15 minutes remain
+            const container = document.getElementById("timerContainer");
+            if (timerSeconds < 900) {
+                container.classList.remove("text-amber-300");
+                container.classList.add("text-rose-400", "animate-pulse");
+            }
+        }
+
+        function renderPalette() {
+            const grid = document.getElementById("paletteGrid");
+            grid.innerHTML = "";
+
+            for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+                const btn = document.createElement("button");
+                btn.id = `palette-btn-${i}`;
+                btn.className = getPaletteBtnClass(i);
+                btn.innerText = questionsData[i].id;
+                btn.title = `Question ${questionsData[i].id}: ${questionsData[i].module}`;
+                btn.onclick = () => loadQuestion(i);
+                grid.appendChild(btn);
+            }
+            updateAnsweredCount();
+        }
+
+        function getPaletteBtnClass(index) {
+            const base = "h-9 w-full rounded-lg font-bold text-xs transition flex items-center justify-center border ";
+            const isCurrent = index === currentQuestionIndex;
+            const currentRing = isCurrent ? "ring-2 ring-indigo-600 ring-offset-1 " : "";
+
+            if (isSubmitted) {
+                if (userAnswers[index] === questionsData[index].answer) {
+                    return base + currentRing + "bg-emerald-600 text-white border-emerald-700";
+                } else if (userAnswers[index] !== null) {
+                    return base + currentRing + "bg-rose-600 text-white border-rose-700";
+                }
+                return base + currentRing + "bg-slate-200 text-slate-600 border-slate-300";
+            }
+
+            if (bookmarkedState[index]) {
+                return base + currentRing + "bg-amber-500 text-white border-amber-600";
+            }
+            if (userAnswers[index] !== null) {
+                return base + currentRing + "bg-emerald-500 text-white border-emerald-600";
+            }
+            return base + currentRing + "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200";
+        }
+
+        function updateAnsweredCount() {
+            const count = userAnswers.filter(a => a !== null).length;
+            document.getElementById("answeredCount").innerText = `${count} / ${TOTAL_QUESTIONS} Answered`;
+        }
+
+        function loadQuestion(index) {
+            currentQuestionIndex = index;
+            const q = questionsData[index];
+
+            document.getElementById("sectionBadge").innerText = q.section;
+            document.getElementById("moduleBadge").innerText = q.module;
+            document.getElementById("questionTitleNumber").innerText = `Question ${q.id} of ${TOTAL_QUESTIONS}`;
+            document.getElementById("questionText").innerText = q.question;
+
+            // Show verified/corrected badge if applicable
+            const verifiedBadge = document.getElementById("verifiedBadge");
+            if (q.verified) {
+                verifiedBadge.classList.remove("hidden");
+            } else {
+                verifiedBadge.classList.add("hidden");
+            }
+
+            // Subsumed Context Container (DI Tables, RC Passages, or Matching Lists)
+            const contextContainer = document.getElementById("contextContainer");
+            const contextContent = document.getElementById("contextContent");
+            if (q.context) {
+                contextContainer.classList.remove("hidden");
+                contextContent.innerHTML = q.context;
+                const heading = document.getElementById("contextHeading");
+                if (q.module === "Data Interpretation") {
+                    heading.textContent = "Data Interpretation — Subsumed Dataset Table";
+                } else if (q.module === "Reading Comprehension") {
+                    heading.textContent = "Reading Comprehension — Subsumed Passage";
+                } else {
+                    heading.textContent = "Matching Question — List I & List II Reference Table";
+                }
+            } else {
+                contextContainer.classList.add("hidden");
+                contextContent.innerHTML = "";
+            }
+
+            // Render Options
+            const optionsList = document.getElementById("optionsList");
+            optionsList.innerHTML = "";
+
+            const showSolutionNow = isSubmitted || instantSolutionVisible[index];
+
+            q.options.forEach((opt, optIdx) => {
+                const optBtn = document.createElement("button");
+                optBtn.className = getOptionStyle(optIdx, showSolutionNow);
+                optBtn.onclick = () => selectOption(optIdx);
+                optBtn.disabled = isSubmitted;
+
+                const optionRow = document.createElement("div");
+                optionRow.className = "flex items-center space-x-3.5 w-full text-left";
+
+                const optionNumber = document.createElement("span");
+                optionNumber.className = `w-7 h-7 shrink-0 rounded-full flex items-center justify-center text-xs font-bold border ${getOptionBadgeStyle(optIdx, showSolutionNow)}`;
+                optionNumber.textContent = String(optIdx + 1);
+
+                const optionText = document.createElement("span");
+                optionText.className = "text-sm sm:text-base font-medium flex-1 whitespace-pre-line";
+                optionText.textContent = opt;
+
+                optionRow.append(optionNumber, optionText);
+                optBtn.appendChild(optionRow);
+                optionsList.appendChild(optBtn);
+            });
+
+            // Bookmark icon state
+            const bookmarkIcon = document.getElementById("bookmarkIcon");
+            if (bookmarkedState[index]) {
+                bookmarkIcon.className = "fa-solid fa-bookmark text-amber-600 mr-1.5";
+            } else {
+                bookmarkIcon.className = "fa-regular fa-bookmark mr-1.5";
+            }
+
+            // Prev / Next button states
+            document.getElementById("prevBtn").disabled = (index === 0);
+            document.getElementById("prevBtn").style.opacity = (index === 0) ? "0.5" : "1";
+
+            if (index === TOTAL_QUESTIONS - 1 && !isSubmitted) {
+                document.getElementById("nextBtn").innerHTML = `Finish &amp; Submit <i class="fa-solid fa-flag-checkered ml-1.5"></i>`;
+            } else {
+                document.getElementById("nextBtn").innerHTML = `Next <i class="fa-solid fa-chevron-right ml-1.5"></i>`;
+            }
+
+            // Solution Explanation Box
+            const expBox = document.getElementById("explanationBox");
+            const toggleSolBtn = document.getElementById("toggleSolutionBtn");
+            if (showSolutionNow) {
+                expBox.classList.remove("hidden");
+                document.getElementById("explanationText").innerText = q.explanation;
+                toggleSolBtn.innerHTML = `<i class="fa-regular fa-eye-slash mr-1.5"></i> Hide Solution`;
+            } else {
+                expBox.classList.add("hidden");
+                toggleSolBtn.innerHTML = `<i class="fa-regular fa-eye mr-1.5"></i> View Solution`;
+            }
+
+            if (isSubmitted) {
+                toggleSolBtn.classList.add("hidden");
+                document.getElementById("clearBtn").classList.add("hidden");
+            } else {
+                toggleSolBtn.classList.remove("hidden");
+                document.getElementById("clearBtn").classList.remove("hidden");
+            }
+
+            renderPalette();
+        }
+
+        function getOptionStyle(optIdx, showSolutionNow) {
+            const selected = userAnswers[currentQuestionIndex] === optIdx;
+            const correct = questionsData[currentQuestionIndex].answer === optIdx;
+            const base = "w-full p-3.5 sm:p-4 rounded-xl border text-left transition-all flex items-center justify-between ";
+
+            if (showSolutionNow) {
+                if (correct) return base + "bg-emerald-50 border-emerald-500 text-emerald-950 ring-2 ring-emerald-500/30 font-semibold";
+                if (selected && !correct) return base + "bg-rose-50 border-rose-500 text-rose-950 ring-2 ring-rose-500/30";
+                return base + "bg-slate-50 border-slate-200 text-slate-500";
+            }
+
+            if (selected) {
+                return base + "bg-indigo-50 border-indigo-600 text-indigo-950 ring-2 ring-indigo-500/20 shadow-sm";
+            }
+            return base + "bg-white border-slate-200 hover:bg-slate-50 hover:border-slate-300 text-slate-700";
+        }
+
+        function getOptionBadgeStyle(optIdx, showSolutionNow) {
+            const selected = userAnswers[currentQuestionIndex] === optIdx;
+            const correct = questionsData[currentQuestionIndex].answer === optIdx;
+
+            if (showSolutionNow) {
+                if (correct) return "bg-emerald-600 text-white border-emerald-600";
+                if (selected && !correct) return "bg-rose-600 text-white border-rose-600";
+                return "bg-slate-200 text-slate-600 border-slate-300";
+            }
+
+            if (selected) return "bg-indigo-600 text-white border-indigo-600";
+            return "bg-slate-100 text-slate-600 border-slate-300";
+        }
+
+        function selectOption(optIdx) {
+            if (isSubmitted) return;
+            userAnswers[currentQuestionIndex] = optIdx;
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function clearResponse() {
+            if (isSubmitted) return;
+            userAnswers[currentQuestionIndex] = null;
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function toggleBookmark() {
+            bookmarkedState[currentQuestionIndex] = !bookmarkedState[currentQuestionIndex];
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function toggleInstantSolution() {
+            instantSolutionVisible[currentQuestionIndex] = !instantSolutionVisible[currentQuestionIndex];
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function navigateQuestion(direction) {
+            const newIndex = currentQuestionIndex + direction;
+            if (newIndex >= 0 && newIndex < TOTAL_QUESTIONS) {
+                loadQuestion(newIndex);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            } else if (newIndex === TOTAL_QUESTIONS && !isSubmitted) {
+                openConfirmModal();
+            }
+        }
+
+        function openConfirmModal() {
+            if (isSubmitted) return;
+            const answered = userAnswers.filter(a => a !== null).length;
+            const unanswered = TOTAL_QUESTIONS - answered;
+            const bookmarked = bookmarkedState.filter(b => b).length;
+
+            document.getElementById("modalAnsweredCount").innerText = answered;
+            document.getElementById("modalUnansweredCount").innerText = unanswered;
+            document.getElementById("modalBookmarkedCount").innerText = bookmarked;
+
+            const msg = unanswered > 0
+                ? `You still have ${unanswered} unanswered question(s) out of ${TOTAL_QUESTIONS}. Since there is no negative marking, attempting all questions is recommended. Do you wish to submit now?`
+                : `You have answered all ${TOTAL_QUESTIONS} questions! Ready to view your final score and detailed solutions?`;
+
+            document.getElementById("confirmModalText").innerText = msg;
+            document.getElementById("confirmModal").classList.remove("hidden");
+        }
+
+        function closeConfirmModal() {
+            document.getElementById("confirmModal").classList.add("hidden");
+        }
+
+        function submitTest(autoTimeUp = false) {
+            closeConfirmModal();
+            isSubmitted = true;
+            clearInterval(timerInterval);
+
+            document.getElementById("submitBtn").classList.add("hidden");
+
+            let correct = 0;
+            let incorrect = 0;
+            let p1Correct = 0;
+            let p2Correct = 0;
+
+            userAnswers.forEach((ans, idx) => {
+                if (ans === questionsData[idx].answer) {
+                    correct++;
+                    if (idx < 50) p1Correct++;
+                    else p2Correct++;
+                } else if (ans !== null) {
+                    incorrect++;
+                }
+            });
+
+            const skipped = TOTAL_QUESTIONS - (correct + incorrect);
+            const score = correct * 2;
+            const percentage = ((score / TOTAL_MARKS) * 100).toFixed(1);
+
+            if (autoTimeUp) {
+                document.getElementById("resultSubheading").innerText = "Time Limit Reached (180:00) — Test Auto-Submitted";
+            }
+
+            document.getElementById("finalScore").innerText = `${score} / ${TOTAL_MARKS}`;
+            document.getElementById("finalPercentage").innerText = `${percentage}%`;
+            document.getElementById("correctCount").innerText = `${correct} (+${score})`;
+            document.getElementById("incorrectCount").innerText = `${incorrect} W / ${skipped} S`;
+            document.getElementById("paper1ScoreBadge").innerText = `${p1Correct * 2} / 100`;
+            document.getElementById("paper2ScoreBadge").innerText = `${p2Correct * 2} / 200`;
+
+            document.getElementById("resultModal").classList.remove("hidden");
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function reviewMode() {
+            document.getElementById("resultModal").classList.add("hidden");
+            loadQuestion(0);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    </script>
+</body>
+</html>
